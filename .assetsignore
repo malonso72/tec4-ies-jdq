@@ -1,0 +1,33 @@
+# ═══════════════════════════════════════════════════════════════
+# Cloudflare Workers Static Assets — exclusiones
+# Misma sintaxis que .gitignore
+# ═══════════════════════════════════════════════════════════════
+
+.git
+.git/
+.git/**
+.git/objects/**
+.git/objects/pack/**
+**/.git/**
+**/*.pack
+**/*.idx
+
+documentacion/
+_soluciones/
+
+wrangler.toml
+.wrangler/
+
+*.docx
+*.zip
+*.tar
+*.tar.gz
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+*.log
+
+_redirects.disabled
