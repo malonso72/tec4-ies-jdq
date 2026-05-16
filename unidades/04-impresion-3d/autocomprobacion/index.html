@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U04 Impresión 3D · Tecnología 4º ESO</title>
+<meta name="description" content="18 preguntas sobre impresión 3D y fabricación aditiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:var(--principal-cl);border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px}
+.bloque-encabezado .num{font-family:var(--cond);background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond)}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-cl);padding:2px 8px;border-radius:10px;margin-right:7px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,var(--principal-cl),#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U04 · Impresión 3D · Autocomprobación</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro</span></a><span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomp</span></span>
+</nav>
+
+<main id="main-content">
+<section class="ac-hero"><h1>✅ Autocomprobación · U04 Impresión 3D</h1><p class="subt">18 preguntas en 4 bloques</p></section>
+<div class="ac-instrucciones"><p>Una sola oportunidad por pregunta.</p></div>
+
+<div class="ac-wrap">
+
+<div class="bloque-encabezado"><span class="num">B1</span><h2>Fundamentos</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="1">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P1</span>La impresión 3D es un proceso...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Sustractivo</button><button class="test-opt" data-opt="b">Aditivo: añade material capa a capa</button><button class="test-opt" data-opt="c">De conformado</button><button class="test-opt" data-opt="d">Sin necesidad de archivo digital</button></div>
+    <div class="test-fb">Aditivo: añade material. Lo contrario al mecanizado (sustractivo).</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P2</span>El primer sistema de impresión 3D, en 1986, fue...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">FDM</button><button class="test-opt" data-opt="b">SLS</button><button class="test-opt" data-opt="c">SLA (estereolitografía, Chuck Hull)</button><button class="test-opt" data-opt="d">Bioimpresión</button></div>
+    <div class="test-fb">Chuck Hull patentó la SLA en 1986 (Resina + láser UV). Hoy es aún una de las tecnologías más precisas.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P3</span>La impresión 3D doméstica se popularizó después de 2009 porque...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Salió la tecnología SLS</button><button class="test-opt" data-opt="b">Expiró la patente del FDM, lo que dio paso a impresoras económicas open-source</button><button class="test-opt" data-opt="c">Bajó el precio del plástico</button><button class="test-opt" data-opt="d">Google lanzó una impresora</button></div>
+    <div class="test-fb">La patente de FDM (Stratasys) expiró en 2009 → Prusa, RepRap, Creality. Pasó de 20 000 € a 200-500 € por impresora.</div>
+  </div>
+  <div class="test-q" data-answer="d"><p class="test-qtext"><span class="test-num">P4</span>Una <strong>ventaja clave</strong> de la impresión 3D frente a otros procesos es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Siempre es la más barata</button><button class="test-opt" data-opt="b">No necesita archivo digital</button><button class="test-opt" data-opt="c">No usa material</button><button class="test-opt" data-opt="d">Permite geometrías imposibles con otros métodos (huecos internos, formas orgánicas)</button></div>
+    <div class="test-fb">Aditiva permite huecos, conductos internos, ramificaciones... geometrías imposibles para fresado o moldeo.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B2</span><h2>Tecnologías</h2><span class="meta">6 preguntas</span></div>
+<section class="test-section" data-bloque="2">
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P5</span><strong>FDM</strong> significa...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Fast Direct Modelling</button><button class="test-opt" data-opt="b">Fusion Digital Material</button><button class="test-opt" data-opt="c">Fused Deposition Modeling (deposición de filamento fundido)</button><button class="test-opt" data-opt="d">Fluid Drop Method</button></div>
+    <div class="test-fb">Filamento → extrusor caliente → deposita capa a capa. Tecnología más usada.</div>
+  </div>
+  <div class="test-q" data-answer="a"><p class="test-qtext"><span class="test-num">P6</span>El <strong>PLA</strong> es el material FDM más usado porque...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Fácil de imprimir, sin cama caliente obligatoria, biodegradable</button><button class="test-opt" data-opt="b">Es el más resistente al calor</button><button class="test-opt" data-opt="c">Es el más barato</button><button class="test-opt" data-opt="d">Es metálico</button></div>
+    <div class="test-fb">PLA: T=200ºC, sin warping, biodegradable. Su desventaja: a partir de 60ºC se reblandece (no para piezas al sol o cerca de motores).</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P7</span>Para imprimir <strong>miniaturas con máxima precisión</strong>...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">FDM</button><button class="test-opt" data-opt="b">SLA (resina)</button><button class="test-opt" data-opt="c">Impresión metálica</button><button class="test-opt" data-opt="d">Bioimpresión</button></div>
+    <div class="test-fb">SLA con resina llega a 0,025 mm de capa. Las capas son casi invisibles. Ideal para miniaturas, dentales, joyería.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P8</span>Las resinas de SLA exigen <strong>precauciones</strong> porque...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Son explosivas</button><button class="test-opt" data-opt="b">Son tóxicas/irritantes; obligan guantes y postproceso (lavado + curado UV)</button><button class="test-opt" data-opt="c">Son frías</button><button class="test-opt" data-opt="d">No se pueden usar en interiores</button></div>
+    <div class="test-fb">Las resinas líquidas son irritantes y sensibilizantes. Guantes nitrilo, gafas, ventilación. Tras imprimir: lavar en alcohol y curar bajo UV.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P9</span>La impresión 3D en <strong>metal</strong> (SLM/DMLS) se usa en...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Juguetes</button><button class="test-opt" data-opt="b">Servilletas decorativas</button><button class="test-opt" data-opt="c">Toberas de cohetes, prótesis de titanio, piezas aeroespaciales optimizadas</button><button class="test-opt" data-opt="d">Empaquetado</button></div>
+    <div class="test-fb">Permite reducir peso un 40-50% usando optimización topológica. Vital en aviación y aeroespacial donde cada gramo cuenta.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P10</span>El SLS / MJF imprime con...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Filamento</button><button class="test-opt" data-opt="b">Resina líquida</button><button class="test-opt" data-opt="c">Polvo (nylon) que se sinteriza con láser o calor</button><button class="test-opt" data-opt="d">Hilo metálico</button></div>
+    <div class="test-fb">Polvo de PA12. Ventaja: no necesita soportes (el polvo no sinterizado los sustituye). Piezas isótropas.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B3</span><h2>Slicer y flujo</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="3">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P11</span>El flujo correcto para imprimir es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">CAD → impresora directamente</button><button class="test-opt" data-opt="b">CAD → STL → slicer → G-code → impresora</button><button class="test-opt" data-opt="c">Slicer → CAD → STL</button><button class="test-opt" data-opt="d">Solo G-code</button></div>
+    <div class="test-fb">Modelo CAD → exportar STL (malla) → slicer (Cura, PrusaSlicer) → genera G-code → SD o USB a impresora.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P12</span>La <strong>altura de capa</strong> de 0,1 mm en FDM significa...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Mismo tiempo y mismo acabado que 0,2 mm</button><button class="test-opt" data-opt="b">Doble de tiempo que 0,2 mm, mejor acabado superficial</button><button class="test-opt" data-opt="c">Imprime al triple de velocidad</button><button class="test-opt" data-opt="d">No afecta a nada</button></div>
+    <div class="test-fb">Mitad de altura → doble de capas → doble de tiempo aproximadamente. Pero las capas se notan mucho menos.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P13</span>El <strong>relleno (infill)</strong> al 25 % con patrón giroide...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Es lo mismo que al 100 %</button><button class="test-opt" data-opt="b">Es siempre peor</button><button class="test-opt" data-opt="c">Es buen compromiso entre resistencia y material/tiempo</button><button class="test-opt" data-opt="d">Solo se usa en metal</button></div>
+    <div class="test-fb">25 % con giroide es la combinación más usada para piezas normales: ligera, rápida y resistente. 100% solo para piezas con cargas extremas.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P14</span>Una pieza grande de ABS se levanta de las esquinas (<strong>warping</strong>). ¿Qué haces?</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Subes la velocidad</button><button class="test-opt" data-opt="b">Subes la temperatura de cama a 100-110ºC, activas brim y cierras la cámara</button><button class="test-opt" data-opt="c">Bajas la temperatura del extrusor</button><button class="test-opt" data-opt="d">Aumentas relleno al 100%</button></div>
+    <div class="test-fb">El warping (contracción al enfriar) se combate con cama caliente, recinto cerrado y brim. Alternativa: usar PLA o PETG que casi no warpean.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B4</span><h2>Aplicaciones</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="4">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P15</span>Para fabricar <strong>50 000 piezas iguales</strong> de plástico, lo más económico es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Impresión 3D FDM</button><button class="test-opt" data-opt="b">Inyección de plástico en molde</button><button class="test-opt" data-opt="c">SLA</button><button class="test-opt" data-opt="d">Mecanizado CNC</button></div>
+    <div class="test-fb">Para gran serie, inyección es imbatible. El molde cuesta miles de euros pero después cada pieza céntimos. La 3D solo gana en series cortas o prototipos.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P16</span>Una <strong>prótesis impresa en 3D personalizada</strong> es valiosa porque...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Cuesta menos que 1 €</button><button class="test-opt" data-opt="b">Se imprime en 5 minutos</button><button class="test-opt" data-opt="c">Se adapta exactamente al paciente (a partir de TAC o escáner), reduciendo rechazo y mejorando función</button><button class="test-opt" data-opt="d">No necesita médico</button></div>
+    <div class="test-fb">La gran ventaja de la 3D en medicina: cada paciente recibe una pieza diseñada para él, no un estándar. Combinado con titanio (biocompatible), reduce rechazos.</div>
+  </div>
+  <div class="test-q" data-answer="d"><p class="test-qtext"><span class="test-num">P17</span>La <strong>bioimpresión 3D</strong> usa como tinta...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">PLA biodegradable</button><button class="test-opt" data-opt="b">Resina UV</button><button class="test-opt" data-opt="c">Polvo metálico</button><button class="test-opt" data-opt="d">Biotinta: células vivas en una matriz de hidrogel</button></div>
+    <div class="test-fb">Células vivas (a menudo propias del paciente) en un gel nutritivo. Ya se imprimen piel, cartílago y vasos sanguíneos. El reto: órganos completos (10-20 años).</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P18</span>Una <strong>limitación importante</strong> de la impresión 3D FDM es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">No funciona con plástico</button><button class="test-opt" data-opt="b">Las piezas son más débiles en la dirección perpendicular a las capas</button><button class="test-opt" data-opt="c">No se ven las capas nunca</button><button class="test-opt" data-opt="d">No se pueden imprimir más de 10 piezas iguales</button></div>
+    <div class="test-fb">FDM tiene propiedades direccionales: la unión entre capas es más débil que dentro de cada capa. Hay que orientar la pieza para que la carga vaya en la dirección de las capas, no perpendicular.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+<section class="ac-resumen" id="ac-resumen">
+  <h2>Resultado</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span></div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p id="ac-veredicto">Responde para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Libro</a>
+    <a class="btn-link" href="../index.html">📋 Hub</a>
+  </div>
+</section>
+</div>
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){'use strict';
+var qs=document.querySelectorAll('.test-q'),tot=document.getElementById('ac-total'),ac=document.getElementById('ac-aciertos'),bar=document.getElementById('ac-bar'),vr=document.getElementById('ac-veredicto'),br=document.getElementById('ac-reintentar'),bt=document.getElementById('ac-todo');
+tot.textContent=qs.length;
+function refrescar(){var a=0,c=0,f=0,pB={};qs.forEach(function(q){var b=q.closest('.test-section').dataset.bloque;if(!pB[b])pB[b]={ok:0,ko:0,total:0};pB[b].total++;if(q.classList.contains('answered')){c++;var ok=q.querySelector('.test-opt.correct')&&!q.querySelector('.test-opt.wrong');if(ok){a++;pB[b].ok++;}else{f++;pB[b].ko++;}}});ac.textContent=a;var p=Math.round(a/qs.length*100);bar.style.width=p+'%';if(c===0){vr.textContent='Responde para ver tu resultado.';}else if(c<qs.length){vr.innerHTML='Llevas <strong>'+c+'</strong> de '+qs.length+' respondidas.';}else{var m=p>=90?'🌟 ¡Excelente!':p>=75?'👍 Muy bien.':p>=50?'🙂 Aprobado.':'📚 Repasa el libro.';vr.innerHTML=m+'<br><small>'+a+' aciertos · '+f+' fallos · '+p+'%</small>';}br.disabled=(f===0);bt.disabled=(c===0);Object.keys(pB).forEach(function(b){var m=document.querySelector('.bloque-marcador[data-bloque="'+b+'"]'),x=pB[b],d=x.ok+x.ko;if(d===0){m.classList.remove('activo');return;}m.classList.add('activo');if(d<x.total){m.innerHTML='Bloque '+b+': '+d+' / '+x.total+' respondidas';}else{m.innerHTML='Bloque '+b+': <span class="acierto">'+x.ok+'✓</span> · <span class="fallo">'+x.ko+'✗</span>';}});}
+document.addEventListener('click',function(e){if(e.target.classList&&e.target.classList.contains('test-opt')){setTimeout(refrescar,0);}});
+function rs(q){q.classList.remove('answered');q.querySelectorAll('.test-opt').forEach(function(b){b.classList.remove('correct','wrong');b.disabled=false;});}
+br.addEventListener('click',function(){qs.forEach(function(q){if(q.classList.contains('answered')&&q.querySelector('.test-opt.wrong'))rs(q);});refrescar();});
+bt.addEventListener('click',function(){if(!confirm('¿Empezar de nuevo?'))return;qs.forEach(rs);refrescar();});
+refrescar();})();
+</script>
+</body>
+</html>

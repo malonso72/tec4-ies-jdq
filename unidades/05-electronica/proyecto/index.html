@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U05 Electrónica · Tecnología 4º ESO</title>
+<meta name="description" content="Diseña un circuito lógico que resuelva un problema real con CIs 74xx.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.pr-rubrica td:first-child{font-weight:600;width:55%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+.pr-ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pr-idea{background:var(--principal-cl);border-radius:8px;padding:12px 14px;border-left:3px solid var(--principal)}
+.pr-idea h5{font-family:var(--cond);color:var(--principal);font-size:.95rem;margin:0 0 4px}
+.pr-idea p{font-size:.85rem;color:var(--texto2);margin:0}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U05 · Electrónica · Proyecto</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U05</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro</span></a><span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+  <section class="pr-hero">
+    <h1>🚀 Circuito lógico para un problema real</h1>
+    <p>Aplica el método completo: problema → tabla de verdad → Karnaugh → circuito → montaje con chips 74xx.</p>
+  </section>
+
+  <div class="pr-card"><h2><span class="num">1</span>La idea</h2>
+    <p>Tu equipo (parejas) elige un problema real y diseña el <strong>circuito lógico</strong> que lo resuelva: define entradas/salidas, construye la tabla de verdad, simplifica con Karnaugh y monta el circuito en protoboard con CIs de la serie 74xx (alimentado a 5 V con pulsadores como entradas y LEDs como salida).</p>
+    <p>Duración: 3-4 sesiones. Entrega: memoria PDF + circuito montado + defensa oral 4 min.</p>
+  </div>
+
+  <div class="pr-card"><h2><span class="num">2</span>Ideas de problema</h2>
+    <div class="pr-ideas">
+      <div class="pr-idea"><h5>🚗 Alarma de coche</h5><p>Si el motor está arrancado Y el cinturón no puesto Y la puerta cerrada, se enciende una luz.</p></div>
+      <div class="pr-idea"><h5>💡 Pasillo con 2 interruptores</h5><p>La luz se enciende/apaga desde cualquiera de los dos extremos (típica XOR).</p></div>
+      <div class="pr-idea"><h5>🏠 Detector de intrusos</h5><p>Sirena suena si suena el sensor de ventana O de puerta, pero solo si la alarma está activada.</p></div>
+      <div class="pr-idea"><h5>🌡️ Aire acondicionado</h5><p>Solo se enciende si hace calor Y hay alguien en la habitación (sensor presencia).</p></div>
+      <div class="pr-idea"><h5>🚦 Semáforo simple</h5><p>3 salidas (R, Y, G) según 2 entradas de un contador.</p></div>
+      <div class="pr-idea"><h5>🗳️ Sistema de votación 3 personas</h5><p>Mayoría de 3: F=1 si al menos 2 votan sí.</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card"><h2><span class="num">3</span>Fases</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>🎯 1. Definir</h4><p>Problema real, entradas, salidas.</p></div>
+      <div class="pr-fase"><h4>📋 2. Tabla</h4><p>Construye la tabla de verdad completa.</p></div>
+      <div class="pr-fase"><h4>🗺️ 3. Karnaugh</h4><p>Simplifica visualmente.</p></div>
+      <div class="pr-fase"><h4>📐 4. Esquema</h4><p>Dibuja el circuito con puertas.</p></div>
+      <div class="pr-fase"><h4>🔌 5. Chips 74xx</h4><p>Elige los CIs necesarios.</p></div>
+      <div class="pr-fase"><h4>🛠️ 6. Montar</h4><p>En protoboard con pulsadores y LEDs.</p></div>
+      <div class="pr-fase"><h4>🧪 7. Probar</h4><p>Comprueba todas las combinaciones.</p></div>
+      <div class="pr-fase"><h4>🎤 8. Defender</h4><p>4 min con demo en vivo.</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card"><h2><span class="num">4</span>Rúbrica</h2>
+    <table class="pr-rubrica"><thead><tr><th>Criterio</th><th>Peso</th></tr></thead>
+    <tbody>
+      <tr><td>Definición clara del problema (entradas, salidas)</td><td>10%</td></tr>
+      <tr><td>Tabla de verdad correcta</td><td>15%</td></tr>
+      <tr><td>Simplificación con Karnaugh bien hecha</td><td>20%</td></tr>
+      <tr><td>Esquema del circuito con puertas</td><td>15%</td></tr>
+      <tr><td>Montaje físico funcional en protoboard</td><td>25%</td></tr>
+      <tr><td>Defensa con demo y memoria</td><td>15%</td></tr>
+    </tbody></table>
+  </div>
+</main>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

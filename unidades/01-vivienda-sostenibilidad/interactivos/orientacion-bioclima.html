@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Orientación bioclimática · U01 · Tecnología 4º ESO</title>
+<meta name="description" content="Cambia la orientación de la vivienda y observa cómo afecta el sol en invierno y verano.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.ob-wrap{max-width:880px;margin:30px auto;padding:0 20px 60px}
+.ob-hero{text-align:center;margin-bottom:24px}
+.ob-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.ob-hero p{font-size:.95rem;color:var(--texto2);margin:0;line-height:1.55}
+.ob-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.ob-controles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:600px){.ob-controles{grid-template-columns:1fr}}
+.ob-control{display:flex;flex-direction:column;gap:6px}
+.ob-control label{font-family:var(--cond);font-size:.82rem;color:var(--texto2);letter-spacing:.5px}
+.ob-tabs{display:flex;gap:4px}
+.ob-tab{flex:1;font-family:var(--cond);background:#fff;border:1.5px solid var(--borde);padding:9px 12px;border-radius:6px;cursor:pointer;font-size:.88rem;color:var(--texto2)}
+.ob-tab.activa{background:var(--principal);color:#fff;border-color:var(--principal)}
+.ob-canvas{display:block;margin:0 auto;max-width:100%;height:auto;background:linear-gradient(to bottom,#87CEEB 0%,#87CEEB 50%,#9ACD8E 50%,#9ACD8E 100%);border-radius:8px}
+.ob-eval{margin-top:16px;padding:14px 18px;background:var(--principal-cl);border-left:4px solid var(--principal);border-radius:0 6px 6px 0}
+.ob-eval h4{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1rem}
+.ob-eval p{font-size:.94rem;line-height:1.55;color:var(--texto);margin:0}
+.ob-stars{font-size:1.2rem;letter-spacing:2px;color:#FFB400}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda · Orientación bioclimática</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🧭</span><span class="nc-lbl">Orientación</span></span>
+</nav>
+
+<main id="main-content" class="ob-wrap">
+  <section class="ob-hero">
+    <h1>🧭 Orientación bioclimática</h1>
+    <p>Cambia la orientación de la ventana principal de tu vivienda y la estación del año. Observa cómo el sol entra (o no) y la calificación bioclimática.</p>
+  </section>
+
+  <div class="ob-card">
+    <div class="ob-controles">
+      <div class="ob-control">
+        <label>Orientación de la ventana principal</label>
+        <div class="ob-tabs">
+          <button class="ob-tab activa" data-o="S">Sur</button>
+          <button class="ob-tab" data-o="N">Norte</button>
+          <button class="ob-tab" data-o="E">Este</button>
+          <button class="ob-tab" data-o="O">Oeste</button>
+        </div>
+      </div>
+      <div class="ob-control">
+        <label>Estación</label>
+        <div class="ob-tabs">
+          <button class="ob-tab activa" data-est="invierno">❄️ Invierno</button>
+          <button class="ob-tab" data-est="verano">☀️ Verano</button>
+        </div>
+      </div>
+    </div>
+
+    <svg viewBox="0 0 700 360" class="ob-canvas" id="svg">
+      <!-- Suelo -->
+      <rect x="0" y="180" width="700" height="180" fill="#9ACD8E"/>
+      <!-- Casa -->
+      <g id="casa">
+        <rect x="270" y="200" width="160" height="100" fill="#E8C99B" stroke="#7A5C2E" stroke-width="2"/>
+        <polygon points="265,200 350,150 435,200" fill="#8B4513" stroke="#5C2D0C" stroke-width="2"/>
+        <!-- Ventana (cambia color según sol) -->
+        <rect id="ventana" x="305" y="230" width="40" height="50" fill="#9BD0F5" stroke="#1B4F8A" stroke-width="2"/>
+        <!-- Alero -->
+        <rect id="alero" x="290" y="223" width="80" height="6" fill="#5C2D0C"/>
+        <!-- Puerta -->
+        <rect x="370" y="245" width="35" height="55" fill="#7A5C2E" stroke="#5C2D0C" stroke-width="2"/>
+        <circle cx="397" cy="272" r="1.5" fill="#FFD700"/>
+      </g>
+      <!-- Sol -->
+      <g id="sol-grupo">
+        <circle id="sol" cx="350" cy="80" r="25" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+        <line id="rayo" x1="350" y1="80" x2="325" y2="240" stroke="#FFD700" stroke-width="3" stroke-dasharray="6,4" opacity="0.8"/>
+      </g>
+      <!-- Brújula -->
+      <g transform="translate(630,40)">
+        <circle r="28" fill="#fff" stroke="#1B4F8A" stroke-width="2"/>
+        <text y="-12" text-anchor="middle" font-size="12" font-weight="bold" fill="#1B4F8A">N</text>
+        <text y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#1B4F8A">S</text>
+        <text x="-18" y="4" text-anchor="middle" font-size="11" fill="#1B4F8A">O</text>
+        <text x="18" y="4" text-anchor="middle" font-size="11" fill="#1B4F8A">E</text>
+        <polygon points="0,-22 -3,0 0,4 3,0" fill="#C62828"/>
+      </g>
+      <!-- Etiqueta orientación de la ventana -->
+      <text id="lbl-orient" x="325" y="320" text-anchor="middle" font-family="Barlow Condensed" font-size="14" fill="#1B4F8A" font-weight="bold">Ventana al Sur</text>
+    </svg>
+
+    <div class="ob-eval">
+      <h4>Calificación bioclimática <span class="ob-stars" id="stars">★★★★★</span></h4>
+      <p id="eval-text">—</p>
+    </div>
+  </div>
+
+  <div class="ob-card">
+    <h3 style="font-family:var(--cond);color:var(--principal);font-size:1.05rem;margin:0 0 10px">🔆 Cómo se mueve el sol en España</h3>
+    <ul style="margin:0 0 0 20px;line-height:1.7;color:var(--texto2);font-size:.92rem">
+      <li><strong>Invierno</strong>: el sol está bajo en el cielo (~30º). Entra mucho por las ventanas al sur, calienta gratis.</li>
+      <li><strong>Verano</strong>: el sol está muy alto (~75º). Casi no entra por la ventana al sur (un alero corto lo bloquea), pero entra mucho por el este de mañana y por el oeste de tarde.</li>
+      <li><strong>Norte</strong>: nunca recibe sol directo (en el hemisferio Norte). Es la orientación más fría pero estable.</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+(function(){'use strict';
+var orient='S',est='invierno';
+var ventana=document.getElementById('ventana'),sol=document.getElementById('sol'),rayo=document.getElementById('rayo'),lbl=document.getElementById('lbl-orient'),evalT=document.getElementById('eval-text'),stars=document.getElementById('stars');
+
+var posiciones={
+  // Para cada combinación: posicion del sol (cx,cy), si el sol entra por la ventana, evaluación
+  invierno:{S:{cx:350,cy:100,entra:true},N:{cx:350,cy:280,entra:false,oculto:true},E:{cx:120,cy:140,entra:true,lateral:'E'},O:{cx:580,cy:140,entra:true,lateral:'O'}},
+  verano:{S:{cx:350,cy:55,entra:false,alto:true},N:{cx:350,cy:55,entra:false,alto:true},E:{cx:80,cy:120,entra:true,lateral:'E'},O:{cx:620,cy:120,entra:true,lateral:'O'}}
+};
+
+var evals={
+  S:{invierno:{s:5,t:'Excelente. La ventana al sur recibe el sol bajo de invierno, calentando gratis tu vivienda. Es la mejor orientación.'},verano:{s:5,t:'Excelente. El sol alto de verano queda bloqueado por el alero, y la ventana al sur apenas calienta. ¡Lo mejor de ambos mundos!'}},
+  N:{invierno:{s:2,t:'Mala. El norte no recibe sol directo nunca. En invierno hace frío y no aprovechas calefacción natural.'},verano:{s:3,t:'Regular-buena. El norte se mantiene fresco en verano, pero pierde el confort que da la luz indirecta amable. Buena para dormitorios.'}},
+  E:{invierno:{s:3,t:'Regular. Recibes sol por la mañana en invierno, pero por la tarde la habitación se enfría rápido. Bueno para cocinas y comedores de desayuno.'},verano:{s:2,t:'Mala. El sol bajo de la mañana entra mucho por la ventana este, recalentando la habitación desde las 7 h. Necesita persianas y toldos.'}},
+  O:{invierno:{s:3,t:'Regular. Sol de tarde en invierno: calienta poco antes del frío de la noche. Salones agradables al atardecer.'},verano:{s:1,t:'Pésima. El sol bajo del atardecer (las horas más calientes del día) golpea directamente la ventana. Recalentamiento intenso. Evita.'}}
+};
+
+function actualizar(){
+  var p=posiciones[est][orient];
+  sol.setAttribute('cx',p.cx);
+  sol.setAttribute('cy',p.cy);
+  sol.setAttribute('opacity', p.oculto?'0.25':'1');
+  // Rayo del sol a la ventana (centro de ventana en 325, 255)
+  rayo.setAttribute('x1',p.cx);
+  rayo.setAttribute('y1',p.cy);
+  if(p.entra && !p.alto && !p.oculto){
+    // El rayo llega a la ventana
+    rayo.setAttribute('x2','325');
+    rayo.setAttribute('y2','255');
+    rayo.setAttribute('opacity','0.85');
+    ventana.setAttribute('fill','#FFE680'); // ventana iluminada
+  } else if(p.alto){
+    // En verano sur: el rayo cae sobre la cubierta/alero (no entra)
+    rayo.setAttribute('x2','325');
+    rayo.setAttribute('y2','223');
+    rayo.setAttribute('opacity','0.6');
+    ventana.setAttribute('fill','#9BD0F5'); // ventana fresca
+  } else {
+    rayo.setAttribute('x2',p.cx);
+    rayo.setAttribute('y2',p.cy);
+    rayo.setAttribute('opacity','0');
+    ventana.setAttribute('fill','#9BD0F5');
+  }
+
+  var nombres={S:'Sur',N:'Norte',E:'Este',O:'Oeste'};
+  lbl.textContent='Ventana al '+nombres[orient]+' · '+(est==='invierno'?'❄️ Invierno':'☀️ Verano');
+
+  var ev=evals[orient][est];
+  evalT.textContent=ev.t;
+  stars.textContent='★★★★★'.substring(0,ev.s)+'☆☆☆☆☆'.substring(0,5-ev.s);
+}
+
+document.querySelectorAll('.ob-tab[data-o]').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.ob-tab[data-o]').forEach(function(t){t.classList.remove('activa');});
+    b.classList.add('activa');orient=b.dataset.o;actualizar();
+  });
+});
+document.querySelectorAll('.ob-tab[data-est]').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.ob-tab[data-est]').forEach(function(t){t.classList.remove('activa');});
+    b.classList.add('activa');est=b.dataset.est;actualizar();
+  });
+});
+
+actualizar();
+})();
+</script>
+</body>
+</html>

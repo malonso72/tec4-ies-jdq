@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Identifica el material · U03 · Tecnología 4º ESO</title>
+<meta name="description" content="12 objetos cotidianos: identifica el material principal y su justificación.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.im-wrap{max-width:880px;margin:30px auto;padding:0 20px 60px}
+.im-hero{text-align:center;margin-bottom:24px}
+.im-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.im-progress{display:flex;justify-content:space-between;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:18px;font-family:var(--cond)}
+.im-progress strong{color:var(--principal)}
+.im-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:20px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.im-emoji{font-size:5rem;line-height:1;margin:8px 0}
+.im-obj{font-family:var(--cond);font-size:1.6rem;color:var(--principal);margin:0 0 4px}
+.im-desc{font-size:1rem;line-height:1.6;color:var(--texto);padding:14px 18px;background:var(--principal-cl);border-left:4px solid var(--principal);border-radius:0 6px 6px 0;text-align:left;margin:0 14px 16px}
+.im-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:left}
+@media(max-width:560px){.im-opts{grid-template-columns:1fr}}
+.im-opt{font-family:var(--cond);background:#fff;border:2px solid var(--borde);border-radius:8px;padding:11px 14px;cursor:pointer;font-size:.92rem}
+.im-opt:hover:not(:disabled){border-color:var(--principal);background:var(--principal-cl)}
+.im-opt.ok{background:#E1F5EE;border-color:#1E8E3E;color:#0F6E56}
+.im-opt.ko{background:#FCEBEB;border-color:#C44536;color:#9A2A2A}
+.im-opt:disabled{cursor:not-allowed}
+.im-fb{display:none;margin-top:12px;padding:14px 18px;border-radius:8px;font-size:.93rem;line-height:1.55;text-align:left}
+.im-fb.show{display:block}
+.im-fb.acierto{background:#E1F5EE;color:#0F6E56;border-left:5px solid #1E8E3E}
+.im-fb.fallo{background:#FCEBEB;color:#9A2A2A;border-left:5px solid #C44536}
+.im-actions{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.im-btn{font-family:var(--cond);padding:9px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.im-resumen{text-align:center;background:linear-gradient(180deg,var(--principal-cl),#fff);border:2px solid var(--principal);border-radius:10px;padding:28px 24px}
+.im-resumen .puntos{font-family:var(--cond);font-size:2.6rem;color:var(--principal)}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U03 · Diseño · Identifica material</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🧱</span><span class="nc-lbl">Material</span></span>
+</nav>
+
+<main id="main-content" class="im-wrap">
+  <section class="im-hero"><h1>🧱 Identifica el material</h1><p>12 objetos cotidianos. ¿De qué están hechos y por qué?</p></section>
+  <div class="im-progress"><span>Objeto <strong id="num">1</strong> de <strong id="tot">12</strong></span><span>Aciertos: <strong id="ac">0</strong></span></div>
+
+  <div class="im-card" id="card">
+    <div class="im-emoji" id="emoji">—</div>
+    <h2 class="im-obj" id="obj">—</h2>
+    <p class="im-desc" id="desc">—</p>
+    <div class="im-opts" id="opts"></div>
+    <div class="im-fb" id="fb"></div>
+    <div class="im-actions" id="acciones" style="display:none"><button class="im-btn" id="siguiente">Siguiente →</button></div>
+  </div>
+
+  <section class="im-resumen" id="resumen" style="display:none">
+    <h2 style="font-family:var(--cond);color:var(--principal);margin:0 0 6px">¡Has terminado!</h2>
+    <div class="puntos"><span id="r-ac">0</span> / <span id="r-tot">12</span></div>
+    <p id="r-msg" style="margin:10px 0 14px;color:var(--texto2)">—</p>
+    <button class="im-btn" id="rein">🔁 Volver a empezar</button>
+  </section>
+</main>
+
+<script>
+(function(){'use strict';
+var mats={
+  acero:{n:'Acero',exp:'Aleación de hierro y carbono. Resistente y duro. Necesita protección antioxidante (pintura, galvanizado).'},
+  inox:{n:'Acero inox',exp:'Acero con cromo y níquel. No se oxida; usado en cocina, sanidad, química.'},
+  alu:{n:'Aluminio',exp:'Ligero, no se oxida (forma Al2O3 protector), reciclable. Aviones, latas, perfiles.'},
+  cobre:{n:'Cobre',exp:'Excelente conductor eléctrico y térmico. Cableado, tuberías.'},
+  titanio:{n:'Titanio',exp:'Ligero, muy resistente, biocompatible, caro. Aeroespacial y medicina.'},
+  pp:{n:'Polipropileno (PP)',exp:'Termoplástico común. Tapones, yogures, bisagras vivas. Reciclaje #5.'},
+  pet:{n:'PET',exp:'Termoplástico transparente, alta resistencia. Botellas. Reciclaje #1.'},
+  abs:{n:'ABS',exp:'Termoplástico duro y resistente al impacto. Carcasas, juguetes, piezas técnicas.'},
+  carbono:{n:'Fibra de carbono',exp:'Composite muy ligero y rígido. Deporte alto rendimiento, aviación.'},
+  kevlar:{n:'Kevlar',exp:'Aramida con altísima resistencia a tracción. Chalecos antibalas, cuerdas.'},
+  vidrio:{n:'Vidrio',exp:'Cerámico amorfo (SiO2). Ventanas, pantallas, fibras ópticas.'},
+  ceramica:{n:'Cerámica técnica',exp:'Muy duros y resistentes a temperatura. Frenos, prótesis dentales.'},
+  madera:{n:'Madera',exp:'Material natural renovable. Calidez, fácil de trabajar.'}
+};
+var casos=[
+  {emoji:'🪛',obj:'Llave inglesa',desc:'Herramienta dura, resistente a golpes, pesa. Si la dejas en intemperie se oxida.',correcto:'acero'},
+  {emoji:'🥄',obj:'Cubertería de cocina',desc:'Resistente al lavavajillas y al agua, no se oxida, color metálico brillante.',correcto:'inox'},
+  {emoji:'✈️',obj:'Fuselaje de avión',desc:'Necesita ser ligero, resistente, no oxidarse y soportar fatiga.',correcto:'alu'},
+  {emoji:'🔌',obj:'Cable eléctrico (alma interior)',desc:'Hilo que conduce muy bien la electricidad, color rojizo.',correcto:'cobre'},
+  {emoji:'🦷',obj:'Implante dental',desc:'Pequeño tornillo que se fija al hueso y debe ser biocompatible.',correcto:'titanio'},
+  {emoji:'🥛',obj:'Tapón de yogur',desc:'Plástico flexible que se abre y cierra muchas veces sin romperse. Suele llevar el #5.',correcto:'pp'},
+  {emoji:'🍶',obj:'Botella de agua',desc:'Transparente, ligera, resistente, totalmente reciclable. Reciclaje #1.',correcto:'pet'},
+  {emoji:'🎮',obj:'Carcasa de PlayStation',desc:'Plástico duro, opaco, resistente a impacto, con buen acabado.',correcto:'abs'},
+  {emoji:'🚴',obj:'Cuadro bici de competición',desc:'Material muy ligero y rígido para ciclismo profesional. Caro y difícil de reciclar.',correcto:'carbono'},
+  {emoji:'🛡️',obj:'Chaleco antibalas',desc:'Tejido flexible que para balas. Muy resistente a tracción.',correcto:'kevlar'},
+  {emoji:'📱',obj:'Pantalla de móvil',desc:'Transparente, duro pero frágil al impacto fuerte. Gorilla Glass es una variedad.',correcto:'vidrio'},
+  {emoji:'🪑',obj:'Mesa rústica de comedor',desc:'Cálida al tacto, ligera, fácil de trabajar, natural y renovable.',correcto:'madera'}
+];
+
+var i=0,aciertos=0,r=false;
+var n=document.getElementById('num'),tot=document.getElementById('tot'),ac=document.getElementById('ac'),emoji=document.getElementById('emoji'),obj=document.getElementById('obj'),desc=document.getElementById('desc'),op=document.getElementById('opts'),fb=document.getElementById('fb'),acc=document.getElementById('acciones'),sig=document.getElementById('siguiente'),card=document.getElementById('card'),resumen=document.getElementById('resumen');
+tot.textContent=casos.length;document.getElementById('r-tot').textContent=casos.length;
+
+function shuffle(a){var b=a.slice();for(var k=b.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=b[k];b[k]=b[j];b[j]=t;}return b;}
+function pintar(){
+  var c=casos[i];n.textContent=i+1;emoji.textContent=c.emoji;obj.textContent=c.obj;desc.textContent=c.desc;
+  fb.className='im-fb';fb.innerHTML='';acc.style.display='none';r=false;op.innerHTML='';
+  var keys=Object.keys(mats).filter(function(k){return k!==c.correcto;});
+  keys=shuffle(keys).slice(0,3);keys.push(c.correcto);
+  shuffle(keys).forEach(function(k){
+    var b=document.createElement('button');b.className='im-opt';b.dataset.id=k;b.textContent=mats[k].n;
+    b.addEventListener('click',function(){if(r)return;r=true;var c2=casos[i];
+      op.querySelectorAll('.im-opt').forEach(function(bt){bt.disabled=true;if(bt.dataset.id===c2.correcto)bt.classList.add('ok');else if(bt===b)bt.classList.add('ko');});
+      var corr=mats[c2.correcto];
+      if(k===c2.correcto){aciertos++;fb.className='im-fb show acierto';fb.innerHTML='<strong>✓ ¡Correcto!</strong> <strong>'+corr.n+'</strong>: '+corr.exp;}
+      else{var elec=mats[k];fb.className='im-fb show fallo';fb.innerHTML='<strong>✗ Era '+corr.n+'</strong>: '+corr.exp+'<br><br><em>Tu respuesta '+elec.n+':</em> '+elec.exp;}
+      ac.textContent=aciertos;acc.style.display='flex';
+    });
+    op.appendChild(b);
+  });
+}
+sig.addEventListener('click',function(){i++;if(i>=casos.length){card.style.display='none';document.querySelector('.im-progress').style.display='none';resumen.style.display='block';document.getElementById('r-ac').textContent=aciertos;var p=Math.round(aciertos/casos.length*100);document.getElementById('r-msg').innerHTML=(p>=80?'🌟 ¡Excelente!':p>=60?'👍 Bien.':'📚 Repasa.')+'<br><small>'+aciertos+' / '+casos.length+' ('+p+'%)</small>';resumen.scrollIntoView({behavior:'smooth'});}else pintar();});
+document.getElementById('rein').addEventListener('click',function(){i=0;aciertos=0;ac.textContent='0';resumen.style.display='none';card.style.display='block';document.querySelector('.im-progress').style.display='flex';pintar();window.scrollTo({top:0,behavior:'smooth'});});
+pintar();
+})();
+</script>
+</body>
+</html>

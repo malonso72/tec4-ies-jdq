@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U01 Vivienda y sostenibilidad · Tecnología 4º ESO</title>
+<meta name="description" content="Libro digital U1: la vivienda y sus instalaciones, bioclimática, eficiencia energética y ciudades sostenibles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../../assets/css/unidad.css">
+<style>
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+.tipo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+.tipo-box .ti{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tipo-box .ti h4{margin:0 0 6px;font-family:var(--cond);color:var(--principal);font-size:1.05rem}
+.tipo-box .ti p{margin:0;font-size:.92rem;color:var(--texto2);line-height:1.5}
+.tipo-box .ti.azul h4{color:var(--principal2)}
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond);font-weight:600}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+table.tipo-tabla td strong{color:var(--principal2)}
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-cl);color:var(--principal);font-family:var(--cond);padding:8px 10px;text-align:left;font-weight:600}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+@media print{.curso-hd,.curso-navcross,.sb-side{display:none!important}.apartado{break-inside:avoid}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda y sostenibilidad · Libro digital</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span>
+  <span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomp</span></a>
+</nav>
+
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Apartados</h3>
+  <div class="parte-titulo">Parte 1 · La vivienda</div>
+  <a href="#s1">1. La vivienda como derecho</a>
+  <a href="#s2">2. Vivienda mínima y acceso</a>
+  <a href="#s3">3. Proceso constructivo</a>
+  <div class="parte-titulo">Parte 2 · Instalaciones</div>
+  <a href="#s4">4. Agua</a>
+  <a href="#s5">5. Electricidad doméstica</a>
+  <a href="#s6">6. Gas y calefacción</a>
+  <a href="#s7">7. Climatización</a>
+  <a href="#s8">8. Telecomunicaciones</a>
+  <div class="parte-titulo">Parte 3 · Eficiencia</div>
+  <a href="#s9">9. Aislamiento</a>
+  <a href="#s10">10. Vivienda bioclimática</a>
+  <a href="#s11">11. Certificación energética</a>
+  <a href="#s12">12. Domótica</a>
+  <div class="parte-titulo">Parte 4 · Ciudad sostenible</div>
+  <a href="#s13">13. Smart city</a>
+  <a href="#s14">14. Movilidad sostenible</a>
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+  <h1 class="unidad-titulo">U01 · La vivienda y sus instalaciones</h1>
+  <p class="unidad-subt">La casa es el ejemplo perfecto de proceso tecnológico: necesidad → diseño → construcción → uso. Aprenderemos cómo se construye, qué instalaciones tiene y cómo hacerla más eficiente.</p>
+
+  <div class="callout callout-info">
+    <span class="ic">⏭️</span>
+    <p><strong>Conexión Bachillerato:</strong> esta unidad prepara el <a href="https://teci2-ies-jdq.malonso72.workers.dev/teoria/bloque_G.html" target="_blank">bloque G Tecnología sostenible</a> de TECI II, donde profundizarás en análisis de ciclo de vida, huella ecológica y ecodiseño cuantitativo.</p>
+  </div>
+
+  <section class="apartado" id="s1">
+    <h2>1. La vivienda como derecho</h2>
+    <p>El derecho a una vivienda digna está recogido en la <strong>Constitución Española</strong> (art. 47) y en la <strong>Declaración Universal de los Derechos Humanos</strong>. Una vivienda digna debe ser segura, salubre y accesible, protegerte de las inclemencias del tiempo y permitir vida privada.</p>
+    <p>El concepto de vivienda varía con la cultura, el clima y la economía. Una <em>yurta</em> en Mongolia, un <em>iglú</em> en el Ártico o un piso en Madrid responden a la misma necesidad básica con soluciones muy distintas.</p>
+  </section>
+
+  <section class="apartado" id="s2">
+    <h2>2. Vivienda mínima y acceso a la vivienda</h2>
+    <p>La <strong>vivienda mínima</strong> es la superficie y equipamiento mínimo que la normativa exige para considerarla habitable. En España, una vivienda mínima incluye:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li>Superficie ≥ 25 m² (variable según comunidad).</li>
+      <li>Cocina, baño completo (inodoro + ducha/bañera + lavabo) y dormitorio diferenciado.</li>
+      <li>Ventilación e iluminación natural en estancias de uso permanente.</li>
+      <li>Altura libre mínima (~2,50 m en salas; 2,20 m en pasillos).</li>
+      <li>Suministros básicos: agua potable, electricidad, evacuación de aguas.</li>
+    </ul>
+    <h3>Acceso a la vivienda</h3>
+    <p>El acceso a la vivienda es uno de los problemas sociales más graves: el alto precio (compra o alquiler), la temporalidad laboral y la falta de oferta dificultan que jóvenes y familias accedan. Soluciones que se exploran:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Vivienda de protección oficial (VPO)</strong> con precio limitado.</li>
+      <li><strong>Alquiler social</strong> gestionado por administraciones.</li>
+      <li><strong>Co-living</strong>: espacios compartidos para reducir coste.</li>
+      <li><strong>Rehabilitación</strong> del parque antiguo para ampliar oferta.</li>
+    </ul>
+  </section>
+
+  <section class="apartado" id="s3">
+    <h2>3. Proceso constructivo vs. proceso tecnológico</h2>
+    <p>Construir una vivienda <strong>es</strong> un proceso tecnológico: hay una necesidad (alojamiento), un diseño (proyecto del arquitecto), una fabricación (construcción) y un uso. Pero tiene singularidades:</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>📐 Proyecto</h4><p>Memoria, planos, mediciones, presupuesto, pliego. Firmado por arquitecto. Visado por el Colegio.</p></div>
+      <div class="ti azul"><h4>📋 Licencia</h4><p>El ayuntamiento autoriza la obra si cumple el plan urbanístico y el Código Técnico de la Edificación (CTE).</p></div>
+      <div class="ti"><h4>👷 Construcción</h4><p>Fases: cimentación, estructura, cubiertas, cerramientos, instalaciones, acabados.</p></div>
+      <div class="ti azul"><h4>✅ Licencia de habitabilidad</h4><p>Tras inspección, se autoriza la ocupación.</p></div>
+    </div>
+
+    <h3>Fases del proceso constructivo</h3>
+    <table class="tipo-tabla">
+      <thead><tr><th>Fase</th><th>Qué se hace</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Replanteo</strong></td><td>Marcar sobre el terreno la planta del edificio.</td></tr>
+        <tr><td><strong>Cimentación</strong></td><td>Excavar y construir zapatas o losas que transmiten cargas al suelo.</td></tr>
+        <tr><td><strong>Estructura</strong></td><td>Pilares, vigas y forjados. Sostiene el peso. Hormigón armado, acero o madera.</td></tr>
+        <tr><td><strong>Cubierta</strong></td><td>Tejado o azotea. Protege de la lluvia.</td></tr>
+        <tr><td><strong>Cerramientos</strong></td><td>Fachadas y particiones interiores. Define los espacios.</td></tr>
+        <tr><td><strong>Instalaciones</strong></td><td>Agua, electricidad, gas, climatización, telecom.</td></tr>
+        <tr><td><strong>Acabados</strong></td><td>Pintura, suelos, carpintería, sanitarios.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <section class="apartado" id="s4">
+    <h2>4. Instalación de agua</h2>
+    <p>Lleva agua potable a los puntos de consumo (grifos, sanitarios, electrodomésticos) y evacúa las aguas residuales. Dos circuitos separados:</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>💧 Abastecimiento (fría/caliente)</h4><p>Acometida desde la red pública → contador → llave general → distribución por la vivienda. La caliente se produce en una caldera, termo eléctrico o solar.</p></div>
+      <div class="ti azul"><h4>🚰 Saneamiento</h4><p>Aguas usadas (gris) y fecales (negra) bajan por bajantes y van al alcantarillado.</p></div>
+    </div>
+    <p>Elementos clave: <strong>llave de paso general</strong> (cierra todo), <strong>llaves de corte</strong> de cada local húmedo, <strong>sifones</strong> en cada desagüe (impiden malos olores), <strong>termo</strong> o <strong>caldera</strong> para agua caliente.</p>
+  </section>
+
+  <section class="apartado" id="s5">
+    <h2>5. Instalación eléctrica</h2>
+    <p>Lleva la energía eléctrica desde la red pública hasta los puntos de uso. La normativa es el <strong>REBT</strong> (Reglamento Electrotécnico de Baja Tensión).</p>
+
+    <h3>Cuadro general de mando y protección (CGMP)</h3>
+    <p>Es la "centralita" eléctrica de tu casa. Está cerca de la entrada y contiene:</p>
+    <table class="tipo-tabla">
+      <thead><tr><th>Elemento</th><th>Qué hace</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ICP</strong> (Interruptor de Control de Potencia)</td><td>Limita la potencia contratada con la compañía.</td></tr>
+        <tr><td><strong>IGA</strong> (Interruptor General Automático)</td><td>Permite cortar toda la corriente manualmente.</td></tr>
+        <tr><td><strong>ID</strong> (Interruptor Diferencial)</td><td>Detecta fugas a tierra (te puede salvar la vida).</td></tr>
+        <tr><td><strong>PIA</strong>s (Pequeños Interruptores Automáticos / magnetotérmicos)</td><td>Uno por circuito (iluminación, enchufes, cocina, calefacción…). Saltan ante sobrecargas o cortocircuitos.</td></tr>
+        <tr><td><strong>Toma de tierra</strong></td><td>Conductor que va al suelo. Evita que la carcasa metálica de los aparatos te electrocute si hay derivación.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-warn">
+      <span class="ic">⚡</span>
+      <p>El <strong>diferencial</strong> es el dispositivo que salva vidas. Si entra en tu casa por un cable y sale a tierra por tu cuerpo (porque tocas la carcasa de la lavadora rota), el diferencial nota que entra más corriente de la que sale y dispara en 30 ms. <strong>Prueba el botón "T" una vez al mes.</strong></p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s6">
+    <h2>6. Instalación de gas y calefacción</h2>
+    <p>El <strong>gas natural</strong> (o butano/propano en bombona) se distribuye por tuberías metálicas. Cada aparato tiene una llave de corte. Obligatoria <strong>revisión periódica</strong> (cada 5 años por empresa autorizada).</p>
+
+    <h3>Tipos de calefacción</h3>
+    <table class="tipo-tabla">
+      <thead><tr><th>Sistema</th><th>Fuente</th><th>Ventaja / inconveniente</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Radiadores con caldera de gas</strong></td><td>Gas natural / GLP</td><td>+ Económica · − Emisiones CO₂</td></tr>
+        <tr><td><strong>Suelo radiante</strong></td><td>Agua caliente / eléctrico</td><td>+ Confortable, eficiente a baja T<sup>a</sup> · − Inversión alta</td></tr>
+        <tr><td><strong>Bomba de calor (aerotermia)</strong></td><td>Electricidad + aire exterior</td><td>+ Muy eficiente (1 kWh ≈ 3-4 kWh de calor) · − Inversión alta</td></tr>
+        <tr><td><strong>Eléctrica (radiadores, acumulación)</strong></td><td>Electricidad</td><td>+ Sin instalación gas · − Cara si la electricidad no es renovable</td></tr>
+        <tr><td><strong>Biomasa (pellets)</strong></td><td>Pellets de madera</td><td>+ CO₂ neutro · − Necesita silo y mantenimiento</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="apartado" id="s7">
+    <h2>7. Climatización (frío y aire)</h2>
+    <p>Mantiene la temperatura y humedad confortables. Lo más común: <strong>aire acondicionado split</strong> que extrae calor del interior y lo expulsa al exterior. En modo invierno (bomba de calor) hace lo contrario.</p>
+    <p><strong>Ventilación mecánica</strong>: en viviendas modernas muy estancas, se instala un sistema que renueva el aire interior recuperando el calor del aire extraído (VMC con recuperador).</p>
+  </section>
+
+  <section class="apartado" id="s8">
+    <h2>8. Telecomunicaciones</h2>
+    <p>La <strong>ICT</strong> (Infraestructura Común de Telecomunicaciones) de un edificio incluye:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li>Antena de TV y radio (TDT, FM).</li>
+      <li>Antena de satélite (Astra) — opcional.</li>
+      <li>Cable coaxial o fibra óptica para internet y televisión por cable.</li>
+      <li>RITU/RITS: recintos donde se centraliza la electrónica del edificio.</li>
+      <li>Tomas en el interior de cada vivienda (mínimo 2 en salón).</li>
+    </ul>
+    <p>El <strong>router de fibra</strong> de tu casa se conecta a la roseta óptica (entrada de fibra) y reparte internet por wifi y por cable Ethernet a los dispositivos.</p>
+  </section>
+
+
+  <section class="apartado" id="s9">
+    <h2>9. Aislamiento térmico y acústico</h2>
+    <p>El <strong>aislamiento</strong> es el elemento clave para la eficiencia: una vivienda mal aislada gasta hasta 3 veces más en climatización.</p>
+
+    <h3>Aislamiento térmico</h3>
+    <p>Materiales con baja <strong>conductividad térmica (λ)</strong>: poliestireno expandido (corcho blanco), lana de roca, lana de vidrio, espuma de poliuretano, paneles SIP. Se coloca en muros (exterior preferente), cubierta y suelos.</p>
+
+    <h3>Carpinterías</h3>
+    <table class="tipo-tabla">
+      <thead><tr><th>Tipo</th><th>Aislamiento</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>Vidrio simple + aluminio sin rotura</td><td>Muy malo</td><td>Las clásicas de los 70-80.</td></tr>
+        <tr><td>Doble vidrio + PVC</td><td>Bueno</td><td>Estándar actual.</td></tr>
+        <tr><td>Doble vidrio bajo emisivo + relleno argón</td><td>Excelente</td><td>Vivienda pasiva.</td></tr>
+        <tr><td>Triple vidrio</td><td>Top</td><td>Climas extremos.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Aislamiento acústico</h3>
+    <p>Para evitar ruido entre viviendas y desde la calle: muros gruesos, lanas minerales en cámaras, suelos flotantes, ventanas con vidrio asimétrico (4+8+6 mm).</p>
+  </section>
+
+  <section class="apartado" id="s10">
+    <h2>10. Vivienda bioclimática</h2>
+    <p>Una <strong>vivienda bioclimática</strong> aprovecha las condiciones del clima para ahorrar energía sin necesidad de tecnología compleja. Principios básicos:</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>🧭 Orientación</h4><p>En el hemisferio Norte, las estancias principales al <strong>sur</strong> (sol en invierno, alero las protege en verano). Cocinas y dormitorios al norte.</p></div>
+      <div class="ti azul"><h4>🏔️ Inercia térmica</h4><p>Muros gruesos que acumulan calor de día y lo liberan de noche. Tradicional en casas de pueblo.</p></div>
+      <div class="ti"><h4>🌬️ Ventilación cruzada</h4><p>Aberturas enfrentadas para que el aire fresco circule en verano sin aire acondicionado.</p></div>
+      <div class="ti azul"><h4>🪟 Aleros y celosías</h4><p>Bloquean el sol alto de verano pero dejan pasar el bajo de invierno.</p></div>
+      <div class="ti"><h4>🌳 Vegetación</h4><p>Árboles caducos al sur: sombra en verano, sol en invierno.</p></div>
+      <div class="ti azul"><h4>💧 Captación de agua</h4><p>Cubierta inclinada → depósito → uso para riego o WC.</p></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🏚️</span>
+      <p>Las casas tradicionales andaluzas son ejemplos perfectos de arquitectura bioclimática: muros gruesos encalados (reflejan), patios interiores (ventilación), persianas (sombra), cubiertas planas (terraza). Tu abuela ya sabía esto sin saber que era "bioclimático".</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s11">
+    <h2>11. Certificación energética</h2>
+    <p>Todas las viviendas que se venden o alquilan deben tener <strong>certificación energética</strong>, una etiqueta (A a G) que indica su consumo de energía y emisiones de CO₂.</p>
+    <table class="tipo-tabla">
+      <thead><tr><th>Letra</th><th>Consumo</th><th>Significado</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:#1B8B3A">A</strong></td><td>Muy bajo</td><td>Vivienda pasiva o casi nula energía</td></tr>
+        <tr><td><strong style="color:#3FA646">B</strong></td><td>Bajo</td><td>Viviendas muy eficientes</td></tr>
+        <tr><td><strong style="color:#A3C742">C</strong></td><td>Medio-bajo</td><td>Construcción reciente buena</td></tr>
+        <tr><td><strong style="color:#E2D32A">D</strong></td><td>Medio</td><td>Mayoría del parque actual</td></tr>
+        <tr><td><strong style="color:#E2AB2A">E</strong></td><td>Medio-alto</td><td>Viviendas antiguas sin reformar</td></tr>
+        <tr><td><strong style="color:#E27A2A">F</strong></td><td>Alto</td><td>Viviendas muy ineficientes</td></tr>
+        <tr><td><strong style="color:#C42A2A">G</strong></td><td>Muy alto</td><td>Las peores: 1970-80 sin reformar</td></tr>
+      </tbody>
+    </table>
+
+    <p>Cómo subir de letra: <strong>aislamiento</strong> (paredes, ventanas, cubierta), <strong>caldera</strong> de condensación o bomba de calor, <strong>iluminación LED</strong>, <strong>electrodomésticos A+++</strong>, <strong>placas solares</strong>.</p>
+  </section>
+
+  <section class="apartado" id="s12">
+    <h2>12. Domótica</h2>
+    <p>La <strong>domótica</strong> es la integración de tecnología en la vivienda para hacerla automática, eficiente y accesible. Hoy se llama también <strong>smart home</strong>.</p>
+
+    <h3>Qué se puede automatizar</h3>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Iluminación</strong>: encendido por presencia, atenuación según hora.</li>
+      <li><strong>Climatización</strong>: termostato programable, control por geolocalización.</li>
+      <li><strong>Persianas</strong> motorizadas con horario.</li>
+      <li><strong>Seguridad</strong>: alarmas, cámaras, cerraduras inteligentes.</li>
+      <li><strong>Consumo</strong>: enchufes inteligentes que apagan en stand-by.</li>
+      <li><strong>Riego</strong> automático según humedad.</li>
+    </ul>
+
+    <p>Protocolos típicos: <strong>Zigbee, Z-Wave, KNX, Matter</strong>. Asistentes: Alexa, Google Home, Siri.</p>
+  </section>
+
+
+  <section class="apartado" id="s13">
+    <h2>13. Smart city (ciudad inteligente)</h2>
+    <p>Una <strong>ciudad inteligente</strong> usa sensores, datos y tecnología para mejorar la vida de sus habitantes. Ámbitos típicos:</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>🚦 Tráfico</h4><p>Semáforos adaptativos, sensores de aparcamiento, peajes inteligentes.</p></div>
+      <div class="ti azul"><h4>💡 Alumbrado</h4><p>Farolas LED que ajustan intensidad por presencia o luz natural.</p></div>
+      <div class="ti"><h4>🗑️ Residuos</h4><p>Contenedores con sensor de llenado que optimizan rutas de recogida.</p></div>
+      <div class="ti azul"><h4>🚿 Agua</h4><p>Detección automática de fugas en la red.</p></div>
+      <div class="ti"><h4>🌳 Calidad del aire</h4><p>Sensores que miden polución y avisan a la población.</p></div>
+      <div class="ti azul"><h4>📊 Datos abiertos</h4><p>El ayuntamiento publica datos para que ciudadanos y empresas creen apps útiles.</p></div>
+    </div>
+  </section>
+
+  <section class="apartado" id="s14">
+    <h2>14. Movilidad sostenible</h2>
+    <p>Reducir el impacto del transporte urbano:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Transporte público</strong> eléctrico (metro, tranvía, autobús eléctrico/híbrido).</li>
+      <li><strong>Carriles bici</strong> y sistemas de bicis públicas.</li>
+      <li><strong>Coches eléctricos</strong>: la UE prohíbe vender coches nuevos de combustión a partir de 2035.</li>
+      <li><strong>Zonas de bajas emisiones</strong> (ZBE): restricciones a coches contaminantes.</li>
+      <li><strong>Caminar a pie</strong>: la mejor opción para distancias cortas.</li>
+    </ul>
+
+    <div class="callout callout-ok">
+      <span class="ic">🌍</span>
+      <p>El transporte genera el <strong>~25 %</strong> de las emisiones de CO₂ en España. Cambiar coches privados por transporte público y bici tiene un impacto enorme en la huella de carbono de una ciudad.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario</h2>
+    <table class="glosario-tabla">
+      <tbody>
+        <tr><td>Aerotermia</td><td>Bomba de calor que extrae energía del aire exterior para climatizar.</td></tr>
+        <tr><td>Aislamiento</td><td>Material o sistema que reduce la transmisión de calor o ruido.</td></tr>
+        <tr><td>Bioclimática</td><td>Arquitectura que aprovecha el clima local para ahorrar energía.</td></tr>
+        <tr><td>Caldera</td><td>Aparato que calienta agua usando un combustible (gas, biomasa, etc.).</td></tr>
+        <tr><td>CGMP</td><td>Cuadro general de mando y protección. "Centralita" eléctrica de la vivienda.</td></tr>
+        <tr><td>CTE</td><td>Código Técnico de la Edificación. Normativa básica de construcción en España.</td></tr>
+        <tr><td>Certificación energética</td><td>Etiqueta A-G que indica consumo y emisiones de una vivienda.</td></tr>
+        <tr><td>Diferencial</td><td>Protección eléctrica que detecta fugas a tierra y desconecta en milisegundos.</td></tr>
+        <tr><td>Domótica</td><td>Automatización de la vivienda mediante tecnología.</td></tr>
+        <tr><td>ICP</td><td>Interruptor de Control de Potencia. Limita la potencia contratada.</td></tr>
+        <tr><td>ICT</td><td>Infraestructura Común de Telecomunicaciones de un edificio.</td></tr>
+        <tr><td>Inercia térmica</td><td>Capacidad de un material de almacenar calor y liberarlo lentamente.</td></tr>
+        <tr><td>Magnetotérmico (PIA)</td><td>Protección eléctrica que salta ante sobrecargas o cortocircuitos.</td></tr>
+        <tr><td>REBT</td><td>Reglamento Electrotécnico de Baja Tensión. Normativa eléctrica.</td></tr>
+        <tr><td>Smart city</td><td>Ciudad que usa sensores y datos para mejorar servicios públicos.</td></tr>
+        <tr><td>Suelo radiante</td><td>Sistema de calefacción con tubos bajo el suelo por los que circula agua caliente.</td></tr>
+        <tr><td>VPO</td><td>Vivienda de Protección Oficial. Precio limitado por la administración.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+</div>
+
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

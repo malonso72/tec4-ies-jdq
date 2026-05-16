@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U04 Impresión 3D · Tecnología 4º ESO</title>
+<meta name="description" content="Fabricación aditiva: tecnologías, materiales, flujo CAD-slicer-imprimir, aplicaciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css"><link rel="stylesheet" href="../../assets/css/unidad.css">
+<style>
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+.tipo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+.tipo-box .ti{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tipo-box .ti h4{margin:0 0 6px;font-family:var(--cond);color:var(--principal);font-size:1.05rem}
+.tipo-box .ti p{margin:0;font-size:.92rem;color:var(--texto2);line-height:1.5}
+.tipo-box .ti.azul h4{color:var(--principal2)}
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond)}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-cl);color:var(--principal);padding:8px 10px;text-align:left;font-family:var(--cond)}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U04 · Impresión 3D · Libro digital</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span><span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomp</span></a>
+</nav>
+
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Apartados</h3>
+  <div class="parte-titulo">Parte 1 · Fundamentos</div>
+  <a href="#s1">1. ¿Qué es la fabricación aditiva?</a>
+  <a href="#s2">2. Aditiva vs. otras</a>
+  <a href="#s3">3. Historia</a>
+  <div class="parte-titulo">Parte 2 · Tecnologías</div>
+  <a href="#s4">4. FDM</a>
+  <a href="#s5">5. SLA / DLP</a>
+  <a href="#s6">6. SLS y MJF</a>
+  <a href="#s7">7. Impresión en metal</a>
+  <div class="parte-titulo">Parte 3 · Flujo de trabajo</div>
+  <a href="#s8">8. CAD → STL</a>
+  <a href="#s9">9. El slicer</a>
+  <a href="#s10">10. Parámetros clave</a>
+  <a href="#s11">11. Problemas comunes</a>
+  <div class="parte-titulo">Parte 4 · Aplicaciones</div>
+  <a href="#s12">12. Aplicaciones</a>
+  <a href="#s13">13. Limitaciones</a>
+  <a href="#s14">14. Bioimpresión y futuro</a>
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+  <h1 class="unidad-titulo">U04 · Impresión 3D · Fabricación aditiva</h1>
+  <p class="unidad-subt">La impresión 3D está cambiando cómo se fabrican objetos: prótesis médicas a medida, piezas aeroespaciales, vivienda... incluso comida. Esta unidad te enseña qué es, cómo se usa y cuándo merece la pena.</p>
+
+  <section class="apartado" id="s1">
+    <h2>1. ¿Qué es la fabricación aditiva?</h2>
+    <p>La <strong>impresión 3D</strong> o <strong>fabricación aditiva</strong> es un proceso donde se construye una pieza <strong>añadiendo material capa a capa</strong>, controlado por un archivo digital. Es lo contrario del mecanizado, que <em>quita</em> material.</p>
+    <p>Ventajas: piezas únicas sin moldes, geometrías imposibles para otros procesos, prototipos rápidos, casi sin desperdicio.</p>
+  </section>
+
+  <section class="apartado" id="s2">
+    <h2>2. Aditiva vs. otros procesos</h2>
+    <table class="tipo-tabla">
+      <thead><tr><th>Tipo</th><th>Cómo crea la forma</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Aditivo</strong></td><td>Añadiendo material</td><td>Impresión 3D</td></tr>
+        <tr><td><strong>Sustractivo</strong></td><td>Quitando material (virutas)</td><td>Fresado CNC, torneado</td></tr>
+        <tr><td><strong>Conformado</strong></td><td>Cambiando forma del material existente</td><td>Forja, extrusión, embutición</td></tr>
+        <tr><td><strong>Moldeo</strong></td><td>Vertiendo material líquido en molde</td><td>Inyección, fundición</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="apartado" id="s3">
+    <h2>3. Breve historia</h2>
+    <p>La primera impresora 3D la inventó <strong>Chuck Hull en 1986</strong> con la tecnología SLA (estereolitografía). En 2009 expiraron las patentes de FDM, lo que permitió que aparecieran impresoras económicas (RepRap, Prusa) y popularizó la tecnología. Hoy se usa en industria, medicina, arquitectura y centros educativos.</p>
+  </section>
+
+
+  <section class="apartado" id="s4">
+    <h2>4. FDM (Fused Deposition Modeling)</h2>
+    <p>La tecnología más común y económica. Un filamento de plástico se funde a ~200 ºC en un extrusor y se deposita capa a capa.</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>📦 Equipos</h4><p>Prusa, Creality Ender, Bambu Lab. Desde 200 € hasta 2000 €.</p></div>
+      <div class="ti azul"><h4>🧵 Materiales</h4><p>PLA (fácil, biodegradable), PETG (resistente), ABS (durable, requiere cama caliente), TPU (flexible), Nylon, Madera/Metal (PLA cargado).</p></div>
+      <div class="ti"><h4>✅ Ventajas</h4><p>Económica, materiales variados, fácil mantenimiento.</p></div>
+      <div class="ti azul"><h4>❌ Inconvenientes</h4><p>Capas visibles, precisión media (0,1-0,3 mm), tiempo de impresión largo.</p></div>
+    </div>
+  </section>
+
+  <section class="apartado" id="s5">
+    <h2>5. SLA / DLP / LCD (Resina)</h2>
+    <p>Una resina líquida fotosensible se endurece capa a capa con luz UV (láser en SLA, proyector en DLP, pantalla LCD en LCD-MSLA).</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>✅ Ventajas</h4><p>Precisión altísima (0,025-0,05 mm), capas casi invisibles, ideal para detalles.</p></div>
+      <div class="ti azul"><h4>❌ Inconvenientes</h4><p>Resinas tóxicas (guantes obligatorios), olor, postproceso (limpieza con alcohol y curado UV), piezas algo frágiles.</p></div>
+    </div>
+    <p>Aplicaciones: joyería, modelos dentales, miniaturas (juegos de mesa), prototipos visuales.</p>
+  </section>
+
+  <section class="apartado" id="s6">
+    <h2>6. SLS (Selective Laser Sintering) y MJF</h2>
+    <p>Un láser (SLS) o cabezal de inyección (MJF) sinteriza polvo de nylon (PA12) capa a capa. La pieza queda "enterrada" en polvo que sirve como soporte natural.</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li>No necesita soportes (el polvo no sinterizado los sustituye).</li>
+      <li>Piezas muy resistentes (mecánicamente isótropas).</li>
+      <li>Máquinas industriales caras (>50 000 €).</li>
+      <li>Servicios online: subes el STL y te llega la pieza por correo.</li>
+    </ul>
+  </section>
+
+  <section class="apartado" id="s7">
+    <h2>7. Impresión 3D en metal</h2>
+    <p>Tecnologías SLM (Selective Laser Melting) y DMLS funden polvo metálico (acero, titanio, aluminio, inconel) con un láser potente. Piezas con propiedades comparables a las forjadas.</p>
+    <p>Aplicaciones: <strong>aeroespacial</strong> (toberas de cohetes, álabes de turbina), <strong>medicina</strong> (prótesis de titanio), <strong>automoción</strong> (piezas optimizadas topológicamente).</p>
+  </section>
+
+
+  <section class="apartado" id="s8">
+    <h2>8. CAD → STL: el archivo digital</h2>
+    <p>Todo empieza con un modelo 3D. Puedes:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Diseñarlo</strong> en software CAD: Tinkercad (web, fácil), FreeCAD (gratis, paramétrico), Fusion 360 (gratis para estudiantes), SolidWorks.</li>
+      <li><strong>Descargarlo</strong> de bibliotecas: Thingiverse, Printables, MyMiniFactory, Cults3D.</li>
+      <li><strong>Escanearlo</strong>: escáneres 3D (algunos móviles ya lo permiten).</li>
+    </ul>
+    <p>El modelo 3D se exporta como archivo <strong>.STL</strong> (Standard Tessellation Language): una malla de triángulos que describe la superficie.</p>
+  </section>
+
+  <section class="apartado" id="s9">
+    <h2>9. El slicer (laminador)</h2>
+    <p>El <strong>slicer</strong> traduce el .STL a instrucciones que entiende la impresora: el <strong>G-code</strong>. Lo más usado: <em>Cura</em> (gratis), <em>PrusaSlicer</em> (gratis), <em>Bambu Studio</em> (gratis).</p>
+    <p>El slicer corta tu modelo en capas horizontales finísimas (0,1-0,3 mm) y para cada capa genera un camino que el extrusor seguirá.</p>
+  </section>
+
+  <section class="apartado" id="s10">
+    <h2>10. Parámetros clave del slicer</h2>
+    <table class="tipo-tabla">
+      <thead><tr><th>Parámetro</th><th>Qué controla</th><th>Valor típico</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Altura de capa</strong></td><td>Calidad superficial vs tiempo</td><td>0,15-0,2 mm (estándar); 0,1 (alta); 0,3 (rápida)</td></tr>
+        <tr><td><strong>Relleno (infill)</strong></td><td>Resistencia vs material</td><td>15-25 % (estándar); 50-100 % (mucha carga)</td></tr>
+        <tr><td><strong>Patrón de relleno</strong></td><td>Rejilla, giroide, cubo</td><td>Giroide (más resistente)</td></tr>
+        <tr><td><strong>Soportes</strong></td><td>Apoyan voladizos &gt; 45º</td><td>Activos para piezas con voladizos</td></tr>
+        <tr><td><strong>Adhesión</strong></td><td>Brim/raft para que no se despegue</td><td>Brim para piezas altas</td></tr>
+        <tr><td><strong>Velocidad</strong></td><td>Tiempo vs calidad</td><td>50-60 mm/s (calidad); 100+ mm/s (rápido)</td></tr>
+        <tr><td><strong>Temperatura</strong></td><td>Fluidez del plástico</td><td>200 ºC PLA, 230 PETG, 240 ABS</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="apartado" id="s11">
+    <h2>11. Problemas comunes y soluciones</h2>
+    <table class="tipo-tabla">
+      <thead><tr><th>Problema</th><th>Causa</th><th>Solución</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Warping</strong> (esquinas se levantan)</td><td>Contracción al enfriar; cama fría</td><td>Calentar la cama (60ºC), añadir brim, cerrar la impresora</td></tr>
+        <tr><td><strong>Capas mal pegadas</strong></td><td>Temperatura baja o velocidad alta</td><td>Subir T 5-10 ºC, bajar velocidad</td></tr>
+        <tr><td><strong>Stringing</strong> (hilos)</td><td>Material que escurre al moverse</td><td>Activar retracción, bajar T</td></tr>
+        <tr><td><strong>Pieza no se pega</strong></td><td>Cama sucia o mal nivelada</td><td>Limpiar con alcohol, autonivelar</td></tr>
+        <tr><td><strong>Sobrecalentamiento de capa</strong></td><td>Capas muy pequeñas sin enfriar</td><td>Activar enfriado de capa (ventilador)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <section class="apartado" id="s12">
+    <h2>12. Aplicaciones</h2>
+    <div class="tipo-box">
+      <div class="ti"><h4>🧬 Medicina</h4><p>Prótesis personalizadas, implantes de titanio, modelos pre-operatorios. Bioimpresión de tejidos.</p></div>
+      <div class="ti azul"><h4>🚀 Aeroespacial</h4><p>Piezas de cohetes SpaceX, álabes de turbina, optimización topológica para reducir peso.</p></div>
+      <div class="ti"><h4>🏗️ Arquitectura</h4><p>Maquetas, encofrados, casas impresas (1 día, 30 % menos coste).</p></div>
+      <div class="ti azul"><h4>🛠️ Industria</h4><p>Prototipado rápido, herramientas, repuestos bajo demanda.</p></div>
+      <div class="ti"><h4>🎓 Educación</h4><p>Modelos didácticos, proyectos de aula.</p></div>
+      <div class="ti azul"><h4>🎮 Hogar</h4><p>Repuestos, ganchos, soportes, juguetes, regalos personalizados.</p></div>
+    </div>
+  </section>
+
+  <section class="apartado" id="s13">
+    <h2>13. Limitaciones y comparativa</h2>
+    <p>La impresión 3D <strong>NO</strong> es la solución a todo:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Coste unidad alto</strong>: para >2000 unidades iguales, la inyección de plástico es mucho más barata.</li>
+      <li><strong>Tiempo</strong>: una pieza pequeña tarda 1-4 horas; algo grande, días.</li>
+      <li><strong>Propiedades direccionales</strong> en FDM: las piezas son más débiles en la dirección de capas.</li>
+      <li><strong>Tamaño</strong>: limitado al volumen de la impresora (≈ 20×20×25 cm en domésticas).</li>
+      <li><strong>Acabado superficial</strong>: visible en FDM (necesita lijado o postpintado).</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <span class="ic">🎯</span>
+      <p>Regla: <strong>impresión 3D para series cortas, prototipos, geometrías complejas y piezas únicas</strong>. Inyección/fundición para grandes series.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s14">
+    <h2>14. Bioimpresión y futuro</h2>
+    <p>La <strong>bioimpresión 3D</strong> usa "biotinta" hecha con células vivas para crear tejidos. Ya se imprimen:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li>Piel para tratar quemaduras.</li>
+      <li>Cartílago para reconstruir orejas y narices.</li>
+      <li>Vasos sanguíneos pequeños.</li>
+      <li>Modelos de órganos para entrenar cirujanos.</li>
+    </ul>
+    <p>El sueño: imprimir órganos completos para trasplantes, eliminando listas de espera. Estimación: 10-20 años para órganos simples (riñón).</p>
+    <p><strong>Otras fronteras</strong>: impresión en cemento (casas), comida (chocolate, carne sintética), prendas de ropa, electrónica integrada.</p>
+  </section>
+
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario</h2>
+    <table class="glosario-tabla">
+      <tbody>
+        <tr><td>Aditiva</td><td>Fabricación que añade material capa a capa.</td></tr>
+        <tr><td>Brim</td><td>Aro que se imprime alrededor de la pieza para mejorar adhesión.</td></tr>
+        <tr><td>FDM</td><td>Fused Deposition Modeling. Filamento fundido, la tecnología 3D más común.</td></tr>
+        <tr><td>Filamento</td><td>Hilo de plástico que entra al extrusor. Diámetros 1,75 mm o 2,85 mm.</td></tr>
+        <tr><td>G-code</td><td>Lenguaje de instrucciones para máquinas CNC e impresoras 3D.</td></tr>
+        <tr><td>Infill</td><td>Relleno interior. Patrón y densidad (% de material).</td></tr>
+        <tr><td>PLA</td><td>Ácido poliláctico. Plástico de FDM, biodegradable, fácil de imprimir.</td></tr>
+        <tr><td>SLA</td><td>Stereolithography. Resina endurecida con láser UV.</td></tr>
+        <tr><td>Slicer</td><td>Software que convierte STL en G-code.</td></tr>
+        <tr><td>SLS</td><td>Selective Laser Sintering. Sinteriza polvo de nylon con láser.</td></tr>
+        <tr><td>Soportes</td><td>Estructuras temporales que sustentan voladizos durante la impresión.</td></tr>
+        <tr><td>STL</td><td>Standard Tessellation Language. Formato de malla 3D estándar.</td></tr>
+        <tr><td>Warping</td><td>Las esquinas de la pieza se levantan al enfriarse.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+</div>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

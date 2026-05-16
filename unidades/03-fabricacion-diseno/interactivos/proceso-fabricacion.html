@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>¿Qué proceso? · U03 · Tecnología 4º ESO</title>
+<meta name="description" content="10 casos reales para identificar el proceso de fabricación adecuado.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pa-wrap{max-width:880px;margin:30px auto;padding:0 20px 60px}
+.pa-hero{text-align:center;margin-bottom:24px}
+.pa-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pa-progress{display:flex;justify-content:space-between;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:18px;font-family:var(--cond)}
+.pa-progress strong{color:var(--principal)}
+.pa-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.pa-caso{font-size:1rem;line-height:1.55;margin:0 0 14px;padding:14px 18px;background:var(--principal-cl);border-left:4px solid var(--principal);border-radius:0 6px 6px 0}
+.pa-caso .pieza{display:block;font-family:var(--cond);font-size:.78rem;letter-spacing:1.5px;color:var(--principal);margin-bottom:4px;text-transform:uppercase}
+.pa-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:560px){.pa-opts{grid-template-columns:1fr}}
+.pa-opt{font-family:var(--cond);background:#fff;border:2px solid var(--borde);border-radius:8px;padding:12px;cursor:pointer;font-size:.92rem;text-align:left}
+.pa-opt:hover:not(:disabled){border-color:var(--principal);background:var(--principal-cl)}
+.pa-opt.ok{background:#E1F5EE;border-color:#1E8E3E;color:#0F6E56}
+.pa-opt.ko{background:#FCEBEB;border-color:#C44536;color:#9A2A2A}
+.pa-opt:disabled{cursor:not-allowed}
+.pa-opt .titulo{display:block;font-weight:700}
+.pa-opt .desc{display:block;color:var(--texto2);font-size:.82rem;font-weight:400;margin-top:2px}
+.pa-opt.ok .desc,.pa-opt.ko .desc{color:inherit;opacity:.85}
+.pa-fb{display:none;margin-top:12px;padding:14px 18px;border-radius:8px;font-size:.93rem;line-height:1.55}
+.pa-fb.show{display:block}
+.pa-fb.acierto{background:#E1F5EE;color:#0F6E56;border-left:5px solid #1E8E3E}
+.pa-fb.fallo{background:#FCEBEB;color:#9A2A2A;border-left:5px solid #C44536}
+.pa-actions{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.pa-btn{font-family:var(--cond);padding:9px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.pa-resumen{text-align:center;background:linear-gradient(180deg,var(--principal-cl),#fff);border:2px solid var(--principal);border-radius:10px;padding:28px 24px}
+.pa-resumen .puntos{font-family:var(--cond);font-size:2.6rem;color:var(--principal)}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U03 · Diseño · ¿Qué proceso?</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🏭</span><span class="nc-lbl">Proceso</span></span>
+</nav>
+
+<main id="main-content" class="pa-wrap">
+  <section class="pa-hero"><h1>🏭 ¿Qué proceso de fabricación?</h1><p>10 casos reales para identificar el proceso más adecuado.</p></section>
+
+  <div class="pa-progress"><span>Caso <strong id="num">1</strong> de <strong id="tot">10</strong></span><span>Aciertos: <strong id="ac">0</strong></span></div>
+
+  <div class="pa-card" id="card">
+    <div class="pa-caso"><span class="pieza" id="pieza">—</span><span id="enun"></span></div>
+    <div class="pa-opts" id="opts"></div>
+    <div class="pa-fb" id="fb"></div>
+    <div class="pa-actions" id="acciones" style="display:none"><button class="pa-btn" id="siguiente">Siguiente →</button></div>
+  </div>
+
+  <section class="pa-resumen" id="resumen" style="display:none">
+    <h2 style="font-family:var(--cond);color:var(--principal);margin:0 0 6px">¡Has terminado!</h2>
+    <div class="puntos"><span id="r-ac">0</span> / <span id="r-tot">10</span></div>
+    <p id="r-msg" style="margin:10px 0 14px;color:var(--texto2)">—</p>
+    <button class="pa-btn" id="rein">🔁 Volver a empezar</button>
+  </section>
+</main>
+
+<script>
+(function(){'use strict';
+var casos=[
+  {pieza:'50 000 carcasas de mando TV',enun:'Plástico ABS, geometría con clips, grandes series, mínimo coste por unidad.',correcto:'inyeccion',explica:'Inyección de plástico. Molde caro, pero céntimos por pieza.'},
+  {pieza:'Prótesis personalizada',enun:'Una sola unidad adaptada a una persona concreta, geometría única.',correcto:'3d',explica:'Impresión 3D. Sin molde, personalizada.'},
+  {pieza:'Bloque motor coche',enun:'Aluminio, geometría compleja con conductos internos, miles al mes.',correcto:'fundicion',explica:'Fundición a presión. Forma compleja en una sola operación.'},
+  {pieza:'Perfil aluminio ventana',enun:'Sección uniforme, gran longitud, mismo perfil a lo largo.',correcto:'conformado',explica:'Extrusión (conformado). El aluminio caliente pasa por una matriz con la forma deseada.'},
+  {pieza:'Engranaje de precisión',enun:'Una unidad, acero, alta precisión (centésimas), acabado fino, dientes exactos.',correcto:'cnc',explica:'Mecanizado CNC. Fresadora de control numérico, máxima precisión.'},
+  {pieza:'5000 botellas refresco',enun:'Cuerpo hueco con cuello, PET, gran serie, paredes finas.',correcto:'soplado',explica:'Soplado. Se infla una preforma con aire dentro de un molde.'},
+  {pieza:'Estructura puente metálico',enun:'Vigas grandes que hay que unir permanentemente para soportar mucha carga.',correcto:'soldadura',explica:'Soldadura. Funde las piezas creando unión permanente máximamente resistente.'},
+  {pieza:'Latas aluminio',enun:'Chapa fina cilíndrica con fondo, producción a millones por día.',correcto:'embuticion',explica:'Embutición. Disco de chapa estirado con punzón hasta formar el vaso.'},
+  {pieza:'Cuchara madera artesanal',enun:'Pieza única tallada en madera, sin moldes, valor cultural y único.',correcto:'artesania',explica:'Artesanía/tallado manual. Cada pieza distinta, valor estético y cultural.'},
+  {pieza:'Llave inglesa de acero',enun:'Pieza maciza resistente, fabricada en grandes series, forma cerrada y robusta.',correcto:'forja',explica:'Forja en caliente. El golpe en caliente reordena la estructura del acero dándole resistencia.'}
+];
+var opciones={
+  inyeccion:{titulo:'Inyección plástico',desc:'Molde + grandes series'},
+  '3d':{titulo:'Impresión 3D',desc:'Aditivo, capa a capa'},
+  cnc:{titulo:'Mecanizado CNC',desc:'Sustractivo, alta precisión'},
+  fundicion:{titulo:'Fundición',desc:'Metal líquido en molde'},
+  conformado:{titulo:'Extrusión / conformado',desc:'Perfil continuo'},
+  soplado:{titulo:'Soplado',desc:'Inflar plástico en molde'},
+  embuticion:{titulo:'Embutición',desc:'Estirar chapa con punzón'},
+  soldadura:{titulo:'Soldadura',desc:'Unión permanente fundiendo material'},
+  artesania:{titulo:'Artesanía',desc:'Trabajo manual, pieza única'},
+  forja:{titulo:'Forja',desc:'Golpear metal caliente'}
+};
+
+var i=0,aciertos=0,r=false;
+var n=document.getElementById('num'),tot=document.getElementById('tot'),ac=document.getElementById('ac'),pi=document.getElementById('pieza'),en=document.getElementById('enun'),op=document.getElementById('opts'),fb=document.getElementById('fb'),acc=document.getElementById('acciones'),sig=document.getElementById('siguiente'),card=document.getElementById('card'),resumen=document.getElementById('resumen');
+tot.textContent=casos.length;document.getElementById('r-tot').textContent=casos.length;
+
+function shuffle(a){var b=a.slice();for(var k=b.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=b[k];b[k]=b[j];b[j]=t;}return b;}
+function pintar(){
+  var c=casos[i];n.textContent=i+1;pi.textContent=c.pieza;en.innerHTML=c.enun;
+  fb.className='pa-fb';fb.innerHTML='';acc.style.display='none';r=false;op.innerHTML='';
+  var keys=Object.keys(opciones).filter(function(k){return k!==c.correcto;});
+  keys=shuffle(keys).slice(0,3);keys.push(c.correcto);
+  shuffle(keys).forEach(function(k){
+    var o=opciones[k],b=document.createElement('button');
+    b.className='pa-opt';b.dataset.id=k;
+    b.innerHTML='<span class="titulo">'+o.titulo+'</span><span class="desc">'+o.desc+'</span>';
+    b.addEventListener('click',function(){if(r)return;r=true;var c2=casos[i];
+      op.querySelectorAll('.pa-opt').forEach(function(bt){bt.disabled=true;if(bt.dataset.id===c2.correcto)bt.classList.add('ok');else if(bt===b)bt.classList.add('ko');});
+      if(k===c2.correcto){aciertos++;fb.className='pa-fb show acierto';fb.innerHTML='<strong>✓ ¡Correcto!</strong> '+c2.explica;}
+      else{fb.className='pa-fb show fallo';fb.innerHTML='<strong>✗ Era:</strong> '+c2.explica;}
+      ac.textContent=aciertos;acc.style.display='flex';
+    });
+    op.appendChild(b);
+  });
+}
+sig.addEventListener('click',function(){i++;if(i>=casos.length){card.style.display='none';document.querySelector('.pa-progress').style.display='none';resumen.style.display='block';document.getElementById('r-ac').textContent=aciertos;var p=Math.round(aciertos/casos.length*100);document.getElementById('r-msg').innerHTML=(p>=80?'🌟 ¡Muy bien!':p>=60?'👍 Bien.':'📚 Repasa.')+'<br><small>'+aciertos+' / '+casos.length+' ('+p+'%)</small>';resumen.scrollIntoView({behavior:'smooth'});}else pintar();});
+document.getElementById('rein').addEventListener('click',function(){i=0;aciertos=0;ac.textContent='0';resumen.style.display='none';card.style.display='block';document.querySelector('.pa-progress').style.display='flex';pintar();window.scrollTo({top:0,behavior:'smooth'});});
+pintar();
+})();
+</script>
+</body>
+</html>
