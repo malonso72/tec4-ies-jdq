@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U07 Robótica · Tecnología 4º ESO</title>
+<meta name="description" content="Sistemas de control, robots, Arduino, sensores, actuadores e IoT.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css"><link rel="stylesheet" href="../../assets/css/unidad.css">
+<style>
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+.tipo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+.tipo-box .ti{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tipo-box .ti h4{margin:0 0 6px;font-family:var(--cond);color:var(--principal);font-size:1.05rem}
+.tipo-box .ti p{margin:0;font-size:.92rem;color:var(--texto2);line-height:1.5}
+.tipo-box .ti.azul h4{color:var(--principal2)}
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond)}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+.code{display:block;font-family:'JetBrains Mono',monospace;background:#1E1E2A;color:#E6E6F0;padding:14px 18px;border-radius:8px;margin:12px 0;font-size:.88rem;line-height:1.6;overflow-x:auto;white-space:pre}
+.code .k{color:#FF9DB5}.code .c{color:#8C97A8;font-style:italic}.code .v{color:#9ED3FF}
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-cl);color:var(--principal);padding:8px 10px;text-align:left;font-family:var(--cond)}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U07 · Robótica y control · Libro digital</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U07</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span><span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomp</span></a>
+</nav>
+
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Apartados</h3>
+  <div class="parte-titulo">Parte 1 · Control</div>
+  <a href="#s1">1. Sistema técnico</a>
+  <a href="#s2">2. Lazo abierto y cerrado</a>
+  <a href="#s3">3. Ejemplos cotidianos</a>
+  <div class="parte-titulo">Parte 2 · Robots</div>
+  <a href="#s4">4. Qué es un robot</a>
+  <a href="#s5">5. Sense-Think-Act</a>
+  <a href="#s6">6. Tipos de robots</a>
+  <div class="parte-titulo">Parte 3 · Arduino</div>
+  <a href="#s7">7. Microcontroladores</a>
+  <a href="#s8">8. Sensores y actuadores</a>
+  <a href="#s9">9. Estructura del programa</a>
+  <a href="#s10">10. Ejemplos prácticos</a>
+  <div class="parte-titulo">Parte 4 · IoT</div>
+  <a href="#s11">11. Internet de las Cosas</a>
+  <a href="#s12">12. Aplicaciones y retos</a>
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+  <h1 class="unidad-titulo">U07 · Robótica, control e Internet de las Cosas</h1>
+  <p class="unidad-subt">Cómo las máquinas pueden percibir, decidir y actuar de forma autónoma, y cómo se conectan entre sí para crear el mundo «inteligente» que ya nos rodea.</p>
+
+  <div class="callout callout-info"><span class="ic">⏭️</span>
+    <p><strong>Conexión Bachillerato:</strong> el <a href="https://teci2-ies-jdq.malonso72.workers.dev/teoria/bloque_F.html" target="_blank">bloque F de TECI II</a> profundiza con diagramas de bloques, función de transferencia, lazos de control PID y estabilidad de sistemas.</p>
+  </div>
+
+  <section class="apartado" id="s1">
+    <h2>1. Sistema técnico: entrada, proceso, salida</h2>
+    <p>Cualquier <strong>sistema técnico</strong> tiene tres partes:</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>📥 Entrada</h4><p>Datos que recibe: temperatura ambiente, pulsación del usuario, distancia a obstáculo.</p></div>
+      <div class="ti azul"><h4>⚙️ Proceso</h4><p>Lo que decide hacer con esos datos. La "inteligencia" del sistema.</p></div>
+      <div class="ti"><h4>📤 Salida</h4><p>Lo que hace en consecuencia: encender el LED, mover el motor, mostrar texto.</p></div>
+    </div>
+    <p>Ejemplos: tu móvil (toque → procesador → respuesta visual), un horno (temperatura programada → calienta o no → genera calor), un robot (sensor → decisión → motor).</p>
+  </section>
+
+  <section class="apartado" id="s2">
+    <h2>2. Lazo abierto y lazo cerrado</h2>
+    <div class="tipo-box">
+      <div class="ti"><h4>📡 Lazo abierto</h4><p>El sistema ejecuta una orden sin comprobar el resultado. Ejemplo: la lavadora ejecuta el ciclo sin saber si las prendas están limpias.</p></div>
+      <div class="ti azul"><h4>🔄 Lazo cerrado (con feedback)</h4><p>Hay un <strong>sensor</strong> que mide la salida y la compara con el objetivo, corrigiendo si es necesario. Ejemplo: el termostato apaga la calefacción cuando llega a la temperatura deseada.</p></div>
+    </div>
+
+    <div class="callout callout-info"><span class="ic">🔁</span>
+      <p>El feedback (realimentación) es el ingrediente que hace «inteligente» a un sistema: le permite reaccionar a la realidad en lugar de seguir un guion ciego.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s3">
+    <h2>3. Ejemplos cotidianos</h2>
+    <table class="tipo-tabla">
+      <thead><tr><th>Sistema</th><th>Tipo</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td>Microondas con tiempo fijo</td><td>Lazo abierto</td><td>No mide si la comida está caliente, solo cuenta tiempo</td></tr>
+        <tr><td>Termostato del calentador</td><td>Lazo cerrado</td><td>Mide temperatura del agua y ajusta llama/resistencia</td></tr>
+        <tr><td>Semáforo con temporizador fijo</td><td>Lazo abierto</td><td>Cambia cada X segundos sin mirar tráfico</td></tr>
+        <tr><td>Semáforo con sensor de cola</td><td>Lazo cerrado</td><td>Detecta cuántos coches hay y ajusta</td></tr>
+        <tr><td>Lavadora moderna con peso</td><td>Lazo cerrado</td><td>Detecta peso → ajusta agua y giros</td></tr>
+        <tr><td>Riego programado por horario</td><td>Lazo abierto</td><td>Riega aunque llueva</td></tr>
+        <tr><td>Riego con sensor de humedad</td><td>Lazo cerrado</td><td>Solo riega si la tierra está seca</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <section class="apartado" id="s4">
+    <h2>4. ¿Qué es un robot?</h2>
+    <p>Un <strong>robot</strong> es una máquina automática con tres ingredientes esenciales:</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>👁️ Sensores</h4><p>Para percibir el entorno: cámaras, ultrasonidos, IR, micrófonos, fuerza.</p></div>
+      <div class="ti azul"><h4>🧠 Cerebro</h4><p>Un microcontrolador (Arduino, micro:bit) o un procesador completo (Raspberry Pi) que toma decisiones.</p></div>
+      <div class="ti"><h4>💪 Actuadores</h4><p>Para actuar: motores, servomotores, pinzas, voz, pantallas.</p></div>
+    </div>
+    <p>Sin sensor, no es robot: es solo automatismo. Sin actuador, es solo instrumento de medida. Sin cerebro, es solo conexión directa.</p>
+  </section>
+
+  <section class="apartado" id="s5">
+    <h2>5. Sense-Think-Act (Percibir-Decidir-Actuar)</h2>
+    <p>El bucle fundamental que ejecuta cualquier robot:</p>
+    <ol style="margin-left:20px;line-height:1.7;font-size:1rem">
+      <li><strong>Sense (Percibir)</strong>: leer sensores.</li>
+      <li><strong>Think (Decidir)</strong>: aplicar reglas o condiciones.</li>
+      <li><strong>Act (Actuar)</strong>: mover actuadores.</li>
+    </ol>
+    <p>Y vuelta a empezar. En Arduino, este bucle es exactamente la función <code>loop()</code>.</p>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>Robot aspirador</h5>
+      <p><strong>Sense</strong>: el sensor de ultrasonidos detecta una pared a 10 cm.<br>
+      <strong>Think</strong>: «Si distancia < 15 cm → parar y girar».<br>
+      <strong>Act</strong>: motor izquierdo gira al revés, el robot rota a la derecha.<br>
+      <strong>Sense de nuevo</strong>: ¿hay pared? No. <strong>Act</strong>: seguir adelante.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s6">
+    <h2>6. Tipos de robots</h2>
+    <div class="tipo-box">
+      <div class="ti"><h4>🏭 Industrial</h4><p>Brazos en cadenas de montaje (coches, electrónica). Rápidos, precisos, sin descansos.</p></div>
+      <div class="ti azul"><h4>🏠 Doméstico</h4><p>Aspirador Roomba, cortacésped, lavavajillas (parte automática).</p></div>
+      <div class="ti"><h4>🩺 Médico</h4><p>Da Vinci (cirugía con manipulación remota), exoesqueletos para rehabilitación.</p></div>
+      <div class="ti azul"><h4>🛰️ Espacial</h4><p>Rovers en Marte (Perseverance, Curiosity), satélites autónomos.</p></div>
+      <div class="ti"><h4>🚗 Vehículos autónomos</h4><p>Coches Tesla, taxis Waymo, drones de reparto.</p></div>
+      <div class="ti azul"><h4>🎓 Educativo</h4><p>LEGO Mindstorms, mBot, BBC micro:bit, Arduino didáctico.</p></div>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s7">
+    <h2>7. Microcontroladores: Arduino y micro:bit</h2>
+    <p>Un <strong>microcontrolador</strong> es un chip que contiene CPU + memoria + entradas/salidas en un solo encapsulado. Lo programas, lo enchufas a la corriente y ejecuta tu programa eternamente.</p>
+
+    <table class="tipo-tabla">
+      <thead><tr><th></th><th>Arduino UNO</th><th>micro:bit</th></tr></thead>
+      <tbody>
+        <tr><td>Procesador</td><td>ATmega328 16 MHz</td><td>ARM Cortex M4 64 MHz</td></tr>
+        <tr><td>Pines digitales</td><td>14</td><td>25 + LED matrix</td></tr>
+        <tr><td>Programación</td><td>C/C++ con Arduino IDE</td><td>Bloques (MakeCode) o Python</td></tr>
+        <tr><td>Conectividad</td><td>USB (con shield: WiFi, BT)</td><td>Bluetooth incluido</td></tr>
+        <tr><td>Sensores integrados</td><td>Ninguno</td><td>Acelerómetro, brújula, temperatura, luz, micrófono</td></tr>
+        <tr><td>Precio</td><td>~25 €</td><td>~18 €</td></tr>
+        <tr><td>Curva de aprendizaje</td><td>Media</td><td>Suave (bloques)</td></tr>
+      </tbody>
+    </table>
+
+    <p>Para empezar es más amigable micro:bit. Para electrónica más avanzada y proyectos serios, Arduino.</p>
+  </section>
+
+  <section class="apartado" id="s8">
+    <h2>8. Sensores y actuadores típicos</h2>
+    <h3>Sensores</h3>
+    <table class="tipo-tabla">
+      <thead><tr><th>Sensor</th><th>Mide</th><th>Aplicación</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LDR</strong></td><td>Luz ambiente</td><td>Farola automática</td></tr>
+        <tr><td><strong>HC-SR04</strong></td><td>Distancia (ultrasonidos)</td><td>Robot evita obstáculos</td></tr>
+        <tr><td><strong>NTC</strong></td><td>Temperatura</td><td>Termostato</td></tr>
+        <tr><td><strong>IR</strong></td><td>Presencia</td><td>Mando a distancia, alarma</td></tr>
+        <tr><td><strong>DHT11</strong></td><td>Temperatura y humedad</td><td>Estación meteo</td></tr>
+        <tr><td><strong>Potenciómetro</strong></td><td>Posición giratoria</td><td>Control de volumen/brillo</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Actuadores</h3>
+    <table class="tipo-tabla">
+      <thead><tr><th>Actuador</th><th>Hace</th><th>Aplicación</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LED</strong></td><td>Emite luz</td><td>Indicadores</td></tr>
+        <tr><td><strong>Zumbador</strong></td><td>Sonido</td><td>Alarmas, melodías</td></tr>
+        <tr><td><strong>Servo</strong></td><td>Gira a un ángulo (0-180º)</td><td>Brazos robot, timones</td></tr>
+        <tr><td><strong>Motor CC</strong></td><td>Gira con velocidad variable</td><td>Ruedas de robot</td></tr>
+        <tr><td><strong>Motor paso a paso</strong></td><td>Gira en pasos discretos</td><td>Impresoras 3D, CNC</td></tr>
+        <tr><td><strong>Relé</strong></td><td>Interruptor electrónico para 230V</td><td>Controlar electrodomésticos</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="apartado" id="s9">
+    <h2>9. Estructura de un programa Arduino</h2>
+<pre class="code"><span class="c">// Variables globales</span>
+<span class="k">int</span> led = 13;
+
+<span class="k">void</span> setup() {
+  <span class="c">// UNA VEZ al encender</span>
+  pinMode(led, OUTPUT);
+}
+
+<span class="k">void</span> loop() {
+  <span class="c">// SIN PARAR</span>
+  digitalWrite(led, HIGH);
+  delay(500);
+  digitalWrite(led, LOW);
+  delay(500);
+}</pre>
+
+    <p>Las 4 instrucciones básicas:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><code>digitalRead(pin)</code> · lee HIGH/LOW</li>
+      <li><code>digitalWrite(pin, valor)</code> · pone pin a HIGH o LOW</li>
+      <li><code>analogRead(pin)</code> · lee 0-1023 (entrada analógica)</li>
+      <li><code>analogWrite(pin, valor)</code> · salida PWM 0-255</li>
+    </ul>
+  </section>
+
+  <section class="apartado" id="s10">
+    <h2>10. Ejemplos prácticos</h2>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO 1</span>
+      <h5>Farola automática</h5>
+<pre class="code"><span class="k">int</span> ldr = A0;
+<span class="k">int</span> led = 9;
+
+<span class="k">void</span> setup(){pinMode(led, OUTPUT);}
+
+<span class="k">void</span> loop(){
+  <span class="k">int</span> luz = analogRead(ldr);
+  <span class="k">if</span> (luz &lt; 400) digitalWrite(led, HIGH); <span class="c">// oscuro</span>
+  <span class="k">else</span>          digitalWrite(led, LOW);
+}</pre>
+    </div>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO 2</span>
+      <h5>Robot que evita obstáculos</h5>
+<pre class="code"><span class="k">int</span> trig = 12, echo = 11;
+<span class="k">int</span> motorL = 9, motorR = 10;
+
+<span class="k">long</span> distancia(){
+  digitalWrite(trig, HIGH); delayMicroseconds(10); digitalWrite(trig, LOW);
+  <span class="k">return</span> pulseIn(echo, HIGH) * 0.0343 / 2;
+}
+
+<span class="k">void</span> loop(){
+  <span class="k">long</span> d = distancia();
+  <span class="k">if</span> (d &gt; 20) { adelante(); }
+  <span class="k">else</span>        { giraDerecha(); }
+}</pre>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s11">
+    <h2>11. Internet de las Cosas (IoT)</h2>
+    <p>El <strong>IoT</strong> (Internet of Things) es la conexión a internet de objetos cotidianos: bombillas, termostatos, frigoríficos, neveras, cerraduras, coches... Cada uno con su sensor, su pequeño procesador y conectividad WiFi/4G/Bluetooth.</p>
+
+    <h3>Cómo funciona</h3>
+    <ol style="margin-left:20px;line-height:1.7">
+      <li>El dispositivo IoT <strong>recoge datos</strong> con sus sensores.</li>
+      <li>Los envía por internet a un <strong>servidor en la nube</strong>.</li>
+      <li>El servidor los analiza, los muestra al usuario y, si procede, envía órdenes de vuelta.</li>
+      <li>El dispositivo ejecuta las órdenes.</li>
+    </ol>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>Termostato Nest</h5>
+      <p>El termostato mide temperatura y aprende tus hábitos. Cuando sales de casa (detecta tu móvil ausente vía la app), baja la calefacción. Cuando estás cerca, vuelve a subir. Puedes encenderla desde el móvil al volver de viaje.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s12">
+    <h2>12. Aplicaciones y retos del IoT</h2>
+
+    <h3>Aplicaciones</h3>
+    <div class="tipo-box">
+      <div class="ti"><h4>🏠 Hogar conectado</h4><p>Alexa, Google Home, Philips Hue, cámaras de seguridad.</p></div>
+      <div class="ti azul"><h4>🚗 Coche conectado</h4><p>Mantenimiento predictivo, navegación con tráfico real.</p></div>
+      <div class="ti"><h4>🌾 Agricultura</h4><p>Riego automatizado según humedad, monitorización de cultivos.</p></div>
+      <div class="ti azul"><h4>🏥 Salud</h4><p>Pulseras, marcapasos conectados, monitorización remota.</p></div>
+      <div class="ti"><h4>🏭 Industria 4.0</h4><p>Fábricas con sensores en cada máquina, predicción de averías.</p></div>
+      <div class="ti azul"><h4>🏙️ Smart cities</h4><p>Alumbrado adaptativo, recogida de basura inteligente.</p></div>
+    </div>
+
+    <h3>Retos</h3>
+    <div class="callout callout-warn"><span class="ic">⚠️</span>
+      <p>El IoT plantea retos serios:</p>
+    </div>
+    <ul style="margin-left:20px;line-height:1.7">
+      <li><strong>Seguridad</strong>: cámaras y bombillas inseguras se han usado para ataques masivos a internet (botnets Mirai 2016).</li>
+      <li><strong>Privacidad</strong>: tu nevera o tu altavoz pueden saber demasiado de ti. Lee qué datos comparten.</li>
+      <li><strong>Obsolescencia</strong>: cuando el fabricante deja de actualizar tu dispositivo, se vuelve inseguro o inservible.</li>
+      <li><strong>Energía</strong>: miles de millones de dispositivos siempre encendidos consumen mucha electricidad.</li>
+      <li><strong>Dependencia</strong>: si cae la red wifi, la "casa inteligente" se vuelve tonta.</li>
+    </ul>
+  </section>
+
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario</h2>
+    <table class="glosario-tabla">
+      <tbody>
+        <tr><td>Actuador</td><td>Componente que ejecuta una acción física (motor, LED, zumbador).</td></tr>
+        <tr><td>Arduino</td><td>Plataforma de microcontrolador open-source para hardware educativo y maker.</td></tr>
+        <tr><td>Feedback</td><td>Realimentación: la salida se mide y se usa para corregir la entrada.</td></tr>
+        <tr><td>IoT</td><td>Internet of Things. Objetos cotidianos conectados a internet.</td></tr>
+        <tr><td>Lazo abierto</td><td>Sistema que ejecuta una orden sin comprobar el resultado.</td></tr>
+        <tr><td>Lazo cerrado</td><td>Sistema que mide la salida y la compara con el objetivo.</td></tr>
+        <tr><td>Microcontrolador</td><td>Chip con CPU + memoria + E/S integrados. Ejecuta programas autónomamente.</td></tr>
+        <tr><td>micro:bit</td><td>Microcontrolador educativo de la BBC con sensores integrados.</td></tr>
+        <tr><td>Robot</td><td>Máquina con sensores, cerebro y actuadores que percibe y actúa.</td></tr>
+        <tr><td>Sense-Think-Act</td><td>Bucle básico de cualquier robot: percibir → decidir → actuar.</td></tr>
+        <tr><td>Sensor</td><td>Componente que convierte una magnitud física en señal eléctrica.</td></tr>
+        <tr><td>Servo</td><td>Motor que gira hasta un ángulo concreto y se mantiene ahí.</td></tr>
+        <tr><td>Smart city</td><td>Ciudad que usa sensores y datos para optimizar servicios.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+</div>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>
