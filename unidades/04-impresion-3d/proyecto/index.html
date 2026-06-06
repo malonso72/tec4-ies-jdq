@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U04 Impresión 3D · Tecnología 4º ESO</title>
+<meta name="description" content="Diseña, imprime y testea una pieza para resolver un problema real.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.pr-rubrica td:first-child{font-weight:600;width:55%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U04 · Impresión 3D · Proyecto</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro</span></a><span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+  <section class="pr-hero">
+    <h1>🚀 Diseña, imprime y testea</h1>
+    <p>Resuelve un problema real con una pieza impresa en 3D: detecta la necesidad, modela en CAD, imprime y mejora.</p>
+  </section>
+
+  <div class="pr-card"><h2><span class="num">1</span>La idea</h2>
+    <p>Tu equipo (parejas) crea una pieza impresa en 3D que resuelva una necesidad real. La memoria documenta el ciclo completo: <strong>detectar → diseñar → laminar → imprimir → probar → iterar</strong>.</p>
+    <p>Duración: 4-5 sesiones (1 sesión adicional de impresión nocturna). Entrega: memoria PDF + archivo .STL + .gcode + pieza física + defensa 5 min.</p>
+  </div>
+
+  <div class="pr-card"><h2><span class="num">2</span>Fases</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>🔍 1. Necesidad</h4><p>Detectar problema en casa/aula/IES.</p></div>
+      <div class="pr-fase"><h4>✏️ 2. Boceto</h4><p>3 propuestas a mano + medidas reales.</p></div>
+      <div class="pr-fase"><h4>📐 3. CAD</h4><p>Modela en Tinkercad/FreeCAD con cotas.</p></div>
+      <div class="pr-fase"><h4>🔪 4. Slicer</h4><p>Ajustes: capa, relleno, soportes, orientación.</p></div>
+      <div class="pr-fase"><h4>🖨️ 5. Imprimir</h4><p>PLA o PETG según uso.</p></div>
+      <div class="pr-fase"><h4>🧪 6. Probar</h4><p>El usuario real la usa. Apuntas qué falla.</p></div>
+      <div class="pr-fase"><h4>🔁 7. Iterar</h4><p>Modificas CAD y vuelves a imprimir.</p></div>
+      <div class="pr-fase"><h4>🎤 8. Defender</h4><p>5 min con demo + memoria PDF.</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card"><h2><span class="num">3</span>Entregables</h2>
+    <ol>
+      <li><strong>Memoria PDF (5-7 págs.)</strong>: necesidad, bocetos, capturas de CAD con cotas, capturas del slicer con parámetros justificados, fotos del proceso, evaluación con el usuario, qué mejoraste en la iteración.</li>
+      <li><strong>Archivos digitales</strong>: .STL (modelo) + .3mf o .gcode (slicer).</li>
+      <li><strong>Pieza física</strong> impresa y funcionando.</li>
+      <li><strong>Defensa oral (5 min)</strong> con demo en vivo.</li>
+    </ol>
+  </div>
+
+  <div class="pr-card"><h2><span class="num">4</span>Rúbrica</h2>
+    <table class="pr-rubrica"><thead><tr><th>Criterio</th><th>Peso</th></tr></thead>
+    <tbody>
+      <tr><td>Necesidad real bien detectada</td><td>10%</td></tr>
+      <tr><td>Calidad del modelo CAD (cotas, geometría adecuada)</td><td>25%</td></tr>
+      <tr><td>Ajustes del slicer justificados (capa, relleno, orientación, soportes)</td><td>20%</td></tr>
+      <tr><td>Calidad de impresión (sin fallos, bien terminada)</td><td>20%</td></tr>
+      <tr><td>Test con usuario + iteración real (al menos una mejora)</td><td>15%</td></tr>
+      <tr><td>Memoria y defensa</td><td>10%</td></tr>
+    </tbody></table>
+  </div>
+</main>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

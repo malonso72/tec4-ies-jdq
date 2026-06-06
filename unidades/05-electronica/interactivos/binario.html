@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Conversor binario · U05 · Tecnología 4º ESO</title>
+<meta name="description" content="Conversión interactiva decimal ↔ binario con explicación paso a paso.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.bn-wrap{max-width:900px;margin:30px auto;padding:0 20px 60px}
+.bn-hero{text-align:center;margin-bottom:22px}
+.bn-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.bn-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.bn-card h3{font-family:var(--cond);color:var(--principal);font-size:1.05rem;margin:0 0 10px}
+.bn-input{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.bn-input label{font-family:var(--cond);font-size:.82rem;color:var(--texto2);letter-spacing:.5px}
+.bn-input input{font-family:'JetBrains Mono',monospace;background:var(--principal-cl);border:1.5px solid var(--borde);border-radius:6px;padding:12px 14px;font-size:1.4rem;color:var(--principal);text-align:center;font-weight:600}
+.bn-input input:focus{outline:none;border-color:var(--principal);background:#fff}
+.bn-bits{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.bn-bit{display:flex;flex-direction:column;align-items:center;gap:4px}
+.bn-bit .pot{font-family:var(--cond);font-size:.7rem;color:var(--texto2)}
+.bn-bit .val{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:600;cursor:pointer;border:2px solid var(--borde);background:#fff;transition:all .15s}
+.bn-bit .val.on{background:var(--principal);color:#fff;border-color:var(--principal)}
+.bn-bit .dec{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--principal);font-weight:600}
+.bn-pasos{padding:14px 18px;background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:.92rem;line-height:1.7;white-space:pre-wrap}
+.bn-tabs{display:flex;gap:6px;margin-bottom:14px}
+.bn-tab{font-family:var(--cond);background:#fff;border:1.5px solid var(--borde);padding:8px 14px;border-radius:18px;cursor:pointer;font-size:.88rem}
+.bn-tab.activa{background:var(--principal);color:#fff;border-color:var(--principal)}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U05 · Electrónica · Binario</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U05</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🔢</span><span class="nc-lbl">Binario</span></span>
+</nav>
+
+<main id="main-content" class="bn-wrap">
+  <section class="bn-hero"><h1>🔢 Conversor binario interactivo</h1><p>Cambia el decimal y observa el binario, o activa bits y observa el decimal. Con explicación paso a paso.</p></section>
+
+  <div class="bn-card">
+    <div class="bn-tabs">
+      <button class="bn-tab activa" data-m="dec">Decimal → Binario</button>
+      <button class="bn-tab" data-m="bin">Binario → Decimal</button>
+    </div>
+
+    <div id="m-dec">
+      <div class="bn-input">
+        <label>Decimal (0 a 255)</label>
+        <input type="number" id="dec" min="0" max="255" value="13">
+      </div>
+      <h3>Binario resultante (8 bits):</h3>
+      <div class="bn-bits" id="bits-dec"></div>
+      <h3>Pasos del cálculo:</h3>
+      <div class="bn-pasos" id="pasos-dec"></div>
+    </div>
+
+    <div id="m-bin" style="display:none">
+      <h3>Activa los bits que valen 1:</h3>
+      <div class="bn-bits" id="bits-bin"></div>
+      <div class="bn-input">
+        <label>Decimal resultante</label>
+        <input type="text" id="dec-res" readonly>
+      </div>
+      <h3>Suma de potencias:</h3>
+      <div class="bn-pasos" id="pasos-bin"></div>
+    </div>
+  </div>
+
+  <div class="bn-card">
+    <h3>💡 Por qué binario</h3>
+    <p style="font-size:.94rem;line-height:1.6;color:var(--texto2);margin:0">Los circuitos electrónicos digitales solo distinguen <strong>dos estados</strong>: tensión alta (1) o baja (0). Cualquier número, letra, imagen o vídeo se descompone en binario para procesarse. Un byte = 8 bits = 256 valores (0-255).</p>
+  </div>
+</main>
+
+<script>
+(function(){'use strict';
+var modo='dec';
+document.querySelectorAll('.bn-tab').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.bn-tab').forEach(function(t){t.classList.remove('activa');});
+    b.classList.add('activa');modo=b.dataset.m;
+    document.getElementById('m-dec').style.display=modo==='dec'?'block':'none';
+    document.getElementById('m-bin').style.display=modo==='bin'?'block':'none';
+  });
+});
+
+// DEC → BIN
+var inpDec=document.getElementById('dec'),bitsDec=document.getElementById('bits-dec'),pasosDec=document.getElementById('pasos-dec');
+function renderDec(){
+  var n=parseInt(inpDec.value)||0;
+  if(n<0)n=0;if(n>255)n=255;
+  inpDec.value=n;
+  var bin=n.toString(2).padStart(8,'0');
+  // Bits
+  bitsDec.innerHTML='';
+  for(var i=0;i<8;i++){
+    var pot=7-i;var val=parseInt(bin[i]);
+    var d=document.createElement('div');d.className='bn-bit';
+    d.innerHTML='<div class="pot">2^'+pot+'</div><div class="val'+(val?' on':'')+'">'+val+'</div><div class="dec">'+Math.pow(2,pot)+'</div>';
+    bitsDec.appendChild(d);
+  }
+  // Pasos
+  var pasos='Divisiones sucesivas entre 2:\n';
+  var x=n,restos=[];
+  while(x>0){restos.push(x%2);pasos+=x+' / 2 = '+Math.floor(x/2)+' resto '+(x%2)+'\n';x=Math.floor(x/2);}
+  if(n===0){pasos+='0 / 2 = 0 resto 0\n';restos.push(0);}
+  pasos+='\nLeído de abajo a arriba: '+restos.reverse().join('')+'\n';
+  pasos+='Comprobación: '+bin+'₂ = '+bin.split('').map(function(b,i){return b==='1'?Math.pow(2,7-i):0;}).filter(function(v){return v;}).join(' + ')+' = '+n;
+  pasosDec.textContent=pasos;
+}
+inpDec.addEventListener('input',renderDec);
+renderDec();
+
+// BIN → DEC
+var bitsBin=document.getElementById('bits-bin'),decRes=document.getElementById('dec-res'),pasosBin=document.getElementById('pasos-bin');
+var bits=[0,0,0,0,0,0,0,0]; // bit7 ... bit0
+function renderBin(){
+  bitsBin.innerHTML='';
+  for(var i=0;i<8;i++){
+    var pot=7-i;var val=bits[i];
+    var d=document.createElement('div');d.className='bn-bit';
+    d.innerHTML='<div class="pot">2^'+pot+'</div><div class="val'+(val?' on':'')+'" data-i="'+i+'">'+val+'</div><div class="dec">'+Math.pow(2,pot)+'</div>';
+    bitsBin.appendChild(d);
+  }
+  bitsBin.querySelectorAll('.val').forEach(function(b){
+    b.addEventListener('click',function(){bits[parseInt(b.dataset.i)]^=1;renderBin();});
+  });
+  var suma=bits.map(function(b,i){return b?Math.pow(2,7-i):0;});
+  var dec=suma.reduce(function(a,c){return a+c;},0);
+  decRes.value=dec;
+  var pasos='';
+  for(var i=0;i<8;i++){pasos+='bit '+(7-i)+' = '+bits[i]+' × 2^'+(7-i)+' = '+bits[i]*Math.pow(2,7-i)+'\n';}
+  pasos+='\nSuma total: '+suma.filter(function(v){return v;}).join(' + ')+' = '+dec;
+  pasosBin.textContent=pasos;
+}
+renderBin();
+})();
+</script>
+</body>
+</html>

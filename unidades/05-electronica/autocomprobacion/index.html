@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U05 Electrónica · Tecnología 4º ESO</title>
+<meta name="description" content="18 preguntas sobre electrónica analógica y digital.">
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:var(--principal-cl);border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px}
+.bloque-encabezado .num{font-family:var(--cond);background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond)}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-cl);padding:2px 8px;border-radius:10px;margin-right:7px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,var(--principal-cl),#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+</style></head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U05 · Electrónica · Autocomprobación</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U05</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro</span></a><span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomp</span></span>
+</nav>
+
+<main id="main-content">
+<section class="ac-hero"><h1>✅ Autocomprobación · U05 Electrónica</h1><p class="subt">18 preguntas en 4 bloques</p></section>
+<div class="ac-instrucciones"><p>Una sola oportunidad por pregunta.</p></div>
+
+<div class="ac-wrap">
+
+<div class="bloque-encabezado"><span class="num">B1</span><h2>Analógica</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="1">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P1</span>Una señal <strong>analógica</strong>...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Tiene solo dos valores</button><button class="test-opt" data-opt="b">Toma valores continuos en el tiempo (infinitos posibles)</button><button class="test-opt" data-opt="c">No tiene relación con el tiempo</button><button class="test-opt" data-opt="d">Es digital</button></div>
+    <div class="test-fb">Analógica = continua (voz, temperatura). Digital = dos valores (0 o 1).</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P2</span>Una resistencia con bandas <strong>Rojo-Violeta-Naranja-Dorado</strong> vale...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">270 Ω</button><button class="test-opt" data-opt="b">27 kΩ ±5%</button><button class="test-opt" data-opt="c">2,7 MΩ</button><button class="test-opt" data-opt="d">2 kΩ</button></div>
+    <div class="test-fb">Rojo=2, Violeta=7, Naranja=×1000, Dorado=5%. 27 × 1000 = 27 kΩ.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P3</span>Para conectar un LED (Vf=2V, If=20mA) a 9V necesitas una resistencia...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">100 Ω</button><button class="test-opt" data-opt="b">220 Ω</button><button class="test-opt" data-opt="c">350 Ω (valor comercial cercano: 470 Ω)</button><button class="test-opt" data-opt="d">No hace falta resistencia</button></div>
+    <div class="test-fb">$R=(9-2)/0,02=350\ \Omega$. Sin resistencia, el LED se quema. NUNCA se conecta directamente.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P4</span>Un <strong>transistor</strong> en saturación se comporta como...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Una resistencia</button><button class="test-opt" data-opt="b">Un interruptor cerrado (deja pasar corriente C-E)</button><button class="test-opt" data-opt="c">Un condensador</button><button class="test-opt" data-opt="d">Un interruptor abierto</button></div>
+    <div class="test-fb">En saturación, el transistor está completamente "abierto" para la corriente C-E (zona de corte = abierto, saturación = cerrado).</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B2</span><h2>Sistema binario y puertas</h2><span class="meta">6 preguntas</span></div>
+<section class="test-section" data-bloque="2">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P5</span>El número <strong>25</strong> en binario es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">10101</button><button class="test-opt" data-opt="b">11001</button><button class="test-opt" data-opt="c">1011</button><button class="test-opt" data-opt="d">11000</button></div>
+    <div class="test-fb">25 = 16+8+0+0+1 = <strong>11001</strong>.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P6</span>El binario <strong>1011</strong> en decimal es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">7</button><button class="test-opt" data-opt="b">13</button><button class="test-opt" data-opt="c">11</button><button class="test-opt" data-opt="d">14</button></div>
+    <div class="test-fb">1·8 + 0·4 + 1·2 + 1·1 = 11.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P7</span>Una puerta <strong>AND</strong> de 3 entradas da salida 1...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Si al menos una entrada es 1</button><button class="test-opt" data-opt="b">Solo si las 3 entradas son 1 simultáneamente</button><button class="test-opt" data-opt="c">Si las entradas son diferentes</button><button class="test-opt" data-opt="d">Si todas son 0</button></div>
+    <div class="test-fb">AND = TODAS deben ser 1. OR = AL MENOS UNA. XOR = DIFERENTES.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P8</span>La puerta <strong>XOR</strong> entre dos entradas A y B da 1 cuando...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Las dos son 1</button><button class="test-opt" data-opt="b">A y B son diferentes (una es 0 y otra es 1)</button><button class="test-opt" data-opt="c">Las dos son 0</button><button class="test-opt" data-opt="d">Cualquiera es 1</button></div>
+    <div class="test-fb">XOR = O exclusiva. Diferentes → 1. Iguales (00 o 11) → 0.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P9</span>NAND es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Una OR seguida de un NOT</button><button class="test-opt" data-opt="b">Igual que AND</button><button class="test-opt" data-opt="c">AND seguida de un NOT (inverso de AND)</button><button class="test-opt" data-opt="d">Una puerta de 3 entradas</button></div>
+    <div class="test-fb">NAND = NOT-AND. Su tabla es inversa a AND: 1, 1, 1, 0.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P10</span>1 <strong>byte</strong> son...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">4 bits</button><button class="test-opt" data-opt="b">8 bits (puede representar 0 a 255 en decimal)</button><button class="test-opt" data-opt="c">16 bits</button><button class="test-opt" data-opt="d">1024 bits</button></div>
+    <div class="test-fb">1 byte = 8 bits = 2⁸ = 256 valores distintos (0 a 255).</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B3</span><h2>Formas canónicas y Karnaugh</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="3">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P11</span>La <strong>SOP</strong> (suma de productos) se forma con...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Los maxitérminos</button><button class="test-opt" data-opt="b">Los minitérminos (filas donde F=1)</button><button class="test-opt" data-opt="c">Las variables negadas</button><button class="test-opt" data-opt="d">Los productos de OR</button></div>
+    <div class="test-fb">SOP = OR de minitérminos (filas con F=1). POS = AND de maxitérminos (filas con F=0).</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P12</span>En un mapa de Karnaugh, los grupos de 1s adyacentes deben ser...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Diagonales</button><button class="test-opt" data-opt="b">Potencias de 2 (1, 2, 4, 8) y lo más grandes posibles</button><button class="test-opt" data-opt="c">Siempre de 3 celdas</button><button class="test-opt" data-opt="d">Sin solapar</button></div>
+    <div class="test-fb">Grupos de 1, 2, 4, 8... celdas. Cuanto más grande, más simplifica. Los grupos pueden solaparse para abarcar mejor.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P13</span>Si en un Karnaugh de 3 variables tienes 1s en 0, 1, 2, 3 (toda la fila A=0), la función simplificada es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">F = A</button><button class="test-opt" data-opt="b">$F = \overline{A}$</button><button class="test-opt" data-opt="c">F = B + C</button><button class="test-opt" data-opt="d">F = 1</button></div>
+    <div class="test-fb">Las 4 celdas con F=1 son TODAS las que tienen A=0. Por tanto F sale 1 cuando A=0 → F = $\overline{A}$.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P14</span>En un mapa de Karnaugh, las celdas de los bordes (izquierda-derecha, arriba-abajo)...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">No pueden agruparse</button><button class="test-opt" data-opt="b">Se duplican cuando agrupas</button><button class="test-opt" data-opt="c">Son adyacentes (el mapa "cierra" como un cilindro)</button><button class="test-opt" data-opt="d">Siempre valen 0</button></div>
+    <div class="test-fb">El mapa de Karnaugh se cierra: la columna 00 es adyacente a la 10 (a través del borde). Esto permite agrupar 1s que parecen lejanos.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B4</span><h2>Implementación</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="4">
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P15</span>El chip <strong>7408</strong> contiene...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">6 puertas NOT</button><button class="test-opt" data-opt="b">4 puertas AND de 2 entradas</button><button class="test-opt" data-opt="c">4 puertas OR</button><button class="test-opt" data-opt="d">Un microcontrolador</button></div>
+    <div class="test-fb">7404=6 NOT, 7408=4 AND, 7432=4 OR, 7400=4 NAND, 7402=4 NOR, 7486=4 XOR.</div>
+  </div>
+  <div class="test-q" data-answer="c"><p class="test-qtext"><span class="test-num">P16</span>En un chip DIP14 (14 patas), VCC y GND van en...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Pines 1 y 14</button><button class="test-opt" data-opt="b">Pines 7 y 8</button><button class="test-opt" data-opt="c">Pin 14 (VCC) y pin 7 (GND)</button><button class="test-opt" data-opt="d">Pin 1 y pin 13</button></div>
+    <div class="test-fb">Convención estándar: VCC arriba-derecha (pin 14), GND abajo-izquierda (pin 7). Para identificar el pin 1, hay una muesca semicircular o un punto.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P17</span>Una <strong>tabla de verdad</strong> con 4 entradas tiene cuántas filas?</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">8</button><button class="test-opt" data-opt="b">16 (2⁴)</button><button class="test-opt" data-opt="c">4</button><button class="test-opt" data-opt="d">32</button></div>
+    <div class="test-fb">Con n entradas, $2^n$ combinaciones. 4 entradas → 16 filas. 5 entradas → 32. 8 entradas → 256.</div>
+  </div>
+  <div class="test-q" data-answer="b"><p class="test-qtext"><span class="test-num">P18</span>Las entradas no utilizadas de un CI 74xx deben...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Dejarse al aire</button><button class="test-opt" data-opt="b">Conectarse a 0V (GND) o a VCC según convenga</button><button class="test-opt" data-opt="c">Conectarse a otra salida</button><button class="test-opt" data-opt="d">Sustituirse por una resistencia infinita</button></div>
+    <div class="test-fb">Las entradas al aire flotan y pueden tomar valores erráticos. Siempre fijarlas a GND o VCC según el efecto deseado.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+<section class="ac-resumen" id="ac-resumen">
+  <h2>Resultado</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span></div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p id="ac-veredicto">Responde para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Libro</a>
+    <a class="btn-link" href="../index.html">📋 Hub</a>
+  </div>
+</section>
+</div>
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){'use strict';
+var qs=document.querySelectorAll('.test-q'),tot=document.getElementById('ac-total'),ac=document.getElementById('ac-aciertos'),bar=document.getElementById('ac-bar'),vr=document.getElementById('ac-veredicto'),br=document.getElementById('ac-reintentar'),bt=document.getElementById('ac-todo');
+tot.textContent=qs.length;
+function refrescar(){var a=0,c=0,f=0,pB={};qs.forEach(function(q){var b=q.closest('.test-section').dataset.bloque;if(!pB[b])pB[b]={ok:0,ko:0,total:0};pB[b].total++;if(q.classList.contains('answered')){c++;var ok=q.querySelector('.test-opt.correct')&&!q.querySelector('.test-opt.wrong');if(ok){a++;pB[b].ok++;}else{f++;pB[b].ko++;}}});ac.textContent=a;var p=Math.round(a/qs.length*100);bar.style.width=p+'%';if(c===0){vr.textContent='Responde para ver tu resultado.';}else if(c<qs.length){vr.innerHTML='Llevas <strong>'+c+'</strong> de '+qs.length+' respondidas.';}else{var m=p>=90?'🌟 ¡Excelente!':p>=75?'👍 Muy bien.':p>=50?'🙂 Aprobado.':'📚 Repasa el libro.';vr.innerHTML=m+'<br><small>'+a+' aciertos · '+f+' fallos · '+p+'%</small>';}br.disabled=(f===0);bt.disabled=(c===0);Object.keys(pB).forEach(function(b){var m=document.querySelector('.bloque-marcador[data-bloque="'+b+'"]'),x=pB[b],d=x.ok+x.ko;if(d===0){m.classList.remove('activo');return;}m.classList.add('activo');if(d<x.total){m.innerHTML='Bloque '+b+': '+d+' / '+x.total+' respondidas';}else{m.innerHTML='Bloque '+b+': <span class="acierto">'+x.ok+'✓</span> · <span class="fallo">'+x.ko+'✗</span>';}});}
+document.addEventListener('click',function(e){if(e.target.classList&&e.target.classList.contains('test-opt')){setTimeout(refrescar,0);}});
+function rs(q){q.classList.remove('answered');q.querySelectorAll('.test-opt').forEach(function(b){b.classList.remove('correct','wrong');b.disabled=false;});}
+br.addEventListener('click',function(){qs.forEach(function(q){if(q.classList.contains('answered')&&q.querySelector('.test-opt.wrong'))rs(q);});refrescar();});
+bt.addEventListener('click',function(){if(!confirm('¿Empezar de nuevo?'))return;qs.forEach(rs);refrescar();});
+refrescar();})();
+</script>
+</body>
+</html>

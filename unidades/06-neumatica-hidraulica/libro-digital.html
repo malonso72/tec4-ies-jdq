@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U06 Neumática e hidráulica · Tecnología 4º ESO</title>
+<meta name="description" content="Sistemas neumáticos e hidráulicos: presión, caudal, cilindros, válvulas, circuitos.">
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css"><link rel="stylesheet" href="../../assets/css/unidad.css">
+<style>
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+.tipo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+.tipo-box .ti{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tipo-box .ti h4{margin:0 0 6px;font-family:var(--cond);color:var(--principal);font-size:1.05rem}
+.tipo-box .ti p{margin:0;font-size:.92rem;color:var(--texto2);line-height:1.5}
+.tipo-box .ti.azul h4{color:var(--principal2)}
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond)}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.formula{background:var(--principal-cl);border-left:3px solid var(--principal);border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0;line-height:1.7}
+.formula .et{display:block;font-family:var(--cond);font-size:.72rem;letter-spacing:1.5px;color:var(--principal);text-transform:uppercase;margin-bottom:4px}
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-cl);color:var(--principal);padding:8px 10px;text-align:left;font-family:var(--cond)}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U06 · Neumática e hidráulica · Libro digital</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U06</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span><span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomp</span></a>
+</nav>
+
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Apartados</h3>
+  <div class="parte-titulo">Parte 1 · Fundamentos</div>
+  <a href="#s1">1. Neumática vs hidráulica</a>
+  <a href="#s2">2. Magnitudes</a>
+  <a href="#s3">3. Principio de Pascal</a>
+  <div class="parte-titulo">Parte 2 · Neumática</div>
+  <a href="#s4">4. Compresor y red</a>
+  <a href="#s5">5. Cilindros</a>
+  <a href="#s6">6. Válvulas distribuidoras</a>
+  <a href="#s7">7. Símbolos y esquemas</a>
+  <a href="#s8">8. Circuitos básicos</a>
+  <div class="parte-titulo">Parte 3 · Hidráulica</div>
+  <a href="#s9">9. Prensa hidráulica</a>
+  <a href="#s10">10. Aplicaciones</a>
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+  <h1 class="unidad-titulo">U06 · Neumática e hidráulica</h1>
+  <p class="unidad-subt">El aire comprimido y los líquidos a presión mueven fábricas enteras: brazos robóticos, frenos de coches, ascensores, excavadoras. Aprenderemos sus principios y cómo se diseñan los circuitos.</p>
+
+  <div class="callout callout-info"><span class="ic">⏭️</span>
+    <p><strong>Conexión Bachillerato:</strong> los bloques <a href="https://teci2-ies-jdq.malonso72.workers.dev/teoria/bloque_C31.html" target="_blank">C31</a> y <a href="https://teci2-ies-jdq.malonso72.workers.dev/teoria/bloque_C32.html" target="_blank">C32</a> de TECI II profundizan con cálculos de presiones máximas, dimensionado de tuberías, válvulas múltiples y secuencias cascada.</p>
+  </div>
+
+  <section class="apartado" id="s1">
+    <h2>1. Neumática vs hidráulica</h2>
+    <p>Ambas tecnologías usan <strong>fluidos a presión</strong> para transmitir fuerza, pero con fluidos distintos:</p>
+    <table class="tipo-tabla">
+      <thead><tr><th></th><th>Neumática</th><th>Hidráulica</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fluido</strong></td><td>Aire comprimido (compresible)</td><td>Aceite (prácticamente incompresible)</td></tr>
+        <tr><td><strong>Presión típica</strong></td><td>6-10 bar</td><td>50-300 bar</td></tr>
+        <tr><td><strong>Velocidad</strong></td><td>Alta y rápida</td><td>Lenta y precisa</td></tr>
+        <tr><td><strong>Fuerza</strong></td><td>Moderada</td><td>Muy alta</td></tr>
+        <tr><td><strong>Limpieza</strong></td><td>Limpia (escapes inocuos)</td><td>Sucia (fugas de aceite)</td></tr>
+        <tr><td><strong>Aplicaciones</strong></td><td>Brazos robot, máquinas industriales ligeras, frenos de camión</td><td>Excavadoras, prensas, ascensores hidráulicos, frenos de coche</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="apartado" id="s2">
+    <h2>2. Magnitudes</h2>
+
+    <h3>Presión (P)</h3>
+    <div class="formula"><span class="et">Presión</span>
+      $$P = \dfrac{F}{S}$$
+      F en N, S en m² → P en Pa (pascal). Otra unidad: 1 bar = 100 000 Pa ≈ 1 atm.
+    </div>
+
+    <h3>Caudal (Q)</h3>
+    <p>Volumen de fluido que pasa por una sección en la unidad de tiempo. Unidad: m³/s (en líquidos, L/min).</p>
+
+    <h3>Fuerza en un cilindro</h3>
+    <div class="formula"><span class="et">F = P · S</span>
+      $$F = P \cdot S$$
+      F (N) = Presión (Pa) × Sección del pistón (m²). <br>
+      Si P está en bar (= 10⁵ Pa) y S en cm² (= 10⁻⁴ m²): $F\ (\text{N}) = P\ (\text{bar}) \cdot S\ (\text{cm}^2) \cdot 10$.
+    </div>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>Cilindro neumático de Ø50 mm a 6 bar</h5>
+      <p>Sección: $S = \pi r^2 = \pi (2,5)^2 \approx 19,6$ cm².<br>
+      Fuerza: $F = 6 \cdot 19,6 \cdot 10 = \boldsymbol{1\,178\ \text{N}}$ (unos 120 kg).</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s3">
+    <h2>3. Principio de Pascal</h2>
+    <p>«La presión ejercida sobre un fluido en reposo se transmite con la misma intensidad a todas las direcciones». Es la base de la <strong>prensa hidráulica</strong> y de los frenos del coche.</p>
+    <div class="formula"><span class="et">Prensa hidráulica</span>
+      $$\dfrac{F_1}{S_1} = \dfrac{F_2}{S_2} \Rightarrow F_2 = F_1 \cdot \dfrac{S_2}{S_1}$$
+      Si el pistón grande tiene 100× más sección que el pequeño, multiplicas la fuerza por 100.
+    </div>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>Levantar un coche de 1500 kg con la mano</h5>
+      <p>Pistón pequeño Ø2 cm, pistón grande Ø40 cm. S₁ = π·1² = 3,14 cm². S₂ = π·20² = 1257 cm². Relación = 400.<br>
+      $F_1 = F_2 / 400 = 15000 / 400 = \boldsymbol{37,5\ \text{N}}$ (3,8 kg). Cualquiera puede subirlo.<br>
+      Precio: hay que recorrer 400 veces más distancia con el pistón pequeño que sube el grande.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s4">
+    <h2>4. Compresor y red neumática</h2>
+    <p>Los circuitos neumáticos parten del <strong>compresor</strong> (genera aire a presión) y la <strong>red de aire</strong> (lleva el aire a cada máquina).</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>🛞 Compresor</h4><p>Aspira aire atmosférico y lo comprime a 6-10 bar.</p></div>
+      <div class="ti azul"><h4>🪣 Depósito (calderín)</h4><p>Acumula aire para abastecer las puntas de consumo y reducir el trabajo del compresor.</p></div>
+      <div class="ti"><h4>🧹 FRL (filtro-regulador-lubricador)</h4><p>Filtra impurezas, regula la presión y lubrica el aire que va a los componentes.</p></div>
+      <div class="ti azul"><h4>🚰 Red de distribución</h4><p>Tuberías con tomas en cada máquina. Inclinación leve para drenar condensados.</p></div>
+    </div>
+  </section>
+
+  <section class="apartado" id="s5">
+    <h2>5. Cilindros neumáticos</h2>
+    <p>Los <strong>cilindros</strong> son los actuadores que convierten la presión del aire en movimiento lineal (ida y vuelta del vástago).</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>↪️ Simple efecto</h4><p>Una conexión de aire. La salida del vástago la genera el aire; el retorno, un muelle interno. Más sencillo y barato.</p></div>
+      <div class="ti azul"><h4>↔️ Doble efecto</h4><p>Dos conexiones. El aire empuja al vástago tanto en la salida como en el retorno. Más fuerza en ambos sentidos y más control. Más común.</p></div>
+    </div>
+
+    <h3>Fuerza ejercida</h3>
+    <p>Recuerda: $F = P \cdot S$. La sección del pistón doble efecto es ligeramente menor en el retorno (porque el vástago resta área).</p>
+  </section>
+
+  <section class="apartado" id="s6">
+    <h2>6. Válvulas distribuidoras</h2>
+    <p>Las <strong>válvulas distribuidoras</strong> dirigen el aire a las distintas conexiones del cilindro. Se nombran por el formato <strong>n/m</strong>: n vías (orificios), m posiciones.</p>
+
+    <table class="tipo-tabla">
+      <thead><tr><th>Tipo</th><th>Uso típico</th></tr></thead>
+      <tbody>
+        <tr><td><strong>3/2</strong> (3 vías, 2 posiciones)</td><td>Control de cilindro de simple efecto</td></tr>
+        <tr><td><strong>5/2</strong> (5 vías, 2 posiciones)</td><td>Control de cilindro de doble efecto</td></tr>
+        <tr><td><strong>5/3</strong> (5 vías, 3 posiciones)</td><td>Cilindro doble efecto con posición central de "stop"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Accionamientos</h3>
+    <p>Cómo se activa la válvula:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Manual</strong>: pulsador, palanca, pedal.</li>
+      <li><strong>Mecánico</strong>: rodillo, leva (final de carrera).</li>
+      <li><strong>Neumático</strong>: piloto (aire de otra válvula).</li>
+      <li><strong>Eléctrico</strong>: solenoide (electroválvula).</li>
+    </ul>
+    <p>Y el <strong>retorno</strong>: muelle (vuelve a posición inicial automáticamente) o segundo accionamiento (biestable).</p>
+  </section>
+
+  <section class="apartado" id="s7">
+    <h2>7. Símbolos y esquemas</h2>
+    <p>Los esquemas neumáticos usan símbolos normalizados (ISO 1219). Algunos básicos:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Cilindro simple efecto</strong>: rectángulo alargado con vástago, una conexión.</li>
+      <li><strong>Cilindro doble efecto</strong>: rectángulo con dos conexiones.</li>
+      <li><strong>Válvula 3/2</strong>: dos cuadros enfrentados (las 2 posiciones), cada uno con flechas que indican las conexiones.</li>
+      <li><strong>Compresor</strong>: círculo con triángulo apuntando.</li>
+      <li><strong>Fuente de presión</strong>: punto con flecha.</li>
+      <li><strong>Escape</strong>: triángulo apuntando hacia afuera.</li>
+    </ul>
+
+    <div class="callout callout-info"><span class="ic">📐</span>
+      <p>El esquema se lee de abajo arriba: <strong>fuente de aire → válvula → actuador</strong>. Los accionamientos van a los lados de cada válvula.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s8">
+    <h2>8. Circuitos neumáticos básicos</h2>
+    <p>Algunos circuitos que vais a saber leer y dibujar:</p>
+
+    <h3>Cilindro simple efecto con pulsador</h3>
+    <p>Fuente → válvula 3/2 con accionamiento de pulsador y retorno por muelle → cilindro simple efecto. Al pulsar, el vástago sale; al soltar, vuelve por su muelle.</p>
+
+    <h3>Cilindro doble efecto con dos pulsadores</h3>
+    <p>Fuente → válvula 5/2 con dos pulsadores (uno para avance, otro para retroceso) → cilindro doble efecto. El cilindro mantiene su posición hasta que cambies de orden.</p>
+
+    <h3>Mando bimanual de seguridad</h3>
+    <p>Para que el operario no pueda meter la mano debajo de la prensa, dos pulsadores deben pulsarse simultáneamente para que el cilindro avance. Lógica equivalente a un <strong>AND</strong>: como las puertas lógicas pero hecho con válvulas (válvula de simultaneidad).</p>
+  </section>
+
+
+  <section class="apartado" id="s9">
+    <h2>9. Prensa hidráulica</h2>
+    <p>La aplicación más característica del principio de Pascal. Dos cilindros conectados por aceite a presión, uno pequeño (entrada) y otro grande (salida).</p>
+    <div class="formula">
+      <span class="et">Multiplicación de fuerza</span>
+      $$F_2 = F_1 \cdot \dfrac{S_2}{S_1}$$
+      A cambio, el cilindro pequeño debe recorrer <strong>más distancia</strong>: $d_1 \cdot S_1 = d_2 \cdot S_2$.
+    </div>
+
+    <p>Aplicaciones reales: gatos de coche, prensas de chatarra, frenos de disco (con un cilindro maestro y varios receptores), elevadores de coches, comprimir cartón.</p>
+  </section>
+
+  <section class="apartado" id="s10">
+    <h2>10. Aplicaciones cotidianas</h2>
+    <p>Donde vives con neumática e hidráulica sin darte cuenta:</p>
+    <div class="tipo-box">
+      <div class="ti"><h4>🚗 Frenos del coche</h4><p>Hidráulicos. El líquido transmite la fuerza del pedal a los pistones de las ruedas.</p></div>
+      <div class="ti azul"><h4>🚛 Frenos del camión</h4><p>Neumáticos. El "fshhhh" cuando el camión arranca o frena es aire comprimido.</p></div>
+      <div class="ti"><h4>🚜 Excavadoras / grúas</h4><p>Hidráulicas. Cilindros de gran fuerza levantan toneladas.</p></div>
+      <div class="ti azul"><h4>🪑 Sillas de oficina</h4><p>Cilindro neumático que sube/baja al accionar la palanca.</p></div>
+      <div class="ti"><h4>🚪 Puertas neumáticas de autobús</h4><p>Cilindros neumáticos que abren/cierran.</p></div>
+      <div class="ti azul"><h4>🏭 Brazos robóticos</h4><p>En fabricación industrial: válvulas + cilindros + control PLC.</p></div>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario</h2>
+    <table class="glosario-tabla">
+      <tbody>
+        <tr><td>Bar</td><td>Unidad de presión. 1 bar ≈ 1 atm = 100 000 Pa.</td></tr>
+        <tr><td>Caudal</td><td>Volumen de fluido por unidad de tiempo.</td></tr>
+        <tr><td>Cilindro</td><td>Actuador lineal que convierte presión en movimiento.</td></tr>
+        <tr><td>Compresor</td><td>Máquina que aspira aire y lo comprime.</td></tr>
+        <tr><td>Doble efecto</td><td>Cilindro con dos conexiones de aire: presión empuja en ambos sentidos.</td></tr>
+        <tr><td>FRL</td><td>Filtro-Regulador-Lubricador. Acondiciona el aire antes de usarlo.</td></tr>
+        <tr><td>Hidráulica</td><td>Sistemas con fluido líquido (aceite) a presión.</td></tr>
+        <tr><td>Neumática</td><td>Sistemas con aire comprimido.</td></tr>
+        <tr><td>Pascal (Pa)</td><td>Unidad de presión = N/m². 1 bar = 10⁵ Pa.</td></tr>
+        <tr><td>Pascal (principio)</td><td>La presión sobre un fluido se transmite igual en todas direcciones.</td></tr>
+        <tr><td>Simple efecto</td><td>Cilindro con una conexión: aire empuja y muelle devuelve.</td></tr>
+        <tr><td>Válvula 3/2</td><td>Distribuidora de 3 vías y 2 posiciones. Para simple efecto.</td></tr>
+        <tr><td>Válvula 5/2</td><td>Distribuidora de 5 vías y 2 posiciones. Para doble efecto.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+</div>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

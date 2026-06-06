@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U02 Renovables · Tecnología 4º ESO</title>
+<meta name="description" content="18 preguntas sobre energías renovables, transición y huella de carbono.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:var(--principal-cl);border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px;padding:0 4px}
+.bloque-encabezado .num{font-family:var(--cond);font-size:1.05rem;background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond)}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-cl);padding:2px 8px;border-radius:10px;margin-right:7px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,var(--principal-cl),#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;color:var(--texto);margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0;border:1px solid #E0E5EC}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U02 · Renovables · Autocomprobación</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomp</span></span>
+</nav>
+
+<main id="main-content">
+<section class="ac-hero"><h1>✅ Autocomprobación · U02 Energías renovables</h1><p class="subt">18 preguntas en 4 bloques</p></section>
+<div class="ac-instrucciones"><p>Una sola oportunidad por pregunta.</p></div>
+
+<div class="ac-wrap">
+
+<div class="bloque-encabezado"><span class="num">B1</span><h2>Conceptos</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="1">
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P1</span>La unidad de energía en el SI es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">kWh</button><button class="test-opt" data-opt="b">Julio (J)</button><button class="test-opt" data-opt="c">Voltio (V)</button><button class="test-opt" data-opt="d">Vatio (W)</button></div>
+    <div class="test-fb">El SI usa el <strong>Julio</strong>. El kWh es práctico: 1 kWh = 3 600 000 J. El W es potencia (J/s).</div>
+  </div>
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P2</span>Una fuente es <strong>renovable</strong> cuando...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Es siempre limpia y no emite CO₂</button><button class="test-opt" data-opt="b">Se almacena en baterías</button><button class="test-opt" data-opt="c">La naturaleza la repone a un ritmo superior al consumo humano</button><button class="test-opt" data-opt="d">Es gratuita</button></div>
+    <div class="test-fb">Renovable = la naturaleza la repone más rápido de lo que la usamos. No tiene por qué ser limpia (biomasa) ni gratuita (instalación cuesta).</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P3</span>De estas fuentes, ¿cuál NO es renovable?</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Geotermia</button><button class="test-opt" data-opt="b">Uranio (nuclear)</button><button class="test-opt" data-opt="c">Mareas</button><button class="test-opt" data-opt="d">Biomasa</button></div>
+    <div class="test-fb">El uranio se agota (es no renovable), aunque la nuclear no emita CO₂ directamente.</div>
+  </div>
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P4</span>La electricidad es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Energía primaria limpia</button><button class="test-opt" data-opt="b">Una fuente renovable</button><button class="test-opt" data-opt="c">Una forma secundaria de energía: hay que producirla a partir de otras fuentes</button><button class="test-opt" data-opt="d">Igual al voltaje</button></div>
+    <div class="test-fb">La electricidad NO se encuentra como tal en la naturaleza: se produce a partir de fuentes primarias (sol, viento, gas...).</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B2</span><h2>Renovables</h2><span class="meta">6 preguntas</span></div>
+<section class="test-section" data-bloque="2">
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P5</span>Las placas solares <strong>fotovoltaicas</strong>...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Calientan agua</button><button class="test-opt" data-opt="b">Convierten luz en electricidad mediante efecto fotoeléctrico</button><button class="test-opt" data-opt="c">Solo funcionan con luz infrarroja</button><button class="test-opt" data-opt="d">Necesitan combustible</button></div>
+    <div class="test-fb">Las fotovoltaicas convierten luz → electricidad directamente. Las térmicas calientan un fluido (no convierten en electricidad).</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P6</span>Una instalación solar fotovoltaica de 3 kWp en Granada ($H_\text{equiv}$=1600 h) produce al año...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">1600 kWh</button><button class="test-opt" data-opt="b">4800 kWh</button><button class="test-opt" data-opt="c">3000 kWh</button><button class="test-opt" data-opt="d">9600 kWh</button></div>
+    <div class="test-fb">$E = P \cdot H = 3 \cdot 1600 = 4800$ kWh/año.</div>
+  </div>
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P7</span>El <strong>límite de Betz</strong> dice que un aerogenerador no puede aprovechar más del...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">25%</button><button class="test-opt" data-opt="b">35%</button><button class="test-opt" data-opt="c">59,3%</button><button class="test-opt" data-opt="d">100%</button></div>
+    <div class="test-fb">Límite físico: 16/27 ≈ 59,3%. Los reales aprovechan 35-45%.</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P8</span>La energía hidráulica de <strong>bombeo</strong>...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Genera electricidad solo con bombas</button><button class="test-opt" data-opt="b">Es un método de almacenamiento: sube agua cuando sobra energía y la libera cuando falta</button><button class="test-opt" data-opt="c">No es renovable</button><button class="test-opt" data-opt="d">Es lo mismo que minihidráulica</button></div>
+    <div class="test-fb">Bombeo = batería gigante de agua. La forma más madura y barata de almacenamiento masivo.</div>
+  </div>
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P9</span>La biomasa es <strong>renovable</strong> pero...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">No emite CO₂</button><button class="test-opt" data-opt="b">Es la fuente más eficiente</button><button class="test-opt" data-opt="c">Emite CO₂ al quemarse y compite con cultivos alimentarios</button><button class="test-opt" data-opt="d">Solo se usa en cocinas</button></div>
+    <div class="test-fb">Renovable ≠ limpia. La biomasa emite CO₂ (neutro a largo plazo si se replanta) y plantea dilemas como uso del suelo (¿comida o energía?).</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P10</span>Para producir agua caliente sanitaria con sol, es más eficiente...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Solar fotovoltaica + termo eléctrico</button><button class="test-opt" data-opt="b">Solar térmica directa (~70% eficiencia)</button><button class="test-opt" data-opt="c">Eólica</button><button class="test-opt" data-opt="d">Biomasa</button></div>
+    <div class="test-fb">La térmica capta el calor directamente (70% eficiencia). La fotovoltaica solo aprovecha el 20% y luego se convierte en calor.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B3</span><h2>No renovables</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="3">
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P11</span>De estos combustibles fósiles, el que más CO₂ emite por unidad de energía es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Gas natural</button><button class="test-opt" data-opt="b">Petróleo</button><button class="test-opt" data-opt="c">Carbón</button><button class="test-opt" data-opt="d">Todos igual</button></div>
+    <div class="test-fb">Carbón: el peor en emisiones (más C). Por eso es el primero que se está cerrando en la transición.</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P12</span>La fisión nuclear actual usa...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Hidrógeno</button><button class="test-opt" data-opt="b">Uranio-235</button><button class="test-opt" data-opt="c">Carbón</button><button class="test-opt" data-opt="d">Helio</button></div>
+    <div class="test-fb">Centrales actuales: fisión de uranio-235. La fusión (con hidrógeno) sería el futuro pero aún no es viable comercialmente.</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P13</span>El proyecto <strong>ITER</strong> (Francia) investiga...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Almacenamiento con baterías</button><button class="test-opt" data-opt="b">La fusión nuclear (lo que hace el Sol)</button><button class="test-opt" data-opt="c">Eólica marina</button><button class="test-opt" data-opt="d">Captura de CO₂</button></div>
+    <div class="test-fb">ITER es el mayor proyecto de fusión nuclear. Si funciona, energía casi ilimitada y limpia. Prototipo previsto ~2035.</div>
+  </div>
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P14</span>Una desventaja MAYOR de la nuclear es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Emite mucho CO₂</button><button class="test-opt" data-opt="b">Solo funciona de día</button><button class="test-opt" data-opt="c">Genera residuos radiactivos peligrosos durante miles de años</button><button class="test-opt" data-opt="d">No produce mucha energía</button></div>
+    <div class="test-fb">Los residuos: hay que almacenarlos miles de años. Aún no hay una solución definitiva: España los guarda en piscinas dentro de las centrales.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+<div class="bloque-encabezado"><span class="num">B4</span><h2>Transición y huella</h2><span class="meta">4 preguntas</span></div>
+<section class="test-section" data-bloque="4">
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P15</span>El principal reto técnico de las renovables solar y eólica es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Que son caras</button><button class="test-opt" data-opt="b">La intermitencia: no producen siempre, necesitan almacenamiento</button><button class="test-opt" data-opt="c">Que no generan suficiente</button><button class="test-opt" data-opt="d">Que contaminan</button></div>
+    <div class="test-fb">Intermitencia: el sol no sale de noche, el viento no sopla constante. Hay que combinar fuentes, almacenar y conectar mercados.</div>
+  </div>
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P16</span>El <strong>hidrógeno verde</strong> se produce...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Quemando gas natural</button><button class="test-opt" data-opt="b">Extrayéndolo de minas</button><button class="test-opt" data-opt="c">Por electrólisis del agua usando electricidad renovable</button><button class="test-opt" data-opt="d">Como subproducto del petróleo</button></div>
+    <div class="test-fb">H₂ verde = electrólisis con renovables. Es la apuesta para almacenar energía y para industrias difíciles de electrificar (acero, fertilizantes, aviación).</div>
+  </div>
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P17</span>La <strong>huella de carbono</strong> de una persona media en España es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">~1 t CO₂/año</button><button class="test-opt" data-opt="b">~7 t CO₂/año</button><button class="test-opt" data-opt="c">~25 t CO₂/año</button><button class="test-opt" data-opt="d">0 t CO₂/año</button></div>
+    <div class="test-fb">~7 t en España. EE.UU. ~15 t. Objetivo París para 2030: ≤2 t/persona.</div>
+  </div>
+  <div class="test-q" data-answer="d">
+    <p class="test-qtext"><span class="test-num">P18</span>La acción individual que MÁS reduce la huella de carbono es...</p>
+    <div class="test-opts"><button class="test-opt" data-opt="a">Apagar las luces al salir</button><button class="test-opt" data-opt="b">Reciclar el vidrio</button><button class="test-opt" data-opt="c">Comprar productos locales</button><button class="test-opt" data-opt="d">Reducir vuelos, coche y carne (combinadas)</button></div>
+    <div class="test-fb">Los grandes impactos: transporte (sobre todo aviones y coche), dieta (carne) y vivienda. Reciclar y apagar luces son buenas pero impactan mucho menos.</div>
+  </div>
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+<section class="ac-resumen" id="ac-resumen">
+  <h2>Resultado</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span></div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p id="ac-veredicto">Responde para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Libro</a>
+    <a class="btn-link" href="../index.html">📋 Hub U02</a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){'use strict';
+var qs=document.querySelectorAll('.test-q'),tot=document.getElementById('ac-total'),ac=document.getElementById('ac-aciertos'),bar=document.getElementById('ac-bar'),vr=document.getElementById('ac-veredicto'),br=document.getElementById('ac-reintentar'),bt=document.getElementById('ac-todo');
+tot.textContent=qs.length;
+function refrescar(){var a=0,c=0,f=0,pB={};qs.forEach(function(q){var b=q.closest('.test-section').dataset.bloque;if(!pB[b])pB[b]={ok:0,ko:0,total:0};pB[b].total++;if(q.classList.contains('answered')){c++;var ok=q.querySelector('.test-opt.correct')&&!q.querySelector('.test-opt.wrong');if(ok){a++;pB[b].ok++;}else{f++;pB[b].ko++;}}});ac.textContent=a;var p=Math.round(a/qs.length*100);bar.style.width=p+'%';if(c===0){vr.textContent='Responde para ver tu resultado.';}else if(c<qs.length){vr.innerHTML='Llevas <strong>'+c+'</strong> de '+qs.length+' respondidas.';}else{var m=p>=90?'🌟 ¡Excelente!':p>=75?'👍 Muy bien.':p>=50?'🙂 Aprobado.':'📚 Repasa el libro.';vr.innerHTML=m+'<br><small>'+a+' aciertos · '+f+' fallos · '+p+'%</small>';}br.disabled=(f===0);bt.disabled=(c===0);Object.keys(pB).forEach(function(b){var m=document.querySelector('.bloque-marcador[data-bloque="'+b+'"]'),x=pB[b],d=x.ok+x.ko;if(d===0){m.classList.remove('activo');return;}m.classList.add('activo');if(d<x.total){m.innerHTML='Bloque '+b+': '+d+' / '+x.total+' respondidas';}else{m.innerHTML='Bloque '+b+': <span class="acierto">'+x.ok+'✓</span> · <span class="fallo">'+x.ko+'✗</span>';}});}
+document.addEventListener('click',function(e){if(e.target.classList&&e.target.classList.contains('test-opt')){setTimeout(refrescar,0);}});
+function rs(q){q.classList.remove('answered');q.querySelectorAll('.test-opt').forEach(function(b){b.classList.remove('correct','wrong');b.disabled=false;});}
+br.addEventListener('click',function(){qs.forEach(function(q){if(q.classList.contains('answered')&&q.querySelector('.test-opt.wrong'))rs(q);});refrescar();});
+bt.addEventListener('click',function(){if(!confirm('¿Empezar de nuevo?'))return;qs.forEach(rs);refrescar();});
+refrescar();})();
+</script>
+</body>
+</html>

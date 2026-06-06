@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U05 Electrónica · Tecnología 4º ESO</title>
+<meta name="description" content="Electrónica analógica y digital: componentes, sistema binario, puertas lógicas, Karnaugh y circuitos integrados.">
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css"><link rel="stylesheet" href="../../assets/css/unidad.css">
+<style>
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+.tipo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+.tipo-box .ti{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tipo-box .ti h4{margin:0 0 6px;font-family:var(--cond);color:var(--principal);font-size:1.05rem}
+.tipo-box .ti p{margin:0;font-size:.92rem;color:var(--texto2);line-height:1.5}
+.tipo-box .ti.azul h4{color:var(--principal2)}
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond)}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+.formula{background:var(--principal-cl);border-left:3px solid var(--principal);border-radius:0 6px 6px 0;padding:10px 16px;margin:10px 0;line-height:1.7}
+.formula .et{display:block;font-family:var(--cond);font-size:.72rem;letter-spacing:1.5px;color:var(--principal);text-transform:uppercase;margin-bottom:4px}
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+.tabla-verdad{display:inline-block;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.95rem;margin:8px 12px 8px 0}
+.tabla-verdad th{background:var(--principal);color:#fff;padding:5px 12px;text-align:center}
+.tabla-verdad td{padding:5px 12px;text-align:center;border:1px solid var(--borde);background:#fff}
+.karnaugh{display:inline-block;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.95rem;margin:8px 12px}
+.karnaugh th{background:var(--principal-cl);color:var(--principal);padding:6px 14px;text-align:center}
+.karnaugh td{padding:6px 14px;text-align:center;border:1px solid var(--borde);background:#fff}
+.karnaugh td.uno{background:#FFE680;font-weight:700}
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-cl);color:var(--principal);padding:8px 10px;text-align:left;font-family:var(--cond)}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U05 · Electrónica · Libro digital</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U05</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span><span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a><span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomp</span></a>
+</nav>
+
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Apartados</h3>
+  <div class="parte-titulo">Parte 1 · Analógica</div>
+  <a href="#s1">1. Electrónica · analógica vs digital</a>
+  <a href="#s2">2. Resistencias y diodos</a>
+  <a href="#s3">3. LED, relé, transistor</a>
+  <a href="#s4">4. Condensador</a>
+  <div class="parte-titulo">Parte 2 · Digital</div>
+  <a href="#s5">5. Sistema binario</a>
+  <a href="#s6">6. Puertas lógicas</a>
+  <a href="#s7">7. Álgebra de Boole · tablas</a>
+  <a href="#s8">8. Formas canónicas</a>
+  <a href="#s9">9. Mapas de Karnaugh</a>
+  <div class="parte-titulo">Parte 3 · Implementación</div>
+  <a href="#s10">10. Circuitos integrados 74xx</a>
+  <a href="#s11">11. De la idea al circuito</a>
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+  <h1 class="unidad-titulo">U05 · Electrónica analógica y digital</h1>
+  <p class="unidad-subt">Lo que hay dentro de cada dispositivo: componentes que conducen, amplifican o conmutan electricidad. Y la base lógica que rige cualquier ordenador moderno: el sistema binario y las puertas lógicas.</p>
+
+  <div class="callout callout-info"><span class="ic">⏭️</span>
+    <p><strong>Conexión Bachillerato:</strong> el <a href="https://teci2-ies-jdq.malonso72.workers.dev/teoria/bloque_D2.html" target="_blank">bloque D2 de TECI II</a> profundiza con implementación con solo NAND/NOR (puertas universales), simplificación algebraica con teoremas de Boole, términos don't-care y MUX/DEMUX/codificadores. Aquí dejamos asentada la base.</p>
+  </div>
+
+  <section class="apartado" id="s1">
+    <h2>1. La electrónica y los tipos de señal</h2>
+    <p>La <strong>electrónica</strong> estudia el comportamiento de los electrones en distintos medios y los aplica a circuitos que transmiten, almacenan o procesan información.</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>📈 Señal analógica</h4><p>Varía de forma continua en el tiempo y puede tomar infinitos valores. Ejemplos: la voz de un micrófono, la temperatura de un sensor analógico.</p></div>
+      <div class="ti azul"><h4>📊 Señal digital</h4><p>Solo toma dos valores discretos: <strong>0</strong> (sin tensión, LOW) y <strong>1</strong> (con tensión, HIGH). Es la base de los ordenadores.</p></div>
+    </div>
+  </section>
+
+  <section class="apartado" id="s2">
+    <h2>2. Resistencias y diodos</h2>
+    <p>Componentes pasivos esenciales que ya conoces en parte:</p>
+
+    <h3>Resistencias</h3>
+    <p>Limitan el paso de la corriente. Su valor se mide en ohmios (Ω) y se lee con un código de colores de 4 bandas:</p>
+    <table class="tipo-tabla">
+      <thead><tr><th>Color</th><th>Cifra</th><th>Multiplicador</th></tr></thead>
+      <tbody>
+        <tr><td>Negro</td><td>0</td><td>×1</td></tr>
+        <tr><td>Marrón</td><td>1</td><td>×10</td></tr>
+        <tr><td>Rojo</td><td>2</td><td>×100</td></tr>
+        <tr><td>Naranja</td><td>3</td><td>×1000 (kΩ)</td></tr>
+        <tr><td>Amarillo</td><td>4</td><td>×10⁴</td></tr>
+        <tr><td>Verde</td><td>5</td><td>×100k</td></tr>
+        <tr><td>Azul</td><td>6</td><td>×1M</td></tr>
+        <tr><td>Violeta</td><td>7</td><td>×10M</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Tolerancia</strong> (4ª banda): dorado = ±5 %, plateado = ±10 %.</p>
+
+    <h3>Diodo</h3>
+    <p>Componente que <strong>solo deja pasar la corriente en un sentido</strong>: de ánodo a cátodo. Usado para rectificar (convertir CA en CC) y proteger circuitos.</p>
+  </section>
+
+  <section class="apartado" id="s3">
+    <h2>3. LED, relé y transistor</h2>
+
+    <h3>LED</h3>
+    <p>Diodo emisor de luz. Tiene polaridad (la pata larga es el ánodo). Necesita resistencia limitadora en serie para no quemarse.</p>
+    <div class="formula">
+      <span class="et">Resistencia limitadora del LED</span>
+      $$R = \dfrac{V_{fuente} - V_{LED}}{I_{LED}}$$
+      Donde $V_{LED}$ típico ≈ 2 V (rojo) y $I_{LED}$ típico ≈ 20 mA.
+    </div>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>LED rojo conectado a 9 V</h5>
+      <p>$R = (9 - 2) / 0,02 = \boldsymbol{350\ \Omega}$. Valor comercial más cercano por encima: <strong>470 Ω</strong>.</p>
+    </div>
+
+    <h3>Relé</h3>
+    <p>Interruptor accionado eléctricamente. Una bobina recibe una corriente pequeña que actúa como electroimán y mueve contactos en otro circuito independiente. Permite que un Arduino (5 V) controle dispositivos de 230 V.</p>
+
+    <h3>Transistor</h3>
+    <p>Componente activo con 3 patas: <strong>base (B)</strong>, <strong>colector (C)</strong> y <strong>emisor (E)</strong>. Funciona como interruptor electrónico controlado por la corriente de base:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>Corte</strong>: sin corriente en la base → no pasa corriente C-E (como interruptor abierto).</li>
+      <li><strong>Saturación</strong>: corriente alta en la base → pasa máxima corriente C-E (como interruptor cerrado).</li>
+      <li><strong>Activa</strong> (intermedia): amplifica.</li>
+    </ul>
+    <p>Es la base de toda la electrónica digital. Un procesador moderno tiene miles de millones de transistores.</p>
+  </section>
+
+  <section class="apartado" id="s4">
+    <h2>4. Condensador</h2>
+    <p>Componente que <strong>almacena carga eléctrica</strong> temporalmente. Se usa para:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li>Filtros (suavizar tensión).</li>
+      <li>Temporizadores (cargar/descargar lleva tiempo).</li>
+      <li>Acoplamiento entre etapas de audio.</li>
+      <li>Memorias DRAM (1 bit = 1 condensador cargado o descargado).</li>
+    </ul>
+    <p>Se mide en faradios (F), normalmente en μF o nF.</p>
+  </section>
+
+
+  <section class="apartado" id="s5">
+    <h2>5. Sistema binario</h2>
+    <p>La electrónica digital trabaja con solo dos estados: <strong>0</strong> y <strong>1</strong>. Para representar cualquier número usamos base 2 en vez de base 10.</p>
+
+    <table class="tipo-tabla">
+      <thead><tr><th>Decimal</th><th>Binario</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0</td></tr>
+        <tr><td>1</td><td>1</td></tr>
+        <tr><td>2</td><td>10</td></tr>
+        <tr><td>3</td><td>11</td></tr>
+        <tr><td>5</td><td>101</td></tr>
+        <tr><td>10</td><td>1010</td></tr>
+        <tr><td>15</td><td>1111</td></tr>
+        <tr><td>255</td><td>11111111 (8 bits = 1 byte)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Decimal → binario</h3>
+    <p>Divisiones sucesivas entre 2; los restos leídos de abajo a arriba son el binario.</p>
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>Convierte 13 a binario</h5>
+      <p>13 / 2 = 6 resto <strong>1</strong><br>
+      6 / 2 = 3 resto <strong>0</strong><br>
+      3 / 2 = 1 resto <strong>1</strong><br>
+      1 / 2 = 0 resto <strong>1</strong><br>
+      Lectura de abajo arriba: <strong>1101</strong>. Comprobación: 1·8 + 1·4 + 0·2 + 1·1 = 13 ✓</p>
+    </div>
+
+    <h3>Binario → decimal</h3>
+    <p>Sumar las potencias de 2 donde hay 1. <code>1101 = 1·2³ + 1·2² + 0·2¹ + 1·2⁰ = 8+4+0+1 = 13</code>.</p>
+  </section>
+
+  <section class="apartado" id="s6">
+    <h2>6. Puertas lógicas</h2>
+    <p>Componentes electrónicos que ejecutan operaciones lógicas básicas. Las 6 fundamentales:</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>NOT (inversor)</h4><p>Una entrada. Invierte el valor: 0→1, 1→0.</p></div>
+      <div class="ti azul"><h4>AND (Y)</h4><p>Salida 1 solo si TODAS las entradas son 1.</p></div>
+      <div class="ti"><h4>OR (O)</h4><p>Salida 1 si AL MENOS UNA entrada es 1.</p></div>
+      <div class="ti azul"><h4>NAND (no-Y)</h4><p>Inverso de AND. Salida 0 solo si todas son 1.</p></div>
+      <div class="ti"><h4>NOR (no-O)</h4><p>Inverso de OR. Salida 1 solo si todas son 0.</p></div>
+      <div class="ti azul"><h4>XOR (O exclusiva)</h4><p>Salida 1 si las entradas son DIFERENTES.</p></div>
+    </div>
+
+    <h3>Tablas de verdad de las puertas básicas</h3>
+    <table class="tabla-verdad">
+      <thead><tr><th>A</th><th>NOT A</th></tr></thead>
+      <tbody><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td></tr></tbody>
+    </table>
+    <table class="tabla-verdad">
+      <thead><tr><th>A</th><th>B</th><th>AND</th><th>OR</th><th>XOR</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+        <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+        <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="apartado" id="s7">
+    <h2>7. Álgebra de Boole y tabla de verdad</h2>
+    <p>El <strong>álgebra de Boole</strong> usa operaciones lógicas (AND, OR, NOT) con variables booleanas (0 o 1). Notación:</p>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li><strong>NOT A</strong> = $\overline{A}$ (A con raya encima).</li>
+      <li><strong>A AND B</strong> = $A \cdot B$ (o simplemente $AB$).</li>
+      <li><strong>A OR B</strong> = $A + B$.</li>
+    </ul>
+
+    <div class="callout callout-info"><span class="ic">📝</span>
+      <p>El proceso típico en 4º ESO: partir de una <strong>tabla de verdad</strong> (lo que queremos que haga el circuito) → escribir la función booleana → simplificar con Karnaugh → dibujar el circuito con puertas.</p>
+    </div>
+
+    <h3>Construir una tabla de verdad</h3>
+    <p>Si tienes <em>n</em> entradas, hay <strong>2ⁿ</strong> combinaciones posibles. Para 3 entradas: 2³ = 8 filas.</p>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>«Si hay luz Y la puerta está cerrada» enciende una alarma</h5>
+      <table class="tabla-verdad" style="margin-top:8px">
+        <thead><tr><th>Luz (L)</th><th>Puerta cerrada (P)</th><th>Alarma (F)</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <p>Función: $F = L \cdot P$ → una puerta <strong>AND</strong>.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s8">
+    <h2>8. Formas canónicas: SOP y POS</h2>
+    <p>Toda función lógica puede escribirse de dos formas equivalentes a partir de su tabla de verdad:</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>Σ Suma de productos (SOP)</h4><p>Suma (OR) de los <strong>minitérminos</strong>: combinaciones donde F=1. Cada minitérmino es un producto (AND) con todas las variables: las que valen 1 sin negar y las que valen 0 negadas.</p></div>
+      <div class="ti azul"><h4>Π Producto de sumas (POS)</h4><p>Producto (AND) de los <strong>maxitérminos</strong>: combinaciones donde F=0. Cada maxitérmino es una suma (OR) con las variables: las que valen 0 sin negar y las que valen 1 negadas.</p></div>
+    </div>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>Tabla con tres unos en F (de la función mayoría de 3 entradas)</h5>
+      <table class="tabla-verdad">
+        <thead><tr><th>A</th><th>B</th><th>C</th><th>F</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <p><strong>SOP</strong> (donde F=1): $F = \overline{A}BC + A\overline{B}C + AB\overline{C} + ABC$.<br>
+      <strong>POS</strong> (donde F=0): $F = (A+B+C)(A+B+\overline{C})(A+\overline{B}+C)(\overline{A}+B+C)$.</p>
+    </div>
+
+    <p>La SOP es más usada cuando hay menos 1s que 0s; la POS al revés.</p>
+  </section>
+
+  <section class="apartado" id="s9">
+    <h2>9. Mapas de Karnaugh</h2>
+    <p>Los <strong>mapas de Karnaugh</strong> son una técnica visual para simplificar funciones booleanas. Es mucho más rápido que aplicar teoremas algebraicos.</p>
+
+    <h3>Mapa de 2 variables (4 celdas)</h3>
+    <table class="karnaugh">
+      <thead><tr><th></th><th>B=0</th><th>B=1</th></tr></thead>
+      <tbody>
+        <tr><th>A=0</th><td>m₀</td><td>m₁</td></tr>
+        <tr><th>A=1</th><td>m₂</td><td>m₃</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Mapa de 3 variables (8 celdas)</h3>
+    <p>El orden de las columnas es importante: <strong>00, 01, 11, 10</strong> (código Gray, solo cambia 1 bit entre adyacentes).</p>
+    <table class="karnaugh">
+      <thead><tr><th>A</th><th>BC=00</th><th>BC=01</th><th>BC=11</th><th>BC=10</th></tr></thead>
+      <tbody>
+        <tr><th>0</th><td>m₀</td><td>m₁</td><td>m₃</td><td>m₂</td></tr>
+        <tr><th>1</th><td>m₄</td><td>m₅</td><td>m₇</td><td>m₆</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Reglas de simplificación</h3>
+    <ol style="margin-left:20px;line-height:1.7">
+      <li>Coloca los 1s de la tabla de verdad en las celdas del mapa.</li>
+      <li>Forma <strong>grupos de potencias de 2</strong>: 1, 2, 4, 8 celdas adyacentes con 1.</li>
+      <li>Los grupos pueden ser horizontales, verticales o rectangulares (no diagonales).</li>
+      <li>El mapa <strong>se cierra por los bordes</strong> (izquierda con derecha, arriba con abajo).</li>
+      <li>Cada grupo debe ser <strong>lo más grande posible</strong> (más grande = más simplificación).</li>
+      <li>Cubre todos los 1s con el mínimo número de grupos.</li>
+      <li>Para cada grupo, escribe el término que es <strong>común</strong> a todas las celdas.</li>
+    </ol>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO</span>
+      <h5>F(A,B,C) = Σ(1,3,5,7) — todos los términos donde C=1</h5>
+      <table class="karnaugh">
+        <thead><tr><th>A</th><th>BC=00</th><th>BC=01</th><th>BC=11</th><th>BC=10</th></tr></thead>
+        <tbody>
+          <tr><th>0</th><td>0</td><td class="uno">1</td><td class="uno">1</td><td>0</td></tr>
+          <tr><th>1</th><td>0</td><td class="uno">1</td><td class="uno">1</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <p>Los 4 unos forman un grupo grande. Lo común a las 4 celdas: <strong>C = 1</strong>.<br>
+      Simplificación: $F = C$. La función original con 4 minitérminos se reduce a una sola variable.</p>
+    </div>
+
+    <div class="callout callout-ok"><span class="ic">💡</span>
+      <p><strong>Conexión a Bachillerato:</strong> en TECI II también verás Karnaugh, pero con <em>4 variables</em> y con términos <em>don't-care</em> (X) que dan flexibilidad. La técnica es la misma; la gracia es saber agruparlos mejor.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s10">
+    <h2>10. Circuitos integrados: la serie 74xx</h2>
+    <p>Los <strong>circuitos integrados (CI)</strong> son chips con conjuntos de transistores ya conectados para formar puertas. La <strong>serie 74xx</strong> es la más usada en clase:</p>
+
+    <table class="tipo-tabla">
+      <thead><tr><th>Chip</th><th>Contenido</th></tr></thead>
+      <tbody>
+        <tr><td><strong>7404</strong></td><td>6 puertas NOT</td></tr>
+        <tr><td><strong>7408</strong></td><td>4 puertas AND</td></tr>
+        <tr><td><strong>7432</strong></td><td>4 puertas OR</td></tr>
+        <tr><td><strong>7400</strong></td><td>4 puertas NAND</td></tr>
+        <tr><td><strong>7402</strong></td><td>4 puertas NOR</td></tr>
+        <tr><td><strong>7486</strong></td><td>4 puertas XOR</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Cómo montarlos</h3>
+    <ul style="margin-left:20px;line-height:1.6">
+      <li>La <strong>patilla 1</strong> está en el extremo de una muesca semicircular.</li>
+      <li>Pata <strong>VCC</strong> (alimentación, +5V) en la pata superior derecha (la 14 de un DIP14).</li>
+      <li>Pata <strong>GND</strong> (tierra, 0V) en la pata inferior izquierda (la 7).</li>
+      <li>Si no se alimenta correctamente, la puerta NO funciona aunque las entradas estén bien.</li>
+    </ul>
+
+    <div class="callout callout-warn"><span class="ic">⚠️</span>
+      <p>Las entradas no usadas en un CI <strong>nunca deben quedar al aire</strong>: conéctalas a 0 V (GND) o a 5 V según convenga. Si no, el chip puede comportarse erráticamente.</p>
+    </div>
+  </section>
+
+  <section class="apartado" id="s11">
+    <h2>11. De la idea al circuito real (método completo)</h2>
+    <p>Los 6 pasos que aplicaremos en cualquier ejercicio o proyecto:</p>
+
+    <ol style="margin-left:20px;line-height:1.7">
+      <li><strong>Identifica entradas y salida(s)</strong>: ¿qué variables tiene el problema? ¿cuántas?</li>
+      <li><strong>Construye la tabla de verdad</strong>: 2ⁿ filas, una columna por entrada, una por salida.</li>
+      <li><strong>Escribe la SOP</strong> a partir de las filas donde F = 1.</li>
+      <li><strong>Simplifica con Karnaugh</strong>: agrupa 1s en potencias de 2, lee el resultado mínimo.</li>
+      <li><strong>Dibuja el circuito</strong> con las puertas necesarias (AND, OR, NOT, eventualmente NAND/NOR/XOR).</li>
+      <li><strong>Implementa con chips 74xx</strong>: identifica patillas, conecta VCC y GND, prueba.</li>
+    </ol>
+
+    <div class="ejemplo">
+      <span class="et">EJEMPLO COMPLETO</span>
+      <h5>Alarma de coche: suena si está cerrado el contacto Y la puerta abierta</h5>
+      <p>Entradas: <strong>C</strong> (contacto), <strong>P</strong> (puerta abierta). Salida: <strong>S</strong> (sirena).<br>
+      Solo suena si C=1 y P=1.<br>
+      <strong>Función</strong>: $S = C \cdot P$ → una puerta <strong>AND</strong> (chip 7408).<br>
+      Conexiones: VCC al pin 14, GND al pin 7, contacto a entrada 1A, puerta a entrada 1B, sirena a la salida 1Y.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario</h2>
+    <table class="glosario-tabla">
+      <tbody>
+        <tr><td>74xx</td><td>Familia de circuitos integrados TTL con puertas lógicas.</td></tr>
+        <tr><td>AND (Y)</td><td>Puerta lógica: salida 1 solo si TODAS las entradas son 1.</td></tr>
+        <tr><td>Bit</td><td>Dígito binario: 0 o 1.</td></tr>
+        <tr><td>Byte</td><td>8 bits. Representa números 0 a 255.</td></tr>
+        <tr><td>Cátodo / ánodo</td><td>Terminales negativo / positivo del diodo o LED.</td></tr>
+        <tr><td>Diodo</td><td>Deja pasar corriente solo en un sentido.</td></tr>
+        <tr><td>Forma canónica</td><td>Expresión SOP o POS obtenida directamente de la tabla de verdad.</td></tr>
+        <tr><td>Karnaugh</td><td>Mapa para simplificar funciones booleanas visualmente.</td></tr>
+        <tr><td>LED</td><td>Diodo emisor de luz. Necesita resistencia en serie.</td></tr>
+        <tr><td>Maxitérmino</td><td>Suma (OR) de las variables. Combinación donde F=0.</td></tr>
+        <tr><td>Minitérmino</td><td>Producto (AND) de las variables. Combinación donde F=1.</td></tr>
+        <tr><td>NAND</td><td>NOT-AND. Inverso de AND.</td></tr>
+        <tr><td>NOR</td><td>NOT-OR. Inverso de OR.</td></tr>
+        <tr><td>NOT (inversor)</td><td>Puerta lógica que invierte la entrada.</td></tr>
+        <tr><td>OR (O)</td><td>Puerta lógica: salida 1 si al menos una entrada es 1.</td></tr>
+        <tr><td>POS</td><td>Producto de Sumas. Forma canónica a partir de los maxitérminos.</td></tr>
+        <tr><td>Relé</td><td>Interruptor accionado eléctricamente. Aísla circuitos.</td></tr>
+        <tr><td>SOP</td><td>Suma de Productos. Forma canónica a partir de los minitérminos.</td></tr>
+        <tr><td>Tabla de verdad</td><td>Tabla con todas las combinaciones de entradas y la salida correspondiente.</td></tr>
+        <tr><td>Transistor</td><td>Componente activo con base, colector, emisor. Interruptor o amplificador.</td></tr>
+        <tr><td>XOR</td><td>O exclusiva: salida 1 si entradas son distintas.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+</div>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Mix energético · U02 · Tecnología 4º ESO</title>
+<meta name="description" content="Diseña el mix energético de tu país y visualiza emisiones de CO2 y coste.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.mx-wrap{max-width:900px;margin:30px auto;padding:0 20px 60px}
+.mx-hero{text-align:center;margin-bottom:22px}
+.mx-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.mx-hero p{font-size:.95rem;color:var(--texto2);margin:0;line-height:1.55}
+.mx-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.mx-card h3{font-family:var(--cond);color:var(--principal);font-size:1.05rem;margin:0 0 10px}
+.mx-fuente{display:grid;grid-template-columns:140px 1fr 60px;gap:10px;align-items:center;margin-bottom:10px}
+@media(max-width:600px){.mx-fuente{grid-template-columns:1fr;gap:4px}}
+.mx-fuente label{font-family:var(--cond);font-size:.92rem;color:var(--texto);display:flex;align-items:center;gap:6px}
+.mx-fuente input[type=range]{width:100%;accent-color:var(--principal)}
+.mx-fuente .val{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--principal);text-align:right;font-weight:600}
+.mx-barra{height:48px;display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--borde);margin-bottom:12px}
+.mx-barra .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--cond);font-size:.78rem;transition:all .3s}
+.mx-resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.mx-r{background:var(--principal-cl);border-left:3px solid var(--principal);border-radius:0 8px 8px 0;padding:10px 14px}
+.mx-r .lab{font-family:var(--cond);font-size:.72rem;letter-spacing:1.2px;color:var(--principal);text-transform:uppercase}
+.mx-r .val{font-family:'JetBrains Mono',monospace;font-size:1.3rem;color:var(--texto);font-weight:600;display:block;margin-top:2px}
+.mx-total{text-align:center;font-family:var(--cond);font-size:1rem;padding:8px;border-radius:6px;margin-bottom:10px}
+.mx-total.ok{background:#E1F5EE;color:#0F6E56}
+.mx-total.ko{background:#FCEBEB;color:#9A2A2A}
+.mx-presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mx-preset{font-family:var(--cond);background:#fff;border:1.5px solid var(--borde);padding:7px 12px;border-radius:14px;cursor:pointer;font-size:.82rem;color:var(--texto2)}
+.mx-preset:hover{border-color:var(--principal);color:var(--principal)}
+.mx-eval{margin-top:14px;padding:12px 16px;background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;font-size:.92rem;line-height:1.55}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U02 · Renovables · Mix energético</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>⚡</span><span class="nc-lbl">Mix</span></span>
+</nav>
+
+<main id="main-content" class="mx-wrap">
+  <section class="mx-hero">
+    <h1>⚡ Diseña el mix energético</h1>
+    <p>Ajusta el porcentaje de cada fuente y observa las emisiones de CO₂, el coste y la cobertura renovable. La suma debe dar 100 %.</p>
+  </section>
+
+  <div class="mx-card">
+    <div id="mx-total" class="mx-total ok">Total: 100 %</div>
+
+    <div class="mx-barra" id="barra"></div>
+
+    <div id="fuentes"></div>
+
+    <div class="mx-resumen">
+      <div class="mx-r"><span class="lab">Renovables</span><span class="val" id="r-ren">—%</span></div>
+      <div class="mx-r"><span class="lab">CO₂ por kWh</span><span class="val" id="r-co2">—<span style="font-size:.74rem">g/kWh</span></span></div>
+      <div class="mx-r"><span class="lab">Coste relativo</span><span class="val" id="r-cost">—</span></div>
+      <div class="mx-r"><span class="lab">Dependencia exterior</span><span class="val" id="r-dep">—%</span></div>
+    </div>
+
+    <div class="mx-eval" id="eval">📌 Ajusta los porcentajes para ver el análisis.</div>
+
+    <div class="mx-presets">
+      <span style="font-family:var(--cond);font-size:.82rem;color:var(--texto2);align-self:center">Comparar con:</span>
+      <button class="mx-preset" data-p="esp">🇪🇸 España 2024</button>
+      <button class="mx-preset" data-p="esp2030">🇪🇸 Meta 2030</button>
+      <button class="mx-preset" data-p="fra">🇫🇷 Francia</button>
+      <button class="mx-preset" data-p="ale">🇩🇪 Alemania</button>
+      <button class="mx-preset" data-p="100ren">💚 100% renovable</button>
+    </div>
+  </div>
+
+  <div class="mx-card">
+    <h3>📊 Datos de referencia</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      <thead><tr style="background:var(--principal);color:#fff"><th style="padding:8px;text-align:left">Fuente</th><th style="padding:8px">CO₂ g/kWh</th><th style="padding:8px">Coste relativo</th><th style="padding:8px">Renovable</th><th style="padding:8px">Importada</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--borde)"><td style="padding:6px">Carbón</td><td style="padding:6px;text-align:center">900</td><td style="padding:6px;text-align:center">Medio</td><td style="padding:6px;text-align:center">❌</td><td style="padding:6px;text-align:center">✅</td></tr>
+        <tr style="border-bottom:1px solid var(--borde)"><td style="padding:6px">Gas natural</td><td style="padding:6px;text-align:center">490</td><td style="padding:6px;text-align:center">Medio</td><td style="padding:6px;text-align:center">❌</td><td style="padding:6px;text-align:center">✅</td></tr>
+        <tr style="border-bottom:1px solid var(--borde)"><td style="padding:6px">Nuclear</td><td style="padding:6px;text-align:center">12</td><td style="padding:6px;text-align:center">Alto</td><td style="padding:6px;text-align:center">❌</td><td style="padding:6px;text-align:center">✅ (uranio)</td></tr>
+        <tr style="border-bottom:1px solid var(--borde)"><td style="padding:6px">Solar</td><td style="padding:6px;text-align:center">48</td><td style="padding:6px;text-align:center">Bajo</td><td style="padding:6px;text-align:center">✅</td><td style="padding:6px;text-align:center">❌</td></tr>
+        <tr style="border-bottom:1px solid var(--borde)"><td style="padding:6px">Eólica</td><td style="padding:6px;text-align:center">11</td><td style="padding:6px;text-align:center">Bajo</td><td style="padding:6px;text-align:center">✅</td><td style="padding:6px;text-align:center">❌</td></tr>
+        <tr style="border-bottom:1px solid var(--borde)"><td style="padding:6px">Hidráulica</td><td style="padding:6px;text-align:center">24</td><td style="padding:6px;text-align:center">Bajo</td><td style="padding:6px;text-align:center">✅</td><td style="padding:6px;text-align:center">❌</td></tr>
+        <tr><td style="padding:6px">Biomasa</td><td style="padding:6px;text-align:center">230</td><td style="padding:6px;text-align:center">Medio</td><td style="padding:6px;text-align:center">✅</td><td style="padding:6px;text-align:center">❌</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.85rem;color:var(--texto2);margin-top:8px"><em>Fuentes: IPCC AR6, IRENA. Los valores de CO₂ incluyen ciclo de vida completo (no solo combustión).</em></p>
+  </div>
+</main>
+
+<script>
+(function(){'use strict';
+var fuentes=[
+  {id:'carbon',n:'Carbón',co2:900,c:2.5,ren:false,imp:true,col:'#3a3a3a'},
+  {id:'gas',n:'Gas natural',co2:490,c:2.0,ren:false,imp:true,col:'#a06010'},
+  {id:'nuclear',n:'Nuclear',co2:12,c:3.0,ren:false,imp:true,col:'#8c2d2d'},
+  {id:'solar',n:'Solar',co2:48,c:1.5,ren:true,imp:false,col:'#FFB400'},
+  {id:'eolica',n:'Eólica',co2:11,c:1.6,ren:true,imp:false,col:'#5CB3E0'},
+  {id:'hidro',n:'Hidráulica',co2:24,c:1.2,ren:true,imp:false,col:'#1B7CBF'},
+  {id:'biomasa',n:'Biomasa',co2:230,c:1.8,ren:true,imp:false,col:'#4CAF50'}
+];
+var vals={carbon:5,gas:25,nuclear:20,solar:20,eolica:25,hidro:5,biomasa:0};
+var fuentesDiv=document.getElementById('fuentes'),barra=document.getElementById('barra');
+
+function pintar(){
+  fuentesDiv.innerHTML='';
+  fuentes.forEach(function(f){
+    var row=document.createElement('div');row.className='mx-fuente';
+    row.innerHTML='<label>'+f.n+'</label><input type="range" min="0" max="100" step="1" value="'+vals[f.id]+'" data-id="'+f.id+'"><span class="val" id="v-'+f.id+'">'+vals[f.id]+'%</span>';
+    fuentesDiv.appendChild(row);
+  });
+  fuentesDiv.querySelectorAll('input').forEach(function(el){
+    el.addEventListener('input',function(){vals[el.dataset.id]=parseInt(el.value);document.getElementById('v-'+el.dataset.id).textContent=el.value+'%';actualizar();});
+  });
+  actualizar();
+}
+
+function actualizar(){
+  var tot=0,co2=0,cost=0,ren=0,dep=0;
+  barra.innerHTML='';
+  fuentes.forEach(function(f){
+    var v=vals[f.id];
+    tot+=v;co2+=v*f.co2/100;cost+=v*f.c/100;
+    if(f.ren)ren+=v;if(f.imp)dep+=v;
+    if(v>0){
+      var seg=document.createElement('div');seg.className='seg';
+      seg.style.width=v+'%';seg.style.background=f.col;
+      seg.textContent=v>5?f.n+' '+v+'%':'';
+      seg.title=f.n+': '+v+'%';
+      barra.appendChild(seg);
+    }
+  });
+  var t=document.getElementById('mx-total');
+  t.textContent='Total: '+tot+'%';t.className='mx-total '+(tot===100?'ok':'ko');
+  if(tot!==100)t.textContent+=' (debe ser 100%)';
+  document.getElementById('r-ren').textContent=ren+'%';
+  document.getElementById('r-co2').innerHTML=co2.toFixed(0)+'<span style="font-size:.74rem"> g/kWh</span>';
+  document.getElementById('r-cost').textContent=cost.toFixed(2);
+  document.getElementById('r-dep').textContent=dep+'%';
+
+  var msg='';
+  if(tot!==100){msg='⚠️ La suma de porcentajes no es 100%. Ajusta los valores.';}
+  else if(co2<100){msg='🌱 Mix muy descarbonizado ('+co2.toFixed(0)+' g/kWh). Compatible con Acuerdo de París.';}
+  else if(co2<300){msg='✅ Mix razonablemente limpio. Mejorable subiendo renovables.';}
+  else if(co2<500){msg='⚠️ Mix con muchas emisiones ('+co2.toFixed(0)+' g/kWh). Reduce carbón/biomasa.';}
+  else {msg='❌ Mix MUY contaminante. Insostenible para el clima.';}
+  if(ren>=75)msg+=' Renovables ≥75% (cumple objetivo UE 2030).';
+  else if(ren>=50)msg+=' Renovables ≥50% (buen camino).';
+  if(dep>=50)msg+=' ⚠️ Dependencia exterior alta: vulnerable a crisis geopolíticas.';
+  document.getElementById('eval').innerHTML='📌 '+msg;
+}
+
+var presets={
+  esp:{carbon:2,gas:25,nuclear:20,solar:18,eolica:23,hidro:9,biomasa:3},
+  esp2030:{carbon:0,gas:10,nuclear:15,solar:30,eolica:30,hidro:10,biomasa:5},
+  fra:{carbon:1,gas:8,nuclear:65,solar:5,eolica:10,hidro:10,biomasa:1},
+  ale:{carbon:25,gas:15,nuclear:0,solar:15,eolica:25,hidro:5,biomasa:15},
+  '100ren':{carbon:0,gas:0,nuclear:0,solar:35,eolica:35,hidro:15,biomasa:15}
+};
+document.querySelectorAll('.mx-preset').forEach(function(b){
+  b.addEventListener('click',function(){vals=Object.assign({},presets[b.dataset.p]);pintar();});
+});
+
+pintar();
+})();
+</script>
+</body>
+</html>
