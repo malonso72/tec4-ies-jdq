@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dibujo técnico · 4º ESO · Tecnología · v1.0</title>
+<meta name="description" content="Libro digital de dibujo técnico para 4º ESO: normalización, vistas necesarias, escalas normalizadas, acotación y perspectiva isométrica. IES Jiménez de Quesada (Santa Fe, Granada).">
+<meta name="theme-color" content="#d2552a">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="canonical" href="https://tec4-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/libro-digital.html">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Libro digital · Dibujo técnico · Tecnología 4º ESO">
+<meta property="og:description" content="Normalización, vistas necesarias, escalas normalizadas, acotación y perspectiva isométrica.">
+<meta property="og:image" content="https://tec4-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tec4-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #f6f1e7;
+  --cream-2: #efe7d4;
+  --ink: #1a2238;
+  --ink-soft: #3a4360;
+  --teja: #d2552a;
+  --teja-soft: #e87a4e;
+  --blue: #2c5f8d;
+  --blue-soft: #3d7fb8;
+  --yellow: #e8b647;
+  --line: #d6c9ad;
+  --ok: #4a7c59;
+  --err: #c44536;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(232,182,71,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(210,85,42,0.06) 0%, transparent 40%);
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ── ASIDE ── */
+aside {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid var(--teja);
+}
+aside .brand { font-family: 'Fraunces', serif; font-weight: 800; font-size: 24px; line-height: 1.1; margin-bottom: 4px; }
+aside .brand span { color: var(--teja-soft); font-style: italic; }
+aside .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(246,241,231,0.5); margin-bottom: 32px; }
+aside .parte-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teja-soft);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-left: 14px;
+  font-weight: 700;
+}
+aside .parte-titulo:first-of-type { margin-top: 8px; }
+aside nav { display: flex; flex-direction: column; gap: 4px; }
+aside nav a {
+  color: rgba(246,241,231,0.75);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+aside nav a:hover { background: rgba(246,241,231,0.05); color: var(--cream); border-left-color: var(--teja-soft); }
+aside nav a .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(246,241,231,0.1); padding: 2px 6px; border-radius: 4px; min-width: 24px; text-align: center; }
+aside .back-link {
+  margin-top: 24px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(232,122,78,0.12);
+  color: var(--teja-soft);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(232,122,78,0.2);
+  transition: all .15s;
+}
+aside .back-link:hover { background: rgba(232,122,78,0.2); color: var(--cream); }
+aside .credit { margin-top: 24px; font-size: 11px; opacity: 0.4; line-height: 1.5; }
+
+/* ── MAIN ── */
+main { padding: 48px 56px 80px; min-width: 0; }
+header.hero { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px dashed var(--line); }
+header.hero .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--teja); margin-bottom: 12px; }
+header.hero h1 { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+header.hero h1 em { font-style: italic; color: var(--teja); font-weight: 400; }
+header.hero p.lead { font-size: 18px; color: var(--ink-soft); max-width: 640px; }
+header.hero .meta { display: flex; gap: 24px; margin-top: 24px; font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; }
+header.hero .meta strong { color: var(--ink); font-weight: 600; }
+
+/* ── PARTE ── */
+.parte { margin-bottom: 60px; scroll-margin-top: 24px; }
+.parte-cabecera {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a3458 100%);
+  color: var(--cream);
+  padding: 36px 44px;
+  border-radius: 18px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid var(--teja);
+}
+.parte-cabecera::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(232,182,71,0.08) 0%, transparent 70%);
+}
+.parte-cabecera .parte-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--teja-soft);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  position: relative;
+}
+.parte-cabecera h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  position: relative;
+}
+.parte-cabecera p {
+  font-size: 16px;
+  opacity: 0.85;
+  max-width: 580px;
+  position: relative;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 56px; scroll-margin-top: 24px; }
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--teja);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.section h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  color: var(--ink);
+}
+.section p { margin-bottom: 14px; color: var(--ink-soft); }
+.section p strong { color: var(--ink); font-weight: 600; }
+.section ul, .section ol { margin: 8px 0 14px 24px; color: var(--ink-soft); }
+.section li { margin-bottom: 6px; }
+.section li strong { color: var(--ink); font-weight: 600; }
+
+/* ── KEY CONCEPT BOX ── */
+.keybox {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teja);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.keybox .ktit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--teja);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.keybox p { margin-bottom: 8px; }
+.keybox p:last-child { margin-bottom: 0; }
+
+/* ── CALLOUT (info, ok, warn) ── */
+.callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+.callout .ic { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.callout p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+.callout p + p { margin-top: 6px; }
+.callout-info { background: rgba(44,95,141,0.07); border: 1px solid rgba(44,95,141,0.18); }
+.callout-info p strong { color: var(--blue); }
+.callout-ok { background: rgba(74,124,89,0.07); border: 1px solid rgba(74,124,89,0.18); }
+.callout-ok p strong { color: var(--ok); }
+.callout-warn { background: rgba(232,182,71,0.10); border: 1px solid rgba(232,182,71,0.30); }
+.callout-warn p strong { color: #8a6d1a; }
+.callout-key { background: rgba(210,85,42,0.07); border: 1px solid rgba(210,85,42,0.20); }
+.callout-key p strong { color: var(--teja); }
+
+/* ── TWO COLS ── */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 22px 0; }
+.cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin: 22px 0; }
+.col-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.col-card h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  margin: 0 0 10px;
+  color: var(--teja);
+}
+.col-card h4.azul { color: var(--blue); }
+.col-card p { font-size: 14.5px; margin-bottom: 8px; }
+.col-card ul { margin: 6px 0 0 18px; font-size: 14.5px; }
+
+/* ── FIGURE ── */
+.fig {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.fig-cap {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-top: 12px;
+}
+
+/* ── EJEMPLO RESUELTO ── */
+.ejemplo {
+  background: linear-gradient(135deg, #fdfaf3, #f6f1e7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--yellow);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.ejemplo .et {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #8a6d1a;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.ejemplo h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.steps { display: grid; gap: 10px; counter-reset: step; }
+.step {
+  position: relative;
+  padding: 12px 14px 12px 46px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--teja);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14.5px;
+}
+th {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+  letter-spacing: .3px;
+}
+td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 0; }
+tr:nth-child(even) td { background: rgba(246,241,231,0.5); }
+td.bien { color: var(--ok); font-weight: 600; }
+td.mal { color: var(--err); font-weight: 600; }
+
+/* ── NORM TABLE (3 cols) ── */
+.norm-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 10px 0;
+  align-items: center;
+}
+.norm-row .nr-text { font-size: 14.5px; color: var(--ink-soft); }
+.norm-row .nr-svg { background: rgba(74,124,89,0.06); border-radius: 8px; padding: 10px; text-align: center; }
+.norm-row .nr-svg.mal { background: rgba(196,69,54,0.06); }
+.norm-row .nr-svg svg { max-width: 100%; height: auto; }
+.norm-row .nr-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.norm-row .nr-svg .lab-ok { color: var(--ok); }
+.norm-row .nr-svg .lab-bad { color: var(--err); }
+.norm-head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 14px;
+  padding: 0 16px;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* ── GLOSARIO ── */
+.glos { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-top: 32px; }
+.glos h3 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 14px; color: var(--ink); }
+.glos dl { display: grid; gap: 12px; }
+.glos dt { font-family: 'Fraunces', serif; font-weight: 700; color: var(--teja); font-size: 16px; }
+.glos dd { color: var(--ink-soft); font-size: 14.5px; margin-left: 0; }
+
+/* ── FOOTER ── */
+footer.book-foot {
+  margin-top: 60px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--line);
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+footer.book-foot a { color: var(--teja); text-decoration: none; }
+footer.book-foot a:hover { color: var(--teja-soft); }
+footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { position: relative; height: auto; max-height: none; top: auto; }
+  main { padding: 32px 24px 60px; }
+  header.hero h1 { font-size: 36px; }
+  .parte-cabecera { padding: 28px 24px; }
+  .parte-cabecera h2 { font-size: 26px; }
+  .section h3 { font-size: 24px; }
+  .cols2, .cols3 { grid-template-columns: 1fr; }
+  .norm-row, .norm-head { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  aside { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 0; }
+  .parte-cabecera { background: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section, .ejemplo, .fig, .col-card, .keybox { break-inside: avoid; }
+}
+
+/* ── SVG STYLES ── */
+.svg-fig { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.svg-fig .stroke-main { stroke: #1a2238; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.svg-fig .stroke-thin { stroke: #1a2238; stroke-width: 1; fill: none; }
+.svg-fig .stroke-aux { stroke: #d2552a; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+.svg-fig .stroke-eje { stroke: #2c5f8d; stroke-width: 1; fill: none; stroke-dasharray: 6 2 1 2; }
+.svg-fig .fill-light { fill: #f6f1e7; }
+.svg-fig .fill-teja { fill: rgba(210,85,42,0.18); }
+.svg-fig .fill-blue { fill: rgba(44,95,141,0.15); }
+.svg-fig .fill-yellow { fill: rgba(232,182,71,0.25); }
+.svg-fig text { fill: #1a2238; }
+.svg-fig text.lbl-teja { fill: #d2552a; font-weight: 600; }
+.svg-fig text.lbl-blue { fill: #2c5f8d; font-weight: 600; }
+.svg-fig .arrow { fill: #1a2238; }
+.svg-fig .arrow-teja { fill: #d2552a; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside>
+  <div class="brand">Dibujo<br><span>técnico</span></div>
+  <div class="sub">Tecnología 4º ESO · U0</div>
+
+  <div class="parte-titulo">Parte 1 · Del croquis al plano</div>
+  <nav>
+    <a href="#s1"><span class="num">1</span>Lo que ya sabes y lo que cambia</a>
+    <a href="#s2"><span class="num">2</span>Normalización</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 2 · Representar con criterio</div>
+  <nav>
+    <a href="#s3"><span class="num">3</span>Las vistas necesarias</a>
+    <a href="#s4"><span class="num">4</span>Perspectiva isométrica</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 3 · Las medidas</div>
+  <nav>
+    <a href="#s5"><span class="num">5</span>Escalas normalizadas</a>
+    <a href="#s6"><span class="num">6</span>Acotación</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 4 · Del papel al ordenador</div>
+  <nav>
+    <a href="#s7"><span class="num">7</span>CAD 2D · LibreCAD</a>
+    <a href="#s8"><span class="num">8</span>Del plano al objeto</a>
+    <a href="#cierre"><span class="num">★</span>Recuerda</a>
+  </nav>
+
+  <a class="back-link" href="index.html">← Volver al hub de la unidad</a>
+
+  <div class="credit">
+    Tecnología 4º ESO · Curso 2026-27<br>
+    Manuel Alonso Herrera<br>
+    IES Jiménez de Quesada
+  </div>
+</aside>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Unidad 0 · Libro digital · v1.0</div>
+  <h1>Dibujo técnico:<br>del croquis <em>al plano</em></h1>
+  <p class="lead">En 2.º y en 3.º aprendiste a dibujar las tres vistas de una pieza. Aquí la pregunta cambia: cuántas vistas hacen falta de verdad, con qué escala, con qué líneas y con qué cotas. Un plano no es un dibujo bonito de una pieza: es el documento que la define, y tiene que hacerlo sin que nadie necesite preguntar nada.</p>
+  <div class="meta">
+    <span><strong>Curso:</strong> 4º ESO</span>
+    <span><strong>Duración:</strong> 6-8 sesiones</span>
+    <span><strong>Bloques:</strong> 8 secciones · 4 partes</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 1 · DEL CROQUIS AL PLANO
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte1">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 1</div>
+    <h2>Del croquis al plano</h2>
+    <p>Dibujar una pieza y definirla no son lo mismo. Esta parte establece la diferencia y las reglas que convierten un dibujo en un documento técnico.</p>
+  </div>
+
+  <!-- ─── 1. Lo que ya sabes ─── -->
+  <article class="section" id="s1">
+    <div class="section-num">Sección 1</div>
+    <h3>Lo que ya sabes y lo que cambia en 4.º</h3>
+
+    <p>Llevas dos cursos dibujando. Sabes distinguir un boceto de un croquis y de un plano, sabes sacar el alzado, la planta y el perfil de una pieza, sabes aplicar una escala y sabes poner una cota. Nada de eso se repite aquí. Lo que cambia es <strong>quién toma las decisiones</strong>.</p>
+
+    <p>Hasta ahora el enunciado te decía qué dibujar: «dibuja las tres vistas de esta pieza a escala 1:2». A partir de ahora esas decisiones son tuyas, y son las que separan un ejercicio de clase de un plano de verdad.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Hasta 3.º</h4>
+        <ul>
+          <li>Dibujar <strong>las tres</strong> vistas</li>
+          <li>Con la escala que te dan</li>
+          <li>Con el trazo que salga</li>
+          <li>Poniendo las cotas que veas</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>En 4.º</h4>
+        <ul>
+          <li>Decidir <strong>cuántas</strong> vistas hacen falta y <strong>cuál</strong> es el alzado</li>
+          <li>Elegir la escala normalizada que encaja en la lámina</li>
+          <li>Usar cada tipo de línea para lo que sirve</li>
+          <li>Poner las cotas mínimas que definen la pieza</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="keybox">
+      <div class="ktit">Idea clave</div>
+      <p>Un plano está bien hecho cuando otra persona, con el plano delante y sin hablar contigo, puede fabricar exactamente la misma pieza. Ni una medida de menos, que la dejaría indefinida, ni una de más, que sobra y puede contradecirse con las demás.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Esta unidad tiene <strong>cuatro simuladores</strong> en el hub: escalas, vistas, acotación y la lámina paso a paso. Sus niveles están todos abiertos desde el principio y no corresponden a ningún curso: entra por donde te haga falta y sube hasta donde llegues.</p>
+    </div>
+  </article>
+
+  <!-- ─── 2. Normalización ─── -->
+  <article class="section" id="s2">
+    <div class="section-num">Sección 2</div>
+    <h3>Normalización</h3>
+
+    <p>Una <strong>norma</strong> es un acuerdo escrito sobre cómo se hacen las cosas para que todo el mundo las haga igual. En dibujo técnico las normas dicen qué tamaño tiene el papel, qué grosor tiene cada línea, cómo se escribe una escala o dónde va una cota. Gracias a ellas, un plano hecho en Santa Fe se entiende en Stuttgart.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>ISO</h4>
+        <p>Organización Internacional de Normalización. Sus normas valen en todo el mundo.</p>
+      </div>
+      <div class="col-card">
+        <h4>EN</h4>
+        <p>Norma europea, adoptada por los países de la UE.</p>
+      </div>
+      <div class="col-card">
+        <h4>UNE</h4>
+        <p>Norma española. Cuando ves <strong>UNE-EN ISO</strong>, es la misma norma en los tres niveles.</p>
+      </div>
+    </div>
+
+    <h4>Los formatos de papel</h4>
+
+    <p>La serie A parte del <strong>A0</strong>, que tiene una superficie de <strong>1 m²</strong> y mide 841 × 1189 mm. Cada formato siguiente se obtiene <strong>partiendo el anterior por la mitad</strong> por su lado mayor. Como todos mantienen la misma proporción entre sus lados, un dibujo pasa de un formato a otro sin deformarse.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-label="Los formatos de la serie A obtenidos partiendo el A0 por la mitad">
+        <rect x="10" y="20" width="336" height="238" class="stroke-main fill-light"/>
+        <line x1="178" y1="20" x2="178" y2="258" class="stroke-main"/>
+        <line x1="178" y1="139" x2="346" y2="139" class="stroke-main"/>
+        <line x1="262" y1="139" x2="262" y2="258" class="stroke-main"/>
+        <line x1="262" y1="198" x2="346" y2="198" class="stroke-main"/>
+        <text x="94" y="145" text-anchor="middle" font-size="22" font-weight="700">A1</text>
+        <text x="262" y="86" text-anchor="middle" font-size="18" font-weight="700">A2</text>
+        <text x="220" y="205" text-anchor="middle" font-size="15" font-weight="700">A3</text>
+        <text x="304" y="174" text-anchor="middle" font-size="12" font-weight="700" class="lbl-teja">A4</text>
+        <text x="304" y="232" text-anchor="middle" font-size="10" font-weight="700">A5</text>
+        <text x="178" y="14" text-anchor="middle" font-size="12" font-weight="700">A0 · 841 × 1189 mm · 1 m²</text>
+        <text x="370" y="100" font-size="11" font-weight="700">A0 · 841 × 1189</text>
+        <text x="370" y="118" font-size="11">A1 · 594 × 841</text>
+        <text x="370" y="136" font-size="11">A2 · 420 × 594</text>
+        <text x="370" y="154" font-size="11">A3 · 297 × 420</text>
+        <text x="370" y="172" font-size="11" class="lbl-teja" font-weight="700">A4 · 210 × 297</text>
+      </svg>
+      <div class="fig-cap">Cada formato es la mitad del anterior: dos A4 hacen un A3, dos A3 un A2, y así hasta el A0</div>
+    </div>
+
+    <p>En clase trabajamos siempre en <strong>A4 vertical</strong>. La lámina lleva un margen de <strong>20 mm a la izquierda</strong>, para poder encuadernarla, y de <strong>5 mm</strong> en los otros tres lados. Dentro queda el recuadro útil, de 185 × 287 mm.</p>
+
+    <h4>El cajetín</h4>
+
+    <p>El cajetín es la <strong>ficha de identidad del plano</strong>. Va siempre en la parte inferior y dice de quién es, qué representa y a qué escala está. Sin cajetín, un plano suelto no vale para nada: nadie sabe si la pieza que mide 40 mm en el papel mide 40, 20 u 80 en la realidad.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" aria-label="Lámina A4 con márgenes y detalle del cajetín de dos franjas">
+        <rect x="60" y="14" width="143" height="202" class="stroke-main fill-light"/>
+        <rect x="73.6" y="17.4" width="126" height="195.2" class="stroke-main" fill="none" stroke-width="1.2"/>
+        <line x1="73.6" y1="199" x2="199.6" y2="199" class="stroke-main" stroke-width="1.2"/>
+        <line x1="73.6" y1="205.8" x2="199.6" y2="205.8" class="stroke-main" stroke-width="1.2"/>
+        <line x1="94" y1="199" x2="94" y2="212.6" class="stroke-main" stroke-width="1.2"/>
+        <line x1="179.2" y1="199" x2="179.2" y2="212.6" class="stroke-main" stroke-width="1.2"/>
+        <line x1="60" y1="120" x2="73.6" y2="120" class="stroke-aux"/>
+        <text x="54" y="117" text-anchor="end" font-size="11" class="lbl-teja">20 mm</text>
+        <line x1="199.6" y1="70" x2="210" y2="70" class="stroke-aux"/>
+        <text x="215" y="73" font-size="11" class="lbl-teja">5 mm</text>
+        <text x="131" y="236" text-anchor="middle" font-size="11">A4 vertical · 210 × 297</text>
+        <line x1="199.6" y1="206" x2="260" y2="150" class="stroke-thin" stroke-dasharray="4 3"/>
+        <rect x="260" y="90" width="400" height="60" class="stroke-main fill-light" stroke-width="1.6"/>
+        <line x1="260" y1="120" x2="660" y2="120" class="stroke-main" stroke-width="1.6"/>
+        <line x1="324.9" y1="90" x2="324.9" y2="150" class="stroke-main" stroke-width="1.6"/>
+        <line x1="595.1" y1="90" x2="595.1" y2="150" class="stroke-main" stroke-width="1.6"/>
+        <text x="292" y="110" text-anchor="middle" font-size="11">curso</text>
+        <text x="460" y="110" text-anchor="middle" font-size="11">apellidos y nombre</text>
+        <text x="627" y="110" text-anchor="middle" font-size="11">fecha</text>
+        <text x="292" y="140" text-anchor="middle" font-size="11">escala</text>
+        <text x="460" y="140" text-anchor="middle" font-size="11">título de la lámina</text>
+        <text x="627" y="140" text-anchor="middle" font-size="11">nº</text>
+        <text x="292" y="82" text-anchor="middle" font-size="10" class="lbl-teja">30 mm</text>
+        <text x="460" y="82" text-anchor="middle" font-size="10" class="lbl-teja">125 mm</text>
+        <text x="627" y="82" text-anchor="middle" font-size="10" class="lbl-teja">30 mm</text>
+        <text x="668" y="113" font-size="10" class="lbl-teja">10</text>
+        <text x="668" y="143" font-size="10" class="lbl-teja">10</text>
+        <text x="460" y="180" text-anchor="middle" font-size="11">3º ESO A · Alonso Herrera, Manuel · 15/09/2026</text>
+        <text x="460" y="198" text-anchor="middle" font-size="11">E 2:1 · Vistas principales de una pieza · Nº 1</text>
+        <text x="460" y="220" text-anchor="middle" font-size="10" class="lbl-blue">Ejemplo de cajetín ya rotulado</text>
+      </svg>
+      <div class="fig-cap">El formato de lámina que usamos en clase, con el cajetín ampliado: dos franjas de 10 mm a todo el ancho del recuadro</div>
+    </div>
+
+    <h4>Los tipos de línea</h4>
+
+    <p>Esta es la diferencia más visible entre un dibujo de 2.º y un plano de 4.º. En un plano <strong>cada línea significa una cosa</strong>, y se distingue por su grosor y por su trazado. La norma UNE-EN ISO 128 recoge todas; estas cinco son las que vas a usar.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 620 250" xmlns="http://www.w3.org/2000/svg" aria-label="Los cinco tipos de línea normalizados y su uso">
+        <g>
+          <line x1="20" y1="26" x2="200" y2="26" class="stroke-main" stroke-width="2.4"/>
+          <text x="215" y="22" font-size="12" font-weight="700">Continua gruesa</text>
+          <text x="215" y="38" font-size="11">Aristas y contornos vistos</text>
+        </g>
+        <g>
+          <line x1="20" y1="76" x2="200" y2="76" class="stroke-main" stroke-width="1"/>
+          <text x="215" y="72" font-size="12" font-weight="700">Continua fina</text>
+          <text x="215" y="88" font-size="11">Líneas de cota, líneas auxiliares y rayados</text>
+        </g>
+        <g>
+          <line x1="20" y1="126" x2="200" y2="126" class="stroke-main" stroke-width="1.2" stroke-dasharray="9 5"/>
+          <text x="215" y="122" font-size="12" font-weight="700">De trazos, fina</text>
+          <text x="215" y="138" font-size="11">Aristas ocultas: las que existen pero no se ven</text>
+        </g>
+        <g>
+          <line x1="20" y1="176" x2="200" y2="176" class="stroke-main" stroke-width="1" stroke-dasharray="14 3 2 3"/>
+          <text x="215" y="172" font-size="12" font-weight="700">De trazo y punto, fina</text>
+          <text x="215" y="188" font-size="11">Ejes de simetría y de revolución</text>
+        </g>
+        <g>
+          <path d="M 20 226 L 70 226 L 80 220 L 90 232 L 100 226 L 200 226" class="stroke-main" stroke-width="1" fill="none"/>
+          <text x="215" y="222" font-size="12" font-weight="700">Continua fina a mano alzada</text>
+          <text x="215" y="238" font-size="11">Roturas: cuando se dibuja solo un trozo de la pieza</text>
+        </g>
+      </svg>
+      <div class="fig-cap">La línea gruesa es aproximadamente el doble de ancha que la fina; esa proporción es lo que hace legible un plano</div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p>En clase el grosor no lo da la norma, lo da el lápiz: <strong>todo se dibuja con 2H</strong> y solo al final se <strong>repasan las aristas con HB</strong>, vistas y ocultas. Cotas, ejes, auxiliares, recuadro y cajetín se quedan en 2H. Repasar con HB una línea de cota es, en la práctica, mentir sobre lo que esa línea significa.</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>Un fallo muy repetido: dibujar las <strong>aristas ocultas como si fueran vistas</strong>. Una línea continua dice «aquí hay un borde a la vista»; una de trazos dice «aquí hay un borde, pero está detrás». Cambiar una por otra cambia la pieza.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 2 · REPRESENTAR CON CRITERIO
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte2">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 2</div>
+    <h2>Representar con criterio</h2>
+    <p>Las vistas que hacen falta y ninguna más, y la perspectiva que enseña la pieza entera de un vistazo.</p>
+  </div>
+
+  <!-- ─── 3. Las vistas necesarias ─── -->
+  <article class="section" id="s3">
+    <div class="section-num">Sección 3</div>
+    <h3>Las vistas necesarias</h3>
+
+    <p>En Europa se usa el <strong>sistema europeo</strong> (o de primer diedro). La pieza se coloca entre el observador y el plano de proyección, y las vistas quedan colocadas así: la <strong>planta debajo del alzado</strong> y el <strong>perfil izquierdo a su derecha</strong>.</p>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p>Los ejes tal como los usamos en clase: <strong>Z</strong> vertical hacia arriba, la altura. <strong>Y</strong> horizontal hacia la izquierda, la anchura. <strong>X</strong> es la profundidad, y aparece <strong>dos veces</strong> —a la derecha y hacia abajo— porque es el eje que se desdobla al abatir los planos.</p>
+    </div>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 740 400" xmlns="http://www.w3.org/2000/svg" aria-label="Una pieza en perspectiva y sus tres vistas colocadas según el sistema europeo">
+        <!-- ═══ Pieza en isométrica ═══ -->
+        <g>
+          <polygon points="107.5,149 197.5,201 197.5,175 107.5,123" class="stroke-main fill-light"/>
+          <polygon points="265.1,162 197.5,201 197.5,175 265.1,136" class="stroke-main fill-light"/>
+          <polygon points="141.2,103.5 231.3,155.5 197.5,175 107.5,123" class="stroke-main fill-light"/>
+          <polygon points="141.2,103.5 231.3,155.5 231.3,103.5 141.2,51.5" class="stroke-main fill-light"/>
+          <polygon points="265.1,136 231.3,155.5 231.3,103.5 265.1,84" class="stroke-main fill-light"/>
+          <polygon points="175,32 265.1,84 231.3,103.5 141.2,51.5" class="stroke-main fill-light"/>
+          <line x1="72" y1="224" x2="126" y2="193" class="stroke-main" stroke-width="2"/>
+          <polygon points="131,190 120,190 124,197" class="arrow-teja"/>
+          <text x="40" y="240" font-size="12" font-weight="700" class="lbl-teja">Alzado</text>
+          <text x="160" y="268" text-anchor="middle" font-size="11">Anchura 40 · profundidad 30 · altura 30</text>
+          <text x="160" y="284" text-anchor="middle" font-size="11">El bloque de arriba ocupa los 15 mm del fondo</text>
+        </g>
+
+        <!-- ═══ Ejes ═══ -->
+        <line x1="510" y1="240" x2="510" y2="104" class="stroke-eje"/>
+        <line x1="510" y1="240" x2="360" y2="240" class="stroke-eje"/>
+        <line x1="510" y1="240" x2="630" y2="240" class="stroke-eje"/>
+        <line x1="510" y1="240" x2="510" y2="362" class="stroke-eje"/>
+        <text x="518" y="102" font-size="13" font-weight="700" class="lbl-blue">Z</text>
+        <text x="350" y="244" font-size="13" font-weight="700" class="lbl-blue">Y</text>
+        <text x="636" y="244" font-size="13" font-weight="700" class="lbl-blue">X</text>
+        <text x="518" y="368" font-size="13" font-weight="700" class="lbl-blue">X</text>
+
+        <!-- ═══ Alzado ═══ -->
+        <rect x="378" y="138" width="120" height="90" class="stroke-main fill-light"/>
+        <line x1="378" y1="198" x2="498" y2="198" class="stroke-main"/>
+        <text x="438" y="130" text-anchor="middle" font-size="12" font-weight="600">Alzado</text>
+
+        <!-- ═══ Perfil izquierdo ═══ -->
+        <polygon points="522,228 612,228 612,138 567,138 567,198 522,198" class="stroke-main fill-light"/>
+        <text x="567" y="130" text-anchor="middle" font-size="12" font-weight="600">Perfil izquierdo</text>
+
+        <!-- ═══ Planta ═══ -->
+        <rect x="378" y="252" width="120" height="90" class="stroke-main fill-light"/>
+        <line x1="378" y1="297" x2="498" y2="297" class="stroke-main"/>
+        <text x="438" y="360" text-anchor="middle" font-size="12" font-weight="600">Planta</text>
+
+        <!-- ═══ Cuadrante vacío ═══ -->
+        <text x="567" y="295" text-anchor="middle" font-size="11" class="lbl-teja">aquí no va</text>
+        <text x="567" y="311" text-anchor="middle" font-size="11" class="lbl-teja">ninguna vista</text>
+      </svg>
+      <div class="fig-cap">La misma pieza, vista de tres maneras. En la planta, bajar es alejarse; en el perfil, ir a la derecha es alejarse</div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>En clase <strong>no se dibuja la recta a 45°</strong> ni nada en el cuadrante inferior derecho. La profundidad se mide directamente en la planta y en el perfil, cada una desde su línea de separación, que va a 10 mm del eje.</p>
+    </div>
+
+    <h4>Elegir el alzado</h4>
+
+    <p>El alzado no es «la vista de frente»: es la vista que tú eliges como frontal, y de esa elección dependen las otras dos. Una pieza mal orientada obliga a dibujar aristas ocultas que podrían haberse evitado. Se elige el alzado que cumpla, por este orden:</p>
+
+    <div class="steps">
+      <div class="step">Que sea la vista <strong>más representativa</strong>: la que más información da sobre la forma de la pieza.</div>
+      <div class="step">Que genere <strong>el menor número de aristas ocultas</strong> en las tres vistas.</div>
+      <div class="step">Que muestre la pieza en su <strong>posición de uso o de fabricación</strong>, la natural para quien la va a construir.</div>
+    </div>
+
+    <p>Una vez elegido, se marca con una <strong>flecha</strong> sobre la pieza, para que todo el mundo mire desde el mismo sitio.</p>
+
+    <h4>¿Cuántas vistas hacen falta?</h4>
+
+    <p>Tres es la costumbre, no la norma. La norma dice otra cosa: <strong>se dibujan las vistas necesarias para definir la pieza, y ninguna más</strong>. Una vista que repite lo que ya dice otra no aporta nada y ensucia el plano.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Una vista</h4>
+        <p>Piezas de revolución (ejes, casquillos, arandelas) y chapas planas.</p>
+        <p>Basta el alzado con el símbolo <strong>Ø</strong>, o la planta con el espesor indicado.</p>
+      </div>
+      <div class="col-card">
+        <h4>Dos vistas</h4>
+        <p>Piezas prismáticas sencillas, sin detalles en el tercer lado.</p>
+        <p>Normalmente alzado y planta, o alzado y perfil.</p>
+      </div>
+      <div class="col-card">
+        <h4>Tres vistas</h4>
+        <p>El caso general: piezas con detalles en las tres direcciones.</p>
+        <p>Alzado, planta y perfil izquierdo.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>Cuidado con el atajo contrario: quitar una vista que sí hacía falta. Si con las vistas dibujadas caben <strong>dos piezas distintas</strong>, falta información. El caso clásico es la pieza cuyo alzado y planta son dos cuadrados: encajan un cubo, un cilindro tumbado, una pirámide truncada y unas cuantas formas más.</p>
+    </div>
+
+    <h4>La correspondencia entre las vistas</h4>
+
+    <p>Las tres vistas no son tres dibujos sueltos: son la misma pieza y están atadas entre sí. Comprobarlo es la forma más rápida de cazar un error.</p>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p>El <strong>alzado y la planta</strong> tienen la misma anchura · el <strong>alzado y el perfil</strong> tienen la misma altura · la <strong>planta y el perfil</strong> tienen la misma profundidad.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>El simulador <strong>Vistas</strong> de esta unidad tiene 48 piezas en tres niveles. Los niveles 2 y 3 son los que te tocan: piezas con aristas ocultas, caras inclinadas, taladros y voladizos.</p>
+    </div>
+  </article>
+
+  <!-- ─── 4. Perspectiva isométrica ─── -->
+  <article class="section" id="s4">
+    <div class="section-num">Sección 4</div>
+    <h3>Perspectiva isométrica</h3>
+
+    <p>Las vistas definen la pieza, pero no dejan verla. La perspectiva hace lo contrario: no sirve para fabricar, pero enseña la pieza entera de un vistazo. Por eso los planos suelen llevar las dos cosas.</p>
+
+    <p>En la <strong>perspectiva isométrica</strong>, los tres ejes forman entre sí <strong>ángulos de 120°</strong>: el eje vertical se dibuja vertical y los otros dos a <strong>30° sobre la horizontal</strong>. «Isométrica» significa precisamente eso: <em>igual medida</em> en las tres direcciones.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" aria-label="Los ejes isométricos a 120 grados y la caja envolvente de una pieza">
+        <g>
+          <line x1="55" y1="150" x2="245" y2="150" class="stroke-thin" stroke-dasharray="4 3"/>
+          <line x1="150" y1="150" x2="150" y2="40" class="stroke-main" stroke-width="2"/>
+          <line x1="150" y1="150" x2="245" y2="205" class="stroke-main" stroke-width="2"/>
+          <line x1="150" y1="150" x2="55" y2="205" class="stroke-main" stroke-width="2"/>
+          <path d="M 150 105 A 45 45 0 0 1 188.97 172.5" class="stroke-thin" fill="none"/>
+          <text x="204" y="124" font-size="11" font-weight="600" class="lbl-teja">120°</text>
+          <path d="M 210 150 A 60 60 0 0 1 201.96 180" class="stroke-thin" fill="none"/>
+          <text x="216" y="176" font-size="11" font-weight="600" class="lbl-blue">30°</text>
+          <text x="143" y="34" font-size="13" font-weight="700">Z</text>
+          <text x="252" y="212" font-size="13" font-weight="700">Y</text>
+          <text x="42" y="212" font-size="13" font-weight="700">X</text>
+        </g>
+        <g transform="translate(310,20)">
+          <polygon points="80,44 160,90 80,136 0,90" class="stroke-main fill-light"/>
+          <polygon points="0,90 80,136 80,196 0,150" class="stroke-main fill-light"/>
+          <polygon points="80,136 160,90 160,150 80,196" class="stroke-main fill-light"/>
+          <line x1="80" y1="104" x2="80" y2="44" class="stroke-thin" stroke-dasharray="4 3"/>
+          <line x1="80" y1="104" x2="0" y2="150" class="stroke-thin" stroke-dasharray="4 3"/>
+          <line x1="80" y1="104" x2="160" y2="150" class="stroke-thin" stroke-dasharray="4 3"/>
+        </g>
+      </svg>
+      <div class="fig-cap">Los tres ejes a 120°, y la caja de las dimensiones generales de la que se parte siempre</div>
+    </div>
+
+    <h4>El coeficiente de reducción</h4>
+
+    <p>Aquí hay un detalle que sorprende. Cuando se proyecta un objeto sobre el plano isométrico, sus aristas <strong>se acortan</strong>: una arista de 100 mm mide en la proyección 81,65 mm. Ese número, <strong>0,8165</strong>, es el coeficiente de reducción, y es igual en las tres direcciones.</p>
+
+    <p>Aplicarlo a cada medida sería un suplicio. Por eso, en la práctica, <strong>se dibuja sin reducir</strong>: se llevan las medidas reales sobre los ejes tal cual. El resultado es una figura <strong>1,22 veces mayor</strong> que la proyección exacta, pero con la misma forma. A eso se le llama <strong>perspectiva isométrica normalizada</strong>, y es lo que se hace siempre salvo que se indique lo contrario.</p>
+
+    <div class="callout callout-ok">
+      <span class="ic">✓</span>
+      <p><strong>En la práctica:</strong> mide sobre los ejes las medidas reales de la pieza, sin tocarlas. Lo único que hay que recordar es que el dibujo queda algo mayor que la pieza, y que por eso <strong>una isométrica no se acota para fabricar</strong>: para eso están las vistas.</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>En isométrica <strong>solo se miden las medidas paralelas a los ejes</strong>. Las diagonales y los ángulos <strong>no se conservan</strong>: un ángulo de 90° de la pieza se dibuja como 120° o como 60°, y una diagonal sale con otra longitud. Si necesitas un punto que no está sobre un eje, lo obtienes por sus coordenadas, nunca midiendo en diagonal.</p>
+    </div>
+
+    <h4>Circunferencias en isométrica</h4>
+
+    <p>Una circunferencia no se dibuja como una circunferencia: se convierte en una <strong>elipse</strong>. Para trazarla a mano se usa el <strong>óvalo de cuatro centros</strong>, que la aproxima con cuatro arcos de compás y sale bastante bien.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 740 210" xmlns="http://www.w3.org/2000/svg" aria-label="Construcción del óvalo de cuatro centros dentro del rombo isométrico">
+        <polygon points="200,40 286.6,90 200,140 113.4,90" class="stroke-main fill-light"/>
+        <line x1="200" y1="40" x2="243.3" y2="115" class="stroke-thin" stroke-dasharray="4 3"/>
+        <line x1="200" y1="40" x2="156.7" y2="115" class="stroke-thin" stroke-dasharray="4 3"/>
+        <line x1="200" y1="140" x2="243.3" y2="65" class="stroke-thin" stroke-dasharray="4 3"/>
+        <line x1="200" y1="140" x2="156.7" y2="65" class="stroke-thin" stroke-dasharray="4 3"/>
+        <path d="M 243.3 65 A 28.87 28.87 0 0 1 243.3 115 A 86.6 86.6 0 0 1 156.7 115 A 28.87 28.87 0 0 1 156.7 65 A 86.6 86.6 0 0 1 243.3 65 Z" fill="none" stroke="#d2552a" stroke-width="2.4"/>
+        <circle cx="200" cy="40" r="3.4" class="arrow"/>
+        <circle cx="200" cy="140" r="3.4" class="arrow"/>
+        <circle cx="228.87" cy="90" r="3.4" class="arrow"/>
+        <circle cx="171.13" cy="90" r="3.4" class="arrow"/>
+        <circle cx="243.3" cy="65" r="2.4" class="arrow-teja"/>
+        <circle cx="243.3" cy="115" r="2.4" class="arrow-teja"/>
+        <circle cx="156.7" cy="115" r="2.4" class="arrow-teja"/>
+        <circle cx="156.7" cy="65" r="2.4" class="arrow-teja"/>
+        <text x="200" y="30" text-anchor="middle" font-size="12" font-weight="700">1</text>
+        <text x="200" y="158" text-anchor="middle" font-size="12" font-weight="700">2</text>
+        <text x="236" y="84" font-size="12" font-weight="700">3</text>
+        <text x="164" y="84" font-size="12" font-weight="700">4</text>
+        <text x="470" y="72" font-size="11" class="lbl-teja">punto medio del lado:</text>
+        <text x="470" y="88" font-size="11" class="lbl-teja">ahí es tangente el óvalo</text>
+        <line x1="466" y1="68" x2="250" y2="65" class="stroke-thin"/>
+      </svg>
+      <div class="fig-cap">Los dos vértices obtusos del rombo son los centros de los arcos grandes; los otros dos centros salen de los cortes</div>
+    </div>
+
+    <div class="steps">
+      <div class="step">Dibuja el <strong>rombo</strong> del cuadrado que envuelve a la circunferencia: su lado mide lo mismo que el diámetro.</div>
+      <div class="step">Marca el <strong>punto medio de cada lado</strong>. Ahí será tangente el óvalo.</div>
+      <div class="step">Une cada <strong>vértice obtuso</strong> (1 y 2) con los puntos medios de los dos lados opuestos. Donde se cortan esas rectas están los centros <strong>3</strong> y <strong>4</strong>.</div>
+      <div class="step">Con centro en 1 y en 2, traza los <strong>dos arcos grandes</strong>; con centro en 3 y en 4, los <strong>dos pequeños</strong>. Los arcos se encuentran justo en los puntos medios.</div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 3 · LAS MEDIDAS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte3">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 3</div>
+    <h2>Las medidas</h2>
+    <p>Un dibujo sin medidas es un decorado. Aquí se decide cuánto se reduce o se amplía la pieza y qué cotas la dejan definida.</p>
+  </div>
+
+  <!-- ─── 5. Escalas normalizadas ─── -->
+  <article class="section" id="s5">
+    <div class="section-num">Sección 5</div>
+    <h3>Escalas normalizadas</h3>
+
+    <p>La <strong>escala</strong> es la relación entre la medida del dibujo y la medida real:</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p><strong>E = medida del dibujo ÷ medida real</strong>, con las dos medidas en la misma unidad. Por eso la escala <strong>no tiene unidades</strong>: es un número puro, y se escribe como una razón, «2:1» o «1:50». El primer número va siempre con el dibujo; el segundo, con la realidad.</p>
+    </div>
+
+    <h4>Las escalas que se pueden usar</h4>
+
+    <p>No vale cualquier número. La norma <strong>UNE-EN ISO 5455</strong> fija las escalas que se pueden emplear en un plano, y son estas. Una escala 3:1 o 1:3 no es normalizada: no se usa.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Ampliación</h4>
+        <p>El dibujo es mayor que la pieza. Para piezas pequeñas.</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-weight:600;">50:1 · 20:1 · 10:1 · 5:1 · 2:1</p>
+      </div>
+      <div class="col-card">
+        <h4>Natural</h4>
+        <p>El dibujo mide lo mismo que la pieza. Es la preferible siempre que quepa.</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-weight:600;">1:1</p>
+      </div>
+      <div class="col-card">
+        <h4>Reducción</h4>
+        <p>El dibujo es menor que la pieza. Para piezas grandes, planos de vivienda y mapas.</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-weight:600;">1:2 · 1:5 · 1:10 · 1:20 · 1:50 · 1:100 · 1:200 · 1:500 · 1:1000…</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>Fíjate en la serie: los saltos son siempre <strong>2, 5 y 10</strong>. Por eso existe 1:20 y 1:50, pero no 1:30 ni 1:40. Si al calcular te sale 1:3,7, no redondeas a 1:4: coges <strong>la escala normalizada inmediatamente menor</strong>, que es 1:5.</p>
+    </div>
+
+    <h4>Elegir la escala de una lámina</h4>
+
+    <p>Esta es la decisión que antes venía dada en el enunciado y que ahora tomas tú. El procedimiento es siempre el mismo: mides el hueco que tienes, mides lo que quieres meter dentro y coges <strong>la mayor escala normalizada que quepa</strong>.</p>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 1</div>
+      <h5>¿A qué escala dibujo esta pieza?</h5>
+      <p>Tengo que representar las tres vistas de una pieza en una lámina A4 vertical. El conjunto de las tres vistas, a tamaño real, ocupa <strong>70 mm de ancho por 90 mm de alto</strong>.</p>
+
+      <div class="steps">
+        <div class="step"><strong>El hueco.</strong> El recuadro útil del A4 mide 185 × 287 mm. El cajetín se come 20 mm por abajo, así que la zona de dibujo es de <strong>185 × 267 mm</strong>.</div>
+        <div class="step"><strong>Reservar sitio para las cotas y los rótulos.</strong> Unos 20 mm por cada lado. Quedan <strong>145 × 227 mm</strong> útiles de verdad.</div>
+        <div class="step"><strong>Cuánto puedo agrandar.</strong> A lo ancho: 145 ÷ 70 = <strong>2,07</strong>. A lo alto: 227 ÷ 90 = <strong>2,52</strong>. Manda siempre el menor de los dos: <strong>2,07</strong>.</div>
+        <div class="step"><strong>La escala normalizada.</strong> Puedo agrandar hasta 2,07 veces, así que la mayor escala normalizada que cabe es <strong>2:1</strong>. Una 5:1 se saldría de la hoja.</div>
+        <div class="step"><strong>Comprobar.</strong> A 2:1 el conjunto ocupa 140 × 180 mm, dentro de los 145 × 227 mm. Cabe, y con holgura suficiente para las cotas.</div>
+      </div>
+
+      <div class="callout callout-ok" style="margin-top:14px;">
+        <span class="ic">✓</span>
+        <p>En el cajetín se escribe <strong>E 2:1</strong>. Y todas las cotas de la lámina siguen diciendo <strong>la medida real</strong> de la pieza, no la que mide el papel.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p>La regla mide el papel; la cota dice la realidad. Si cambias la escala, el dibujo crece o encoge, pero <strong>las cifras de las cotas no cambian nunca</strong>: son las medidas de la pieza.</p>
+    </div>
+
+    <h4>La escala gráfica</h4>
+
+    <p>Además de escribir la escala en el cajetín, un plano puede llevar una <strong>escala gráfica</strong>: una regla dibujada en el propio plano, rotulada con medidas reales. Para usarla no se mide con la regla de plástico: se toma la distancia del plano con el compás o con el borde de una tira de papel y se traslada sobre ella, leyendo directamente la medida real.</p>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Su ventaja es que <strong>sigue valiendo si el plano se fotocopia ampliado o reducido</strong>. La escala numérica del cajetín, en cambio, deja de ser cierta en cuanto alguien toca el zoom de la fotocopiadora.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>El <strong>laboratorio de escalas</strong> de esta unidad tiene cinco niveles de retos, desde reconocer una escala hasta leer un plano. Los tres tipos de problema son siempre los mismos: realidad + escala → dibujo, dibujo + escala → realidad y realidad + dibujo → escala.</p>
+    </div>
+  </article>
+
+  <!-- ─── 6. Acotación ─── -->
+  <article class="section" id="s6">
+    <div class="section-num">Sección 6</div>
+    <h3>Acotación</h3>
+
+    <p><strong>Acotar</strong> es escribir sobre el dibujo las medidas reales de la pieza. Es la parte del plano que más se usa y la que más errores admite, porque no basta con que las cifras sean correctas: tienen que estar <strong>las que hacen falta</strong>, <strong>donde tocan</strong> y <strong>escritas como manda la norma</strong>.</p>
+
+    <h4>Las partes de una cota</h4>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" aria-label="Las partes de una cota y las distancias que se respetan en clase">
+        <rect x="120" y="100" width="240" height="90" class="stroke-main fill-light"/>
+        <line x1="120" y1="92" x2="120" y2="60" class="stroke-thin"/>
+        <line x1="360" y1="92" x2="360" y2="60" class="stroke-thin"/>
+        <line x1="120" y1="68" x2="360" y2="68" class="stroke-thin"/>
+        <polygon points="120,68 134,65 134,71" class="arrow"/>
+        <polygon points="360,68 346,65 346,71" class="arrow"/>
+        <text x="240" y="60" text-anchor="middle" font-size="15" font-weight="600">55</text>
+        <line x1="380" y1="100" x2="430" y2="100" class="stroke-thin" stroke-dasharray="3 2"/>
+        <line x1="380" y1="68" x2="430" y2="68" class="stroke-thin" stroke-dasharray="3 2"/>
+        <line x1="414" y1="100" x2="414" y2="68" class="stroke-main" stroke-width="1"/>
+        <polygon points="414,100 411,90 417,90" class="arrow-teja"/>
+        <polygon points="414,68 411,78 417,78" class="arrow-teja"/>
+        <text x="436" y="82" font-size="12" font-weight="700" class="lbl-teja">8 mm</text>
+        <text x="436" y="98" font-size="11" class="lbl-teja">innegociable</text>
+        <line x1="96" y1="100" x2="116" y2="100" class="stroke-thin" stroke-dasharray="3 2"/>
+        <line x1="96" y1="92" x2="116" y2="92" class="stroke-thin" stroke-dasharray="3 2"/>
+        <text x="90" y="99" text-anchor="end" font-size="11" class="lbl-teja">2 mm</text>
+        <line x1="96" y1="68" x2="116" y2="68" class="stroke-thin" stroke-dasharray="3 2"/>
+        <line x1="96" y1="60" x2="116" y2="60" class="stroke-thin" stroke-dasharray="3 2"/>
+        <text x="90" y="67" text-anchor="end" font-size="11" class="lbl-teja">2 mm</text>
+      </svg>
+      <div class="fig-cap">El criterio de clase: 8 mm de separación, y auxiliares que ni tocan la pieza ni se quedan cortas</div>
+    </div>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Cifra de cota</h4>
+        <p>La <strong>medida real</strong> de la pieza, en milímetros y <strong>sin escribir «mm»</strong>. Va centrada, encima de la línea de cota y paralela a ella.</p>
+        <h4 style="margin-top:14px;">Línea de cota</h4>
+        <p>Paralela a la medida que indica, a <strong>8 mm del contorno</strong> de la pieza.</p>
+      </div>
+      <div class="col-card">
+        <h4>Líneas auxiliares</h4>
+        <p>Prolongan el contorno hasta la línea de cota. <strong>Empiezan a 2 mm del dibujo</strong>, sin tocarlo, y lo <strong>sobrepasan 2 mm</strong>.</p>
+        <h4 style="margin-top:14px;">Flechas</h4>
+        <p><strong>Cerradas</strong>, tocando las líneas auxiliares. Si no caben dentro, se dibujan por fuera.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p>Las auxiliares <strong>no tocan el dibujo</strong>. Muchos libros las dibujan pegadas al contorno, y con rotulador calibrado se distinguen; a lápiz, no. Una auxiliar pegada a la pieza se lee como una arista más, y eso cambia la forma de la pieza.</p>
+    </div>
+
+    <p>Otras reglas de escritura: la cifra de una <strong>cota vertical se lee de abajo arriba</strong>, girando la cabeza a la izquierda; entre dos cotas paralelas se dejan otros <strong>8 mm</strong>; y si las flechas no caben dentro, se dibujan por fuera.</p>
+
+    <h4>Cotas de tamaño y cotas de posición</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>De tamaño</h4>
+        <p>Dicen <strong>cuánto mide</strong> cada elemento: la longitud de la pieza, la altura de un escalón, el diámetro de un taladro.</p>
+      </div>
+      <div class="col-card">
+        <h4>De posición</h4>
+        <p>Dicen <strong>dónde está</strong> cada elemento respecto a una referencia: a qué distancia del borde está el centro del taladro.</p>
+      </div>
+    </div>
+
+    <p>Las dos hacen falta. Un taladro con su Ø pero sin cotas de posición se puede taladrar en cualquier sitio; un taladro situado pero sin Ø no se sabe con qué broca se hace.</p>
+
+    <h4>Las cotas mínimas imprescindibles</h4>
+
+    <div class="keybox">
+      <div class="ktit">El principio</div>
+      <p>Con las cotas indicadas, <strong>otra persona debe poder dibujar exactamente la misma pieza</strong>. Si falta una cota, la pieza no queda definida y cabe más de una. Si sobra una cota, es redundante: se puede deducir de las otras, y si alguien se equivoca al fabricar, el plano se contradice a sí mismo.</p>
+    </div>
+
+    <p>El truco para comprobarlo es sencillo: tapa el dibujo y quédate solo con las cifras. ¿Podrías redibujar la pieza? Si te falta un dato, falta una cota. ¿Has usado todas las cifras? Si te ha sobrado alguna, sobra una cota.</p>
+
+    <h4>Acotar las tres vistas: el método de la L</h4>
+
+    <p>Una pieza no se acota vista por vista, como si fueran tres dibujos independientes: se acota <strong>el conjunto</strong>. Cada medida aparece <strong>una sola vez</strong>, en la vista donde se ve mejor. Para no repetir ni olvidar ninguna, en clase se acota <strong>en L</strong>.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 720 350" xmlns="http://www.w3.org/2000/svg" aria-label="Las tres vistas acotadas en L: el eje Z en el alzado y los ejes X e Y en la planta">
+        <line x1="470" y1="180" x2="470" y2="104" class="stroke-eje"/>
+        <line x1="470" y1="180" x2="326" y2="180" class="stroke-eje"/>
+        <line x1="470" y1="180" x2="590" y2="180" class="stroke-eje"/>
+        <line x1="470" y1="180" x2="470" y2="300" class="stroke-eje"/>
+        <text x="478" y="102" font-size="12" font-weight="700" class="lbl-blue">Z</text>
+        <text x="316" y="184" font-size="12" font-weight="700" class="lbl-blue">Y</text>
+        <text x="596" y="184" font-size="12" font-weight="700" class="lbl-blue">X</text>
+        <text x="478" y="304" font-size="12" font-weight="700" class="lbl-blue">X</text>
+
+        <rect x="338" y="78" width="120" height="90" class="stroke-main fill-light"/>
+        <line x1="338" y1="138" x2="458" y2="138" class="stroke-main"/>
+        <text x="398" y="70" text-anchor="middle" font-size="12" font-weight="600">Alzado</text>
+
+        <polygon points="482,168 572,168 572,78 527,78 527,138 482,138" class="stroke-main fill-light"/>
+        <text x="527" y="70" text-anchor="middle" font-size="12" font-weight="600">Perfil izquierdo</text>
+
+        <rect x="338" y="192" width="120" height="90" class="stroke-main fill-light"/>
+        <line x1="338" y1="237" x2="458" y2="237" class="stroke-main"/>
+        <text x="398" y="326" text-anchor="middle" font-size="12" font-weight="600">Planta</text>
+
+        <line x1="330" y1="138" x2="314" y2="138" class="stroke-thin"/>
+        <line x1="330" y1="168" x2="314" y2="168" class="stroke-thin"/>
+        <line x1="322" y1="138" x2="322" y2="168" class="stroke-thin"/>
+        <polygon points="322,138 319,146 325,146" class="arrow"/>
+        <polygon points="322,168 319,160 325,160" class="arrow"/>
+        <text x="316" y="157" text-anchor="end" font-size="11">10</text>
+        <line x1="306" y1="78" x2="290" y2="78" class="stroke-thin"/>
+        <line x1="306" y1="168" x2="290" y2="168" class="stroke-thin"/>
+        <line x1="298" y1="78" x2="298" y2="168" class="stroke-thin"/>
+        <polygon points="298,78 295,86 301,86" class="arrow"/>
+        <polygon points="298,168 295,160 301,160" class="arrow"/>
+        <text x="292" y="127" text-anchor="end" font-size="11">30</text>
+        <text x="266" y="100" text-anchor="end" font-size="11" font-weight="700" class="lbl-teja">eje Z</text>
+        <text x="266" y="116" text-anchor="end" font-size="11" class="lbl-teja">en el alzado,</text>
+        <text x="266" y="132" text-anchor="end" font-size="11" class="lbl-teja">por la izquierda</text>
+
+        <line x1="330" y1="237" x2="314" y2="237" class="stroke-thin"/>
+        <line x1="330" y1="282" x2="314" y2="282" class="stroke-thin"/>
+        <line x1="322" y1="237" x2="322" y2="282" class="stroke-thin"/>
+        <polygon points="322,237 319,245 325,245" class="arrow"/>
+        <polygon points="322,282 319,274 325,274" class="arrow"/>
+        <text x="316" y="264" text-anchor="end" font-size="11">15</text>
+        <line x1="306" y1="192" x2="290" y2="192" class="stroke-thin"/>
+        <line x1="306" y1="282" x2="290" y2="282" class="stroke-thin"/>
+        <line x1="298" y1="192" x2="298" y2="282" class="stroke-thin"/>
+        <polygon points="298,192 295,200 301,200" class="arrow"/>
+        <polygon points="298,282 295,274 301,274" class="arrow"/>
+        <text x="292" y="241" text-anchor="end" font-size="11">30</text>
+        <text x="266" y="215" text-anchor="end" font-size="11" font-weight="700" class="lbl-teja">eje X</text>
+        <text x="266" y="231" text-anchor="end" font-size="11" class="lbl-teja">en la planta,</text>
+        <text x="266" y="247" text-anchor="end" font-size="11" class="lbl-teja">por la izquierda</text>
+
+        <line x1="338" y1="290" x2="338" y2="306" class="stroke-thin"/>
+        <line x1="458" y1="290" x2="458" y2="306" class="stroke-thin"/>
+        <line x1="338" y1="298" x2="458" y2="298" class="stroke-thin"/>
+        <polygon points="338,298 346,295 346,301" class="arrow"/>
+        <polygon points="458,298 450,295 450,301" class="arrow"/>
+        <text x="398" y="294" text-anchor="middle" font-size="11">40</text>
+        <text x="492" y="266" font-size="11" font-weight="700" class="lbl-teja">eje Y</text>
+        <text x="492" y="282" font-size="11" class="lbl-teja">en la planta,</text>
+        <text x="492" y="298" font-size="11" class="lbl-teja">por abajo</text>
+      </svg>
+      <div class="fig-cap">Cada eje se acota una sola vez y siempre en el mismo sitio: así no se repiten ni se olvidan medidas</div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>La L es una regla de trabajo, no una ley. En piezas complicadas hay medidas que <strong>solo se ven bien en el perfil</strong>, o detalles que quedan más limpios acotados por la derecha. Cuando eso pasa, se sale de la L y se explica por qué. Lo que nunca se hace es acotar <strong>sobre una línea oculta</strong>: eso sí es un error.</p>
+    </div>
+
+    <h4>Circunferencias y arcos</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Ø · Diámetro</h4>
+        <p>Las <strong>circunferencias completas</strong> se acotan por su diámetro, con el símbolo Ø delante de la cifra. La línea de cota pasa por el centro.</p>
+      </div>
+      <div class="col-card">
+        <h4>R · Radio</h4>
+        <p>Los <strong>arcos de hasta 180° incluidos</strong> se acotan por su radio, con una <strong>sola flecha</strong> que sale del centro y apunta al arco.</p>
+      </div>
+    </div>
+
+    <h4>Errores que se repiten</h4>
+
+    <div class="norm-head">
+      <div>Regla</div>
+      <div>Bien acotado</div>
+      <div>Mal acotado</div>
+    </div>
+
+    <div class="norm-row">
+      <div class="nr-text">Las cotas van <strong>fuera de la figura</strong>, nunca encima del dibujo.</div>
+      <div class="nr-svg">
+        <div class="nr-label lab-ok">CORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="36" x2="20" y2="20" class="stroke-thin"/>
+          <line x1="100" y1="36" x2="100" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="26" x2="100" y2="26" class="stroke-thin"/>
+          <polygon points="20,26 28,23 28,29" class="arrow"/>
+          <polygon points="100,26 92,23 92,29" class="arrow"/>
+          <text x="60" y="22" text-anchor="middle" font-size="9">40</text>
+        </svg>
+      </div>
+      <div class="nr-svg">
+        <div class="nr-label lab-bad">INCORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="58" x2="100" y2="58" class="stroke-thin"/>
+          <polygon points="20,58 28,55 28,61" class="arrow"/>
+          <polygon points="100,58 92,55 92,61" class="arrow"/>
+          <text x="60" y="54" text-anchor="middle" font-size="9">40</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="norm-row">
+      <div class="nr-text">La <strong>línea auxiliar no toca el dibujo</strong>: arranca a 2 mm del contorno.</div>
+      <div class="nr-svg">
+        <div class="nr-label lab-ok">CORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="34" x2="20" y2="18" class="stroke-thin"/>
+          <line x1="100" y1="34" x2="100" y2="18" class="stroke-thin"/>
+          <line x1="20" y1="26" x2="100" y2="26" class="stroke-thin"/>
+          <polygon points="20,26 28,23 28,29" class="arrow"/>
+          <polygon points="100,26 92,23 92,29" class="arrow"/>
+          <text x="60" y="22" text-anchor="middle" font-size="9">40</text>
+        </svg>
+      </div>
+      <div class="nr-svg">
+        <div class="nr-label lab-bad">INCORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="20" y2="18" class="stroke-thin"/>
+          <line x1="100" y1="40" x2="100" y2="18" class="stroke-thin"/>
+          <line x1="20" y1="26" x2="100" y2="26" class="stroke-thin"/>
+          <polygon points="20,26 28,23 28,29" class="arrow"/>
+          <polygon points="100,26 92,23 92,29" class="arrow"/>
+          <text x="60" y="22" text-anchor="middle" font-size="9">40</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="norm-row">
+      <div class="nr-text">En <strong>cotas en paralelo</strong>, la menor va más cerca de la pieza.</div>
+      <div class="nr-svg">
+        <div class="nr-label lab-ok">CORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="48" width="80" height="30" class="stroke-main fill-light"/>
+          <line x1="55" y1="48" x2="55" y2="42" class="stroke-thin"/>
+          <line x1="20" y1="44" x2="20" y2="12" class="stroke-thin"/>
+          <line x1="100" y1="44" x2="100" y2="12" class="stroke-thin"/>
+          <line x1="20" y1="34" x2="55" y2="34" class="stroke-thin"/>
+          <polygon points="20,34 27,31 27,37" class="arrow"/>
+          <polygon points="55,34 48,31 48,37" class="arrow"/>
+          <text x="37" y="30" text-anchor="middle" font-size="8">18</text>
+          <line x1="20" y1="20" x2="100" y2="20" class="stroke-thin"/>
+          <polygon points="20,20 27,17 27,23" class="arrow"/>
+          <polygon points="100,20 93,17 93,23" class="arrow"/>
+          <text x="60" y="16" text-anchor="middle" font-size="8">40</text>
+        </svg>
+      </div>
+      <div class="nr-svg">
+        <div class="nr-label lab-bad">INCORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="48" width="80" height="30" class="stroke-main fill-light"/>
+          <line x1="55" y1="48" x2="55" y2="42" class="stroke-thin"/>
+          <line x1="20" y1="44" x2="20" y2="12" class="stroke-thin"/>
+          <line x1="100" y1="44" x2="100" y2="26" class="stroke-thin"/>
+          <line x1="20" y1="34" x2="100" y2="34" class="stroke-thin"/>
+          <polygon points="20,34 27,31 27,37" class="arrow"/>
+          <polygon points="100,34 93,31 93,37" class="arrow"/>
+          <text x="60" y="30" text-anchor="middle" font-size="8">40</text>
+          <line x1="20" y1="20" x2="55" y2="20" class="stroke-thin"/>
+          <polygon points="20,20 27,17 27,23" class="arrow"/>
+          <polygon points="55,20 48,17 48,23" class="arrow"/>
+          <text x="37" y="16" text-anchor="middle" font-size="8">18</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="callout callout-ok">
+      <span class="ic">✓</span>
+      <p>El simulador de <strong>Acotación</strong> corrige por matemáticas, no comparando con una solución única: acepta cualquier acotación correcta. Si te falta una cota, te dibuja <strong>otra pieza distinta</strong> que cumple exactamente las cotas que has puesto. Si te sobra, te enseña de dónde sale, por ejemplo «25 = 40 − 15».</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 4 · DEL PAPEL AL ORDENADOR
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte4">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 4</div>
+    <h2>Del papel al ordenador</h2>
+    <p>Las mismas reglas, con otra herramienta. Y el camino que lleva del plano a la pieza fabricada.</p>
+  </div>
+
+  <!-- ─── 7. CAD 2D ─── -->
+  <article class="section" id="s7">
+    <div class="section-num">Sección 7</div>
+    <h3>CAD 2D · LibreCAD</h3>
+
+    <p><strong>CAD</strong> son las siglas de <em>Computer Aided Design</em>, diseño asistido por ordenador. Un programa de CAD 2D hace lo mismo que la escuadra y el cartabón, pero con dos ventajas grandes: dibuja <strong>exacto</strong>, porque trabajas con coordenadas y no con el pulso, y permite <strong>modificar sin volver a empezar</strong>.</p>
+
+    <p><strong>LibreCAD</strong> es un programa de CAD 2D <strong>libre y gratuito</strong>, que funciona en Windows, en Linux y en Mac. Se parece bastante a los programas profesionales, así que lo que aprendas aquí te sirve fuera.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Las capas</h4>
+        <p>Cada tipo de línea va en <strong>su propia capa</strong>: una para contornos, otra para ejes, otra para cotas. Cada capa lleva asignado su grosor y su trazado, así que ya no hay que acordarse de cambiar de lápiz.</p>
+        <p>Además, una capa se puede <strong>apagar</strong> para ver el dibujo sin las cotas, por ejemplo.</p>
+      </div>
+      <div class="col-card">
+        <h4>Las referencias (<em>snap</em>)</h4>
+        <p>El programa <strong>engancha el cursor</strong> a los puntos importantes: extremos, puntos medios, centros, intersecciones. Es lo que hace que dos líneas se junten de verdad y no «casi».</p>
+        <p>Un dibujo con esquinas «casi» cerradas no vale para fabricar ni para imprimir.</p>
+      </div>
+    </div>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>La acotación automática</h4>
+        <p>Señalas los dos puntos y el programa escribe la cota con su cifra real. Si luego cambias la pieza, <strong>la cifra se actualiza sola</strong>.</p>
+        <p>Las normas siguen siendo las mismas: sigues decidiendo tú qué cotas hacen falta y dónde van.</p>
+      </div>
+      <div class="col-card">
+        <h4>Imprimir a escala</h4>
+        <p>En CAD <strong>se dibuja siempre a tamaño real</strong>, 1:1, midan lo que midan las piezas. La escala se elige <strong>al imprimir</strong>: le dices al programa el formato y la escala, y él ajusta.</p>
+        <p>Es justo al revés que en el papel, donde la escala hay que decidirla antes de empezar.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Esta sección se irá ampliando durante el curso con prácticas guiadas de LibreCAD: una primera lámina, el uso de capas y la impresión a escala.</p>
+    </div>
+  </article>
+
+  <!-- ─── 8. Del plano al objeto ─── -->
+  <article class="section" id="s8">
+    <div class="section-num">Sección 8</div>
+    <h3>Del plano al objeto</h3>
+
+    <p>El dibujo técnico no acaba en el papel. En las unidades <strong>3 · Fabricación y diseño</strong> y <strong>4 · Diseño e impresión 3D</strong> se recorre el camino completo, y conviene ver dónde encaja lo de esta unidad.</p>
+
+    <div class="steps">
+      <div class="step"><strong>Croquis a mano.</strong> La idea, con sus medidas. Sigue siendo el primer paso, también en la industria.</div>
+      <div class="step"><strong>Modelo CAD.</strong> La pieza, dibujada en 2D o modelada en 3D en el ordenador.</div>
+      <div class="step"><strong>Plano acotado.</strong> El documento que define la pieza: vistas, cotas, escala, material y acabado.</div>
+      <div class="step"><strong>Fabricación.</strong> A partir del plano: mecanizado, moldeo o, si es impresión 3D, exportar a <strong>STL</strong>, laminar e imprimir.</div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p>Aunque exista un modelo 3D, <strong>el documento que manda sigue siendo el plano acotado</strong>. El modelo dice qué forma tiene la pieza; el plano dice además qué medidas hay que respetar, cuánto margen de error se admite y cómo se comprueba. Por eso el dibujo técnico no ha desaparecido con el ordenador: ha cambiado de herramienta.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Si el curso que viene cursas <strong>Tecnología e Ingeniería</strong> en Bachillerato, todo esto vuelve y se amplía: cortes y secciones, tolerancias, acabados superficiales y representación de conjuntos. Lo que aquí se hace a lápiz, allí se hace igual pero con más detalle.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CIERRE
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="cierre">
+  <div class="parte-cabecera">
+    <div class="parte-num">Cierre</div>
+    <h2>Recuerda lo que has aprendido</h2>
+    <p>Resumen y glosario para volver cuando lo necesites.</p>
+  </div>
+
+  <div class="cols2">
+    <div class="col-card">
+      <h4>Las 5 ideas clave</h4>
+      <ol>
+        <li>Un plano no describe una pieza: <strong>la define</strong>. Otra persona tiene que poder fabricarla solo con él.</li>
+        <li>Cada <strong>tipo de línea</strong> significa una cosa. Cambiar una por otra cambia la pieza.</li>
+        <li>Se dibujan <strong>las vistas necesarias</strong>, ni una más. Y el alzado se elige, no viene dado.</li>
+        <li>La <strong>escala</strong> se elige entre las normalizadas, según lo que quepa en la lámina. Las cotas siguen diciendo la medida real.</li>
+        <li>Las cotas son <strong>las mínimas imprescindibles</strong>: si falta una, la pieza no queda definida; si sobra, el plano puede contradecirse.</li>
+      </ol>
+    </div>
+    <div class="col-card">
+      <h4>Lo que debes saber hacer</h4>
+      <ul>
+        <li>Elegir el alzado de una pieza y justificar la elección.</li>
+        <li>Decidir cuántas vistas hacen falta y dibujarlas con sus líneas normalizadas.</li>
+        <li>Calcular la escala a la que cabe un dibujo en una lámina A4.</li>
+        <li>Acotar las tres vistas en L, sin repetir ni olvidar medidas.</li>
+        <li>Dibujar la perspectiva isométrica de una pieza, con sus circunferencias.</li>
+        <li>Rotular el cajetín y presentar la lámina limpia.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="glos">
+    <h3>📖 Glosario</h3>
+    <dl>
+      <dt>Acotación mínima</dt>
+      <dd>Conjunto de cotas justo suficiente para definir la pieza: sin que falte ninguna medida y sin que ninguna se pueda deducir de las demás.</dd>
+      <dt>Alzado</dt>
+      <dd>Vista que se elige como frontal. Se marca con una flecha sobre la pieza y de ella dependen las otras dos vistas.</dd>
+      <dt>Arista oculta</dt>
+      <dd>Borde de la pieza que existe pero no se ve desde esa vista. Se dibuja con línea de trazos fina.</dd>
+      <dt>CAD</dt>
+      <dd><em>Computer Aided Design</em>: diseño asistido por ordenador. En CAD se dibuja siempre a tamaño real y la escala se elige al imprimir.</dd>
+      <dt>Cajetín</dt>
+      <dd>Recuadro de la lámina que identifica el plano: curso, autor, fecha, escala, título y número de lámina.</dd>
+      <dt>Coeficiente de reducción</dt>
+      <dd>0,8165. Lo que se acortan las aristas al proyectarlas en isométrica. En la práctica no se aplica: se dibuja sin reducir y la figura queda 1,22 veces mayor.</dd>
+      <dt>Cota de posición</dt>
+      <dd>Cota que indica dónde está un elemento respecto a una referencia, no cuánto mide.</dd>
+      <dt>Cota de tamaño</dt>
+      <dd>Cota que indica la medida de un elemento: una longitud, una altura, un diámetro.</dd>
+      <dt>Escala</dt>
+      <dd>Relación entre la medida del dibujo y la medida real, sin unidades. Solo se usan las escalas normalizadas por UNE-EN ISO 5455.</dd>
+      <dt>Escala gráfica</dt>
+      <dd>Regla dibujada en el propio plano, rotulada con medidas reales. Sigue siendo válida aunque el plano se amplíe o se reduzca.</dd>
+      <dt>Línea auxiliar</dt>
+      <dd>Línea fina que prolonga el contorno hasta la línea de cota. Empieza a 2 mm del dibujo, sin tocarlo, y lo sobrepasa 2 mm.</dd>
+      <dt>Normalización</dt>
+      <dd>Conjunto de normas que fijan cómo se hace un plano para que se entienda igual en cualquier sitio. UNE en España, EN en Europa, ISO en el mundo.</dd>
+      <dt>Óvalo de cuatro centros</dt>
+      <dd>Construcción con cuatro arcos de compás que aproxima la elipse en que se convierte una circunferencia dibujada en isométrica.</dd>
+      <dt>Perspectiva isométrica</dt>
+      <dd>Perspectiva en la que los tres ejes forman 120° entre sí y las tres direcciones se miden igual.</dd>
+      <dt>Planta</dt>
+      <dd>Vista desde arriba. Va debajo del alzado, y bajar en ella es alejarse del observador.</dd>
+      <dt>Perfil izquierdo</dt>
+      <dd>Vista desde la izquierda. En sistema europeo va a la derecha del alzado, e ir hacia la derecha en ella es alejarse.</dd>
+      <dt>Sistema europeo</dt>
+      <dd>Sistema de proyección usado en Europa, también llamado de primer diedro. La planta va debajo del alzado y el perfil izquierdo a su derecha.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer class="book-foot">
+  <p>IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  Tecnología 4º ESO · Curso 2026-27 · Manuel Alonso Herrera</p>
+  <p style="margin-top:6px;"><a href="index.html">← Volver al hub</a> · <a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a></p>
+  <p class="v" style="margin-top:8px;">Libro digital v1.0</p>
+</footer>
+
+</main>
+</div>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

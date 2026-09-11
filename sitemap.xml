@@ -7,6 +7,18 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://tec4-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tec4-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/teoria.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://tec4-ies-jdq.malonso72.workers.dev/unidades/01-vivienda-sostenibilidad/actividades.html</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
