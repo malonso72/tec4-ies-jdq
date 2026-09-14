@@ -210,6 +210,9 @@ table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
       <div class="ti azul"><h4>XOR (O exclusiva)</h4><p>Salida 1 si las entradas son DIFERENTES.</p></div>
     </div>
 
+    <div class="callout callout-info"><span class="ic">⚡</span>
+      <p>En el <a href="interactivos/karnaugh.html">simulador de la unidad</a> (pestaña «Puertas lógicas») pulsas las entradas de cada puerta y ves la salida y su fila en la tabla.</p>
+    </div>
     <h3>Tablas de verdad de las puertas básicas</h3>
     <table class="tabla-verdad">
       <thead><tr><th>A</th><th>NOT A</th></tr></thead>
@@ -296,22 +299,26 @@ table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
 
     <h3>Mapa de 2 variables (4 celdas)</h3>
     <table class="karnaugh">
-      <thead><tr><th></th><th>B=0</th><th>B=1</th></tr></thead>
+      <thead><tr><th>B ╲ A</th><th>A=0</th><th>A=1</th></tr></thead>
       <tbody>
-        <tr><th>A=0</th><td>m₀</td><td>m₁</td></tr>
-        <tr><th>A=1</th><td>m₂</td><td>m₃</td></tr>
+        <tr><th>B=0</th><td>m₀</td><td>m₂</td></tr>
+        <tr><th>B=1</th><td>m₁</td><td>m₃</td></tr>
       </tbody>
     </table>
+    <p>Las <strong>columnas</strong> llevan la primera variable (A) y las <strong>filas</strong> la última (B). El subíndice de cada celda es el número del minitérmino: A es el bit de más peso.</p>
 
     <h3>Mapa de 3 variables (8 celdas)</h3>
-    <p>El orden de las columnas es importante: <strong>00, 01, 11, 10</strong> (código Gray, solo cambia 1 bit entre adyacentes).</p>
+    <p>Las columnas llevan <strong>AB</strong> y las filas <strong>C</strong>. El orden de las columnas es importante: <strong>00, 01, 11, 10</strong> (código Gray, solo cambia 1 bit entre columnas vecinas).</p>
     <table class="karnaugh">
-      <thead><tr><th>A</th><th>BC=00</th><th>BC=01</th><th>BC=11</th><th>BC=10</th></tr></thead>
+      <thead><tr><th>C ╲ AB</th><th>00</th><th>01</th><th>11</th><th>10</th></tr></thead>
       <tbody>
-        <tr><th>0</th><td>m₀</td><td>m₁</td><td>m₃</td><td>m₂</td></tr>
-        <tr><th>1</th><td>m₄</td><td>m₅</td><td>m₇</td><td>m₆</td></tr>
+        <tr><th>C=0</th><td>m₀</td><td>m₂</td><td>m₆</td><td>m₄</td></tr>
+        <tr><th>C=1</th><td>m₁</td><td>m₃</td><td>m₇</td><td>m₅</td></tr>
       </tbody>
     </table>
+    <div class="callout callout-info"><span class="ic">📌</span>
+      <p>Esta es la disposición que usamos en clase, en el simulador y en Bachillerato: <strong>columnas AB, filas C</strong> (con 4 variables, columnas AB y filas CD). Otros libros ponen las variables al revés; el método es el mismo, pero acostúmbrate a una sola.</p>
+    </div>
 
     <h3>Reglas de simplificación</h3>
     <ol style="margin-left:20px;line-height:1.7">
@@ -328,16 +335,19 @@ table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
       <span class="et">EJEMPLO</span>
       <h5>F(A,B,C) = Σ(1,3,5,7) — todos los términos donde C=1</h5>
       <table class="karnaugh">
-        <thead><tr><th>A</th><th>BC=00</th><th>BC=01</th><th>BC=11</th><th>BC=10</th></tr></thead>
+        <thead><tr><th>C ╲ AB</th><th>00</th><th>01</th><th>11</th><th>10</th></tr></thead>
         <tbody>
-          <tr><th>0</th><td>0</td><td class="uno">1</td><td class="uno">1</td><td>0</td></tr>
-          <tr><th>1</th><td>0</td><td class="uno">1</td><td class="uno">1</td><td>0</td></tr>
+          <tr><th>C=0</th><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><th>C=1</th><td class="uno">1</td><td class="uno">1</td><td class="uno">1</td><td class="uno">1</td></tr>
         </tbody>
       </table>
-      <p>Los 4 unos forman un grupo grande. Lo común a las 4 celdas: <strong>C = 1</strong>.<br>
+      <p>Los 4 unos forman un grupo grande: toda la fila C=1. Lo común a las 4 celdas: <strong>C = 1</strong> (A y B toman todos los valores, así que desaparecen).<br>
       Simplificación: $F = C$. La función original con 4 minitérminos se reduce a una sola variable.</p>
     </div>
 
+    <div class="callout callout-info"><span class="ic">🗺️</span>
+      <p><strong>Practica:</strong> en <a href="interactivos/karnaugh.html">De la tabla de verdad al circuito</a> marcas los unos, ves los grupos dibujados sobre el mapa, la función mínima y el circuito con puertas funcionando. Con el modo «Agrupa tú» agrupas tú y el simulador te corrige.</p>
+    </div>
     <div class="callout callout-ok"><span class="ic">💡</span>
       <p><strong>Conexión a Bachillerato:</strong> en TECI II también verás Karnaugh, pero con <em>4 variables</em> y con términos <em>don't-care</em> (X) que dan flexibilidad. La técnica es la misma; la gracia es saber agruparlos mejor.</p>
     </div>
