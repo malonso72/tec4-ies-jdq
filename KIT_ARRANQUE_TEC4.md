@@ -1,6 +1,6 @@
 # Kit de arranque · Tecnología 4º ESO (tec4-ies-jdq)
 
-Última actualización: junio 2026
+Última actualización: septiembre 2026
 Mantenedor: Manuel Alonso Herrera (malonso72@gmail.com)
 Repositorio: github.com/malonso72/tec4-ies-jdq
 Web en vivo: https://tec4-ies-jdq.malonso72.workers.dev
@@ -11,11 +11,13 @@ Web en vivo: https://tec4-ies-jdq.malonso72.workers.dev
 
 - Profesor de Tecnología en el IES Jiménez de Quesada (Santa Fe, Granada).
 - Esta es la web docente del curso **Tecnología · 4º ESO**.
-- Cloudflare Workers (Static Assets). Despliegue manual con `npx wrangler deploy` desde la raíz. No hay auto-deploy desde GitHub.
+- Cloudflare Workers (Static Assets). `git push` a `main` despliega solo (integración con GitHub); el hook de pre-push verifica HTML y enlaces antes.
 
-## Las 7 unidades del curso
+## Las 8 unidades del curso
 
-Basadas en el libro Casals adaptadas al currículo TECI II → 4º ESO:
+Basadas en el libro Casals adaptadas al currículo TECI II → 4º ESO, más una U0 propia:
+
+- `00-dibujo-tecnico` — Dibujo técnico (vistas, escalas, acotación, isométrica), con 6 interactivos y 2 láminas
 
 - `01-vivienda-sostenibilidad` — Vivienda y sostenibilidad
 - `02-energias-renovables` — Energías renovables
@@ -41,7 +43,7 @@ Si te pido tocar algo de OTRO curso, no es este repo. Dilo y abrimos otro chat.
 - No uses emojis salvo que yo los use primero.
 - Cambio en varios pasos → primero RECAP de lo entendido y espera mi OK antes de tocar nada.
 - Cambio claro y autocontenido → hazlo y resumes al final.
-- Los deploys los hago yo (`git push` + `npx wrangler deploy`); tú no tienes credenciales.
+- El push lo decido yo: tú haces commit y me preguntas antes de hacer push (despliega a la web que usan los alumnos).
 - A veces se cuelga `.git/index.lock` y bloquea commits desde GitHub Desktop. Hay que borrarlo del disco.
 - Antes de cambios grandes deja backup con sufijo `.bak_<descripcion>`.
 
@@ -70,26 +72,18 @@ Esquema por defecto:
 - **Ejercicios** con cálculos, espacio en blanco con borde inferior.
 - Solucionario en VERDE con paso a paso.
 
-## Estado al cerrar este chat (junio 2026)
+## Estado (septiembre 2026)
 
-Repo LIMPIO. `git status` = nothing to commit. Branch `main` al día con origin.
+Las 8 unidades tienen hub, libro digital, interactivos, actividades, autocomprobación y proyecto
+(U0: actividades y proyecto pendientes). Auditoría completa hecha en septiembre de 2026; lo ya
+corregido y lo que queda está en `documentacion/PENDIENTES.md`.
 
-Trabajo hecho hasta ahora en este repo:
-- Las 7 unidades creadas con su estructura base.
-- Mapeo de contenidos TECI II → 4º ESO documentado.
-- Índice del libro Casals leído y usado de base.
+Convenciones fijadas en esa auditoría:
+- Mapas de Karnaugh: columnas **ab**, filas **c**/**cd** en Gray (la disposición de clase y del simulador D2 de TECI II). No adaptar a la del libro de texto.
+- Símbolos neumáticos: ISO 1219-1, generados desde `simbolos.py` (fuente en el chat de la auditoría); los orificios de una distribuidora se dibujan sobre el cuadrado de reposo, el del lado del muelle.
+- Los tests de autocomprobación tienen las opciones equilibradas en longitud: al añadir preguntas, la correcta no debe ser la más larga.
+- El libro es material de apoyo: no ampliar texto; sí figuras donde el contenido es visual.
 
-Pendiente (cuando vuelvas en septiembre, no lo arranques tú solo — espera mi tarea):
-- Posibles ampliaciones por unidad según vea en clase.
-- Posibles exámenes por unidad con el formato test + ejercicios.
-- Interactivos o microactividades si surgen.
+## Cómo arrancar conmigo
 
-## Cómo arrancar conmigo en septiembre
-
-Cuando vuelva, espera a que te diga la tarea. No audites el repo ni propongas cosas por tu cuenta. Solo:
-
-1. Lee este kit.
-2. Confirma "listo, todo cargado" y queda a la espera.
-3. Yo te indico la tarea concreta.
-
-Si la tarea no es de este repo (Tecnología 4º ESO), avisa para abrir un chat separado para el repo correspondiente.
+Lee este kit y `CLAUDE.md`, confirma «listo» y espera la tarea. Si la tarea no es de este repo (Tecnología 4º ESO), avisa para abrir un chat separado.

@@ -36,17 +36,26 @@ en el index).
 - [ ] **Herramientas**: añadir simuladores (electrónica con Falstad, neumática
   con FluidSIM, robótica con Tinkercad Circuits), glosario.
 
+## Auditoría de septiembre de 2026
+
+Hecho: U6 (símbolos ISO 1219, circuitos dibujados, visor animado, quiz), U5 (simulador Karnaugh
+con motor real, disposición de clase en libro y actividades, erratas), tests reequilibrados en
+longitud (126 preguntas), 30 mA en U1, desbordes en móvil, enlaces «Repaso» a TyD2/TyD3,
+sesiones coherentes hub/PROGRAMACION, README y KIT al día.
+
+- [ ] Figuras en los libros donde el contenido es visual: CGMP y esquema de agua (U1), lazo
+  abierto/cerrado y patillaje UNO (U7), aditivo/sustractivo/conformado (U3-U4), símbolos de
+  puertas en las dos normas, transistor y patillaje 7408 (U5).
+- [ ] Revisar contenido con fecha: prohibición UE de coches de combustión en 2035 (U1 libro y
+  test P17; la UE lo está revisando), etiquetas energéticas A+++ (U1 test P14).
+- [ ] Ejemplos Arduino del libro de U7: `adelante()` y `giraDerecha()` no están definidas y
+  falta `setup()`; indicar que son fragmentos o completarlos.
+- [ ] En el simulador C31 de TECI II los orificios de la 3/2 están sobre el cuadrado del lado
+  del pulsador; en la norma van sobre el de reposo (lado del muelle), como en 4º.
+
 ## Infraestructura
 
-- [ ] **`git init`**: el sistema en el que se generó este repo no tenía
-  git instalado. Manuel debe ejecutar al recibirlo:
-  ```bash
-  cd tec4-ies-jdq && git init -b main && git add . && \
-  git commit -m "Bootstrap del sitio Tecnología 4º ESO [v1.0.0]"
-  ```
-- [ ] **Configuración del worker Cloudflare**: crear el subdominio
-  `tec4-ies-jdq.malonso72.workers.dev`. Probar primer deploy con
-  `npx wrangler deploy`.
+- [x] Repo en git y worker desplegado (`tec4-ies-jdq.malonso72.workers.dev`), auto-deploy con `git push`.
 - [ ] **Google Search Console**: añadir verificación si se quiere indexar.
 
 ## Enlaces cruzados (§7.3 del brief)
