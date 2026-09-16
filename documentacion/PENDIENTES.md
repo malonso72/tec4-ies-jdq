@@ -43,15 +43,26 @@ con motor real, disposición de clase en libro y actividades, erratas), tests re
 longitud (126 preguntas), 30 mA en U1, desbordes en móvil, enlaces «Repaso» a TyD2/TyD3,
 sesiones coherentes hub/PROGRAMACION, README y KIT al día.
 
-- [ ] Figuras en los libros donde el contenido es visual: CGMP y esquema de agua (U1), lazo
-  abierto/cerrado y patillaje UNO (U7), aditivo/sustractivo/conformado (U3-U4), símbolos de
-  puertas en las dos normas, transistor y patillaje 7408 (U5).
-- [ ] Revisar contenido con fecha: prohibición UE de coches de combustión en 2035 (U1 libro y
-  test P17; la UE lo está revisando), etiquetas energéticas A+++ (U1 test P14).
+- [x] Figuras en los libros: comprobado el 16-sep-2026 que estaban **todas hechas** ya en la
+  auditoría de septiembre — CGMP y agua (U1), lazo abierto/cerrado y patillaje UNO (U7),
+  aditivo/sustractivo/conformado (U3 y U4), puertas en las dos normas, transistor y patillaje del
+  7408 (U5). Lo que faltaba de verdad era U2, que no tenía ninguna; ya tiene tres.
+- [x] Contenido con fecha revisado el 16-sep-2026 contra fuentes actuales: el reglamento europeo en
+  vigor sigue fijando 0 g CO2/km en 2035 y la rebaja al 90 % que propuso la Comisión en diciembre de
+  2025 está pendiente de Parlamento y Consejo (se explica así, no se da por hecho); A+++ sustituido
+  por clase A o B (reescalado de 2021); ITER pasa a 2034 investigación y 2039 deuterio-tritio; y el
+  cierre nuclear español ya no es 2027-2035, porque la prórroga de Almaraz (agosto de 2026) lo llevó
+  a 2030.
 - [ ] Ejemplos Arduino del libro de U7: `adelante()` y `giraDerecha()` no están definidas y
   falta `setup()`; indicar que son fragmentos o completarlos.
 - [ ] En el simulador C31 de TECI II los orificios de la 3/2 están sobre el cuadrado del lado
   del pulsador; en la norma van sobre el de reposo (lado del muelle), como en 4º.
+- [ ] Interactivos que siguen siendo test de texto sin dibujo: `identifica-material`,
+  `proceso-fabricacion` y `elige-tecnologia` (los dos primeros sí tienen algo que dibujar).
+- [ ] Calculadoras que ganarían con deslizador: `factura-luz`, `calculadora-solar`, `mix-energetico`,
+  `binario`, `slicer-sim` y `lazo-control`. El patrón está en `cilindro-fuerza` y en el
+  `relacion-transmision` de tyd3.
+- [ ] Los 6 interactivos de dibujo técnico están duplicados byte a byte con tyd3.
 
 ## Infraestructura
 
