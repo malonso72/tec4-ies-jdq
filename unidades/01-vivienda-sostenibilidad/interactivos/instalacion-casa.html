@@ -510,7 +510,7 @@ function simbolo(g, tipo, x, y, nx, ny, estado) {
     if (r.tipo === 'conmutada') t += '<b>Rama 3 · Pasillo (conmutada).</b> Cada conmutador une su borne común con uno de los dos hilos puente. La luz se enciende cuando C1 y C2 eligen el mismo puente; accionando cualquiera de los dos se cambia el estado. Por eso se enciende en la entrada y se apaga en la puerta del dormitorio.';
     if (r.tipo === 'timbre') t += '<b>Rama 6 · Timbre.</b> El pulsador solo cierra el circuito mientras se mantiene pulsado (mantén pulsado PT). El zumbador activo no necesita resistencia. También tiene polaridad: rojo al positivo.';
     if (r.tipo === 'ldr') t += '<b>Rama 7 · Luz exterior (opcional).</b> La LDR es una resistencia que cambia con la luz. Un módulo de interruptor crepuscular cierra la rama cuando oscurece: cambia entre día y noche con el botón de arriba.';
-    if (ST.inv[r.id]) t += '<br><b>El LED está conectado al revés:</b> el LED es un diodo y solo deja pasar la corriente en un sentido. No luce, pero no se estropea. Pata larga (ánodo) al positivo.';
+    if (ST.inv[r.id]) t += '<br><b>El LED está conectado al revés:</b> el LED es un diodo y solo deja pasar la corriente en un sentido. No luce, pero con la pila de petaca no se estropea. Pata larga (ánodo) al positivo.';
     t += '<br><span style="color:var(--texto2)">Todas las ramas están en paralelo: cada una recibe los 4,5 V de la pila y funciona de forma independiente.</span>';
     document.getElementById('exp').innerHTML = t;
   }
