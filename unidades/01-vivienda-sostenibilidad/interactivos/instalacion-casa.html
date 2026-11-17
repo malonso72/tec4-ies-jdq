@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>La instalación de la casa · U01 · Tecnología 4º ESO</title>
+<meta name="description" content="Instalación eléctrica de la maqueta de la vivienda tipo: interruptores, conmutada, timbre y esquema eléctrico con LED.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.ic-wrap{max-width:1240px;margin:24px auto;padding:0 20px 60px}
+.ic-hero{text-align:center;margin-bottom:16px}
+.ic-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 6px}
+.ic-hero p{font-size:.95rem;color:var(--texto2);margin:0 auto;line-height:1.55;max-width:820px}
+.ic-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:980px){.ic-grid{grid-template-columns:1fr}}
+.ic-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:14px 16px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.ic-card h2{font-family:var(--cond);color:var(--principal);font-size:1.15rem;margin:0 0 8px}
+.ic-svg{width:100%;height:auto;display:block;background:#FCFDFE;border:1px solid var(--borde);border-radius:8px;user-select:none;touch-action:manipulation}
+.ic-ctrl{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.ic-btn{font-family:var(--cond);font-size:.95rem;background:#fff;color:var(--principal);border:1.5px solid var(--principal);border-radius:6px;padding:6px 12px;cursor:pointer}
+.ic-btn.on{background:var(--principal);color:#fff}
+.ic-btn.gen{border-color:var(--verde);color:var(--verde)}
+.ic-btn.gen.on{background:var(--verde);border-color:var(--verde);color:#fff}
+.ic-exp{background:var(--principal-bg);border-left:4px solid var(--principal);border-radius:0 6px 6px 0;padding:10px 14px;margin-top:10px;font-size:.94rem;line-height:1.55}
+.ic-exp b{color:var(--principal)}
+.ic-tot{font-family:var(--mono);font-size:.9rem;color:var(--texto2);margin-top:6px}
+.rot-est{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;fill:#8a929c;text-anchor:middle;pointer-events:none}
+.rot-norte{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;text-anchor:middle;fill:#1a2430}
+.rot-elec{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;fill:#1a2430;text-anchor:middle;pointer-events:none}
+.ic-svg .act{cursor:pointer}
+.ic-svg .act:hover circle,.ic-svg .act:hover rect{stroke:#2E7BC4}
+.esq-txt{font-family:'Barlow Condensed',sans-serif;font-size:13px;fill:#1a2430;text-anchor:middle}
+.esq-peq{font-family:Barlow,sans-serif;font-size:11px;fill:#455565;text-anchor:middle}
+.esq-i{font-family:'JetBrains Mono',monospace;font-size:11px;fill:#C2410C;text-anchor:middle;font-weight:600}
+.rama{cursor:pointer}
+.rama .fondo{fill:transparent}
+.rama.sel .fondo{fill:rgba(46,123,196,.09)}
+@keyframes zumba{0%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
+.onda{animation:zumba .35s infinite}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda · La instalación de la casa</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html#circuitos"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <a href="lee-el-plano.html"><span>📐</span><span class="nc-lbl">Lee el plano</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>💡</span><span class="nc-lbl">La instalación de la casa</span></span>
+</nav>
+
+<main id="main-content" class="ic-wrap">
+  <section class="ic-hero">
+    <h1>💡 La instalación de la casa</h1>
+    <p>Instalación eléctrica de la maqueta: pila de petaca de 4,5 V, LED con su resistencia y zumbador. Pulsa los interruptores, los conmutadores y el pulsador del timbre en el plano o en el esquema.</p>
+  </section>
+
+  <div class="ic-grid">
+    <div class="ic-card">
+      <h2>Plano de la instalación</h2>
+      <div class="ic-ctrl">
+        <button class="ic-btn gen" id="b-gen">Interruptor general Q: apagado</button>
+        <button class="ic-btn" id="b-noche">☀️ Es de día</button>
+        <button class="ic-btn" id="b-todo">Apagar todo</button>
+      </div>
+      <svg class="ic-svg" id="plano" viewBox="-40 -60 830 560" role="img" aria-label="Plano de la instalación eléctrica"></svg>
+    </div>
+    <div class="ic-card">
+      <h2>Esquema eléctrico</h2>
+      <div class="ic-ctrl">
+        <button class="ic-btn" id="b-led">Invertir el LED de la rama elegida</button>
+      </div>
+      <svg class="ic-svg" id="esquema" viewBox="0 0 600 400" role="img" aria-label="Esquema eléctrico de la instalación"></svg>
+      <div class="ic-tot" id="tot"></div>
+      <div class="ic-exp" id="exp"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ── Vivienda tipo: datos y dibujo de la planta (generado desde vivienda-tipo.json) ── */
+var D = {"nombre":"Vivienda tipo · Proyecto de maqueta · Tecnología 4.º ESO","version":"0.2 (propuesta para revisión)","unidades":"metros reales; origen en la esquina exterior noroeste; x hacia el este, y hacia el sur, z hacia arriba desde el suelo terminado","escala_maqueta":20,"norte":"arriba en planta (fachada principal con las ventanas grandes al sur)","exterior":{"ancho_x":7.0,"fondo_y":4.8,"altura_muros":2.5,"cubierta":"plana; la maqueta va sin techo"},"espesores":{"muro_exterior":0.2,"tabique":0.1},"material_maqueta":{"muro_exterior":"cartón pluma de 10 mm (= 0,20 m)","tabique":"cartón pluma de 5 mm (= 0,10 m)","base":"tablero de DM de 5 mm sobre cuatro patas de 30 mm; el cableado va por debajo"},"muros":[{"id":"MN","nombre":"Fachada norte","tipo":"exterior","x0":0.0,"y0":0.0,"x1":7.0,"y1":0.2},{"id":"MS","nombre":"Fachada sur","tipo":"exterior","x0":0.0,"y0":4.6,"x1":7.0,"y1":4.8},{"id":"MO","nombre":"Fachada oeste","tipo":"exterior","x0":0.0,"y0":0.2,"x1":0.2,"y1":4.6},{"id":"ME","nombre":"Fachada este","tipo":"exterior","x0":6.8,"y0":0.2,"x1":7.0,"y1":4.6},{"id":"T1","nombre":"Tabique salón-cocina / pasillo y dormitorio","tipo":"tabique","x0":3.9,"y0":0.2,"x1":4.0,"y1":4.6},{"id":"T2","nombre":"Tabique pasillo / baño","tipo":"tabique","x0":5.2,"y0":0.2,"x1":5.3,"y1":2.2},{"id":"T3","nombre":"Tabique pasillo y baño / dormitorio","tipo":"tabique","x0":4.0,"y0":2.2,"x1":6.8,"y1":2.3}],"estancias":[{"id":"SC","nombre":"Salón-cocina","x0":0.2,"y0":0.2,"x1":3.9,"y1":4.6},{"id":"PA","nombre":"Pasillo","x0":4.0,"y0":0.2,"x1":5.2,"y1":2.2},{"id":"BA","nombre":"Baño","x0":5.3,"y0":0.2,"x1":6.8,"y1":2.2},{"id":"DO","nombre":"Dormitorio","x0":4.0,"y0":2.3,"x1":6.8,"y1":4.6}],"puertas":[{"id":"P1","nombre":"Entrada","muro":"MN","desde":4.2,"hasta":5.0,"alto":2.0,"abre_hacia":"PA","bisagra":"hasta"},{"id":"P2","nombre":"Salón","muro":"T1","desde":0.6,"hasta":1.4,"alto":2.0,"abre_hacia":"SC","bisagra":"desde"},{"id":"P3","nombre":"Baño","muro":"T2","desde":1.0,"hasta":1.7,"alto":2.0,"abre_hacia":"BA","bisagra":"desde"},{"id":"P4","nombre":"Dormitorio","muro":"T3","desde":4.4,"hasta":5.2,"alto":2.0,"abre_hacia":"DO","bisagra":"desde"}],"ventanas":[{"id":"V1","nombre":"Salón","muro":"MS","desde":1.0,"hasta":3.0,"alfeizar":0.9,"dintel":2.1},{"id":"V2","nombre":"Dormitorio","muro":"MS","desde":5.0,"hasta":6.2,"alfeizar":0.9,"dintel":2.1},{"id":"V3","nombre":"Cocina","muro":"MN","desde":1.0,"hasta":2.0,"alfeizar":1.1,"dintel":2.1},{"id":"V4","nombre":"Baño","muro":"MN","desde":5.8,"hasta":6.4,"alfeizar":1.5,"dintel":2.1}],"nota_huecos":"desde/hasta se miden en x para los muros este-oeste (MN, MS, T3) y en y para los muros norte-sur (MO, ME, T1, T2)","electrico":{"alimentacion":"pila de petaca de 4,5 V bajo la base, junto al cuadro","elementos":[{"id":"Q","tipo":"cuadro","nombre":"Cuadro (interruptor general)","x":4.0,"y":1.8,"z":1.6,"cara":"este de T1","paso":[4.05,1.8]},{"id":"C1","tipo":"conmutador","nombre":"Conmutador del pasillo (entrada)","x":4.0,"y":0.4,"z":1.1,"cara":"este de T1","paso":[4.05,0.4]},{"id":"C2","tipo":"conmutador","nombre":"Conmutador del pasillo (dormitorio)","x":4.2,"y":2.2,"z":1.1,"cara":"norte de T3","paso":[4.2,2.15]},{"id":"L3","tipo":"luz","nombre":"Luz del pasillo","x":5.2,"y":0.75,"z":2.1,"cara":"oeste de T2","paso":[5.15,0.75]},{"id":"I1","tipo":"interruptor","nombre":"Interruptor del salón","x":3.9,"y":1.6,"z":1.1,"cara":"oeste de T1","paso":[3.85,1.6]},{"id":"I2","tipo":"interruptor","nombre":"Interruptor de la cocina","x":3.9,"y":1.85,"z":1.1,"cara":"oeste de T1","paso":[3.85,1.85]},{"id":"L1","tipo":"luz","nombre":"Luz del salón","x":0.2,"y":3.2,"z":2.1,"cara":"interior de MO","paso":[0.25,3.2]},{"id":"L2","tipo":"luz","nombre":"Luz de la cocina","x":3.0,"y":0.2,"z":2.1,"cara":"interior de MN","paso":[3.0,0.25]},{"id":"I3","tipo":"interruptor","nombre":"Interruptor del baño (desde el pasillo)","x":5.2,"y":1.9,"z":1.1,"cara":"oeste de T2","paso":[5.15,1.9]},{"id":"L4","tipo":"luz","nombre":"Luz del baño","x":6.8,"y":1.2,"z":2.1,"cara":"interior de ME","paso":[6.75,1.2]},{"id":"I4","tipo":"interruptor","nombre":"Interruptor del dormitorio","x":5.45,"y":2.3,"z":1.1,"cara":"sur de T3","paso":[5.45,2.35]},{"id":"L5","tipo":"luz","nombre":"Luz del dormitorio","x":6.8,"y":3.5,"z":2.1,"cara":"interior de ME","paso":[6.75,3.5]},{"id":"PT","tipo":"pulsador","nombre":"Pulsador del timbre","x":5.4,"y":0.0,"z":1.2,"cara":"exterior de MN","paso":[5.4,-0.1]},{"id":"TI","tipo":"timbre","nombre":"Timbre (zumbador)","x":5.1,"y":0.2,"z":2.2,"cara":"interior de MN","paso":[5.1,0.25]},{"id":"L6","tipo":"luz","nombre":"Luz exterior con LDR (opcional)","x":3.8,"y":0.0,"z":2.1,"cara":"exterior de MN","paso":[3.8,-0.1],"opcional":true}],"circuitos":[{"id":"1","nombre":"Salón","tipo":"interruptor simple","elementos":["I1","L1"]},{"id":"2","nombre":"Cocina","tipo":"interruptor simple","elementos":["I2","L2"]},{"id":"3","nombre":"Pasillo","tipo":"conmutada","elementos":["C1","C2","L3"]},{"id":"4","nombre":"Baño","tipo":"interruptor simple","elementos":["I3","L4"]},{"id":"5","nombre":"Dormitorio","tipo":"interruptor simple","elementos":["I4","L5"]},{"id":"6","nombre":"Timbre","tipo":"pulsador","elementos":["PT","TI"]},{"id":"7","nombre":"Luz exterior (opcional)","tipo":"automática con LDR","elementos":["L6"]}],"receptores":{"luz":"LED blanco de 5 mm con su resistencia en serie (100 Ω a 4,5 V) o LED con resistencia incorporada; unos 20 mA por LED","timbre":"zumbador activo de 3-6 V","polaridad":"pata larga del LED y cable rojo al positivo; cable negro al negativo"}}};
+var NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent, txt) {
+  var e = document.createElementNS(NS, tag);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (txt != null) e.textContent = txt;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+var S = 100;                                  // 1 m real = 100 unidades del dibujo
+var MUROS = {}; D.muros.forEach(function (m) { MUROS[m.id] = m; });
+function horiz(m) { return (m.x1 - m.x0) > (m.y1 - m.y0); }
+function est(id) { return D.estancias.filter(function (e) { return e.id === id; })[0]; }
+function f2(v) { return (Math.round(v * 100) / 100).toFixed(2).replace('.', ','); }
+function area(e) { return (e.x1 - e.x0) * (e.y1 - e.y0); }
+function hueco(m, a, b) {
+  return horiz(m) ? { x: a, y: m.y0, w: b - a, h: m.y1 - m.y0 } : { x: m.x0, y: a, w: m.x1 - m.x0, h: b - a };
+}
+var ORIENT = { MN: 'norte', MS: 'sur', ME: 'este', MO: 'oeste' };
+
+/* Dibuja la planta en <svg>. Devuelve los grupos por capas. */
+function dibujaPlanta(svg, op) {
+  op = op || {};
+  var g = {
+    mob: el('g', { 'class': 'capa-mob' }, svg),
+    est: el('g', { 'class': 'capa-est' }, svg),
+    muros: el('g', { 'class': 'capa-muros' }, svg),
+    huecos: el('g', { 'class': 'capa-huecos' }, svg),
+    rot: el('g', { 'class': 'capa-rot' }, svg),
+    cotas: el('g', { 'class': 'capa-cotas' }, svg),
+    elec: el('g', { 'class': 'capa-elec' }, svg)
+  };
+  var cExt = op.gris ? '#9aa3ad' : '#2a2f36', cTab = op.gris ? '#c3c9d0' : '#5d6670';
+  // estancias (zonas seleccionables)
+  D.estancias.forEach(function (e) {
+    el('rect', { x: e.x0 * S, y: e.y0 * S, width: (e.x1 - e.x0) * S, height: (e.y1 - e.y0) * S,
+      'class': 'zona', 'data-id': e.id, 'data-tipo': 'estancia', fill: 'transparent' }, g.est);
+  });
+  // mobiliario
+  if (op.mobiliario) mobiliario(g.mob);
+  // muros
+  D.muros.forEach(function (m) {
+    el('rect', { x: m.x0 * S, y: m.y0 * S, width: (m.x1 - m.x0) * S, height: (m.y1 - m.y0) * S,
+      fill: m.tipo === 'exterior' ? cExt : cTab, 'class': 'muro', 'data-id': m.id, 'data-tipo': 'muro' }, g.muros);
+  });
+  // ventanas
+  D.ventanas.forEach(function (v) {
+    var m = MUROS[v.muro], h = hueco(m, v.desde, v.hasta), gg = el('g', { 'class': 'hueco', 'data-id': v.id, 'data-tipo': 'ventana' }, g.huecos);
+    el('rect', { x: h.x * S, y: h.y * S, width: h.w * S, height: h.h * S, fill: '#fff' }, gg);
+    if (horiz(m)) {
+      [0, 0.5, 1].forEach(function (f) { el('line', { x1: h.x * S, y1: (h.y + h.h * f) * S, x2: (h.x + h.w) * S, y2: (h.y + h.h * f) * S, stroke: '#2a2f36', 'stroke-width': f === 0.5 ? 1.6 : 0.9 }, gg); });
+      [h.x, h.x + h.w].forEach(function (x) { el('line', { x1: x * S, y1: h.y * S, x2: x * S, y2: (h.y + h.h) * S, stroke: '#2a2f36', 'stroke-width': 1.4 }, gg); });
+    } else {
+      [0, 0.5, 1].forEach(function (f) { el('line', { x1: (h.x + h.w * f) * S, y1: h.y * S, x2: (h.x + h.w * f) * S, y2: (h.y + h.h) * S, stroke: '#2a2f36', 'stroke-width': f === 0.5 ? 1.6 : 0.9 }, gg); });
+    }
+    el('rect', { x: h.x * S - 4, y: h.y * S - 4, width: h.w * S + 8, height: h.h * S + 8, fill: 'transparent', 'class': 'hit' }, gg);
+  });
+  // puertas: hoja y arco de abatimiento con centro en la bisagra
+  D.puertas.forEach(function (p) {
+    var m = MUROS[p.muro], h = hueco(m, p.desde, p.hasta), e = est(p.abre_hacia), w = p.hasta - p.desde;
+    var gg = el('g', { 'class': 'hueco', 'data-id': p.id, 'data-tipo': 'puerta' }, g.huecos);
+    el('rect', { x: h.x * S, y: h.y * S, width: h.w * S, height: h.h * S, fill: '#fff' }, gg);
+    var H, T, O;
+    if (horiz(m)) {
+      var dir = ((e.y0 + e.y1) / 2 > m.y0) ? 1 : -1, face = dir > 0 ? m.y1 : m.y0;
+      var hx = p.bisagra === 'desde' ? p.desde : p.hasta, ox = p.bisagra === 'desde' ? p.hasta : p.desde;
+      H = [hx, face]; T = [hx, face + dir * w]; O = [ox, face];
+    } else {
+      var dir2 = ((e.x0 + e.x1) / 2 > m.x0) ? 1 : -1, face2 = dir2 > 0 ? m.x1 : m.x0;
+      var hy = p.bisagra === 'desde' ? p.desde : p.hasta, oy = p.bisagra === 'desde' ? p.hasta : p.desde;
+      H = [face2, hy]; T = [face2 + dir2 * w, hy]; O = [face2, oy];
+    }
+    var ax = T[0] - H[0], ay = T[1] - H[1], bx = O[0] - H[0], by = O[1] - H[1];
+    var sweep = (ax * by - ay * bx) > 0 ? 1 : 0;
+    el('line', { x1: H[0] * S, y1: H[1] * S, x2: T[0] * S, y2: T[1] * S, stroke: '#2a2f36', 'stroke-width': 2.4 }, gg);
+    el('path', { d: 'M' + T[0] * S + ',' + T[1] * S + ' A' + w * S + ',' + w * S + ' 0 0 ' + sweep + ' ' + O[0] * S + ',' + O[1] * S,
+      fill: 'none', stroke: '#6b7480', 'stroke-width': 0.9 }, gg);
+    var px = Math.min(H[0], T[0], O[0]), py = Math.min(H[1], T[1], O[1]);
+    el('rect', { x: px * S, y: py * S, width: w * S, height: w * S, fill: 'transparent', 'class': 'hit' }, gg);
+  });
+  // rótulos
+  if (op.rotulos !== false) {
+    var pos = { SC: [2.3, 2.2], PA: [4.6, 1.3], BA: [5.85, 1.62], DO: [4.5, 3.75] };
+    D.estancias.forEach(function (e) {
+      var p = pos[e.id] || [(e.x0 + e.x1) / 2, (e.y0 + e.y1) / 2];
+      el('text', { x: p[0] * S, y: p[1] * S, 'class': 'rot-est' }, g.rot, e.nombre);
+      if (op.superficies !== false) el('text', { x: p[0] * S, y: p[1] * S + 17, 'class': 'rot-sup' }, g.rot, 'S = ' + f2(area(e)) + ' m²');
+    });
+    if (op.etiquetas !== false) {
+      D.ventanas.forEach(function (v) {
+        var m = MUROS[v.muro], c = (v.desde + v.hasta) / 2;
+        var y = m.y0 < 1 ? m.y0 * S - 8 : m.y0 * S - 7;
+        el('text', { x: c * S, y: y, 'class': 'rot-hueco v' }, g.rot, v.id);
+      });
+    }
+  }
+  if (op.norte !== false) norte(svg, 760, 30);
+  return g;
+}
+
+function norte(svg, x, y) {
+  var g = el('g', { transform: 'translate(' + x + ',' + y + ')' }, svg);
+  el('circle', { r: 17, fill: '#fff', stroke: '#2a2f36', 'stroke-width': 1.2 }, g);
+  el('path', { d: 'M0,-15 L7,9 L0,4 Z', fill: '#2a2f36' }, g);
+  el('path', { d: 'M0,-15 L-7,9 L0,4 Z', fill: '#fff', stroke: '#2a2f36', 'stroke-width': 1 }, g);
+  el('text', { y: -21, 'class': 'rot-norte' }, g, 'N');
+}
+
+function mobiliario(g) {
+  var c = '#a7afb8', sw = 1;
+  function r(x, y, w, h, extra) { var o = { x: x * S, y: y * S, width: w * S, height: h * S, fill: 'none', stroke: c, 'stroke-width': sw }; for (var k in extra) o[k] = extra[k]; return el('rect', o, g); }
+  r(0.2, 0.2, 2.6, 0.6); r(1.2, 0.28, 0.6, 0.42, { rx: 4 });
+  el('circle', { cx: 2.15 * S, cy: 0.5 * S, r: 12, fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  el('circle', { cx: 2.5 * S, cy: 0.5 * S, r: 12, fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  r(0.25, 2.6, 0.85, 1.8, { rx: 6 }); r(0.25, 2.6, 0.25, 1.8);
+  r(6.0, 0.2, 0.8, 0.8);
+  el('path', { d: 'M600,20 L680,100 M680,20 L600,100', stroke: c, 'stroke-width': 0.8 }, g);
+  el('path', { d: 'M530,30 h45 v50 h-45', fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  r(6.3, 1.95, 0.45, 0.22); el('ellipse', { cx: 652, cy: 172, rx: 19, ry: 24, fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  r(4.9, 3.6, 1.9, 0.9); r(6.45, 3.68, 0.3, 0.74, { rx: 4 });
+}
+
+/* Cotas en metros: línea de cota, trazos oblicuos y cifra */
+function cotaH(g, x1, x2, y, txt, up) {
+  el('line', { x1: x1 * S, y1: y, x2: x2 * S, y2: y, 'class': 'cota' }, g);
+  [x1, x2].forEach(function (x) { el('line', { x1: x * S - 4, y1: y + 4, x2: x * S + 4, y2: y - 4, 'class': 'cota-t' }, g); });
+  var ln = (x2 - x1) * S;
+  el('text', { x: (x1 + x2) / 2 * S, y: ln < 30 ? y - 15 : y - 4, 'class': 'cota-txt' + (ln < 30 ? ' peq' : '') }, g, txt || f2(x2 - x1));
+}
+function cotaV(g, y1, y2, x, txt) {
+  el('line', { x1: x, y1: y1 * S, x2: x, y2: y2 * S, 'class': 'cota' }, g);
+  [y1, y2].forEach(function (y) { el('line', { x1: x - 4, y1: y * S + 4, x2: x + 4, y2: y * S - 4, 'class': 'cota-t' }, g); });
+  var ln = (y2 - y1) * S, cy = (y1 + y2) / 2 * S;
+  if (ln < 30) el('text', { x: x + 8, y: cy + 4, 'class': 'cota-txt peq', 'text-anchor': 'start' }, g, txt || f2(y2 - y1));
+  else el('text', { x: x - 4, y: cy, transform: 'rotate(-90 ' + (x - 4) + ' ' + cy + ')', 'class': 'cota-txt' }, g, txt || f2(y2 - y1));
+}
+function dibujaCotas(g) {
+  var W = D.exterior.ancho_x, H = D.exterior.fondo_y;
+  var xs = [0, 0.2, 3.9, 4.0, 5.2, 5.3, 6.8, 7.0], yb = H * S;
+  for (var i = 0; i < xs.length - 1; i++) cotaH(g, xs[i], xs[i + 1], yb + 30);
+  cotaH(g, 0, W, yb + 56);
+  cotaV(g, 0, H, -24);
+  var ys = [0, 0.2, 2.2, 2.3, 4.6, 4.8];
+  for (var j = 0; j < ys.length - 1; j++) cotaV(g, ys[j], ys[j + 1], W * S + 24);
+  cotaV(g, 0.2, 4.6, 2.95 * S);
+  cotaH(g, 4.0, 6.8, 3.35 * S);
+}
+
+/* Símbolos eléctricos de los planos de vivienda */
+var ELEC = {}; D.electrico.elementos.forEach(function (e) { ELEC[e.id] = e; });
+function dirElem(e) { var nx = e.paso[0] - e.x, ny = e.paso[1] - e.y, n = Math.hypot(nx, ny) || 1; return [nx / n, ny / n]; }
+function posSimbolo(e) {
+  var d = dirElem(e), x = e.x * S + d[0] * 20, y = e.y * S + d[1] * 20;
+  return [x, y, d[0], d[1]];
+}
+function simbolo(g, tipo, x, y, nx, ny, estado) {
+  var gg = el('g', { transform: 'translate(' + x + ',' + y + ')' }, g), c = '#1a2430';
+  if (tipo === 'luz') {
+    el('line', { x1: -nx * 10, y1: -ny * 10, x2: -nx * 20, y2: -ny * 20, stroke: c, 'stroke-width': 1.6 }, gg);
+    el('circle', { r: 10, fill: estado ? '#FFD84D' : '#fff', stroke: c, 'stroke-width': 1.6, 'class': 'bombilla' }, gg);
+    el('path', { d: 'M-7,-7 L7,7 M-7,7 L7,-7', stroke: c, 'stroke-width': 1.6 }, gg);
+  } else if (tipo === 'interruptor' || tipo === 'conmutador') {
+    var px = -ny, py = nx;
+    el('circle', { r: 5, fill: '#fff', stroke: c, 'stroke-width': 1.5 }, gg);
+    function brazo(dx, dy, s) {
+      var ex = dx * 18, ey = dy * 18;
+      el('line', { x1: dx * 5, y1: dy * 5, x2: ex, y2: ey, stroke: c, 'stroke-width': 1.5 }, gg);
+      el('line', { x1: ex, y1: ey, x2: ex - dy * 6 * s, y2: ey + dx * 6 * s, stroke: c, 'stroke-width': 1.5 }, gg);
+    }
+    var d1x = (nx + px) / Math.SQRT2, d1y = (ny + py) / Math.SQRT2;
+    brazo(d1x, d1y, 1);
+    if (tipo === 'conmutador') brazo(-d1x, -d1y, 1);
+  } else if (tipo === 'pulsador') {
+    el('circle', { r: 8, fill: '#fff', stroke: c, 'stroke-width': 1.5 }, gg);
+    el('circle', { r: 3.2, fill: c }, gg);
+  } else if (tipo === 'timbre') {
+    var qx = -ny, qy = nx, R = 10;
+    var x1 = qx * R, y1 = qy * R, x2 = -qx * R, y2 = -qy * R;
+    var sw = (nx * (y1 - 0) - ny * (x1 - 0)) > 0 ? 0 : 1;
+    el('path', { d: 'M' + x1 + ',' + y1 + ' A' + R + ',' + R + ' 0 0 ' + sw + ' ' + x2 + ',' + y2 + ' Z', fill: estado ? '#FFD84D' : '#fff', stroke: c, 'stroke-width': 1.6 }, gg);
+  } else if (tipo === 'cuadro') {
+    var w = 26, h = 14; if (Math.abs(nx) > Math.abs(ny)) { w = 14; h = 26; }
+    el('rect', { x: -w / 2, y: -h / 2, width: w, height: h, fill: '#fff', stroke: c, 'stroke-width': 1.6 }, gg);
+    el('path', { d: 'M' + (-w / 2) + ',' + (-h / 2) + ' L' + (w / 2) + ',' + (h / 2) + ' L' + (-w / 2) + ',' + (h / 2) + ' Z', fill: estado === false ? '#9aa3ad' : c }, gg);
+  }
+  return gg;
+}
+
+(function () {
+  'use strict';
+  var plano = document.getElementById('plano'), esq = document.getElementById('esquema');
+  var ST = { Q: false, I1: false, I2: false, I3: false, I4: false, C1: 0, C2: 1, PT: false, noche: false, inv: {}, sel: '1' };
+  var VF = 3.1, VPILA = 4.5, R = 100, IL = Math.round((VPILA - VF) / R * 1000), IZ = 20;
+
+  /* ---------- circuitos ---------- */
+  var RAMAS = [
+    { id: '1', nombre: 'Salón',      tipo: 'simple',    mando: 'I1', luz: 'L1' },
+    { id: '2', nombre: 'Cocina',     tipo: 'simple',    mando: 'I2', luz: 'L2' },
+    { id: '3', nombre: 'Pasillo',    tipo: 'conmutada', mando: 'C1', luz: 'L3' },
+    { id: '4', nombre: 'Baño',       tipo: 'simple',    mando: 'I3', luz: 'L4' },
+    { id: '5', nombre: 'Dormitorio', tipo: 'simple',    mando: 'I4', luz: 'L5' },
+    { id: '6', nombre: 'Timbre',     tipo: 'timbre',    mando: 'PT', luz: 'TI' },
+    { id: '7', nombre: 'Exterior*',  tipo: 'ldr',       mando: 'LDR', luz: 'L6' }
+  ];
+  function cerrada(r) {
+    if (r.tipo === 'simple') return ST[r.mando];
+    if (r.tipo === 'conmutada') return ST.C1 === ST.C2;
+    if (r.tipo === 'timbre') return ST.PT;
+    return ST.noche;
+  }
+  function conduce(r) { return ST.Q && cerrada(r) && !ST.inv[r.id]; }
+
+  /* ---------- plano ---------- */
+  var g = dibujaPlanta(plano, { gris: true, mobiliario: false, superficies: false, etiquetas: false, norte: false });
+  norte(plano, 770, 20);
+  var defs = el('defs', {}, plano);
+  var rg = el('radialGradient', { id: 'brillo' }, defs);
+  el('stop', { offset: '0', 'stop-color': '#FFE066', 'stop-opacity': '.85' }, rg);
+  el('stop', { offset: '1', 'stop-color': '#FFE066', 'stop-opacity': '0' }, rg);
+  var LUZ_EST = { L1: 'SC', L2: 'SC', L3: 'PA', L4: 'BA', L5: 'DO' };
+  var gBrillo = el('g', {}, plano);
+  plano.insertBefore(gBrillo, g.muros);
+  D.estancias.forEach(function (e) {
+    var cp = el('clipPath', { id: 'cp-' + e.id }, defs);
+    el('rect', { x: e.x0 * S, y: e.y0 * S, width: (e.x1 - e.x0) * S, height: (e.y1 - e.y0) * S }, cp);
+  });
+  var gSim = el('g', {}, plano);
+  function dibujaPlano() {
+    gBrillo.innerHTML = ''; gSim.innerHTML = '';
+    RAMAS.forEach(function (r) {
+      if (!conduce(r) || r.tipo === 'timbre') return;
+      var e = ELEC[r.luz], p = posSimbolo(e);
+      var attrs = { cx: p[0], cy: p[1], r: r.luz === 'L6' ? 90 : 170, fill: 'url(#brillo)' };
+      if (LUZ_EST[r.luz]) attrs['clip-path'] = 'url(#cp-' + LUZ_EST[r.luz] + ')';
+      el('circle', attrs, gBrillo);
+    });
+    D.electrico.elementos.forEach(function (e) {
+      var p = posSimbolo(e), estado = null;
+      var r = RAMAS.filter(function (x) { return x.luz === e.id; })[0];
+      if (r) estado = conduce(r);
+      if (e.id === 'Q') estado = ST.Q;
+      var gg = simbolo(gSim, e.tipo, p[0], p[1], p[2], p[3], estado);
+      if (/^(I[1-4]|C[12]|PT|Q)$/.test(e.id)) {
+        gg.setAttribute('class', 'act'); gg.setAttribute('data-id', e.id);
+        el('circle', { r: 18, fill: 'transparent' }, gg);
+        var on = e.id.charAt(0) === 'C' ? null : (e.id === 'PT' ? ST.PT : ST[e.id]);
+        if (on !== null && e.tipo !== 'cuadro') {
+          var c = gg.querySelector('circle'); if (c) c.setAttribute('fill', on ? '#2E7BC4' : '#fff');
+        }
+        if (e.id.charAt(0) === 'C') el('text', { x: 0, y: 4, 'font-size': 9, 'text-anchor': 'middle', 'font-family': 'Barlow', 'font-weight': 700, fill: '#1a2430' }, gg, String(ST[e.id] + 1));
+      }
+      if (e.id === 'TI' && conduce(RAMAS[5])) {
+        [14, 22].forEach(function (rr) { el('path', { d: 'M' + (p[0] - rr) + ',' + (p[1] + 8) + ' A' + rr + ',' + rr + ' 0 0 1 ' + (p[0] + rr) + ',' + (p[1] + 8), fill: 'none', stroke: '#C2410C', 'stroke-width': 1.5, 'class': 'onda' }, gSim); });
+      }
+      var lx = p[0] + p[2] * 26, ly = p[1] + p[3] * 26 + 4;
+      if (e.id === 'I1' || e.id === 'I2') { lx = p[0] - 30; ly = p[1] + 4; }
+      if (e.id === 'C1') { lx = p[0] + 24; ly = p[1] - 14; }
+      if (e.id === 'C2') { lx = p[0] - 26; ly = p[1] - 6; }
+      if (e.id === 'Q') { lx = p[0] + 26; ly = p[1] + 4; }
+      if (e.id === 'TI') { lx = p[0] - 26; ly = p[1] + 4; }
+      if (e.id === 'L3') { lx = p[0] - 26; ly = p[1] + 4; }
+      el('text', { x: lx, y: ly, 'class': 'rot-elec' }, gSim, e.id);
+    });
+  }
+  function ramaDe(id) {
+    if (id === 'C1' || id === 'C2' || id === 'L3') return '3';
+    if (id === 'Q') return ST.sel;
+    var r = RAMAS.filter(function (x) { return x.mando === id || x.luz === id; })[0];
+    return r ? r.id : ST.sel;
+  }
+  function accion(id) {
+    if (/^I[1-4]$/.test(id)) ST[id] = !ST[id];
+    else if (id === 'C1' || id === 'C2') ST[id] = 1 - ST[id];
+    else if (id === 'Q') ST.Q = !ST.Q;
+    ST.sel = ramaDe(id);
+    pinta();
+  }
+  function pulsar(on) { ST.PT = on; if (on) ST.sel = '6'; pinta(); beep(on); }
+  function eventosMando(svg) {
+    svg.addEventListener('click', function (ev) {
+      var t = ev.target; while (t && t !== svg && !(t.getAttribute && t.getAttribute('data-id'))) t = t.parentNode;
+      if (!t || t === svg) return;
+      var id = t.getAttribute('data-id');
+      if (id === 'PT') return;
+      if (id.indexOf('rama-') === 0) { ST.sel = id.slice(5); pinta(); return; }
+      accion(id);
+    });
+    function down(ev) {
+      var t = ev.target; while (t && t !== svg && !(t.getAttribute && t.getAttribute('data-id'))) t = t.parentNode;
+      if (t && t !== svg && t.getAttribute('data-id') === 'PT') { ev.preventDefault(); pulsar(true); }
+    }
+    svg.addEventListener('mousedown', down);
+    svg.addEventListener('touchstart', down, { passive: false });
+    ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(function (n) { svg.addEventListener(n, function () { if (ST.PT) pulsar(false); }); });
+  }
+  eventosMando(plano); eventosMando(esq);
+
+  /* ---------- sonido del zumbador ---------- */
+  var actx = null, osc = null;
+  function beep(on) {
+    try {
+      if (on && conduce(RAMAS[5])) {
+        actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+        osc = actx.createOscillator(); var gn = actx.createGain(); gn.gain.value = 0.06;
+        osc.type = 'square'; osc.frequency.value = 2300; osc.connect(gn); gn.connect(actx.destination); osc.start();
+      } else if (osc) { osc.stop(); osc = null; }
+    } catch (e) { osc = null; }
+  }
+
+  /* ---------- esquema eléctrico (ramas en paralelo) ---------- */
+  var YT = 60, YB = 360, X0 = 62, DX = 69, NAR = '#E8590C', NEG = '#1a2430';
+  function L(g2, x1, y1, x2, y2, on, w) { return el('line', { x1: x1, y1: y1, x2: x2, y2: y2, stroke: on ? NAR : NEG, 'stroke-width': w || (on ? 2.6 : 1.6), 'stroke-linecap': 'round' }, g2); }
+  function contacto(g2, x, ya, yb, cerrado, on) {        // interruptor: contacto abierto o cerrado
+    L(g2, x, ya, x, ya + 8, on); L(g2, x, yb - 8, x, yb, on);
+    el('circle', { cx: x, cy: ya + 8, r: 2.5, fill: '#fff', stroke: NEG, 'stroke-width': 1.3 }, g2);
+    el('circle', { cx: x, cy: yb - 8, r: 2.5, fill: '#fff', stroke: NEG, 'stroke-width': 1.3 }, g2);
+    if (cerrado) L(g2, x, ya + 8, x, yb - 8, on, on ? 2.6 : 1.8);
+    else L(g2, x, yb - 8, x - 14, ya + 12, false, 1.8);
+  }
+  function resistencia(g2, x, y, on) {
+    el('rect', { x: x - 7, y: y, width: 14, height: 30, fill: '#fff', stroke: on ? NAR : NEG, 'stroke-width': on ? 2.2 : 1.5 }, g2);
+    el('text', { x: x + 10, y: y + 19, 'class': 'esq-peq', 'text-anchor': 'start', 'font-size': 10 }, g2, '100 Ω');
+  }
+  function led(g2, x, y, on, inv) {
+    var c = on ? NAR : NEG, t = inv ? 'M' + (x - 10) + ',' + (y + 22) + ' L' + (x + 10) + ',' + (y + 22) + ' L' + x + ',' + (y + 4) + ' Z' : 'M' + (x - 10) + ',' + (y + 4) + ' L' + (x + 10) + ',' + (y + 4) + ' L' + x + ',' + (y + 22) + ' Z';
+    el('path', { d: t, fill: on ? '#FFD84D' : '#fff', stroke: c, 'stroke-width': 1.6 }, g2);
+    var yb = inv ? y + 4 : y + 22; L(g2, x - 10, yb, x + 10, yb, on, 1.8);
+    [[12, 6], [15, 13]].forEach(function (o) {
+      el('path', { d: 'M' + (x + o[0]) + ',' + (y + o[1]) + ' l9,-6 m-4,0 l4,0 l0,4', fill: 'none', stroke: on ? '#E8590C' : '#8a929c', 'stroke-width': 1.2 }, g2);
+    });
+  }
+  function zumbador(g2, x, y, on) {
+    el('path', { d: 'M' + (x - 13) + ',' + (y + 22) + ' A13,13 0 0 1 ' + (x + 13) + ',' + (y + 22) + ' Z', fill: on ? '#FFD84D' : '#fff', stroke: on ? NAR : NEG, 'stroke-width': 1.6 }, g2);
+  }
+  function pinta() {
+    dibujaPlano();
+    esq.innerHTML = '';
+    var hay = RAMAS.some(conduce);
+    // pila de petaca y general
+    var gB = el('g', {}, esq), xb = 30;
+    L(gB, xb, YT, xb, 190, hay); L(gB, xb, 222, xb, YB, hay);
+    L(gB, xb - 16, 190, xb + 16, 190, hay, 2.4); L(gB, xb - 8, 202, xb + 8, 202, hay, 4);
+    L(gB, xb - 16, 210, xb + 16, 210, hay, 2.4); L(gB, xb - 8, 222, xb + 8, 222, hay, 4);
+    el('text', { x: xb - 22, y: 184, 'class': 'esq-peq', 'text-anchor': 'end' }, gB, '+');
+    el('text', { x: xb + 34, y: 210, 'class': 'esq-txt', 'text-anchor': 'start' }, gB, '4,5 V');
+    el('text', { x: xb + 34, y: 224, 'class': 'esq-peq', 'text-anchor': 'start' }, gB, 'petaca');
+    // interruptor general en el raíl superior (horizontal)
+    var gQ = el('g', { 'data-id': 'Q', 'class': 'act' }, esq);
+    L(gQ, xb, YT, 44, YT, hay); L(gQ, 74, YT, X0 + DX * 0.6, YT, hay);
+    el('circle', { cx: 46, cy: YT, r: 2.5, fill: '#fff', stroke: NEG }, gQ); el('circle', { cx: 72, cy: YT, r: 2.5, fill: '#fff', stroke: NEG }, gQ);
+    if (ST.Q) L(gQ, 46, YT, 72, YT, hay, 2.6); else L(gQ, 46, YT, 68, YT - 13, false, 1.8);
+    el('rect', { x: 36, y: YT - 22, width: 46, height: 34, fill: 'transparent' }, gQ);
+    el('text', { x: 59, y: YT - 20, 'class': 'esq-txt' }, gQ, 'Q');
+    var xL = X0 + DX * 0.6 + DX * (RAMAS.length - 0.6);
+    L(esq, X0 + DX * 0.6, YT, xL, YT, hay); L(esq, xb, YB, xL, YB, hay);
+    var tot = 0;
+    RAMAS.forEach(function (r, i) {
+      var x = X0 + DX * (i + 1), on = conduce(r), gR = el('g', { 'class': 'rama' + (ST.sel === r.id ? ' sel' : '') }, esq);
+      el('rect', { x: x - 30, y: YT - 40, width: 60, height: YB - YT + 64, rx: 6, 'class': 'fondo', 'data-id': 'rama-' + r.id }, gR);
+      el('text', { x: x, y: YT - 34, 'class': 'esq-txt', 'data-id': 'rama-' + r.id }, gR, 'Rama ' + r.id);
+      el('text', { x: x, y: YT - 20, 'class': 'esq-peq', 'data-id': 'rama-' + r.id }, gR, r.nombre);
+      var y = YT;
+      if (r.tipo === 'conmutada') {
+        L(gR, x, y, x, 92, on);
+        var gC1 = el('g', { 'data-id': 'C1', 'class': 'act' }, gR), gC2 = el('g', { 'data-id': 'C2', 'class': 'act' }, gR);
+        var xa = x - 13, xc = x + 13, y1 = 92, y2 = 128, y3 = 172, y4 = 208;
+        el('circle', { cx: x, cy: y1, r: 2.5, fill: '#fff', stroke: NEG }, gC1);
+        [xa, xc].forEach(function (xx, k) {
+          el('circle', { cx: xx, cy: y2, r: 2.5, fill: '#fff', stroke: NEG }, gC1);
+          el('circle', { cx: xx, cy: y3, r: 2.5, fill: '#fff', stroke: NEG }, gC2);
+          var used = on && ST.C1 === k;
+          L(gR, xx, y2, xx, y3, used);
+        });
+        L(gC1, x, y1, ST.C1 === 0 ? xa : xc, y2, on, 2);
+        el('circle', { cx: x, cy: y4, r: 2.5, fill: '#fff', stroke: NEG }, gC2);
+        L(gC2, x, y4, ST.C2 === 0 ? xa : xc, y3, on, 2);
+        el('rect', { x: x - 26, y: y1 - 6, width: 52, height: y2 - y1 + 12, fill: 'transparent' }, gC1);
+        el('rect', { x: x - 26, y: y3 - 6, width: 52, height: y4 - y3 + 12, fill: 'transparent' }, gC2);
+        el('text', { x: x - 24, y: (y1 + y2) / 2 + 4, 'class': 'esq-peq', 'text-anchor': 'end' }, gR, 'C1');
+        el('text', { x: x - 24, y: (y3 + y4) / 2 + 4, 'class': 'esq-peq', 'text-anchor': 'end' }, gR, 'C2');
+        y = y4;
+      } else {
+        var mid = r.tipo === 'timbre' ? 'PT' : (r.tipo === 'ldr' ? 'LDR' : r.mando);
+        var gM = el('g', { 'data-id': mid, 'class': r.tipo === 'ldr' ? '' : 'act' }, gR);
+        L(gM, x, y, x, 120, on);
+        if (r.tipo === 'ldr') {
+          el('rect', { x: x - 16, y: 120, width: 32, height: 44, rx: 4, fill: ST.noche ? '#DDE9F7' : '#fff', stroke: on ? NAR : NEG, 'stroke-width': 1.5 }, gM);
+          el('text', { x: x, y: 146, 'class': 'esq-peq' }, gM, 'LDR');
+          y = 164;
+        } else {
+          contacto(gM, x, 120, 172, cerrada(r) , on);
+          if (r.tipo === 'timbre') { L(gM, x - 8, 136, x + 8, 136, false, 1.2); L(gM, x, 136, x, 128, false, 1.2); }
+          el('rect', { x: x - 24, y: 112, width: 48, height: 68, fill: 'transparent' }, gM);
+          el('text', { x: x + 20, y: 150, 'class': 'esq-peq', 'text-anchor': 'start' }, gM, mid);
+          y = 172;
+        }
+      }
+      if (r.tipo === 'timbre') {
+        L(gR, x, y, x, 260, on); zumbador(gR, x, 260, on); L(gR, x, 282, x, YB, on);
+        el('text', { x: x + 20, y: 278, 'class': 'esq-peq', 'text-anchor': 'start' }, gR, 'TI');
+        if (on) { tot += IZ; el('text', { x: x, y: YB + 18, 'class': 'esq-i' }, gR, '≈' + IZ + ' mA'); }
+      } else {
+        L(gR, x, y, x, 220, on); resistencia(gR, x, 220, on); L(gR, x, 250, x, 268, on);
+        led(gR, x, 268, on, ST.inv[r.id]); L(gR, x, 290, x, YB, on);
+        el('text', { x: x - 18, y: 284, 'class': 'esq-peq', 'text-anchor': 'end' }, gR, r.luz);
+        if (on) { tot += IL; el('text', { x: x, y: YB + 18, 'class': 'esq-i' }, gR, '≈' + IL + ' mA'); }
+      }
+      el('circle', { cx: x, cy: YT, r: 3, fill: on ? NAR : NEG }, gR); el('circle', { cx: x, cy: YB, r: 3, fill: on ? NAR : NEG }, gR);
+    });
+    el('text', { x: 300, y: 395, 'class': 'esq-peq' }, esq, '* Rama 7 (opcional): luz exterior que se enciende sola de noche con un módulo de interruptor crepuscular (LDR).');
+    document.getElementById('tot').textContent = 'Intensidad total que da la pila: ≈ ' + tot + ' mA (la suma de las ramas encendidas)';
+    document.getElementById('b-gen').classList.toggle('on', ST.Q);
+    document.getElementById('b-gen').textContent = 'Interruptor general Q: ' + (ST.Q ? 'encendido' : 'apagado');
+    document.getElementById('b-noche').classList.toggle('on', ST.noche);
+    document.getElementById('b-noche').textContent = ST.noche ? '🌙 Es de noche' : '☀️ Es de día';
+    var rs = RAMAS.filter(function (x) { return x.id === ST.sel; })[0];
+    var bl = document.getElementById('b-led');
+    bl.disabled = rs.tipo === 'timbre';
+    bl.textContent = (ST.inv[rs.id] ? 'Poner bien el LED de la rama ' : 'Invertir el LED de la rama ') + rs.id;
+    explica(rs);
+  }
+  function explica(r) {
+    var t = '';
+    if (!ST.Q) t = '<b>El interruptor general Q está abierto.</b> Corta todas las ramas a la vez: no se enciende nada aunque cierres los demás interruptores.<br>';
+    if (r.tipo === 'simple') t += '<b>Rama ' + r.id + ' · ' + r.nombre + ' (interruptor simple).</b> El interruptor ' + r.mando + ' abre o cierra la rama. La resistencia de 100 Ω, en serie con el LED, limita la corriente a unos ' + IL + ' mA; sin ella, el LED se fundiría.';
+    if (r.tipo === 'conmutada') t += '<b>Rama 3 · Pasillo (conmutada).</b> Cada conmutador une su borne común con uno de los dos hilos puente. La luz se enciende cuando C1 y C2 eligen el mismo puente; accionando cualquiera de los dos se cambia el estado. Por eso se enciende en la entrada y se apaga en la puerta del dormitorio.';
+    if (r.tipo === 'timbre') t += '<b>Rama 6 · Timbre.</b> El pulsador solo cierra el circuito mientras se mantiene pulsado (mantén pulsado PT). El zumbador activo no necesita resistencia. También tiene polaridad: rojo al positivo.';
+    if (r.tipo === 'ldr') t += '<b>Rama 7 · Luz exterior (opcional).</b> La LDR es una resistencia que cambia con la luz. Un módulo de interruptor crepuscular cierra la rama cuando oscurece: cambia entre día y noche con el botón de arriba.';
+    if (ST.inv[r.id]) t += '<br><b>El LED está conectado al revés:</b> el LED es un diodo y solo deja pasar la corriente en un sentido. No luce, pero no se estropea. Pata larga (ánodo) al positivo.';
+    t += '<br><span style="color:var(--texto2)">Todas las ramas están en paralelo: cada una recibe los 4,5 V de la pila y funciona de forma independiente.</span>';
+    document.getElementById('exp').innerHTML = t;
+  }
+  document.getElementById('b-gen').onclick = function () { ST.Q = !ST.Q; pinta(); };
+  document.getElementById('b-noche').onclick = function () { ST.noche = !ST.noche; ST.sel = '7'; pinta(); };
+  document.getElementById('b-todo').onclick = function () { ['I1', 'I2', 'I3', 'I4'].forEach(function (k) { ST[k] = false; }); ST.C1 = 0; ST.C2 = 1; ST.noche = false; ST.Q = false; pinta(); };
+  document.getElementById('b-led').onclick = function () { var id = ST.sel; ST.inv[id] = !ST.inv[id]; pinta(); };
+  pinta();
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

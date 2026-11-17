@@ -4,29 +4,39 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Proyecto · U01 Vivienda · Tecnología 4º ESO</title>
-<meta name="description" content="Auditoría energética y plan de mejora de tu propia vivienda.">
+<meta name="description" content="Proyecto de taller: maqueta a escala 1:20 de la vivienda tipo y su instalación eléctrica.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
 <style>
-.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-wrap{max-width:900px;margin:24px auto 50px;padding:0 20px}
 .pr-hero{text-align:center;margin-bottom:28px}
 .pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-hero p{color:var(--texto2);line-height:1.55}
 .pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
 .pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
-.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.pr-card h3{font-family:var(--cond);font-size:1.08rem;color:var(--acento);margin:14px 0 6px}
 .pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
 .pr-card ul,.pr-card ol{margin:8px 0 8px 22px}
-.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:14px 0}
 .pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
-.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
-.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
-.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.98rem}
+.pr-fase p{font-size:.9rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:10px 0}
+.pr-doc{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--borde);border-radius:8px;padding:12px 14px;text-decoration:none;color:var(--texto);background:#fff}
+.pr-doc:hover{border-color:var(--principal2);background:var(--principal-bg)}
+.pr-doc .ic{font-size:1.5rem;line-height:1}
+.pr-doc b{display:block;font-family:var(--cond);color:var(--principal);font-size:1.02rem}
+.pr-doc span{font-size:.88rem;color:var(--texto2);line-height:1.45}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:.92rem}
 .pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
 .pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
-.pr-rubrica td:first-child{font-weight:600;width:55%;color:var(--principal2)}
-.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+.pr-rubrica td:first-child{font-weight:600;width:42%;color:var(--principal2)}
+.pr-niveles{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92rem}
+.pr-niveles th{background:var(--principal-cl);color:var(--principal);padding:7px 10px;font-family:var(--cond);text-align:left}
+.pr-niveles td{padding:7px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
 .pr-callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.55}
 .pr-callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
 </style>
@@ -43,56 +53,121 @@
 
 <main id="main-content" class="pr-wrap">
   <section class="pr-hero">
-    <h1>🚀 Auditoría energética de tu vivienda</h1>
-    <p>Realiza una <strong>auditoría real</strong> de tu propia casa y elabora un plan de mejora justificado y priorizado.</p>
+    <h1>🏠 Maqueta de la vivienda tipo</h1>
+    <p>Proyecto de taller: maqueta a escala <strong>1:20</strong> de una vivienda de una planta y, sobre ella, su <strong>instalación eléctrica</strong>. Se aplican el dibujo técnico y las instalaciones de esta unidad.</p>
   </section>
 
   <div class="pr-card">
-    <h2><span class="num">1</span>La idea</h2>
-    <p>Vas a hacer una <strong>auditoría energética simplificada</strong> de tu vivienda, comparable a la que un técnico haría. Identificarás puntos débiles y propondrás mejoras con presupuesto estimado y plazos de amortización.</p>
-    <p>Trabajo individual. Entrega: memoria PDF + defensa oral 4 min.</p>
-  </div>
-
-  <div class="pr-card">
-    <h2><span class="num">2</span>Fases del proyecto</h2>
+    <h2><span class="num">1</span>El proyecto</h2>
+    <p>Trabajo en grupos de 2 o 3. Todos los grupos construyen la misma vivienda tipo: salón-cocina, pasillo, baño y dormitorio, con unas medidas exteriores de 7,00 × 4,80 m (35 × 24 cm en la maqueta).</p>
     <div class="pr-fases">
-      <div class="pr-fase"><h4>📋 1. Inventario</h4><p>Anota electrodomésticos, climatización, ventanas, aislamiento, iluminación.</p></div>
-      <div class="pr-fase"><h4>🔍 2. Diagnóstico</h4><p>Identifica puntos débiles (etiquetas viejas, ventanas simples, sin aislar, calefacción ineficiente).</p></div>
-      <div class="pr-fase"><h4>📊 3. Consumo</h4><p>Calcula consumo anual (kWh) y coste (€) de cada elemento.</p></div>
-      <div class="pr-fase"><h4>💡 4. Mejoras</h4><p>Propón 5-7 mejoras concretas con coste y ahorro estimado.</p></div>
-      <div class="pr-fase"><h4>📅 5. Priorizar</h4><p>Ordena por relación ahorro/coste y plazo de amortización.</p></div>
-      <div class="pr-fase"><h4>📝 6. Memoria</h4><p>5-7 páginas PDF con tablas, fotos y cálculos.</p></div>
-      <div class="pr-fase"><h4>🎤 7. Defender</h4><p>4 min en clase explicando tu plan.</p></div>
+      <div class="pr-fase"><h4>🧱 Fase A · Construcción</h4><p>Lectura del plano, paso de las medidas a escala, trazado, corte y montaje de las paredes sobre la base.</p></div>
+      <div class="pr-fase"><h4>💡 Fase B · Instalación eléctrica</h4><p>Puntos de luz con LED, interruptores, conmutada del pasillo y timbre, alimentados con una pila de petaca.</p></div>
+      <div class="pr-fase"><h4>🌱 Sostenibilidad</h4><p>Justificación breve de las decisiones de orientación, luz natural y aislamiento, y una mejora de eficiencia.</p></div>
     </div>
+    <p>Los planos son la guía de partida: los ajustes que hagan falta durante la construcción se deciden en el taller.</p>
   </div>
 
   <div class="pr-card">
-    <h2><span class="num">3</span>Entregables</h2>
+    <h2><span class="num">2</span>Documentos e interactivos</h2>
+    <div class="pr-docs">
+      <a class="pr-doc" href="vivienda-tipo_planos-A3.pdf" target="_blank"><span class="ic">📄</span><div><b>Planos de la vivienda (A3)</b><span>Planta acotada, alzados sur y norte y plano de la instalación eléctrica, a escala 1:20.</span></div></a>
+      <a class="pr-doc" href="vivienda-tipo_ficha-despiece-A4.pdf" target="_blank"><span class="ic">📄</span><div><b>Ficha de despiece (A4)</b><span>Tabla de conversión a milímetros y piezas de las paredes con sus cotas.</span></div></a>
+      <a class="pr-doc" href="../interactivos/lee-el-plano.html"><span class="ic">📐</span><div><b>Lee el plano</b><span>Datos de cada elemento, medición a escala y retos.</span></div></a>
+      <a class="pr-doc" href="../interactivos/instalacion-casa.html"><span class="ic">💡</span><div><b>La instalación de la casa</b><span>Circuitos de la maqueta sobre el plano, con su esquema eléctrico.</span></div></a>
+    </div>
+    <div class="pr-callout">🖨️ Los planos se imprimen en A3 a <strong>tamaño real (100 %)</strong>. Comprobación: en la escala gráfica del cajetín, 1 m debe medir 50 mm.</div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">3</span>Fase A · Construcción</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>1. Lee el plano</h4><p>Localiza las estancias, los muros, las puertas (P) y las ventanas (V) en la planta y en los alzados.</p></div>
+      <div class="pr-fase"><h4>2. Pasa las medidas a escala</h4><p>Completa la tabla de conversión de la ficha de despiece: a escala 1:20, 1 m real = 50 mm.</p></div>
+      <div class="pr-fase"><h4>3. Traza las piezas</h4><p>Dibuja cada pared sobre el cartón pluma con regla y escuadra, con sus huecos.</p></div>
+      <div class="pr-fase"><h4>4. Corta</h4><p>Cúter, regla metálica y base de corte. Varias pasadas suaves, sin forzar.</p></div>
+      <div class="pr-fase"><h4>5. Prepara la base</h4><p>Marca la planta sobre la base y taladra los pasos de cable antes de pegar las paredes.</p></div>
+      <div class="pr-fase"><h4>6. Monta</h4><p>Fachadas norte y sur enteras; la este y la oeste, entre ellas. Los tabiques, a tope contra las caras interiores.</p></div>
+      <div class="pr-fase"><h4>7. Comprueba</h4><p>Lista de comprobación de la ficha: medidas, huecos, escuadra y encaje de cada pieza.</p></div>
+    </div>
+    <h3>Material por grupo</h3>
+    <ul>
+      <li>Cartón pluma de 10 mm para los muros exteriores (= 0,20 m reales) y de 5 mm para los tabiques (= 0,10 m).</li>
+      <li>Base de DM de 5 mm de 390 × 280 mm, sobre cuatro patas de 30 mm.</li>
+      <li>Cúter, regla metálica, escuadra, base de corte, cola blanca o pistola termofusible.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">4</span>Fase B · Instalación eléctrica</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>1. Plano eléctrico</h4><p>Identifica en el plano cada punto de luz, mecanismo y circuito.</p></div>
+      <div class="pr-fase"><h4>2. Esquemas</h4><p>Dibuja el esquema de cada circuito antes de montarlo.</p></div>
+      <div class="pr-fase"><h4>3. Coloca los elementos</h4><p>LED en las paredes a presión; mecanismos junto a las puertas.</p></div>
+      <div class="pr-fase"><h4>4. Cablea</h4><p>Por debajo de la base: rojo al positivo, negro al negativo. Conexiones con clemas.</p></div>
+      <div class="pr-fase"><h4>5. Comprueba</h4><p>Circuito a circuito, con el interruptor general.</p></div>
+    </div>
+    <table class="pr-niveles">
+      <thead><tr><th>Nivel</th><th>Circuitos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Básico</strong> (todos los grupos)</td><td>Una luz por estancia con su interruptor y el timbre con pulsador en la entrada.</td></tr>
+        <tr><td><strong>Medio</strong></td><td>Luz del pasillo conmutada: se enciende y se apaga desde la entrada y desde la puerta del dormitorio.</td></tr>
+        <tr><td><strong>Avanzado</strong> (opcional)</td><td>Luz exterior que se enciende sola de noche con un módulo de interruptor crepuscular (LDR).</td></tr>
+      </tbody>
+    </table>
+    <h3>Material por grupo</h3>
+    <ul>
+      <li>Pila de petaca de 4,5 V e interruptor general.</li>
+      <li>6 LED blancos de 5 mm (5 + 1 opcional), cada uno con su resistencia de 100 Ω (o LED con la resistencia incorporada).</li>
+      <li>4 interruptores (más el general), 2 conmutadores, 1 pulsador y 1 zumbador activo de 3-6 V.</li>
+      <li>Unos 10 m de cable rígido fino, rojo y negro, y clemas.</li>
+    </ul>
+    <div class="pr-callout">El LED solo conduce en un sentido: la pata larga (ánodo) va al positivo. Conectado al revés no luce, pero no se estropea.</div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">5</span>Sostenibilidad de la vivienda</h2>
+    <p>Cada grupo justifica por escrito, en pocas líneas:</p>
     <ol>
-      <li><strong>Memoria PDF (5-7 págs.)</strong>: portada, inventario, diagnóstico, tabla de mejoras con coste y ahorro, prioridades, conclusiones.</li>
-      <li><strong>Plano simplificado</strong> de tu vivienda con orientación y elementos analizados.</li>
-      <li><strong>Defensa oral (4 min)</strong> con apoyo visual (2-3 diapositivas).</li>
+      <li><strong>Orientación:</strong> por qué el salón y el dormitorio tienen las ventanas al sur y la cocina y el baño, al norte.</li>
+      <li><strong>Luz natural y ventilación:</strong> qué estancias reciben luz natural y por qué las ventanas de la cocina y del salón, enfrentadas, permiten la ventilación cruzada.</li>
+      <li><strong>Aislamiento:</strong> qué material aislante y qué tipo de ventana se elegirían para los muros exteriores de la vivienda real.</li>
+      <li><strong>Una mejora de eficiencia</strong> (iluminación LED, aerotermia, placas solares, domótica…) y qué ahorro aporta.</li>
     </ol>
   </div>
 
   <div class="pr-card">
-    <h2><span class="num">4</span>Rúbrica</h2>
+    <h2><span class="num">6</span>Seguridad en el taller</h2>
+    <ul>
+      <li>Cúter: cortar siempre sobre la base de corte, con la regla metálica y alejando la mano de la línea de corte. La cuchilla se recoge al dejarlo.</li>
+      <li>Pistola termofusible: la boquilla y el adhesivo recién aplicado queman. Se deja apoyada en su soporte.</li>
+      <li>Pila: el interruptor general, apagado mientras se cablea. No se unen nunca los dos bornes de la pila con un cable.</li>
+      <li>Puesto de trabajo ordenado y herramientas en su sitio al terminar.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">7</span>Evaluación</h2>
+    <p>Las dos fases se evalúan por separado.</p>
     <table class="pr-rubrica">
-      <thead><tr><th>Criterio</th><th>Peso</th></tr></thead>
+      <thead><tr><th>Fase A · Construcción</th><th>Evidencia</th></tr></thead>
       <tbody>
-        <tr><td>Inventario completo y bien clasificado</td><td>15%</td></tr>
-        <tr><td>Diagnóstico riguroso (puntos débiles identificados)</td><td>20%</td></tr>
-        <tr><td>Cálculo correcto de consumo y coste</td><td>20%</td></tr>
-        <tr><td>Propuestas de mejora viables con coste y ahorro</td><td>20%</td></tr>
-        <tr><td>Priorización razonada</td><td>10%</td></tr>
-        <tr><td>Memoria clara y bien presentada</td><td>10%</td></tr>
-        <tr><td>Defensa oral</td><td>5%</td></tr>
+        <tr><td>Interpreta el plano y aplica la escala</td><td>Tabla de conversión completa y correcta.</td></tr>
+        <tr><td>Traza y corta con precisión</td><td>Piezas con las medidas de la ficha, esquinas a escuadra y cortes limpios.</td></tr>
+        <tr><td>Monta la maqueta</td><td>Piezas en su sitio, uniones firmes y pasos de cable previstos.</td></tr>
+        <tr><td>Trabaja en el taller con seguridad y orden</td><td>Observación en el aula.</td></tr>
+      </tbody>
+    </table>
+    <table class="pr-rubrica">
+      <thead><tr><th>Fase B · Instalación eléctrica</th><th>Evidencia</th></tr></thead>
+      <tbody>
+        <tr><td>Interpreta el plano eléctrico y dibuja los esquemas</td><td>Esquema de cada circuito con su simbología.</td></tr>
+        <tr><td>Monta y conecta los circuitos</td><td>Polaridad correcta, una resistencia por LED y cableado ordenado.</td></tr>
+        <tr><td>Comprueba el funcionamiento</td><td>Cada circuito funciona de forma independiente.</td></tr>
+        <tr><td>Justifica la sostenibilidad de la vivienda</td><td>Respuestas del apartado 5.</td></tr>
       </tbody>
     </table>
   </div>
-
-  <div class="pr-callout pr-callout-warn">⚠️ <strong>Privacidad familiar:</strong> el informe es para tu uso y entrega al profesor. No publiques en redes, no incluyas direcciones exactas, datos personales ni contraseñas wifi/cuentas. Puedes anonimizar usando «mi vivienda» sin precisar dirección.</div>
-
 </main>
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>

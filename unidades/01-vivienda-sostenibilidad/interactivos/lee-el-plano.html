@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Lee el plano · U01 · Tecnología 4º ESO</title>
+<meta name="description" content="Plano de la vivienda tipo del proyecto: estancias, puertas, ventanas, cotas, escala e instalación eléctrica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.lp-wrap{max-width:1180px;margin:24px auto;padding:0 20px 60px}
+.lp-hero{text-align:center;margin-bottom:18px}
+.lp-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 6px}
+.lp-hero p{font-size:.95rem;color:var(--texto2);margin:0 auto;line-height:1.55;max-width:760px}
+.lp-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:16px 18px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.lp-barra{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.lp-tabs{display:flex;gap:4px}
+.lp-tab{font-family:var(--cond);background:#fff;border:1.5px solid var(--borde);padding:8px 16px;border-radius:6px;cursor:pointer;font-size:.95rem;color:var(--texto2)}
+.lp-tab.activa{background:var(--principal);color:#fff;border-color:var(--principal)}
+.lp-capas{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem;color:var(--texto2)}
+.lp-capas label{display:flex;gap:5px;align-items:center;cursor:pointer}
+.lp-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media(max-width:900px){.lp-grid{grid-template-columns:1fr}}
+.lp-svg{width:100%;height:auto;display:block;background:#FCFDFE;border:1px solid var(--borde);border-radius:8px;touch-action:manipulation;user-select:none}
+.lp-panel{background:var(--principal-bg);border:1px solid var(--principal-cl);border-radius:10px;padding:14px 16px;font-size:.95rem;line-height:1.55;min-height:220px}
+.lp-panel h3{font-family:var(--cond);color:var(--principal);font-size:1.15rem;margin:0 0 8px}
+.lp-panel table{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0}
+.lp-panel td{padding:4px 2px;border-bottom:1px solid var(--principal-cl);vertical-align:top}
+.lp-panel td:first-child{color:var(--texto2);width:48%}
+.lp-panel td:last-child{font-weight:600;color:var(--texto)}
+.lp-panel .nota{font-size:.86rem;color:var(--texto2);margin-top:8px}
+.lp-panel select,.lp-panel input{font-family:var(--sans);font-size:1rem;padding:6px 8px;border:1px solid var(--borde);border-radius:6px}
+.lp-btn{font-family:var(--cond);font-size:.95rem;background:var(--principal);color:#fff;border:0;border-radius:6px;padding:7px 14px;cursor:pointer;margin:4px 4px 0 0}
+.lp-btn.sec{background:#fff;color:var(--principal);border:1.5px solid var(--principal)}
+.lp-btn:disabled{opacity:.45;cursor:default}
+.lp-fb{margin-top:10px;padding:8px 10px;border-radius:6px;font-weight:600;display:none}
+.lp-fb.ok{display:block;background:var(--verde-cl);color:var(--verde)}
+.lp-fb.ko{display:block;background:var(--rojo-cl);color:var(--rojo)}
+.lp-fb.sol{display:block;background:#FFF4E6;color:#8a5300}
+.lp-ops{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rot-est{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;fill:#1a2430;text-anchor:middle;pointer-events:none}
+.rot-sup{font-family:Barlow,sans-serif;font-size:12px;fill:#455565;text-anchor:middle;pointer-events:none}
+.rot-hueco{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-anchor:middle;pointer-events:none}
+.rot-hueco.v{fill:#1d5c9f}.rot-hueco.p{fill:#a1461a}
+.rot-norte{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;text-anchor:middle;fill:#1a2430}
+.rot-elec{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;fill:#1a2430;text-anchor:middle;pointer-events:none}
+.cota{stroke:#4a5563;stroke-width:.8}.cota-t{stroke:#1a2430;stroke-width:1.6}
+.cota-txt{font-family:Barlow,sans-serif;font-size:12px;fill:#1a2430;text-anchor:middle}
+.cota-txt.peq{font-size:10px}
+.lp-svg .zona,.lp-svg .muro,.lp-svg .hueco,.lp-svg .elem{cursor:pointer}
+.lp-svg .zona:hover{fill:rgba(46,123,196,.07)}
+.lp-svg .zona.sel{fill:rgba(46,123,196,.18)}
+.lp-svg .muro.sel{fill:#2E7BC4!important}
+.lp-svg .hueco.sel rect:first-child{fill:#cfe2f7!important}
+.lp-svg .elem.sel circle,.lp-svg .elem.sel rect,.lp-svg .elem.sel path{stroke:#C0321E!important}
+.lp-svg .ok-zona{fill:rgba(26,107,58,.2)!important}
+.lp-svg.medir,.lp-svg.medir *{cursor:crosshair!important}
+.med-l{stroke:#C0321E;stroke-width:2;stroke-dasharray:6 4}
+.med-p{fill:#C0321E}
+.med-t{font-family:Barlow,sans-serif;font-weight:700;font-size:14px;fill:#C0321E;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:4px}
+</style>
+</head>
+<body>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda · Lee el plano</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html#planos"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>📐</span><span class="nc-lbl">Lee el plano</span></span><span class="nc-sep">·</span>
+  <a href="instalacion-casa.html"><span>💡</span><span class="nc-lbl">La instalación de la casa</span></a>
+</nav>
+
+<main id="main-content" class="lp-wrap">
+  <section class="lp-hero">
+    <h1>📐 Lee el plano</h1>
+    <p>Planta de la vivienda tipo del proyecto de la maqueta. Cotas en metros reales. Escala de la lámina A3 y de la maqueta: <strong>1:20</strong> (1 m real = 50 mm).</p>
+  </section>
+
+  <div class="lp-card">
+    <div class="lp-barra">
+      <div class="lp-tabs" role="tablist">
+        <button class="lp-tab activa" data-modo="explorar">🔍 Explorar</button>
+        <button class="lp-tab" data-modo="medir">📏 Medir</button>
+        <button class="lp-tab" data-modo="retos">🎯 Retos</button>
+      </div>
+      <div class="lp-capas">
+        <label><input type="checkbox" id="c-cotas" checked> Cotas</label>
+        <label><input type="checkbox" id="c-mob" checked> Mobiliario</label>
+        <label><input type="checkbox" id="c-elec"> Instalación eléctrica</label>
+      </div>
+    </div>
+    <div class="lp-grid">
+      <svg class="lp-svg" id="svg" viewBox="-75 -62 870 632" role="img" aria-label="Planta de la vivienda tipo"></svg>
+      <aside class="lp-panel" id="panel"></aside>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ── Vivienda tipo: datos y dibujo de la planta (generado desde vivienda-tipo.json) ── */
+var D = {"nombre":"Vivienda tipo · Proyecto de maqueta · Tecnología 4.º ESO","version":"0.2 (propuesta para revisión)","unidades":"metros reales; origen en la esquina exterior noroeste; x hacia el este, y hacia el sur, z hacia arriba desde el suelo terminado","escala_maqueta":20,"norte":"arriba en planta (fachada principal con las ventanas grandes al sur)","exterior":{"ancho_x":7.0,"fondo_y":4.8,"altura_muros":2.5,"cubierta":"plana; la maqueta va sin techo"},"espesores":{"muro_exterior":0.2,"tabique":0.1},"material_maqueta":{"muro_exterior":"cartón pluma de 10 mm (= 0,20 m)","tabique":"cartón pluma de 5 mm (= 0,10 m)","base":"tablero de DM de 5 mm sobre cuatro patas de 30 mm; el cableado va por debajo"},"muros":[{"id":"MN","nombre":"Fachada norte","tipo":"exterior","x0":0.0,"y0":0.0,"x1":7.0,"y1":0.2},{"id":"MS","nombre":"Fachada sur","tipo":"exterior","x0":0.0,"y0":4.6,"x1":7.0,"y1":4.8},{"id":"MO","nombre":"Fachada oeste","tipo":"exterior","x0":0.0,"y0":0.2,"x1":0.2,"y1":4.6},{"id":"ME","nombre":"Fachada este","tipo":"exterior","x0":6.8,"y0":0.2,"x1":7.0,"y1":4.6},{"id":"T1","nombre":"Tabique salón-cocina / pasillo y dormitorio","tipo":"tabique","x0":3.9,"y0":0.2,"x1":4.0,"y1":4.6},{"id":"T2","nombre":"Tabique pasillo / baño","tipo":"tabique","x0":5.2,"y0":0.2,"x1":5.3,"y1":2.2},{"id":"T3","nombre":"Tabique pasillo y baño / dormitorio","tipo":"tabique","x0":4.0,"y0":2.2,"x1":6.8,"y1":2.3}],"estancias":[{"id":"SC","nombre":"Salón-cocina","x0":0.2,"y0":0.2,"x1":3.9,"y1":4.6},{"id":"PA","nombre":"Pasillo","x0":4.0,"y0":0.2,"x1":5.2,"y1":2.2},{"id":"BA","nombre":"Baño","x0":5.3,"y0":0.2,"x1":6.8,"y1":2.2},{"id":"DO","nombre":"Dormitorio","x0":4.0,"y0":2.3,"x1":6.8,"y1":4.6}],"puertas":[{"id":"P1","nombre":"Entrada","muro":"MN","desde":4.2,"hasta":5.0,"alto":2.0,"abre_hacia":"PA","bisagra":"hasta"},{"id":"P2","nombre":"Salón","muro":"T1","desde":0.6,"hasta":1.4,"alto":2.0,"abre_hacia":"SC","bisagra":"desde"},{"id":"P3","nombre":"Baño","muro":"T2","desde":1.0,"hasta":1.7,"alto":2.0,"abre_hacia":"BA","bisagra":"desde"},{"id":"P4","nombre":"Dormitorio","muro":"T3","desde":4.4,"hasta":5.2,"alto":2.0,"abre_hacia":"DO","bisagra":"desde"}],"ventanas":[{"id":"V1","nombre":"Salón","muro":"MS","desde":1.0,"hasta":3.0,"alfeizar":0.9,"dintel":2.1},{"id":"V2","nombre":"Dormitorio","muro":"MS","desde":5.0,"hasta":6.2,"alfeizar":0.9,"dintel":2.1},{"id":"V3","nombre":"Cocina","muro":"MN","desde":1.0,"hasta":2.0,"alfeizar":1.1,"dintel":2.1},{"id":"V4","nombre":"Baño","muro":"MN","desde":5.8,"hasta":6.4,"alfeizar":1.5,"dintel":2.1}],"nota_huecos":"desde/hasta se miden en x para los muros este-oeste (MN, MS, T3) y en y para los muros norte-sur (MO, ME, T1, T2)","electrico":{"alimentacion":"pila de petaca de 4,5 V bajo la base, junto al cuadro","elementos":[{"id":"Q","tipo":"cuadro","nombre":"Cuadro (interruptor general)","x":4.0,"y":1.8,"z":1.6,"cara":"este de T1","paso":[4.05,1.8]},{"id":"C1","tipo":"conmutador","nombre":"Conmutador del pasillo (entrada)","x":4.0,"y":0.4,"z":1.1,"cara":"este de T1","paso":[4.05,0.4]},{"id":"C2","tipo":"conmutador","nombre":"Conmutador del pasillo (dormitorio)","x":4.2,"y":2.2,"z":1.1,"cara":"norte de T3","paso":[4.2,2.15]},{"id":"L3","tipo":"luz","nombre":"Luz del pasillo","x":5.2,"y":0.75,"z":2.1,"cara":"oeste de T2","paso":[5.15,0.75]},{"id":"I1","tipo":"interruptor","nombre":"Interruptor del salón","x":3.9,"y":1.6,"z":1.1,"cara":"oeste de T1","paso":[3.85,1.6]},{"id":"I2","tipo":"interruptor","nombre":"Interruptor de la cocina","x":3.9,"y":1.85,"z":1.1,"cara":"oeste de T1","paso":[3.85,1.85]},{"id":"L1","tipo":"luz","nombre":"Luz del salón","x":0.2,"y":3.2,"z":2.1,"cara":"interior de MO","paso":[0.25,3.2]},{"id":"L2","tipo":"luz","nombre":"Luz de la cocina","x":3.0,"y":0.2,"z":2.1,"cara":"interior de MN","paso":[3.0,0.25]},{"id":"I3","tipo":"interruptor","nombre":"Interruptor del baño (desde el pasillo)","x":5.2,"y":1.9,"z":1.1,"cara":"oeste de T2","paso":[5.15,1.9]},{"id":"L4","tipo":"luz","nombre":"Luz del baño","x":6.8,"y":1.2,"z":2.1,"cara":"interior de ME","paso":[6.75,1.2]},{"id":"I4","tipo":"interruptor","nombre":"Interruptor del dormitorio","x":5.45,"y":2.3,"z":1.1,"cara":"sur de T3","paso":[5.45,2.35]},{"id":"L5","tipo":"luz","nombre":"Luz del dormitorio","x":6.8,"y":3.5,"z":2.1,"cara":"interior de ME","paso":[6.75,3.5]},{"id":"PT","tipo":"pulsador","nombre":"Pulsador del timbre","x":5.4,"y":0.0,"z":1.2,"cara":"exterior de MN","paso":[5.4,-0.1]},{"id":"TI","tipo":"timbre","nombre":"Timbre (zumbador)","x":5.1,"y":0.2,"z":2.2,"cara":"interior de MN","paso":[5.1,0.25]},{"id":"L6","tipo":"luz","nombre":"Luz exterior con LDR (opcional)","x":3.8,"y":0.0,"z":2.1,"cara":"exterior de MN","paso":[3.8,-0.1],"opcional":true}],"circuitos":[{"id":"1","nombre":"Salón","tipo":"interruptor simple","elementos":["I1","L1"]},{"id":"2","nombre":"Cocina","tipo":"interruptor simple","elementos":["I2","L2"]},{"id":"3","nombre":"Pasillo","tipo":"conmutada","elementos":["C1","C2","L3"]},{"id":"4","nombre":"Baño","tipo":"interruptor simple","elementos":["I3","L4"]},{"id":"5","nombre":"Dormitorio","tipo":"interruptor simple","elementos":["I4","L5"]},{"id":"6","nombre":"Timbre","tipo":"pulsador","elementos":["PT","TI"]},{"id":"7","nombre":"Luz exterior (opcional)","tipo":"automática con LDR","elementos":["L6"]}],"receptores":{"luz":"LED blanco de 5 mm con su resistencia en serie (100 Ω a 4,5 V) o LED con resistencia incorporada; unos 20 mA por LED","timbre":"zumbador activo de 3-6 V","polaridad":"pata larga del LED y cable rojo al positivo; cable negro al negativo"}}};
+var NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent, txt) {
+  var e = document.createElementNS(NS, tag);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (txt != null) e.textContent = txt;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+var S = 100;                                  // 1 m real = 100 unidades del dibujo
+var MUROS = {}; D.muros.forEach(function (m) { MUROS[m.id] = m; });
+function horiz(m) { return (m.x1 - m.x0) > (m.y1 - m.y0); }
+function est(id) { return D.estancias.filter(function (e) { return e.id === id; })[0]; }
+function f2(v) { return (Math.round(v * 100) / 100).toFixed(2).replace('.', ','); }
+function area(e) { return (e.x1 - e.x0) * (e.y1 - e.y0); }
+function hueco(m, a, b) {
+  return horiz(m) ? { x: a, y: m.y0, w: b - a, h: m.y1 - m.y0 } : { x: m.x0, y: a, w: m.x1 - m.x0, h: b - a };
+}
+var ORIENT = { MN: 'norte', MS: 'sur', ME: 'este', MO: 'oeste' };
+
+/* Dibuja la planta en <svg>. Devuelve los grupos por capas. */
+function dibujaPlanta(svg, op) {
+  op = op || {};
+  var g = {
+    mob: el('g', { 'class': 'capa-mob' }, svg),
+    est: el('g', { 'class': 'capa-est' }, svg),
+    muros: el('g', { 'class': 'capa-muros' }, svg),
+    huecos: el('g', { 'class': 'capa-huecos' }, svg),
+    rot: el('g', { 'class': 'capa-rot' }, svg),
+    cotas: el('g', { 'class': 'capa-cotas' }, svg),
+    elec: el('g', { 'class': 'capa-elec' }, svg)
+  };
+  var cExt = op.gris ? '#9aa3ad' : '#2a2f36', cTab = op.gris ? '#c3c9d0' : '#5d6670';
+  // estancias (zonas seleccionables)
+  D.estancias.forEach(function (e) {
+    el('rect', { x: e.x0 * S, y: e.y0 * S, width: (e.x1 - e.x0) * S, height: (e.y1 - e.y0) * S,
+      'class': 'zona', 'data-id': e.id, 'data-tipo': 'estancia', fill: 'transparent' }, g.est);
+  });
+  // mobiliario
+  if (op.mobiliario) mobiliario(g.mob);
+  // muros
+  D.muros.forEach(function (m) {
+    el('rect', { x: m.x0 * S, y: m.y0 * S, width: (m.x1 - m.x0) * S, height: (m.y1 - m.y0) * S,
+      fill: m.tipo === 'exterior' ? cExt : cTab, 'class': 'muro', 'data-id': m.id, 'data-tipo': 'muro' }, g.muros);
+  });
+  // ventanas
+  D.ventanas.forEach(function (v) {
+    var m = MUROS[v.muro], h = hueco(m, v.desde, v.hasta), gg = el('g', { 'class': 'hueco', 'data-id': v.id, 'data-tipo': 'ventana' }, g.huecos);
+    el('rect', { x: h.x * S, y: h.y * S, width: h.w * S, height: h.h * S, fill: '#fff' }, gg);
+    if (horiz(m)) {
+      [0, 0.5, 1].forEach(function (f) { el('line', { x1: h.x * S, y1: (h.y + h.h * f) * S, x2: (h.x + h.w) * S, y2: (h.y + h.h * f) * S, stroke: '#2a2f36', 'stroke-width': f === 0.5 ? 1.6 : 0.9 }, gg); });
+      [h.x, h.x + h.w].forEach(function (x) { el('line', { x1: x * S, y1: h.y * S, x2: x * S, y2: (h.y + h.h) * S, stroke: '#2a2f36', 'stroke-width': 1.4 }, gg); });
+    } else {
+      [0, 0.5, 1].forEach(function (f) { el('line', { x1: (h.x + h.w * f) * S, y1: h.y * S, x2: (h.x + h.w * f) * S, y2: (h.y + h.h) * S, stroke: '#2a2f36', 'stroke-width': f === 0.5 ? 1.6 : 0.9 }, gg); });
+    }
+    el('rect', { x: h.x * S - 4, y: h.y * S - 4, width: h.w * S + 8, height: h.h * S + 8, fill: 'transparent', 'class': 'hit' }, gg);
+  });
+  // puertas: hoja y arco de abatimiento con centro en la bisagra
+  D.puertas.forEach(function (p) {
+    var m = MUROS[p.muro], h = hueco(m, p.desde, p.hasta), e = est(p.abre_hacia), w = p.hasta - p.desde;
+    var gg = el('g', { 'class': 'hueco', 'data-id': p.id, 'data-tipo': 'puerta' }, g.huecos);
+    el('rect', { x: h.x * S, y: h.y * S, width: h.w * S, height: h.h * S, fill: '#fff' }, gg);
+    var H, T, O;
+    if (horiz(m)) {
+      var dir = ((e.y0 + e.y1) / 2 > m.y0) ? 1 : -1, face = dir > 0 ? m.y1 : m.y0;
+      var hx = p.bisagra === 'desde' ? p.desde : p.hasta, ox = p.bisagra === 'desde' ? p.hasta : p.desde;
+      H = [hx, face]; T = [hx, face + dir * w]; O = [ox, face];
+    } else {
+      var dir2 = ((e.x0 + e.x1) / 2 > m.x0) ? 1 : -1, face2 = dir2 > 0 ? m.x1 : m.x0;
+      var hy = p.bisagra === 'desde' ? p.desde : p.hasta, oy = p.bisagra === 'desde' ? p.hasta : p.desde;
+      H = [face2, hy]; T = [face2 + dir2 * w, hy]; O = [face2, oy];
+    }
+    var ax = T[0] - H[0], ay = T[1] - H[1], bx = O[0] - H[0], by = O[1] - H[1];
+    var sweep = (ax * by - ay * bx) > 0 ? 1 : 0;
+    el('line', { x1: H[0] * S, y1: H[1] * S, x2: T[0] * S, y2: T[1] * S, stroke: '#2a2f36', 'stroke-width': 2.4 }, gg);
+    el('path', { d: 'M' + T[0] * S + ',' + T[1] * S + ' A' + w * S + ',' + w * S + ' 0 0 ' + sweep + ' ' + O[0] * S + ',' + O[1] * S,
+      fill: 'none', stroke: '#6b7480', 'stroke-width': 0.9 }, gg);
+    var px = Math.min(H[0], T[0], O[0]), py = Math.min(H[1], T[1], O[1]);
+    el('rect', { x: px * S, y: py * S, width: w * S, height: w * S, fill: 'transparent', 'class': 'hit' }, gg);
+  });
+  // rótulos
+  if (op.rotulos !== false) {
+    var pos = { SC: [2.3, 2.2], PA: [4.6, 1.3], BA: [5.85, 1.62], DO: [4.5, 3.75] };
+    D.estancias.forEach(function (e) {
+      var p = pos[e.id] || [(e.x0 + e.x1) / 2, (e.y0 + e.y1) / 2];
+      el('text', { x: p[0] * S, y: p[1] * S, 'class': 'rot-est' }, g.rot, e.nombre);
+      if (op.superficies !== false) el('text', { x: p[0] * S, y: p[1] * S + 17, 'class': 'rot-sup' }, g.rot, 'S = ' + f2(area(e)) + ' m²');
+    });
+    if (op.etiquetas !== false) {
+      D.ventanas.forEach(function (v) {
+        var m = MUROS[v.muro], c = (v.desde + v.hasta) / 2;
+        var y = m.y0 < 1 ? m.y0 * S - 8 : m.y0 * S - 7;
+        el('text', { x: c * S, y: y, 'class': 'rot-hueco v' }, g.rot, v.id);
+      });
+    }
+  }
+  if (op.norte !== false) norte(svg, 760, 30);
+  return g;
+}
+
+function norte(svg, x, y) {
+  var g = el('g', { transform: 'translate(' + x + ',' + y + ')' }, svg);
+  el('circle', { r: 17, fill: '#fff', stroke: '#2a2f36', 'stroke-width': 1.2 }, g);
+  el('path', { d: 'M0,-15 L7,9 L0,4 Z', fill: '#2a2f36' }, g);
+  el('path', { d: 'M0,-15 L-7,9 L0,4 Z', fill: '#fff', stroke: '#2a2f36', 'stroke-width': 1 }, g);
+  el('text', { y: -21, 'class': 'rot-norte' }, g, 'N');
+}
+
+function mobiliario(g) {
+  var c = '#a7afb8', sw = 1;
+  function r(x, y, w, h, extra) { var o = { x: x * S, y: y * S, width: w * S, height: h * S, fill: 'none', stroke: c, 'stroke-width': sw }; for (var k in extra) o[k] = extra[k]; return el('rect', o, g); }
+  r(0.2, 0.2, 2.6, 0.6); r(1.2, 0.28, 0.6, 0.42, { rx: 4 });
+  el('circle', { cx: 2.15 * S, cy: 0.5 * S, r: 12, fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  el('circle', { cx: 2.5 * S, cy: 0.5 * S, r: 12, fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  r(0.25, 2.6, 0.85, 1.8, { rx: 6 }); r(0.25, 2.6, 0.25, 1.8);
+  r(6.0, 0.2, 0.8, 0.8);
+  el('path', { d: 'M600,20 L680,100 M680,20 L600,100', stroke: c, 'stroke-width': 0.8 }, g);
+  el('path', { d: 'M530,30 h45 v50 h-45', fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  r(6.3, 1.95, 0.45, 0.22); el('ellipse', { cx: 652, cy: 172, rx: 19, ry: 24, fill: 'none', stroke: c, 'stroke-width': sw }, g);
+  r(4.9, 3.6, 1.9, 0.9); r(6.45, 3.68, 0.3, 0.74, { rx: 4 });
+}
+
+/* Cotas en metros: línea de cota, trazos oblicuos y cifra */
+function cotaH(g, x1, x2, y, txt, up) {
+  el('line', { x1: x1 * S, y1: y, x2: x2 * S, y2: y, 'class': 'cota' }, g);
+  [x1, x2].forEach(function (x) { el('line', { x1: x * S - 4, y1: y + 4, x2: x * S + 4, y2: y - 4, 'class': 'cota-t' }, g); });
+  var ln = (x2 - x1) * S;
+  el('text', { x: (x1 + x2) / 2 * S, y: ln < 30 ? y - 15 : y - 4, 'class': 'cota-txt' + (ln < 30 ? ' peq' : '') }, g, txt || f2(x2 - x1));
+}
+function cotaV(g, y1, y2, x, txt) {
+  el('line', { x1: x, y1: y1 * S, x2: x, y2: y2 * S, 'class': 'cota' }, g);
+  [y1, y2].forEach(function (y) { el('line', { x1: x - 4, y1: y * S + 4, x2: x + 4, y2: y * S - 4, 'class': 'cota-t' }, g); });
+  var ln = (y2 - y1) * S, cy = (y1 + y2) / 2 * S;
+  if (ln < 30) el('text', { x: x + 8, y: cy + 4, 'class': 'cota-txt peq', 'text-anchor': 'start' }, g, txt || f2(y2 - y1));
+  else el('text', { x: x - 4, y: cy, transform: 'rotate(-90 ' + (x - 4) + ' ' + cy + ')', 'class': 'cota-txt' }, g, txt || f2(y2 - y1));
+}
+function dibujaCotas(g) {
+  var W = D.exterior.ancho_x, H = D.exterior.fondo_y;
+  var xs = [0, 0.2, 3.9, 4.0, 5.2, 5.3, 6.8, 7.0], yb = H * S;
+  for (var i = 0; i < xs.length - 1; i++) cotaH(g, xs[i], xs[i + 1], yb + 30);
+  cotaH(g, 0, W, yb + 56);
+  cotaV(g, 0, H, -24);
+  var ys = [0, 0.2, 2.2, 2.3, 4.6, 4.8];
+  for (var j = 0; j < ys.length - 1; j++) cotaV(g, ys[j], ys[j + 1], W * S + 24);
+  cotaV(g, 0.2, 4.6, 2.95 * S);
+  cotaH(g, 4.0, 6.8, 3.35 * S);
+}
+
+/* Símbolos eléctricos de los planos de vivienda */
+var ELEC = {}; D.electrico.elementos.forEach(function (e) { ELEC[e.id] = e; });
+function dirElem(e) { var nx = e.paso[0] - e.x, ny = e.paso[1] - e.y, n = Math.hypot(nx, ny) || 1; return [nx / n, ny / n]; }
+function posSimbolo(e) {
+  var d = dirElem(e), x = e.x * S + d[0] * 20, y = e.y * S + d[1] * 20;
+  return [x, y, d[0], d[1]];
+}
+function simbolo(g, tipo, x, y, nx, ny, estado) {
+  var gg = el('g', { transform: 'translate(' + x + ',' + y + ')' }, g), c = '#1a2430';
+  if (tipo === 'luz') {
+    el('line', { x1: -nx * 10, y1: -ny * 10, x2: -nx * 20, y2: -ny * 20, stroke: c, 'stroke-width': 1.6 }, gg);
+    el('circle', { r: 10, fill: estado ? '#FFD84D' : '#fff', stroke: c, 'stroke-width': 1.6, 'class': 'bombilla' }, gg);
+    el('path', { d: 'M-7,-7 L7,7 M-7,7 L7,-7', stroke: c, 'stroke-width': 1.6 }, gg);
+  } else if (tipo === 'interruptor' || tipo === 'conmutador') {
+    var px = -ny, py = nx;
+    el('circle', { r: 5, fill: '#fff', stroke: c, 'stroke-width': 1.5 }, gg);
+    function brazo(dx, dy, s) {
+      var ex = dx * 18, ey = dy * 18;
+      el('line', { x1: dx * 5, y1: dy * 5, x2: ex, y2: ey, stroke: c, 'stroke-width': 1.5 }, gg);
+      el('line', { x1: ex, y1: ey, x2: ex - dy * 6 * s, y2: ey + dx * 6 * s, stroke: c, 'stroke-width': 1.5 }, gg);
+    }
+    var d1x = (nx + px) / Math.SQRT2, d1y = (ny + py) / Math.SQRT2;
+    brazo(d1x, d1y, 1);
+    if (tipo === 'conmutador') brazo(-d1x, -d1y, 1);
+  } else if (tipo === 'pulsador') {
+    el('circle', { r: 8, fill: '#fff', stroke: c, 'stroke-width': 1.5 }, gg);
+    el('circle', { r: 3.2, fill: c }, gg);
+  } else if (tipo === 'timbre') {
+    var qx = -ny, qy = nx, R = 10;
+    var x1 = qx * R, y1 = qy * R, x2 = -qx * R, y2 = -qy * R;
+    var sw = (nx * (y1 - 0) - ny * (x1 - 0)) > 0 ? 0 : 1;
+    el('path', { d: 'M' + x1 + ',' + y1 + ' A' + R + ',' + R + ' 0 0 ' + sw + ' ' + x2 + ',' + y2 + ' Z', fill: estado ? '#FFD84D' : '#fff', stroke: c, 'stroke-width': 1.6 }, gg);
+  } else if (tipo === 'cuadro') {
+    var w = 26, h = 14; if (Math.abs(nx) > Math.abs(ny)) { w = 14; h = 26; }
+    el('rect', { x: -w / 2, y: -h / 2, width: w, height: h, fill: '#fff', stroke: c, 'stroke-width': 1.6 }, gg);
+    el('path', { d: 'M' + (-w / 2) + ',' + (-h / 2) + ' L' + (w / 2) + ',' + (h / 2) + ' L' + (-w / 2) + ',' + (h / 2) + ' Z', fill: estado === false ? '#9aa3ad' : c }, gg);
+  }
+  return gg;
+}
+
+(function () {
+  'use strict';
+  var svg = document.getElementById('svg'), panel = document.getElementById('panel');
+  var g = dibujaPlanta(svg, { mobiliario: true });
+  dibujaCotas(g.cotas);
+  // etiquetas de puertas
+  D.puertas.forEach(function (p) {
+    var m = MUROS[p.muro], e = est(p.abre_hacia), c = (p.desde + p.hasta) / 2, x, y;
+    if (horiz(m)) { var dir = ((e.y0 + e.y1) / 2 > m.y0) ? 1 : -1; x = c * S; y = (dir > 0 ? m.y1 : m.y0) * S + dir * 34 + 4; }
+    else { var dir2 = ((e.x0 + e.x1) / 2 > m.x0) ? 1 : -1; x = (dir2 > 0 ? m.x1 : m.x0) * S + dir2 * 34; y = c * S + 4; }
+    el('text', { x: x, y: y, 'class': 'rot-hueco p' }, g.rot, p.id);
+  });
+  // capa eléctrica
+  D.electrico.elementos.forEach(function (e) {
+    var p = posSimbolo(e), gg = simbolo(g.elec, e.tipo, p[0], p[1], p[2], p[3]);
+    gg.setAttribute('class', 'elem'); gg.setAttribute('data-id', e.id); gg.setAttribute('data-tipo', 'elec');
+    el('circle', { r: 16, fill: 'transparent' }, gg);
+    var lx = p[0] + p[2] * 26, ly = p[1] + p[3] * 26 + 4;
+    if (e.id === 'I1' || e.id === 'I2') { lx = p[0] - 30; ly = p[1] + 4; }
+    if (e.id === 'C1') { lx = p[0] + 22; ly = p[1] - 14; }
+    if (e.id === 'C2') { lx = p[0] - 24; ly = p[1] - 6; }
+    if (e.id === 'Q') { lx = p[0] + 26; ly = p[1] + 4; }
+    if (e.id === 'TI') { lx = p[0] - 24; ly = p[1] + 4; }
+    if (e.id === 'L3') { lx = p[0] - 26; ly = p[1] + 4; }
+    el('text', { x: lx, y: ly, 'class': 'rot-elec' }, g.elec, e.id);
+  });
+  var capas = { 'c-cotas': g.cotas, 'c-mob': g.mob, 'c-elec': g.elec };
+  function aplicaCapas() { for (var k in capas) capas[k].style.display = document.getElementById(k).checked ? '' : 'none'; }
+  Object.keys(capas).forEach(function (k) { document.getElementById(k).addEventListener('change', aplicaCapas); });
+  aplicaCapas();
+
+  /* ---------- información de cada elemento ---------- */
+  var CIRC = {}; D.electrico.circuitos.forEach(function (c) { c.elementos.forEach(function (id) { CIRC[id] = c; }); });
+  var NOMBRE_MURO = { MN: 'fachada norte', MS: 'fachada sur', ME: 'fachada este', MO: 'fachada oeste', T1: 'tabique T1', T2: 'tabique T2', T3: 'tabique T3' };
+  function mm(v) { return Math.round(v * 50) + ' mm'; }
+  function tabla(filas) { return '<table>' + filas.map(function (f) { return '<tr><td>' + f[0] + '</td><td>' + f[1] + '</td></tr>'; }).join('') + '</table>'; }
+  function info(tipo, id) {
+    if (tipo === 'estancia') {
+      var e = est(id), w = e.x1 - e.x0, h = e.y1 - e.y0;
+      return '<h3>' + e.nombre + '</h3>' + tabla([['Medidas interiores', f2(w) + ' × ' + f2(h) + ' m'], ['Superficie útil', f2(w * h) + ' m²'], ['En la maqueta (1:20)', mm(w) + ' × ' + mm(h)]]) +
+        '<p class="nota">La superficie útil es la del suelo de la estancia: se calcula con las medidas interiores, sin los muros.</p>';
+    }
+    if (tipo === 'muro') {
+      var m = MUROS[id], ex = m.tipo === 'exterior', L = Math.max(m.x1 - m.x0, m.y1 - m.y0), t = Math.min(m.x1 - m.x0, m.y1 - m.y0);
+      return '<h3>' + (ex ? 'Muro exterior · ' : 'Tabique · ') + NOMBRE_MURO[id] + '</h3>' + tabla([['Espesor real', f2(t) + ' m'], ['Largo en el plano', f2(L) + ' m'], ['Altura', f2(D.exterior.altura_muros) + ' m'], ['En la maqueta', 'cartón pluma de ' + (ex ? '10' : '5') + ' mm']]) +
+        '<p class="nota">' + (ex ? 'Los muros exteriores separan la vivienda del exterior y se dibujan más gruesos.' : 'Los tabiques dividen el interior de la vivienda en estancias.') + '</p>';
+    }
+    if (tipo === 'puerta') {
+      var p = D.puertas.filter(function (x) { return x.id === id; })[0], w2 = p.hasta - p.desde;
+      return '<h3>Puerta ' + p.id + ' · ' + p.nombre + '</h3>' + tabla([['Ancho', f2(w2) + ' m'], ['Alto', f2(p.alto) + ' m'], ['Está en', NOMBRE_MURO[p.muro]], ['Abre hacia', est(p.abre_hacia).nombre], ['Hueco en la maqueta', mm(w2) + ' × ' + mm(p.alto)]]) +
+        '<p class="nota">El arco indica el recorrido de la hoja al abrir: tiene su centro en la bisagra y su radio es el ancho de la puerta.</p>';
+    }
+    if (tipo === 'ventana') {
+      var v = D.ventanas.filter(function (x) { return x.id === id; })[0], w3 = v.hasta - v.desde;
+      return '<h3>Ventana ' + v.id + ' · ' + v.nombre + '</h3>' + tabla([['Ancho', f2(w3) + ' m'], ['Alto', f2(v.dintel - v.alfeizar) + ' m'], ['Altura del alféizar', f2(v.alfeizar) + ' m'], ['Fachada', NOMBRE_MURO[v.muro] + ' (orientación ' + ORIENT[v.muro] + ')'], ['Hueco en la maqueta', mm(w3) + ' × ' + mm(v.dintel - v.alfeizar)]]) +
+        '<p class="nota">En planta, la ventana se dibuja con tres líneas finas dentro del grueso del muro. Su altura se lee en el alzado.</p>';
+    }
+    if (tipo === 'elec') {
+      var e2 = ELEC[id], c = CIRC[id];
+      var NT = { luz: 'Punto de luz (aplique en pared)', interruptor: 'Interruptor', conmutador: 'Conmutador', pulsador: 'Pulsador', timbre: 'Timbre (zumbador)', cuadro: 'Cuadro: interruptor general' };
+      return '<h3>' + e2.id + ' · ' + e2.nombre + '</h3>' + tabla([['Símbolo', NT[e2.tipo]], ['Altura', f2(e2.z) + ' m'], ['Circuito', c ? c.id + '. ' + c.nombre + ' (' + c.tipo + ')' : 'todos: alimenta la instalación']]) +
+        '<p class="nota">El plano de la instalación indica qué elementos hay y dónde están. Cómo se conectan se representa en el esquema eléctrico.</p>';
+    }
+    return '';
+  }
+  function panelExplorar(html) {
+    panel.innerHTML = html || '<h3>Explorar</h3><p>Pulsa en una estancia, un muro, una puerta, una ventana o un elemento de la instalación para ver sus datos.</p><p class="nota">Activa la capa «Instalación eléctrica» para ver los mecanismos y los puntos de luz.</p>';
+  }
+
+  /* ---------- selección ---------- */
+  var modo = 'explorar', reto = null;
+  function limpiaSel() { svg.querySelectorAll('.sel,.ok-zona').forEach(function (n) { n.classList.remove('sel'); n.classList.remove('ok-zona'); }); }
+  function objetivo(t) {
+    while (t && t !== svg) { if (t.getAttribute && t.getAttribute('data-tipo')) return t; t = t.parentNode; }
+    return null;
+  }
+  svg.addEventListener('click', function (ev) {
+    if (modo === 'medir') { clicMedir(ev); return; }
+    var t = objetivo(ev.target); if (!t) return;
+    var tipo = t.getAttribute('data-tipo'), id = t.getAttribute('data-id');
+    limpiaSel(); t.classList.add('sel');
+    if (modo === 'explorar') panelExplorar(info(tipo, id));
+    else if (modo === 'retos') respuestaClic(id, t);
+  });
+
+  /* ---------- medir ---------- */
+  var med = [], gMed = el('g', {}, svg), escala = 20;
+  var NOTX = [0, 0.2, 1, 1.2, 1.8, 2, 2.8, 3, 3.9, 4, 4.2, 4.4, 5, 5.2, 5.3, 5.8, 6.2, 6.4, 6.8, 7];
+  var NOTY = [0, 0.2, 0.6, 1, 1.4, 1.7, 2.2, 2.3, 4.6, 4.8];
+  function ajusta(v, lista) {
+    var best = null, bd = 0.09;
+    lista.forEach(function (n) { var d = Math.abs(n - v); if (d < bd) { bd = d; best = n; } });
+    return best !== null ? best : Math.round(v / 0.05) * 0.05;
+  }
+  function punto(ev) {
+    var pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+    var p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    return [ajusta(p.x / S, NOTX), ajusta(p.y / S, NOTY)];
+  }
+  function clicMedir(ev) {
+    var p = punto(ev);
+    if (med.length >= 2) med = [];
+    med.push(p); dibujaMed(); panelMedir();
+  }
+  function dibujaMed() {
+    gMed.innerHTML = '';
+    med.forEach(function (p) { el('circle', { cx: p[0] * S, cy: p[1] * S, r: 5, 'class': 'med-p' }, gMed); });
+    if (med.length === 2) {
+      var a = med[0], b = med[1];
+      el('line', { x1: a[0] * S, y1: a[1] * S, x2: b[0] * S, y2: b[1] * S, 'class': 'med-l' }, gMed);
+      el('text', { x: (a[0] + b[0]) / 2 * S, y: (a[1] + b[1]) / 2 * S - 8, 'class': 'med-t' }, gMed, f2(Math.hypot(b[0] - a[0], b[1] - a[1])) + ' m');
+    }
+  }
+  function panelMedir() {
+    var h = '<h3>Medir</h3><p>Pulsa dos puntos del plano. Los puntos se ajustan a las esquinas de los muros y a los bordes de los huecos.</p>' +
+      '<label>Escala del papel: <select id="esc"><option value="20">1:20 (lámina A3 y maqueta)</option><option value="50">1:50 (ficha de despiece)</option><option value="100">1:100</option></select></label>';
+    if (med.length === 2) {
+      var a = med[0], b = med[1], dx = Math.abs(b[0] - a[0]), dy = Math.abs(b[1] - a[1]), d = Math.hypot(dx, dy);
+      var papel = d * 1000 / escala;
+      h += tabla([['Distancia real', f2(d) + ' m'], ['En horizontal (oeste–este)', f2(dx) + ' m'], ['En vertical (norte–sur)', f2(dy) + ' m'], ['En el papel a 1:' + escala, (Math.round(papel * 10) / 10).toString().replace('.', ',') + ' mm'], ['En la maqueta (1:20)', Math.round(d * 50) + ' mm']]) +
+        '<p class="nota">A escala 1:' + escala + ', 1 mm del papel equivale a ' + escala + ' mm reales: medida en el papel = medida real ÷ ' + escala + '.</p>';
+    } else if (med.length === 1) h += '<p class="nota">Ahora pulsa el segundo punto.</p>';
+    h += '<button class="lp-btn sec" id="borrar-med">Borrar la medida</button>';
+    panel.innerHTML = h;
+    var sel = document.getElementById('esc'); sel.value = String(escala);
+    sel.addEventListener('change', function () { escala = +sel.value; panelMedir(); });
+    document.getElementById('borrar-med').addEventListener('click', function () { med = []; dibujaMed(); panelMedir(); });
+  }
+
+  /* ---------- retos ---------- */
+  var RETOS = [
+    { q: 'Señala la puerta del baño.', tipo: 'clic', ok: ['P3'], sol: 'Es la puerta P3, en el tabique T2. Abre hacia el baño.' },
+    { q: 'Señala la ventana de la cocina.', tipo: 'clic', ok: ['V3'], sol: 'Es la ventana V3, en la fachada norte, sobre la encimera.' },
+    { q: '¿Cuánto mide por dentro el salón-cocina de oeste a este? (en m)', tipo: 'num', ok: 3.70, sol: '3,70 m: es la cota interior entre el muro oeste y el tabique T1.' },
+    { q: '¿Qué superficie útil tiene el dormitorio? (en m²)', tipo: 'num', ok: 6.44, tol: 0.02, sol: '2,80 × 2,30 = 6,44 m².' },
+    { q: '¿Qué espesor real tienen los tabiques? (en m)', tipo: 'num', ok: 0.10, sol: '0,10 m. En la maqueta se hacen con cartón pluma de 5 mm.' },
+    { q: 'La fachada sur mide 7,00 m. ¿Cuántos milímetros mide en la maqueta, a escala 1:20?', tipo: 'num', ok: 350, sol: '7,00 m = 7000 mm; 7000 ÷ 20 = 350 mm.' },
+    { q: 'Señala el tabique que separa el pasillo del baño.', tipo: 'clic', ok: ['T2'], sol: 'Es el tabique T2.' },
+    { q: '¿Hacia qué estancia abre la puerta P4? Señálala en el plano.', tipo: 'clic', ok: ['DO'], sol: 'Hacia el dormitorio: el arco de abatimiento queda dentro de esa estancia.' },
+    { q: 'Usa la herramienta «Medir»: ¿qué distancia real hay entre las dos ventanas de la fachada sur? (en m)', tipo: 'num', ok: 2.00, sol: 'La ventana V1 termina a 3,00 m del extremo oeste y la V2 empieza a 5,00 m: hay 2,00 m.' },
+    { q: 'En la lámina A3 (escala 1:20), la puerta de entrada mide 40 mm de ancho. ¿Cuánto mide en la realidad? (en m)', tipo: 'num', ok: 0.80, sol: '40 mm × 20 = 800 mm = 0,80 m.' },
+    { q: '¿Hacia qué orientación da la ventana del salón?', tipo: 'opc', ops: ['Norte', 'Sur', 'Este', 'Oeste'], ok: 'Sur', sol: 'Al sur: está en la fachada sur. El norte está arriba en la planta.' },
+    { q: 'Señala el conmutador que está junto a la puerta de entrada.', tipo: 'clic', ok: ['C1'], elec: true, sol: 'Es C1. El otro conmutador del pasillo, C2, está junto a la puerta del dormitorio.' }
+  ];
+  var ir = 0;
+  function panelRetos() {
+    var r = RETOS[ir];
+    if (r.elec && !document.getElementById('c-elec').checked) { document.getElementById('c-elec').checked = true; aplicaCapas(); }
+    var h = '<h3>Reto ' + (ir + 1) + ' de ' + RETOS.length + '</h3><p><strong>' + r.q + '</strong></p>';
+    if (r.tipo === 'num') h += '<input id="resp" type="text" inputmode="decimal" size="8" placeholder="valor"> <button class="lp-btn" id="comprobar">Comprobar</button>';
+    if (r.tipo === 'opc') h += '<div class="lp-ops">' + r.ops.map(function (o) { return '<button class="lp-btn sec op" data-o="' + o + '">' + o + '</button>'; }).join('') + '</div>';
+    if (r.tipo === 'clic') h += '<p class="nota">Pulsa sobre el plano.</p>';
+    h += '<div class="lp-fb" id="fb"></div><div style="margin-top:12px"><button class="lp-btn sec" id="ant">◀ Anterior</button><button class="lp-btn sec" id="sol">Ver solución</button><button class="lp-btn sec" id="sig">Siguiente ▶</button></div>';
+    panel.innerHTML = h;
+    document.getElementById('ant').disabled = ir === 0;
+    document.getElementById('sig').disabled = ir === RETOS.length - 1;
+    document.getElementById('ant').onclick = function () { ir--; limpiaSel(); panelRetos(); };
+    document.getElementById('sig').onclick = function () { ir++; limpiaSel(); panelRetos(); };
+    document.getElementById('sol').onclick = function () { fb('sol', r.sol); marcaSol(r); };
+    if (r.tipo === 'num') {
+      var inp = document.getElementById('resp');
+      var chk = function () {
+        var v = parseFloat(inp.value.replace(',', '.'));
+        if (isNaN(v)) return;
+        var tol = r.tol || Math.max(0.005, Math.abs(r.ok) * 0.005);
+        if (Math.abs(v - r.ok) <= tol) fb('ok', '✔ Correcto. ' + r.sol); else fb('ko', '✘ No es correcto. Revisa las cotas y vuelve a intentarlo.');
+      };
+      document.getElementById('comprobar').onclick = chk;
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') chk(); });
+    }
+    if (r.tipo === 'opc') panel.querySelectorAll('.op').forEach(function (b) {
+      b.onclick = function () { if (b.getAttribute('data-o') === r.ok) fb('ok', '✔ Correcto. ' + r.sol); else fb('ko', '✘ No es correcto. Fíjate en qué fachada está.'); };
+    });
+  }
+  function fb(cls, txt) { var f = document.getElementById('fb'); f.className = 'lp-fb ' + cls; f.textContent = txt; }
+  function marcaSol(r) {
+    if (r.tipo !== 'clic') return;
+    limpiaSel();
+    r.ok.forEach(function (id) { var n = svg.querySelector('[data-id="' + id + '"]'); if (n) n.classList.add(n.getAttribute('data-tipo') === 'estancia' ? 'ok-zona' : 'sel'); });
+  }
+  function respuestaClic(id, t) {
+    var r = RETOS[ir]; if (r.tipo !== 'clic') return;
+    if (r.ok.indexOf(id) >= 0) { if (t.getAttribute('data-tipo') === 'estancia') { t.classList.remove('sel'); t.classList.add('ok-zona'); } fb('ok', '✔ Correcto. ' + r.sol); }
+    else fb('ko', '✘ Eso no es. Inténtalo otra vez.');
+  }
+
+  /* ---------- modos ---------- */
+  document.querySelectorAll('.lp-tab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.lp-tab').forEach(function (x) { x.classList.toggle('activa', x === b); });
+      modo = b.getAttribute('data-modo'); limpiaSel(); med = []; dibujaMed();
+      svg.classList.toggle('medir', modo === 'medir');
+      if (modo === 'explorar') panelExplorar(); else if (modo === 'medir') panelMedir(); else panelRetos();
+    });
+  });
+  panelExplorar();
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
