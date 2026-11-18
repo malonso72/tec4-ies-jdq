@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Autoconsumo solar con batería · U01 · Tecnología 4º ESO</title>
-<meta name="description" content="Simulador de una instalación de autoconsumo fotovoltaico con batería en una vivienda: producción, consumo, batería y red hora a hora.">
+<meta name="description" content="Simulador 3D de una instalación de autoconsumo fotovoltaico con batería en una vivienda: producción, consumo, batería y red hora a hora.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -26,6 +26,13 @@
 @media(max-width:960px){.as-grid{grid-template-columns:1fr}}
 .as-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:10px}
 .as-svg{width:100%;height:auto;display:block}
+.as-escena{position:relative;width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;touch-action:none;cursor:grab;background:linear-gradient(#8fc6f2,#e6f3ff);transition:background .6s}
+.as-escena canvas{display:block;width:100%;height:100%}
+.as-et{position:absolute;transform:translate(-50%,-100%);font-family:var(--cond);font-weight:600;font-size:15px;line-height:1.15;padding:4px 9px;border-radius:10px;background:rgba(255,255,255,.94);border:2px solid #7d8a99;color:#1a2430;white-space:nowrap;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.18);text-align:center}
+.as-et b{font-family:'JetBrains Mono',monospace;font-size:14px}
+.as-et.sol{border-color:#f2a900}.as-et.bat{border-color:#1f9d55}.as-et.red{border-color:#7a5bc7}.as-et.casa{border-color:#1f5fae}.as-et.inv{border-color:#9aa5b1;font-size:13px}
+.as-arco{position:absolute;right:10px;top:10px;width:150px;background:rgba(255,255,255,.82);border-radius:8px;padding:4px 4px 2px;pointer-events:none}.as-arco text{font:600 10px Barlow,sans-serif;fill:#33404d}
+.as-ayuda{position:absolute;left:10px;bottom:8px;font-size:.78rem;color:#33404d;background:rgba(255,255,255,.85);padding:3px 8px;border-radius:6px;pointer-events:none}
 .as-panel{background:var(--principal-bg);border:1px solid var(--principal-cl);border-radius:10px;padding:14px 16px;font-size:.95rem;line-height:1.5}
 .as-panel h3{font-family:var(--cond);color:var(--principal);font-size:1.2rem;margin:0 0 8px}
 .as-msg{background:#fff;border-left:4px solid #e69500;border-radius:0 6px 6px 0;padding:8px 10px;margin:0 0 10px;min-height:66px}
@@ -78,7 +85,7 @@
   </div>
 
   <div class="as-grid">
-    <div class="as-card"><svg class="as-svg t-svg" id="esq" viewBox="0 0 900 500" role="img" aria-label="Esquema de la instalación con los flujos de energía"></svg></div>
+    <div class="as-card"><div class="as-escena" id="escena3d" aria-label="Vivienda en 3D con las placas solares, la batería y los flujos de energía"><div class="as-ayuda">Arrastra para girar · rueda o pellizco para acercar</div><svg class="as-arco" viewBox="0 0 150 86" aria-hidden="true"><path d="M10 74 A65 62 0 0 1 140 74" fill="none" stroke="#f2a900" stroke-width="2" stroke-dasharray="4 4"/><line x1="4" y1="74" x2="146" y2="74" stroke="#55606e" stroke-width="1.5"/><text x="10" y="84">E</text><text x="75" y="84" text-anchor="middle">S</text><text x="140" y="84" text-anchor="end">O</text><circle id="arco-sol" r="8" fill="#ffcf3a" stroke="#f2a900" stroke-width="2"/></svg></div></div>
     <aside class="as-panel" aria-live="polite">
       <h3>Ahora mismo</h3>
       <p class="as-msg" id="msg"></p>
@@ -114,7 +121,9 @@
     <div><h4>🔌 Contador bidireccional</h4>Mide en los dos sentidos: la energía que se <strong>compra</strong> a la red y la que se <strong>vierte</strong>. Con la compensación de excedentes, la energía vertida se descuenta de la factura.</div>
   </div>
 </main>
+<script src="../../../assets/js/vendor/three.min.js"></script>
 <script>
+const DATA={"HM": 2.5, "muros": [{"tipo": "exterior", "eje": "x", "x0": 0.0, "x1": 7.0, "y0": 0.0, "y1": 0.2, "u0": 0.0, "u1": 7.0, "puertas": [[4.2, 5.0, 2.0]], "ventanas": [[1.0, 2.0, 1.1, 2.1], [5.8, 6.4, 1.5, 2.1]]}, {"tipo": "exterior", "eje": "x", "x0": 0.0, "x1": 7.0, "y0": 4.6, "y1": 4.8, "u0": 0.0, "u1": 7.0, "puertas": [], "ventanas": [[1.0, 3.0, 0.9, 2.1], [5.0, 6.2, 0.9, 2.1]]}, {"tipo": "exterior", "eje": "y", "x0": 0.0, "x1": 0.2, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [], "ventanas": []}, {"tipo": "exterior", "eje": "y", "x0": 6.8, "x1": 7.0, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [], "ventanas": []}, {"tipo": "tabique", "eje": "y", "x0": 3.9, "x1": 4.0, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [[0.6, 1.4, 2.0]], "ventanas": []}, {"tipo": "tabique", "eje": "y", "x0": 5.2, "x1": 5.3, "y0": 0.2, "y1": 2.2, "u0": 0.2, "u1": 2.2, "puertas": [[1.0, 1.7, 2.0]], "ventanas": []}, {"tipo": "tabique", "eje": "x", "x0": 4.0, "x1": 6.8, "y0": 2.2, "y1": 2.3, "u0": 4.0, "u1": 6.8, "puertas": [[4.4, 5.2, 2.0]], "ventanas": []}], "estancias": [{"x0": 0.2, "y0": 0.2, "x1": 3.9, "y1": 4.6}, {"x0": 4.0, "y0": 0.2, "x1": 5.2, "y1": 2.2}, {"x0": 5.3, "y0": 0.2, "x1": 6.8, "y1": 2.2}, {"x0": 4.0, "y0": 2.3, "x1": 6.8, "y1": 4.6}]};
 (function(){
 // ------------------------------------------------------------ modelo
 const DT=0.05, N=Math.round(24/DT);
@@ -145,47 +154,155 @@ function simular(){
   R.tot={p:sum(R.p),c:sum(R.c),dir:sum(R.dir),bat:sum(R.bat),red:sum(R.red),exp:sum(R.exp)};
   return R;}
 
-// ------------------------------------------------------------ esquema
-const NS='http://www.w3.org/2000/svg', esq=document.getElementById('esq');
-function el(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||esq).appendChild(e);return e;}
-function txt(x,y,t,cls,par,extra){const e=el('text',Object.assign({x,y,class:cls},extra||{}),par);e.textContent=t;return e;}
-const cielo=el('rect',{x:0,y:0,width:900,height:500,fill:'#dff0ff',rx:8});
-el('rect',{x:0,y:440,width:900,height:60,fill:'#cfe3c4'});
-const sol=el('g',{});el('circle',{r:26,fill:'#ffcc33',stroke:'#f2a900','stroke-width':3},sol);
-for(let a=0;a<12;a++){const r1=34,r2=46,t=a*Math.PI/6;el('line',{x1:r1*Math.cos(t),y1:r1*Math.sin(t),x2:r2*Math.cos(t),y2:r2*Math.sin(t),stroke:'#f2a900','stroke-width':3,'stroke-linecap':'round'},sol);}
-const luna=el('g',{});el('circle',{r:20,fill:'#f4f1d0'},luna);el('circle',{cx:9,cy:-6,r:18,fill:'#2a3550'},luna);
-// casa
-el('polygon',{points:'170,250 360,140 550,250',fill:'#b5654a',stroke:'#7b3f2c','stroke-width':2});
-for(let i=0;i<7;i++){const x=232+i*33,y=203-(i<4?0:0);el('polygon',{points:`${x},${200+ (i%2?0:0)} ${x+28},${200} ${x+28-0},${226} ${x},${226}`,fill:'#1d3d73',stroke:'#9fb7da','stroke-width':1.2});
-  el('line',{x1:x+14,y1:200,x2:x+14,y2:226,stroke:'#5f7fb3','stroke-width':.8});}
-txt(360,190,'7 placas · 3 kW','t-et',esq,{style:'font-size:14px;fill:#fff'});
-el('rect',{x:185,y:250,width:350,height:190,fill:'#f6efe2',stroke:'#7d6a52','stroke-width':2});
-// inversor, batería, aparatos
-el('rect',{x:205,y:285,width:86,height:52,rx:6,fill:'#fff',stroke:'#55606e','stroke-width':2});txt(248,308,'Inversor','t-et');txt(248,327,'CC → CA','t-eje',esq,{'text-anchor':'middle'});
-el('rect',{x:205,y:362,width:86,height:62,rx:6,fill:'#fff',stroke:'#1f9d55','stroke-width':2});
-const batFill=el('rect',{x:211,y:368,width:74,height:50,fill:'#35c16f'});txt(248,392,'Batería','t-et');const batPct=txt(248,411,'','t-eje',esq,{'text-anchor':'middle'});
-el('rect',{x:368,y:285,width:146,height:139,rx:8,fill:'#fff',stroke:'#1f5fae','stroke-width':2});
-txt(441,310,'Consumo','t-et');txt(441,330,'de la casa','t-et');
-txt(441,378,'💡 🧊 📺 🍳','t-et',esq,{style:'font-size:24px'});
-const casaKW=txt(441,412,'','t-kw',esq,{fill:'#1f5fae'});
-// contador y red
-el('rect',{x:578,y:322,width:70,height:58,rx:6,fill:'#fff',stroke:'#7a5bc7','stroke-width':2});txt(613,345,'Contador','t-et',esq,{style:'font-size:15px'});txt(613,365,'⇄','t-et',esq,{style:'font-size:18px'});
-const torre=el('g',{transform:'translate(780,210)'});
-el('path',{d:'M-30 230 L0 0 L30 230 M-22 170 L22 170 M-15 115 L15 115 M-8 60 L8 60 M-40 40 L40 40 M-30 90 L30 90 M-22 170 L15 115 M22 170 L-15 115',stroke:'#8a96a8','stroke-width':3,fill:'none'},torre);
-txt(780,470,'Red eléctrica','t-et');
-// flujos
-function flujo(d,col){const g=el('path',{d,stroke:col,'stroke-width':4,fill:'none','stroke-linecap':'round',opacity:.25});
-  const f=el('path',{d,stroke:col,'stroke-width':4,fill:'none','stroke-linecap':'round','stroke-dasharray':'10 12'});return {g,f,off:0};}
+// ------------------------------------------------------------ escena 3D
+const NS='http://www.w3.org/2000/svg';
+const E3=(function(){
+const T=THREE, HM=DATA.HM, Z1=HM+0.3, ALERO=Z1+HM+0.05, CUM=ALERO+2.7*0.47;
+const cont=document.getElementById('escena3d');
+const R=new T.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});R.setClearColor(0x000000,0);
+R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));cont.prepend(R.domElement);
+const sc=new T.Scene(), cam=new T.PerspectiveCamera(36,1.6,0.1,300);
+const hemi=new T.HemisphereLight(0xffffff,0xb8c2cc,0.85);sc.add(hemi);
+const solLuz=new T.DirectionalLight(0xfff4dd,0.6);sc.add(solLuz);
+const V=(x,y,z)=>new T.Vector3(x,z,y);
+function plano(x0,y0,x1,y1,color,op,z){const m=new T.Mesh(new T.PlaneGeometry(x1-x0,y1-y0),new T.MeshLambertMaterial({color,transparent:op<1,opacity:op,side:T.DoubleSide}));
+  m.rotation.x=-Math.PI/2;m.position.set((x0+x1)/2,z||0,(y0+y1)/2);sc.add(m);return m;}
+function caja(x0,y0,z0,x1,y1,z1,color,op,edge){const m=new T.Mesh(new T.BoxGeometry(x1-x0,z1-z0,y1-y0),new T.MeshLambertMaterial({color,transparent:(op||1)<1,opacity:op||1,depthWrite:(op||1)>=1}));
+  m.position.set((x0+x1)/2,(z0+z1)/2,(y0+y1)/2);sc.add(m);
+  const e=new T.LineSegments(new T.EdgesGeometry(m.geometry),new T.LineBasicMaterial({color:edge||0x6d7b8c,transparent:true,opacity:0.8}));e.position.copy(m.position);sc.add(e);return m;}
+// terreno
+plano(-20,-18,27,23,0xb7d3a2,1,-0.01);
+DATA.estancias.forEach(e=>{plano(e.x0,e.y0,e.x1,e.y1,0xf1e9da,0.55,0.003);plano(e.x0,e.y0,e.x1,e.y1,0xf1e9da,0.45,Z1+0.003);});
+caja(0,0,HM,7,4.8,Z1,0xc9ced6,0.2,0x8a96a6);
+// muros semitransparentes en las dos plantas
+function muro(m,z0,alta){let pu=m.puertas,ve=m.ventanas.slice();
+  if(alta&&m.tipo==='exterior'){pu.forEach(p=>ve.push([p[0],p[1],1.0,2.1]));pu=[];}
+  const s=new T.Shape();s.moveTo(m.u0,0);
+  pu.slice().sort((a,b)=>a[0]-b[0]).forEach(p=>{s.lineTo(p[0],0);s.lineTo(p[0],p[2]);s.lineTo(p[1],p[2]);s.lineTo(p[1],0);});
+  s.lineTo(m.u1,0);s.lineTo(m.u1,HM);s.lineTo(m.u0,HM);s.lineTo(m.u0,0);
+  ve.forEach(v=>{const h=new T.Path();h.moveTo(v[0],v[2]);h.lineTo(v[0],v[3]);h.lineTo(v[1],v[3]);h.lineTo(v[1],v[2]);h.lineTo(v[0],v[2]);s.holes.push(h);});
+  const t=m.eje==='x'?m.y1-m.y0:m.x1-m.x0, g=new T.ExtrudeGeometry(s,{depth:t,bevelEnabled:false});
+  const me=new T.Mesh(g,new T.MeshLambertMaterial({color:0xf3efe6,transparent:true,opacity:0.32,depthWrite:false}));
+  const ed=new T.LineSegments(new T.EdgesGeometry(g,20),new T.LineBasicMaterial({color:0x6d7b8c,transparent:true,opacity:0.55}));
+  [me,ed].forEach(o=>{if(m.eje==='x'){o.position.set(0,z0,m.y0);}else{o.rotation.y=-Math.PI/2;o.position.set(m.x1,z0,0);}sc.add(o);});
+  return ve;}
+// ventanas que se iluminan de noche
+const vent=[];
+function luces(m,z0,ve){if(m.tipo!=='exterior'||m.eje!=='x')return;
+  ve.forEach(v=>{const p=new T.Mesh(new T.PlaneGeometry(v[1]-v[0],v[3]-v[2]),new T.MeshBasicMaterial({color:0xffd27a,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}));
+    p.position.set((v[0]+v[1])/2,z0+(v[2]+v[3])/2,(m.y0+m.y1)/2);sc.add(p);vent.push(p);});}
+DATA.muros.forEach(m=>{luces(m,0,muro(m,0,false));luces(m,Z1,muro(m,Z1,true));});
+// tejado a dos aguas con tejas
+{const ap=(a,b,c,d,op)=>{const g=new T.BufferGeometry().setFromPoints([a,b,c,a,c,d]);g.computeVertexNormals();
+   sc.add(new T.Mesh(g,new T.MeshLambertMaterial({color:0xb5654a,transparent:true,opacity:op,depthWrite:false,side:T.DoubleSide})));
+   sc.add(new T.LineSegments(new T.EdgesGeometry(g),new T.LineBasicMaterial({color:0x8a4a35})));};
+ ap(V(-0.3,-0.3,ALERO),V(7.3,-0.3,ALERO),V(7.3,2.4,CUM),V(-0.3,2.4,CUM),0.5);
+ ap(V(-0.3,5.1,ALERO),V(7.3,5.1,ALERO),V(7.3,2.4,CUM),V(-0.3,2.4,CUM),0.35);
+ [0,7].forEach(x=>{const g=new T.BufferGeometry().setFromPoints([V(x,0,Z1+HM),V(x,4.8,Z1+HM),V(x,2.4,CUM-0.05)]);g.computeVertexNormals();
+   sc.add(new T.Mesh(g,new T.MeshLambertMaterial({color:0xf3efe6,transparent:true,opacity:0.3,depthWrite:false,side:T.DoubleSide})));});}
+const zT=y=>ALERO+(5.1-y)*0.47;                   // faldón sur
+// placas solares: 7 módulos de 1,13 × 1,72 m en el faldón sur (4 + 3)
+{const c=document.createElement('canvas');c.width=64;c.height=96;const x=c.getContext('2d');
+ x.fillStyle='#173a6e';x.fillRect(0,0,64,96);x.strokeStyle='#5f86c4';x.lineWidth=1.2;
+ for(let i=1;i<4;i++){x.beginPath();x.moveTo(i*16,0);x.lineTo(i*16,96);x.stroke();}for(let j=1;j<6;j++){x.beginPath();x.moveTo(0,j*16);x.lineTo(64,j*16);x.stroke();}
+ x.strokeStyle='#c9d4e3';x.lineWidth=3;x.strokeRect(1,1,62,94);
+ const tex=new T.CanvasTexture(c), ang=Math.atan(0.47);
+ const pos=[];for(let i=0;i<4;i++)pos.push([0.1+i*1.75,2.75]);for(let i=0;i<3;i++)pos.push([0.95+i*1.75,3.9]);
+ pos.forEach(([x0,y0])=>{const g=new T.BoxGeometry(1.72,0.04,1.02);const m=new T.Mesh(g,[0,0,new T.MeshLambertMaterial({map:tex}),0,0,0].map(v=>v||new T.MeshLambertMaterial({color:0x9aa7b8})));
+   m.position.copy(V(x0+0.86,y0+0.51,zT(y0+0.51)+0.08));m.rotation.x=ang;sc.add(m);});}
+// inversor, batería, cuadro y contador (pared oeste)
+const inv=caja(0.2,3.5,1.25,0.42,3.95,1.8,0xf7f7f7);
+caja(0.2,2.75,0,0.58,3.35,1.05,0xf2f4f3,1,0x1f9d55);
+const batNiv=caja(0.24,2.8,0.04,0.54,3.3,0.5,0x35c16f);
+caja(0.2,2.15,1.4,0.32,2.6,1.9,0xe4e8ee);
+caja(-0.14,1.0,0.85,-0.02,1.4,1.35,0xffffff,1,0x7a5bc7);
+// poste de la red
+{const p=new T.Mesh(new T.CylinderGeometry(0.09,0.13,7.5,12),new T.MeshLambertMaterial({color:0x8a7a68}));p.position.copy(V(-3.2,1.2,3.75));sc.add(p);
+ caja(-3.6,1.15,7.0,-2.8,1.25,7.1,0x6b5a48);}
+// sol y luna
+const sol=new T.Mesh(new T.SphereGeometry(0.9,24,16),new T.MeshBasicMaterial({color:0xffcf3a}));sc.add(sol);
+const halo=new T.Mesh(new T.SphereGeometry(1.5,24,16),new T.MeshBasicMaterial({color:0xffe9a0,transparent:true,opacity:0.35}));sol.add(halo);
+const luna=new T.Mesh(new T.SphereGeometry(0.6,20,14),new T.MeshBasicMaterial({color:0xf4f1d0}));luna.position.copy(V(14,-10,16));sc.add(luna);
+
+// ------------------------------------------------------------ flujos de energía (tubos con rayas en movimiento)
+function rayas(color,claro){const c=document.createElement('canvas');c.width=64;c.height=8;const x=c.getContext('2d');
+  x.fillStyle=color;x.fillRect(0,0,64,8);x.fillStyle=claro;x.fillRect(0,0,24,8);
+  const t=new T.CanvasTexture(c);t.wrapS=T.RepeatWrapping;t.wrapT=T.RepeatWrapping;return t;}
+function flujo(pts,col,claro){const P=pts.map(p=>V(...p));const path=new T.CurvePath();let L=0;
+  for(let i=0;i<P.length-1;i++){path.add(new T.LineCurve3(P[i],P[i+1]));L+=P[i].distanceTo(P[i+1]);}
+  const t=rayas(col,claro);t.repeat.set(Math.max(1,L/0.35),1);
+  const g=new T.TubeGeometry(path,Math.max(8,Math.round(L*30)),0.11,12,false);
+  const m=new T.Mesh(g,new T.MeshLambertMaterial({map:t,emissive:new T.Color(col),emissiveIntensity:0.25}));sc.add(m);
+  const nod=P.slice(1,-1).map(p=>{const s=new T.Mesh(new T.SphereGeometry(0.112,12,8),new T.MeshLambertMaterial({color:new T.Color(col)}));s.position.copy(p);sc.add(s);return s;});
+  return {m,t,L,nod,v:0};}
+const zc=Z1+HM-0.15;
 const F={
-  pl:flujo('M 300 228 L 300 262 L 260 262 L 260 285','#f2a900'),
-  ca:flujo('M 291 300 L 368 300','#f2a900'),
-  bt:flujo('M 248 337 L 248 362','#1f9d55'),
-  rc:flujo('M 680 300 L 600 300 L 600 322','#7a5bc7'),
-  rc2:flujo('M 578 352 L 514 352','#7a5bc7'),
-  rx:flujo('M 291 318 L 330 318 L 330 440 L 613 440 L 613 380','#e08a00')};
-const lbl={pl:txt(350,272,'','t-kw',esq,{fill:'#b77800'}),ca:txt(330,292,'','t-kw',esq,{fill:'#b77800'}),bt:txt(315,354,'','t-kw',esq,{fill:'#16804a'}),
-  rc:txt(640,292,'','t-kw',esq,{fill:'#5b3fa6'}),rx:txt(470,462,'','t-kw',esq,{fill:'#b06a00'})};
-el('path',{d:'M 680 300 L 750 252',stroke:'#7a5bc7','stroke-width':2,opacity:.6});
+  pl:flujo([[1.4,3.6,zT(3.6)+0.05],[1.4,3.6,zc],[0.31,3.6,zc],[0.31,3.6,1.8]],'#f2a900','#ffe08a'),     // placas → inversor (corriente continua)
+  ca:flujo([[0.31,3.5,1.5],[0.31,2.6,1.5]],'#f2a900','#ffe08a'),                                           // inversor → cuadro de la casa
+  bt:flujo([[0.31,3.55,1.25],[0.31,3.55,1.15],[0.36,3.2,1.15],[0.36,3.2,1.05]],'#1f9d55','#9fe6bd'),      // inversor ↔ batería
+  rd:flujo([[-3.2,1.2,7.05],[-0.08,1.2,4.6],[-0.08,1.2,1.35]],'#7a5bc7','#cdbdf2'),                       // red → contador
+  rc:flujo([[-0.02,1.2,1.1],[0.26,1.2,1.1],[0.26,2.15,1.55]],'#7a5bc7','#cdbdf2')};                        // contador → cuadro
+function pon(f,val,sentido){const on=val>0.005;f.m.visible=on;f.nod.forEach(n=>n.visible=on);f.v=on?sentido*(0.35+val*0.9):0;
+f.m.material.emissiveIntensity=0.15+Math.min(1,val)*0.35;}
+
+// ------------------------------------------------------------ etiquetas con cifras
+function etq(x,y,z,cls){const d=document.createElement('div');d.className='as-et '+cls;cont.appendChild(d);return {el:d,p:V(x,y,z)};}
+const L={pl:etq(3.5,3.7,zT(3.7)+0.7,'sol'),inv:etq(0.31,3.6,2.75,'inv'),bat:etq(0.4,2.9,1.15,'bat'),casa:etq(5.4,2.6,Z1+0.9,'casa'),red:etq(-3.2,1.2,6.4,'red')};
+function txt(l,h){l.el.innerHTML=h;}
+
+// ------------------------------------------------------------ cámara orbital
+let O={t:V(2.6,2.4,2.5),az:2.2,el:0.38,d:17};
+const ptrs=new Map();let pinch0=0,d0=0;
+cont.addEventListener('pointerdown',e=>{cont.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===2){const a=[...ptrs.values()];pinch0=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);d0=O.d;}});
+cont.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;const p=ptrs.get(e.pointerId);
+  if(ptrs.size===1){O.az-=(e.clientX-p.x)*0.006;O.el=Math.min(1.4,Math.max(0.05,O.el+(e.clientY-p.y)*0.005));}
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===2&&pinch0){const a=[...ptrs.values()];O.d=Math.min(40,Math.max(5,d0*pinch0/Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)));}});
+const fin=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pinch0=0;};
+cont.addEventListener('pointerup',fin);cont.addEventListener('pointercancel',fin);
+cont.addEventListener('wheel',e=>{e.preventDefault();O.d=Math.min(40,Math.max(5,O.d*(e.deltaY>0?1.1:0.9)));},{passive:false});
+function tam(){const w=cont.clientWidth,h=cont.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+window.addEventListener('resize',tam);tam();
+
+// ------------------------------------------------------------ estado
+function act(s){
+  const noche=!s.dia_;
+  // cielo
+  cont.style.background=noche?'linear-gradient(#141c33,#2a3550)':(s.nublado?'linear-gradient(#b9c4cf,#dfe5ea)':'linear-gradient(#8fc6f2,#e6f3ff)');
+  hemi.intensity=noche?0.32:(s.nublado?0.7:0.85);
+  sol.visible=!noche;luna.visible=noche;
+  {const a=document.getElementById('arco-sol');if(noche){a.style.display='none';}else{a.style.display='';const t=Math.PI*(1-s.f);a.setAttribute('cx',75+65*Math.cos(t));a.setAttribute('cy',74-62*Math.sin(t));a.setAttribute('fill',s.nublado?'#d8d2b8':'#ffcf3a');}}
+  if(!noche){const f=s.f;sol.position.copy(V(3.5+14*Math.cos(Math.PI*f),2.4+11,2+11*Math.sin(Math.PI*f)));
+    halo.material.opacity=s.nublado?0.08:0.35;sol.material.color.set(s.nublado?0xe9e2c8:0xffcf3a);
+    solLuz.position.copy(sol.position);solLuz.intensity=s.nublado?0.2:0.6;}else{solLuz.intensity=0.05;}
+  // ventanas encendidas de noche, más cuanto más consume la casa
+  vent.forEach(v=>v.material.opacity=noche?Math.min(0.85,0.35+s.c*0.5):0);
+  // flujos
+  pon(F.pl,s.p,1);pon(F.ca,s.dir+s.des,1);pon(F.bt,s.des+s.car,s.des>s.car?-1:1);
+  pon(F.rd,s.imp>0.005?s.imp:s.exp,s.imp>0.005?1:-1);pon(F.rc,s.imp>0.005?s.imp:s.exp,s.imp>0.005?1:-1);
+  batNiv.scale.y=Math.max(0.02,s.soc);batNiv.position.y=0.04+0.46*Math.max(0.02,s.soc)/2;batNiv.visible=s.conBat;
+  inv.material.color.set(s.p>0.005||s.des>0.005?0xfff3cf:0xf7f7f7);
+  const k=s.kw;
+  txt(L.pl,'☀️ Placas <b>'+k(s.p)+'</b>');
+  txt(L.inv,'Inversor');
+  txt(L.bat,s.conBat?('🔋 Batería <b>'+Math.round(s.soc*100)+' %</b><br>'+(s.des>0.005?'entrega '+k(s.des):(s.car>0.005?'se carga '+k(s.car):'en reposo'))):'🔋 Sin batería');
+  txt(L.casa,'🏠 Casa <b>'+k(s.c)+'</b>');
+  txt(L.red,'⚡ Red<br>'+(s.imp>0.005?'compra <b>'+k(s.imp)+'</b>':(s.exp>0.005?'vierte <b>'+k(s.exp)+'</b>':'sin intercambio')));
+  L.bat.el.style.opacity=s.conBat?1:0.6;
+}
+let t0=performance.now(), mov=true;
+function frame(t){const dt=Math.min(0.05,(t-t0)/1000);t0=t;
+  for(const k in F){const f=F[k];if(f.v)f.t.offset.x-=dt*f.v*f.t.repeat.x/f.L*1.6;}
+  cam.position.set(O.t.x+O.d*Math.cos(O.el)*Math.cos(O.az),O.t.y+O.d*Math.sin(O.el),O.t.z+O.d*Math.cos(O.el)*Math.sin(O.az));cam.lookAt(O.t);
+  R.render(sc,cam);
+  const w=cont.clientWidth,h=cont.clientHeight;
+  for(const k in L){const l=L[k],p=l.p.clone().project(cam);if(p.z>1){l.el.style.display='none';continue;}
+    l.el.style.display='';l.el.style.left=((p.x+1)/2*w)+'px';l.el.style.top=((1-p.y)/2*h)+'px';}
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+return {act};
+})();
 
 // ------------------------------------------------------------ gráfica
 const graf=document.getElementById('graf');const GX0=48,GX1=846,GY0=230,GY1=20,KMAX=3;
@@ -222,20 +339,7 @@ function actualiza(){
   const i=Math.min(S.h.length-1,Math.round(hora/DT)),p=S.p[i],c=S.c[i],dir=S.dir[i],des=S.bat[i],car=S.car[i],imp=S.red[i],exp=S.exp[i],soc=S.soc[i];
   const hh=Math.floor(hora)%24,mm=Math.floor((hora-Math.floor(hora))*60);document.getElementById('reloj').textContent=String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');
   const D=DIAS[dia],dia_=hora>D.sal&&hora<D.pue;
-  // sol / luna y cielo
-  if(dia_){const f=(hora-D.sal)/(D.pue-D.sal);sol.setAttribute('transform',`translate(${70+760*f},${150-110*Math.sin(Math.PI*f)})`);sol.style.display='';luna.style.display='none';
-    cielo.setAttribute('fill',dia==='nublado'?'#cfd8e2':'#dff0ff');}
-  else{sol.style.display='none';luna.style.display='';luna.setAttribute('transform','translate(110,70)');cielo.setAttribute('fill','#2a3550');}
-  // flujos
-  const set=(f,val,sentido,l,texto)=>{const on=val>0.005;f.f.style.display=on?'':'none';f.g.style.display=on?'':'none';f.v=on?val*sentido:0;
-    const w=3+val*3.2;f.f.setAttribute('stroke-width',w);f.g.setAttribute('stroke-width',w);if(l){l.textContent=on?texto:'';}};
-  set(F.pl,p,1,lbl.pl,kw(p));
-  set(F.ca,dir+des,1,lbl.ca,kw(dir+des));
-  set(F.bt,des+car,des>car?-1:1,lbl.bt,des>car?'↑ '+kw(des):'↓ '+kw(car));
-  set(F.rc,imp>0.005?imp:exp,imp>0.005?1:-1,lbl.rc,imp>0.005?'compra '+kw(imp):'vertido '+kw(exp));set(F.rc2,imp,1,null);
-  set(F.rx,exp,1,lbl.rx,kw(exp));
-  batFill.setAttribute('height',50*soc);batFill.setAttribute('y',368+50*(1-soc));batFill.style.display=conBat?'':'none';batPct.textContent=conBat?Math.round(soc*100)+' %':'sin batería';
-  casaKW.textContent=kw(c);
+  E3.act({dia_,f:dia_?(hora-D.sal)/(D.pue-D.sal):0,nublado:dia==='nublado',p,c,dir,des,car,imp,exp,soc,conBat,kw});
   document.getElementById('v-p').textContent=kw(p);document.getElementById('v-c').textContent=kw(c);
   document.getElementById('l-b').textContent=!conBat?'Batería (no hay)':(des>0.005?'La batería entrega':(car>0.005?'Se carga la batería':'Batería en reposo'));
   document.getElementById('v-b').textContent=conBat?kw(des>0.005?des:car):'—';
@@ -265,7 +369,6 @@ bp.addEventListener('click',()=>{play=!play;bp.textContent=play?'⏸ Pausa':'▶
 let t0=performance.now();
 function frame(t){const dt=Math.min(0.05,(t-t0)/1000);t0=t;
   if(play){hora+=dt*1.2;if(hora>24)hora=0;document.getElementById('hora').value=hora;actualiza();}
-  for(const k in F){const f=F[k];if(f.v){f.off-=f.v*dt*40;f.f.setAttribute('stroke-dashoffset',f.off);}}
   requestAnimationFrame(frame);}
 recalcula();requestAnimationFrame(frame);
 window.__asListo=true;
