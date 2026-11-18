@@ -286,6 +286,11 @@ const INFO={
  aux:['C5 · Baño y auxiliares de cocina','Toma auxiliar de cocina','Por encima de la encimera, para pequeños electrodomésticos: microondas, tostadora, cafetera… Circuito C5: magnetotérmico de 16 A y cable de 2,5 mm².'],
  banoE:['C5 · Baño y auxiliares de cocina','Toma del baño','Circuito C5. Se coloca lejos de la ducha y de la bañera, fuera de las zonas donde puede salpicar el agua.']};
 const IMGS={cgmp:[['img/autoconsumo/cuadro.webp','Interruptor general, diferenciales y un magnetotérmico por circuito.']],
+ reg:[['img/electricidad/registro.webp','Caja de registro abierta: fase (marrón), neutro (azul) y protección (verde-amarillo), unidos con bornes.'],['img/electricidad/tubos.webp','Antes de enlucir: los tubos corrugados bajan por las rozas desde el techo hasta las cajas de los mecanismos.']],
+ int:[['img/electricidad/interruptor.webp','Interruptor junto a la puerta, en el lado de la manilla.'],['img/electricidad/interruptor-bornes.webp','Por detrás: al interruptor llegan la fase (marrón) y el retorno hacia la lámpara (negro). El neutro no pasa por él.']],
+ conm:[['img/electricidad/interruptor.webp','Por fuera, un conmutador es igual que un interruptor; por dentro tiene tres bornes en lugar de dos.']],
+ ench:[['img/electricidad/enchufe.webp','Base de enchufe con toma de tierra, a unos 30 cm del suelo.']],
+ aux:[['img/electricidad/toma-cocina.webp','Tomas auxiliares sobre la encimera de la cocina.']],
  cpm:[['img/autoconsumo/contador.webp','Caja de protección y medida en la valla, con la acometida enterrada entrando por abajo.']]};
 // [id, x, y, z, texto, prioridad, capa]
 const ETQ=[
@@ -308,7 +313,7 @@ function mostrar(id){const [tipo,tit,txt]=INFO[id];etqs.forEach(e=>e.el.classLis
   const zi=dlg.querySelector('.fi-img');zi.textContent='';
   im.forEach(([src,cap])=>{const fg=document.createElement('figure'),i=document.createElement('img'),fc=document.createElement('figcaption');
     i.setAttribute('src',src);i.alt=cap;i.loading='lazy';fc.textContent=cap;fg.append(i,fc);zi.appendChild(fg);});
-  dlg.querySelector('.fi-txt').innerHTML='<p>'+txt+'</p><p class="fi-ia">Imagen ilustrativa generada con IA.</p>';
+  dlg.querySelector('.fi-txt').innerHTML='<p>'+txt+'</p><p class="fi-ia">'+(im.length>1?'Imágenes ilustrativas generadas':'Imagen ilustrativa generada')+' con IA.</p>';
   if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');}
 dlg.querySelector('.fi-cerrar').addEventListener('click',()=>dlg.close?dlg.close():dlg.removeAttribute('open'));
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
