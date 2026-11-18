@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Instalación eléctrica · U01 · Tecnología 4º ESO</title>
+<meta name="description" content="Animación 3D de la instalación eléctrica de una vivienda de dos plantas: acometida, contador, derivación individual, cuadro general, circuitos C1 a C5 y toma de tierra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.fs-wrap{max-width:1240px;margin:20px auto;padding:0 20px 60px}
+.fs-hero{text-align:center;margin-bottom:14px}
+.fs-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 6px}
+.fs-hero p{font-size:.95rem;color:var(--texto2);margin:0 auto;line-height:1.55;max-width:820px}
+.fs-barra{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.fs-capas{display:flex;gap:8px;flex-wrap:wrap}
+.fs-capa{display:inline-flex;align-items:center;gap:7px;font-family:var(--cond);font-size:1rem;padding:6px 12px;border-radius:18px;border:1.5px solid var(--borde);background:#fff;cursor:pointer;color:var(--texto2);user-select:none}
+.fs-capa input{accent-color:var(--principal);width:16px;height:16px;margin:0}
+.fs-capa i{display:inline-block;width:22px;height:6px;border-radius:3px}
+.fs-vistas{display:flex;gap:6px;flex-wrap:wrap}
+.fs-btn{font-family:var(--cond);font-size:.95rem;background:#fff;color:var(--principal);border:1.5px solid var(--principal);border-radius:6px;padding:6px 12px;cursor:pointer}
+.fs-btn.on,.fs-btn:hover{background:var(--principal);color:#fff}
+.fs-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}
+@media(max-width:960px){.fs-grid{grid-template-columns:1fr}}
+.fs-escena{position:relative;width:100%;aspect-ratio:16/10;background:linear-gradient(#eef3f8,#f8fafc);border:1px solid var(--borde);border-radius:10px;overflow:hidden;touch-action:none;cursor:grab}
+.fs-escena:active{cursor:grabbing}
+.fs-escena canvas{display:block;width:100%;height:100%}
+.fs-et{position:absolute;transform:translate(-50%,-100%);font-family:var(--cond);font-weight:600;font-size:13px;line-height:1;padding:3px 7px;border-radius:10px;background:rgba(255,255,255,.93);border:1.5px solid #7d8a99;color:#1a2430;white-space:nowrap;cursor:pointer;pointer-events:auto;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.fs-et.fria{border-color:#2f7fd8;color:#1d5aa3}.fs-et.cal{border-color:#e0483c;color:#a82a20}.fs-et.san{border-color:#8a7560;color:#5c4a37}.fs-et.pluv{border-color:#14a3a8;color:#0c6f73}
+.fs-et.c1{border-color:#d9a200;color:#7a5b00}.fs-et.c2{border-color:#2f7fd8;color:#1d5aa3}.fs-et.c3{border-color:#d9412f;color:#a82a20}.fs-et.c4{border-color:#7a5bc7;color:#4f3591}.fs-et.c5{border-color:#14a3a8;color:#0c6f73}.fs-et.di,.fs-et.ac{border-color:#5b4636;color:#4a3828}.fs-et.tt{border-color:#2e9d48;color:#1e6b31}
+.fs-et.sel{background:#1a2430;color:#fff}
+.fs-circ{display:inline-flex;align-items:center;gap:7px;font-family:var(--cond);font-size:1rem;padding:6px 12px;border-radius:18px;border:1.5px solid var(--borde);background:#fff;cursor:pointer;color:var(--texto2)}
+.fs-circ i{display:inline-block;width:20px;height:8px;border-radius:4px}
+.fs-circ.on{border-color:var(--principal);background:var(--principal-bg);color:var(--principal);box-shadow:inset 0 0 0 1px var(--principal)}
+.fs-comp i.pt{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.fs-comp th{font-family:var(--cond)}
+.fs-panel a{font-weight:600}
+.fs-comp td{white-space:nowrap}.fs-comp td:nth-child(2){white-space:normal}
+.fs-nota{font-size:.86rem;color:var(--texto2);margin:8px 2px 0;line-height:1.5}
+.fs-ayuda{position:absolute;left:10px;bottom:8px;font-size:.78rem;color:var(--texto2);background:rgba(255,255,255,.85);padding:3px 8px;border-radius:6px;pointer-events:none}
+.fs-panel{background:var(--principal-bg);border:1px solid var(--principal-cl);border-radius:10px;padding:14px 16px;font-size:.95rem;line-height:1.55}
+.fs-panel h3{font-family:var(--cond);color:var(--principal);font-size:1.2rem;margin:0 0 6px}
+.fs-panel p{margin:0 0 8px}
+.fs-panel .tipo{font-family:var(--cond);font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;color:var(--texto2);margin-bottom:2px}
+.fs-comp{margin-top:14px;border-collapse:collapse;width:100%;font-size:.88rem;background:#fff;border-radius:8px;overflow:hidden}
+.fs-comp th{font-family:var(--cond);font-size:.95rem;padding:6px 8px;color:#fff;text-align:left}
+.fs-comp th.a{background:#2f7fd8}.fs-comp th.s{background:#8a7560}
+.fs-comp td{padding:5px 8px;border-bottom:1px solid var(--principal-cl);vertical-align:top}
+.fs-leyenda{display:flex;gap:16px;flex-wrap:wrap;font-size:.86rem;color:var(--texto2);margin-top:8px}
+.fs-leyenda span{display:inline-flex;align-items:center;gap:6px}
+.fs-leyenda i{display:inline-block;width:24px;height:6px;border-radius:3px}
+#ficha{position:fixed;inset:0;margin:auto;height:fit-content;max-width:min(860px,94vw);width:860px;border:0;border-radius:12px;padding:0;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+#ficha::backdrop{background:rgba(15,25,40,.55)}
+.fi-cab{display:flex;justify-content:space-between;align-items:center;background:var(--principal);color:#fff;padding:10px 16px}
+.fi-cab h3{margin:0;font-family:var(--cond);font-size:1.4rem}
+.fi-cab small{display:block;font-family:var(--sans);font-size:.78rem;opacity:.85;letter-spacing:.5px;text-transform:uppercase}
+.fi-cerrar{background:none;border:0;color:#fff;font-size:1.5rem;cursor:pointer;line-height:1}
+.fi-cuerpo{padding:14px 16px 16px;max-height:80vh;overflow:auto}
+.fi-img{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:10px}
+.fi-img figure{margin:0}.fi-img img{width:100%;height:auto;max-height:52vh;object-fit:contain;background:#f4f6f9;border-radius:8px;display:block}
+.fi-img figcaption{font-size:.86rem;color:var(--texto2);margin-top:4px;line-height:1.4}
+.fi-txt p{margin:0 0 8px;line-height:1.55}.fi-ia{font-size:.8rem;color:var(--texto2);font-style:italic}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda · Instalación eléctrica</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html#s5"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>⚡</span><span class="nc-lbl">Instalación eléctrica</span></span><span class="nc-sep">·</span>
+  <a href="cgmp.html"><span>🔌</span><span class="nc-lbl">Cuadro eléctrico</span></a>
+</nav>
+
+<main id="main-content" class="fs-wrap">
+  <section class="fs-hero">
+    <h1>⚡ Instalación eléctrica de la vivienda</h1>
+    <p>Una vivienda de <strong>dos plantas</strong> vista a través de las paredes: la electricidad llega enterrada desde la red, pasa por el <strong>contador</strong> y la <strong>derivación individual</strong> hasta el <strong>cuadro general</strong>, y de ahí sale un circuito para cada uso. Elige un circuito para verlo solo y pulsa cualquier etiqueta o aparato para ver su ficha.</p>
+  </section>
+
+  <div class="fs-barra">
+    <div class="fs-capas" role="group" aria-label="Circuito">
+      <button type="button" class="fs-circ on" data-circ="todos">Todos</button>
+      <button type="button" class="fs-circ" data-circ="c1"><i style="background:#f2b705"></i>C1 Iluminación</button>
+      <button type="button" class="fs-circ" data-circ="c2"><i style="background:#2f7fd8"></i>C2 Tomas</button>
+      <button type="button" class="fs-circ" data-circ="c3"><i style="background:#d9412f"></i>C3 Cocina</button>
+      <button type="button" class="fs-circ" data-circ="c4"><i style="background:#7a5bc7"></i>C4 Lavadora y termo</button>
+      <button type="button" class="fs-circ" data-circ="c5"><i style="background:#14a3a8"></i>C5 Baño y auxiliares</button>
+      <button type="button" class="fs-circ" data-circ="di"><i style="background:#5b4636"></i>Derivación</button>
+      <button type="button" class="fs-circ" data-circ="tt"><i style="background:repeating-linear-gradient(90deg,#2e9d48 0 6px,#f2d21b 6px 10px)"></i>Tierra</button>
+    </div>
+  </div>
+  <div class="fs-barra">
+    <div class="fs-capas">
+      <label class="fs-capa"><input type="checkbox" id="chk-luz">Luces encendidas</label>
+      <label class="fs-capa"><input type="checkbox" id="chk-et" checked>Etiquetas</label>
+      <label class="fs-capa"><input type="checkbox" id="chk-mov" checked>Movimiento</label>
+    </div>
+    <div class="fs-vistas" role="group" aria-label="Vistas">
+      <button class="fs-btn on" data-vista="general">Vista general</button>
+      <button class="fs-btn" data-vista="baja">Planta baja</button>
+      <button class="fs-btn" data-vista="alta">Planta alta</button>
+      <button class="fs-btn" data-vista="cuadro">Cuadro</button>
+      <button class="fs-btn" data-vista="calle">Calle</button>
+    </div>
+  </div>
+
+  <div class="fs-grid">
+    <div>
+      <div class="fs-escena" id="escena" aria-label="Vista 3D de la vivienda con su instalación eléctrica"><div class="fs-ayuda">Arrastra para girar · pulsa una etiqueta o un aparato para ver su ficha</div></div>
+      <p class="fs-nota">Cada circuito se dibuja de un color para distinguirlo. En una vivienda real todos los cables son de los mismos colores: <strong>fase</strong> marrón, negra o gris; <strong>neutro</strong> azul; <strong>protección</strong> verde-amarillo.</p>
+    </div>
+    <aside class="fs-panel" id="panel" aria-live="polite"></aside>
+  </div>
+</main>
+<dialog id="ficha" aria-labelledby="ficha-t"><div class="fi-cab"><div><small id="ficha-tipo"></small><h3 id="ficha-t"></h3></div><button type="button" class="fi-cerrar" aria-label="Cerrar">✕</button></div><div class="fi-cuerpo"><div class="fi-img"></div><div class="fi-txt"></div></div></dialog>
+<script src="../../../assets/js/vendor/three.min.js"></script>
+<script>
+const DATA={"HM": 2.5, "muros": [{"tipo": "exterior", "eje": "x", "x0": 0.0, "x1": 7.0, "y0": 0.0, "y1": 0.2, "u0": 0.0, "u1": 7.0, "puertas": [[4.2, 5.0, 2.0]], "ventanas": [[1.0, 2.0, 1.1, 2.1], [5.8, 6.4, 1.5, 2.1]]}, {"tipo": "exterior", "eje": "x", "x0": 0.0, "x1": 7.0, "y0": 4.6, "y1": 4.8, "u0": 0.0, "u1": 7.0, "puertas": [], "ventanas": [[1.0, 3.0, 0.9, 2.1], [5.0, 6.2, 0.9, 2.1]]}, {"tipo": "exterior", "eje": "y", "x0": 0.0, "x1": 0.2, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [], "ventanas": []}, {"tipo": "exterior", "eje": "y", "x0": 6.8, "x1": 7.0, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [], "ventanas": []}, {"tipo": "tabique", "eje": "y", "x0": 3.9, "x1": 4.0, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [[0.6, 1.4, 2.0]], "ventanas": []}, {"tipo": "tabique", "eje": "y", "x0": 5.2, "x1": 5.3, "y0": 0.2, "y1": 2.2, "u0": 0.2, "u1": 2.2, "puertas": [[1.0, 1.7, 2.0]], "ventanas": []}, {"tipo": "tabique", "eje": "x", "x0": 4.0, "x1": 6.8, "y0": 2.2, "y1": 2.3, "u0": 4.0, "u1": 6.8, "puertas": [[4.4, 5.2, 2.0]], "ventanas": []}], "estancias": [{"x0": 0.2, "y0": 0.2, "x1": 3.9, "y1": 4.6}, {"x0": 4.0, "y0": 0.2, "x1": 5.2, "y1": 2.2}, {"x0": 5.3, "y0": 0.2, "x1": 6.8, "y1": 2.2}, {"x0": 4.0, "y0": 2.3, "x1": 6.8, "y1": 4.6}]};
+(function(){
+const T=THREE, HM=DATA.HM, Z1=HM+0.3;
+// ---------------------------------------------------------------- escena
+const cont=document.getElementById('escena');
+const R=new T.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});R.setClearColor(0x000000,0);
+R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));cont.prepend(R.domElement);
+const sc=new T.Scene(), cam=new T.PerspectiveCamera(38,1.6,0.05,200);
+sc.add(new T.HemisphereLight(0xffffff,0xb8c2cc,0.85));
+const dl=new T.DirectionalLight(0xffffff,0.55);dl.position.set(-4,12,-6);sc.add(dl);
+const V=(x,y,z)=>new T.Vector3(x,z,y);
+// grupos: común, planta baja y planta alta (la vista de la planta baja oculta la alta)
+const gC=new T.Group(),gB=new T.Group(),gA=new T.Group();sc.add(gC,gB,gA);let G=gC;
+const add=o=>{G.add(o);return o;};
+const clic=[];
+function plano(x0,y0,x1,y1,color,op,z){const m=new T.Mesh(new T.PlaneGeometry(x1-x0,y1-y0),new T.MeshLambertMaterial({color,transparent:true,opacity:op,depthWrite:false,side:T.DoubleSide}));
+  m.rotation.x=-Math.PI/2;m.position.set((x0+x1)/2,z||0,(y0+y1)/2);return add(m);}
+function caja(x0,y0,z0,x1,y1,z1,color,op,ficha,mat){op=op||1;const m=new T.Mesh(new T.BoxGeometry(x1-x0,z1-z0,y1-y0),mat||new T.MeshLambertMaterial({color:color||0xffffff,transparent:op<1,opacity:op,depthWrite:op>=1}));
+  m.position.set((x0+x1)/2,(z0+z1)/2,(y0+y1)/2);add(m);
+  const e=new T.LineSegments(new T.EdgesGeometry(m.geometry),new T.LineBasicMaterial({color:0x8794a3,transparent:true,opacity:0.8}));e.position.copy(m.position);add(e);
+  if(ficha){m.userData.ficha=ficha;clic.push(m);}return m;}
+function texto(w,h,f){const c=document.createElement('canvas');c.width=w;c.height=h;f(c.getContext('2d'),w,h);const t=new T.CanvasTexture(c);t.anisotropy=4;return t;}
+
+// terreno: jardín, acera y calzada al norte (semitransparentes para ver lo enterrado)
+plano(-1.4,-1.6,8.4,0,0xcfe0c4,0.5);plano(-1.4,0,0,5.8,0xcfe0c4,0.5);plano(7,0,8.4,5.8,0xcfe0c4,0.5);plano(0,4.8,7,5.8,0xcfe0c4,0.5);
+plano(-1.4,-2.8,8.4,-1.6,0xd9dde2,0.6);plano(-1.4,-5.0,8.4,-2.8,0x9aa3ad,0.6);
+// muros semitransparentes con sus huecos
+function muro(m,z0,alta){let pu=m.puertas,ve=m.ventanas.slice();
+  if(alta&&m.tipo==='exterior'){pu.forEach(p=>ve.push([p[0],p[1],1.0,2.1]));pu=[];}
+  const s=new T.Shape();s.moveTo(m.u0,0);
+  pu.slice().sort((a,b)=>a[0]-b[0]).forEach(p=>{s.lineTo(p[0],0);s.lineTo(p[0],p[2]);s.lineTo(p[1],p[2]);s.lineTo(p[1],0);});
+  s.lineTo(m.u1,0);s.lineTo(m.u1,HM);s.lineTo(m.u0,HM);s.lineTo(m.u0,0);
+  ve.forEach(v=>{const h=new T.Path();h.moveTo(v[0],v[2]);h.lineTo(v[0],v[3]);h.lineTo(v[1],v[3]);h.lineTo(v[1],v[2]);h.lineTo(v[0],v[2]);s.holes.push(h);});
+  const t=m.eje==='x'?m.y1-m.y0:m.x1-m.x0,g=new T.ExtrudeGeometry(s,{depth:t,bevelEnabled:false});
+  const me=new T.Mesh(g,new T.MeshLambertMaterial({color:0xe8edf3,transparent:true,opacity:0.16,depthWrite:false}));
+  const ed=new T.LineSegments(new T.EdgesGeometry(g,20),new T.LineBasicMaterial({color:0x6d7b8c,transparent:true,opacity:0.55}));
+  [me,ed].forEach(o=>{if(m.eje==='x'){o.position.set(0,z0,m.y0);}else{o.rotation.y=-Math.PI/2;o.position.set(m.x1,z0,0);}add(o);});}
+
+// ---------------------------------------------------------------- cables animados
+const COL={c1:['#f2b705','#fff0a8'],c2:['#2f7fd8','#b9d6f7'],c3:['#d9412f','#f6b8ae'],c4:['#7a5bc7','#d4c6f2'],c5:['#14a3a8','#a6e3e5'],
+  di:['#5b4636','#c9b7a4'],ac:['#55606e','#c4ccd6'],tt:['#2e9d48','#f2d21b']};
+const capas={c1:[],c2:[],c3:[],c4:[],c5:[],di:[],ac:[],tt:[]},flujos=[];
+function rayas(a,b){return texto(64,8,(x)=>{x.fillStyle=a;x.fillRect(0,0,64,8);x.fillStyle=b;x.fillRect(0,0,24,8);});}
+function cable(cap,pts,r){const P=[];pts.forEach(p=>{const v=V(...p);if(!P.length||P[P.length-1].distanceTo(v)>1e-4)P.push(v);});
+  if(P.length<2)return;const path=new T.CurvePath();let L=0;
+  for(let i=0;i<P.length-1;i++){path.add(new T.LineCurve3(P[i],P[i+1]));L+=P[i].distanceTo(P[i+1]);}
+  const t=rayas(...COL[cap]);t.wrapS=t.wrapT=T.RepeatWrapping;t.repeat.set(Math.max(1,L/0.25),1);
+  r=r||0.024;const m=add(new T.Mesh(new T.TubeGeometry(path,Math.max(8,Math.round(L*40)),r,8,false),new T.MeshLambertMaterial({map:t,transparent:true})));
+  capas[cap].push(m);flujos.push({t,L,cap});
+  P.slice(1,-1).forEach(p=>{const s=add(new T.Mesh(new T.SphereGeometry(r*1.05,10,8),new T.MeshLambertMaterial({color:new T.Color(COL[cap][0]),transparent:true})));s.position.copy(p);capas[cap].push(s);});}
+
+// ---------------------------------------------------------------- mecanismos y aparatos
+// placa de pared (interruptor, enchufe…) con su normal (nx, ny) hacia la estancia
+function placa(x,y,z,nx,ny,w,h,col,ficha){const d=0.022;
+  const g=nx?new T.BoxGeometry(d,h,w):new T.BoxGeometry(w,h,d);
+  const m=add(new T.Mesh(g,new T.MeshLambertMaterial({color:col})));m.position.copy(V(x+nx*d/2,y+ny*d/2,z));
+  const e=add(new T.LineSegments(new T.EdgesGeometry(g),new T.LineBasicMaterial({color:0x6d7b8c})));e.position.copy(m.position);
+  if(ficha){m.userData.ficha=ficha;clic.push(m);}return m;}
+function interruptor(x,y,z0,nx,ny,f){const p=placa(x,y,z0+1.1,nx,ny,0.085,0.085,0xffffff,f||'int');
+  const t=add(new T.Mesh(new T.BoxGeometry(nx?0.012:0.03,0.045,nx?0.03:0.012),new T.MeshLambertMaterial({color:0xdfe4ea})));t.position.copy(V(x+nx*0.03,y+ny*0.03,z0+1.1));}
+function enchufe(x,y,z0,h,nx,ny,f){placa(x,y,z0+h,nx,ny,0.085,0.085,0xffffff,f||'ench');
+  [-0.017,0.017].forEach(o=>{const k=add(new T.Mesh(new T.CylinderGeometry(0.006,0.006,0.01,8),new T.MeshBasicMaterial({color:0x333333})));k.rotation[nx?'z':'x']=Math.PI/2;
+    k.position.copy(V(x+nx*0.024+(ny?o:0),y+ny*0.024+(nx?o:0),z0+h));});}
+function registro(x,y,z){const m=caja(x-0.06,y-0.06,z-0.06,x+0.06,y+0.06,z+0.06,0xd5d9de,1,'reg');return m;}
+const lamparas=[];
+function luz(x,y,z0){const z=z0+HM-0.02;
+  const b=add(new T.Mesh(new T.SphereGeometry(0.12,18,10,0,Math.PI*2,0,Math.PI/2),new T.MeshLambertMaterial({color:0xf4f1e6,emissive:0x000000,side:T.DoubleSide})));
+  b.rotation.x=Math.PI;b.position.copy(V(x,y,z));b.userData.ficha='luz';clic.push(b);
+  const h=add(new T.Mesh(new T.SphereGeometry(0.32,18,12),new T.MeshBasicMaterial({color:0xffe08a,transparent:true,opacity:0,depthWrite:false})));h.position.copy(V(x,y,z-0.25));
+  lamparas.push({b,h});}
+
+// ---------------------------------------------------------------- recorridos
+const CI=['c1','c2','c3','c4','c5'];
+const CUA={x:4.0,y0:1.7,y1:2.2,z0:1.4,z1:2.0};      // cuadro en la cara este del tabique T1, en el pasillo
+const xs=k=>4.07+0.0*k, ys=k=>1.78+0.085*k;          // salida de cada circuito por arriba del cuadro
+const zc=(z0,k)=>z0+HM-0.07-0.045*k;                 // altura de cada circuito bajo el techo
+// lleva el circuito k desde el cuadro hasta (tx,ty) por el techo de la planta z0 y baja hasta tz
+function ruta(k,z0,tx,ty,tz,reg){const c=CI[k],y=ys(k),zz=zc(z0,k);
+  const pts=[[xs(k),y,CUA.z1],[xs(k),y,zz],[tx,y,zz],[tx,ty,zz]];if(tz!==undefined)pts.push([tx,ty,tz]);
+  cable(c,pts);if(reg)registro(tx,ty,zz-0.1);}
+
+// ---------------------------------------------------------------- una planta
+function planta(z0,alta){
+  G=alta?gA:gB;
+  DATA.muros.forEach(m=>muro(m,z0,alta));
+  DATA.estancias.forEach(e=>plano(e.x0,e.y0,e.x1,e.y1,0xf1e9da,0.45,z0+0.003));
+  if(!alta){caja(0,0,HM,7,4.8,Z1,0xc9ced6,0.16);}
+  // C1 iluminación
+  const L1=alta?[[2.05,2.4]]:[[1.6,1.2],[2.05,3.4]];
+  L1.concat([[4.6,1.2],[6.05,1.2],[5.4,3.45]]).forEach(([x,y])=>{luz(x,y,z0);ruta(0,z0,x,y,z0+HM-0.02);});
+  const I=[[3.88,1.6,-1,0,'int'],[4.01,0.45,1,0,'conm'],[4.25,2.19,0,-1,'conm'],[5.19,1.9,-1,0,'int'],[5.45,2.31,0,1,'int']];
+  if(!alta)I.push([3.88,1.85,-1,0,'int']);
+  I.forEach(([x,y,nx,ny,f])=>{interruptor(x,y,z0,nx,ny,f);ruta(0,z0,x,y,z0+1.1,true);});
+  // C2 tomas de uso general
+  [[0.21,2.6,1,0],[2.0,4.59,0,-1],[3.89,3.6,-1,0],[6.79,3.0,-1,0],[4.6,4.59,0,-1],[4.01,3.4,1,0],[5.19,0.6,-1,0]].forEach(([x,y,nx,ny])=>{enchufe(x,y,z0,0.3,nx,ny,'ench');ruta(1,z0,x,y,z0+0.3,true);});
+  // C5 baño (y auxiliares de cocina en la planta baja)
+  enchufe(5.4,0.21,z0,1.1,0,1,'banoE');ruta(4,z0,5.4,0.21,z0+1.1,true);
+  // baño
+  caja(5.45,0.2,z0+0.78,5.95,0.62,z0+0.9,0xfbfbfb);caja(5.62,0.2,z0,5.78,0.4,z0+0.78,0xf0f0f0);
+  caja(6.15,0.2,z0+0.4,6.55,0.4,z0+0.85,0xfbfbfb);caja(6.2,0.4,z0,6.5,0.85,z0+0.42,0xfbfbfb);caja(6.05,1.45,z0,6.8,2.2,z0+0.06,0xeef3f7);
+  if(alta)return;
+  // cocina: fregadero, lavavajillas, lavadora, placa y horno, termo
+  caja(1.1,0.2,0,1.9,0.8,0.86,0xf4f1ea);caja(1.25,0.3,0.86,1.75,0.7,0.9,0xb9c3cc);
+  caja(1.9,0.2,0,2.5,0.8,0.85,0xf7f7f7,1,'lavad');caja(2.5,0.2,0,3.1,0.8,0.85,0xf7f7f7,1,'lavad');
+  {const d=add(new T.Mesh(new T.CircleGeometry(0.17,24),new T.MeshLambertMaterial({color:0x8fa4b8})));d.position.set(2.8,0.45,0.802);}
+  caja(3.1,0.2,0,3.85,0.8,0.86,0xf4f1ea,1,'horno');caja(3.2,0.28,0.86,3.75,0.72,0.88,0x1d232b,1,'horno');caja(3.15,0.78,0.15,3.8,0.81,0.7,0x2a3038,1,'horno');
+  {const g=new T.CylinderGeometry(0.22,0.22,0.8,28);const m=add(new T.Mesh(g,new T.MeshLambertMaterial({color:0xfafafa})));m.position.set(0.55,1.75,0.45);m.userData.ficha='termo';clic.push(m);}
+  enchufe(3.5,0.21,0,0.45,0,1,'horno');ruta(2,0,3.5,0.21,0.45,true);
+  [[2.8,0.21,0.45],[2.2,0.21,0.45],[0.55,0.21,1.5]].forEach(([x,y,h])=>{enchufe(x,y,0,h,0,1,h>1?'termo':'lavad');ruta(3,0,x,y,h,true);});
+  [[1.3,0.21],[3.0,0.21]].forEach(([x,y])=>{enchufe(x,y,0,1.1,0,1,'aux');ruta(4,0,x,y,1.1,true);});
+}
+planta(0,false);planta(Z1,true);
+G=gC;
+// paso de los circuitos a la planta alta (por el tabique, junto al cuadro)
+CI.forEach((c,k)=>cable(c,[[xs(k)+0.02,ys(k),zc(0,k)],[xs(k)+0.02,ys(k),Z1+zc(0,k)]],0.02));
+
+// ---------------------------------------------------------------- cuadro, contador, red y tierra
+const texCua=texto(200,240,(x,w,h)=>{x.fillStyle='#f2f3f5';x.fillRect(0,0,w,h);x.strokeStyle='#8a96a6';x.lineWidth=6;x.strokeRect(3,3,w-6,h-6);
+  for(let r=0;r<2;r++)for(let i=0;i<5;i++){const X=22+i*33,Y=46+r*96;x.fillStyle=(r===0&&i===0)?'#c0392b':'#fff';x.fillRect(X,Y,28,64);x.strokeStyle='#7d8a99';x.lineWidth=2;x.strokeRect(X,Y,28,64);x.fillStyle='#333';x.fillRect(X+10,Y+24,8,18);}
+  x.fillStyle='#55606e';x.font='bold 20px Barlow Condensed, sans-serif';x.fillText('CGMP',12,30);});
+{const l=new T.MeshLambertMaterial({color:0xe4e8ee});G=gB;caja(CUA.x,CUA.y0,CUA.z0,CUA.x+0.12,CUA.y1,CUA.z1,0,1,'cgmp',[new T.MeshLambertMaterial({map:texCua}),l,l,l,l,l]);G=gC;}
+// pilar de la valla con la caja de protección y medida (contador)
+caja(3.0,-1.65,0,3.6,-1.35,1.75,0xb7aa96);
+const texCon=texto(220,260,(x,w,h)=>{x.fillStyle='#eef0f2';x.fillRect(0,0,w,h);x.strokeStyle='#9aa3ad';x.lineWidth=6;x.strokeRect(3,3,w-6,h-6);
+  x.fillStyle='#fff';x.fillRect(96,22,104,130);x.strokeStyle='#7d8a99';x.lineWidth=2;x.strokeRect(96,22,104,130);
+  x.fillStyle='#a8d08d';x.fillRect(106,36,84,30);x.fillStyle='#1d2d14';x.font='bold 18px JetBrains Mono, monospace';x.fillText('004692',110,58);
+  for(let i=0;i<3;i++){x.fillStyle='#fff';x.fillRect(18+i*24,30,20,58);x.strokeRect(18+i*24,30,20,58);}
+  x.fillStyle='#55606e';x.font='bold 18px Barlow Condensed, sans-serif';x.fillText('CONTADOR',110,185);});
+{const l=new T.MeshLambertMaterial({color:0xd5d9de});caja(3.05,-1.7,0.55,3.55,-1.65,1.45,0,1,'cpm',[l,l,l,l,l,new T.MeshLambertMaterial({map:texCon})]);}
+// red de distribución bajo la calzada
+{const m=add(new T.Mesh(new T.CylinderGeometry(0.08,0.08,9.8,12),new T.MeshLambertMaterial({color:0x4b4f57})));m.rotation.z=Math.PI/2;m.position.copy(V(3.5,-3.9,-0.7));m.userData.ficha='red';clic.push(m);}
+cable('ac',[[3.3,-3.9,-0.7],[3.3,-1.78,-0.7],[3.3,-1.78,0.6]],0.035);
+cable('di',[[3.3,-1.5,0.6],[3.3,-1.5,-0.45],[4.07,-1.5,-0.45],[4.07,1.95,-0.45],[4.07,1.95,CUA.z0]],0.035);
+// toma de tierra: pica en el jardín y conductor de protección hasta el cuadro
+{const p=add(new T.Mesh(new T.CylinderGeometry(0.02,0.02,1.5,10),new T.MeshLambertMaterial({color:0xb87333})));p.position.copy(V(6.2,-0.8,-1.0));p.userData.ficha='pica';clic.push(p);}
+caja(6.0,-1.0,-0.3,6.4,-0.6,0,0xcfc6b8,0.5,'pica');caja(5.97,-1.03,0,6.43,-0.57,0.025,0x8f8a80,1,'pica');
+cable('tt',[[6.2,-0.8,-0.3],[6.2,-0.8,-0.5],[6.2,2.12,-0.5],[4.1,2.12,-0.5],[4.1,2.12,CUA.z0]],0.03);
+
+// ---------------------------------------------------------------- información
+const PIA={c1:'10 A',c2:'16 A',c3:'25 A',c4:'20 A',c5:'16 A'},SEC={c1:'1,5 mm²',c2:'2,5 mm²',c3:'6 mm²',c4:'4 mm²',c5:'2,5 mm²'};
+const CIRC={
+ c1:['Circuito C1','Iluminación','Alimenta todos los <strong>puntos de luz</strong> de la vivienda, en las dos plantas. Los interruptores y conmutadores cortan la fase de cada punto de luz.'],
+ c2:['Circuito C2','Tomas de uso general','Alimenta las <strong>bases de enchufe</strong> de salón, dormitorios y pasillos, y el frigorífico. Se colocan a unos 0,30 m del suelo.'],
+ c3:['Circuito C3','Cocina y horno','Circuito propio para la <strong>placa de cocina y el horno</strong>, los aparatos de más potencia de la vivienda.'],
+ c4:['Circuito C4','Lavadora, lavavajillas y termo','Alimenta los aparatos que <strong>calientan agua</strong> con una resistencia: lavadora, lavavajillas y termo eléctrico.'],
+ c5:['Circuito C5','Baño y auxiliares de cocina','Alimenta las tomas de los <strong>baños</strong> y las tomas <strong>auxiliares de cocina</strong> por encima de la encimera, para pequeños electrodomésticos.'],
+ di:['Derivación individual','Del contador al cuadro','Cable enterrado que va desde el contador, en la valla, hasta el <strong>cuadro general</strong> de la vivienda. Lleva fase, neutro y conductor de protección.'],
+ tt:['Toma de tierra','Protección de las personas','Una <strong>pica de cobre</strong> clavada en el terreno se une al cuadro. Desde allí, el <strong>conductor de protección</strong> (verde-amarillo) llega a todas las bases de enchufe y a las carcasas metálicas de los aparatos.']};
+const INFO={
+ red:['Red','Red de distribución','Cable de la compañía eléctrica enterrado bajo la calle. Lleva la electricidad a todas las viviendas de la calle en <strong>baja tensión</strong> (230 V).'],
+ acom:['Red','Acometida','Cable enterrado que une la red de distribución con la caja de protección y medida de la vivienda. Pertenece a la compañía.'],
+ cpm:['Red','Caja de protección y medida','Está en la valla o en la fachada, accesible desde la calle. Contiene los <strong>fusibles generales</strong> y el <strong>contador</strong>, que mide la energía consumida en kWh. El contador digital también controla la potencia contratada.'],
+ di:['Instalación interior','Derivación individual','Cable que va del contador al cuadro general. A partir del contador, la instalación es del propietario. Su sección mínima es de 6 mm².'],
+ cgmp:['Instalación interior','Cuadro general de mando y protección','<strong>Toda la electricidad de la vivienda pasa por aquí.</strong> Tiene el interruptor general, el protector contra sobretensiones, el diferencial y un magnetotérmico (PIA) por circuito. Se coloca junto a la entrada, a una altura de entre 1,4 y 2 m. <a href="cgmp.html">Abrir el simulador del cuadro</a>.'],
+ pica:['Protección','Toma de tierra','Pica de cobre clavada en el terreno, con una arqueta para revisarla. Si un aparato tiene una derivación, la corriente de fuga se va a tierra por el conductor de protección y el <strong>diferencial</strong> desconecta: la tierra y el diferencial protegen juntos.'],
+ reg:['Instalación interior','Caja de registro','Caja empotrada cerca del techo donde se <strong>empalman los cables</strong> con bornes de conexión. Tiene tapa para poder revisarlos. Los cables van dentro de tubos corrugados empotrados en paredes y techos.'],
+ paso:['Instalación interior','Paso a la planta alta','Los circuitos suben a la planta de arriba por tubos empotrados. Un solo cuadro protege toda la vivienda.'],
+ luz:['C1 · Iluminación','Punto de luz','Lámpara de techo o aplique de pared. Todos los puntos de luz son del circuito C1: magnetotérmico de 10 A y cable de 1,5 mm².'],
+ int:['C1 · Iluminación','Interruptor','Abre o cierra el circuito de un punto de luz. Se coloca junto a la puerta, en el lado de la manilla, a unos 1,10 m del suelo. El del baño suele ir fuera, en el pasillo.'],
+ conm:['C1 · Iluminación','Conmutadores','Dos conmutadores encienden y apagan la misma luz desde dos sitios: aquí, desde la entrada y desde la puerta del dormitorio, como en la maqueta.'],
+ ench:['C2 · Tomas de uso general','Base de enchufe','Base con toma de tierra (las dos patillas laterales). Circuito C2: magnetotérmico de 16 A y cable de 2,5 mm². Se colocan a unos 0,30 m del suelo.'],
+ horno:['C3 · Cocina y horno','Placa de cocina y horno','Son los aparatos de más potencia de la vivienda, por eso tienen su propio circuito: magnetotérmico de 25 A y cable de 6 mm².'],
+ lavad:['C4 · Lavadora, lavavajillas y termo','Lavadora y lavavajillas','Calientan el agua con una resistencia y consumen mucho durante bastante rato. Circuito C4: magnetotérmico de 20 A y cable de 4 mm².'],
+ termo:['C4 · Lavadora, lavavajillas y termo','Termo eléctrico','Calienta el agua con una resistencia. Comparte el circuito C4 con la lavadora y el lavavajillas.'],
+ aux:['C5 · Baño y auxiliares de cocina','Toma auxiliar de cocina','Por encima de la encimera, para pequeños electrodomésticos: microondas, tostadora, cafetera… Circuito C5: magnetotérmico de 16 A y cable de 2,5 mm².'],
+ banoE:['C5 · Baño y auxiliares de cocina','Toma del baño','Circuito C5. Se coloca lejos de la ducha y de la bañera, fuera de las zonas donde puede salpicar el agua.']};
+const IMGS={cgmp:[['img/autoconsumo/cuadro.webp','Interruptor general, diferenciales y un magnetotérmico por circuito.']],
+ cpm:[['img/autoconsumo/contador.webp','Caja de protección y medida en la valla, con la acometida enterrada entrando por abajo.']]};
+// [id, x, y, z, texto, prioridad, capa]
+const ETQ=[
+ ['red',1.0,-3.9,-0.5,'Red de distribución',1,'ac'],['acom',3.3,-2.8,-0.5,'Acometida',2,'ac'],['cpm',3.3,-1.7,1.85,'Contador',1,'ac'],
+ ['di',4.07,-0.6,-0.4,'Derivación individual',1,'di'],['cgmp',4.07,1.95,2.3,'Cuadro general',1,'gen'],['pica',6.2,-0.8,0.3,'Toma de tierra',1,'tt'],
+ ['paso',4.1,2.1,Z1-0.15,'Paso a la planta alta',2,'gen'],['reg',3.88,1.6,HM-0.35,'Caja de registro',2,'c1'],
+ ['luz',2.05,3.4,HM-0.3,'Punto de luz',1,'c1'],['int',3.88,1.6,1.3,'Interruptor',2,'c1'],['conm',4.01,0.45,1.3,'Conmutador',2,'c1'],
+ ['ench',2.0,4.59,0.55,'Base de enchufe',1,'c2'],['horno',3.5,0.5,1.05,'Placa y horno',1,'c3'],['lavad',2.8,0.5,1.0,'Lavadora',2,'c4'],
+ ['termo',0.55,0.45,2.3,'Termo',2,'c4'],['aux',1.3,0.21,1.35,'Toma auxiliar',2,'c5'],['banoE',5.4,0.21,Z1+1.35,'Toma del baño',1,'c5']];
+const etqs=ETQ.map(([id,x,y,z,txt,pr,cap])=>{const d=document.createElement('button');d.type='button';d.className='fs-et '+(cap==='gen'?'':cap);d.textContent=txt;
+  d.addEventListener('click',ev=>{ev.stopPropagation();mostrar(id);});cont.appendChild(d);return {id,el:d,p:V(x,y,z),pr,cap};});
+const panel=document.getElementById('panel'), dlg=document.getElementById('ficha');
+function tabla(){return '<table class="fs-comp"><tr><th class="a">Circuito</th><th class="a">Uso</th><th class="a">PIA</th><th class="a">Cable</th></tr>'+
+  CI.map(c=>'<tr><td><i class="pt" style="background:'+COL[c][0]+'"></i>'+c.toUpperCase()+'</td><td>'+CIRC[c][1]+'</td><td>'+PIA[c]+'</td><td>'+SEC[c]+'</td></tr>').join('')+'</table>';}
+function inicio(){panel.innerHTML='<div class="tipo">Instalación eléctrica</div><h3>Un circuito para cada uso</h3><p>Del cuadro general salen cinco circuitos. Cada uno tiene su <strong>magnetotérmico (PIA)</strong> y un cable más o menos grueso según la potencia de los aparatos que alimenta.</p>'+tabla();}
+function mostrar(id){const [tipo,tit,txt]=INFO[id];etqs.forEach(e=>e.el.classList.toggle('sel',e.id===id));
+  panel.innerHTML='<div class="tipo">'+tipo+'</div><h3>'+tit+'</h3><p>'+txt+'</p>';
+  const im=IMGS[id];if(!im)return;
+  document.getElementById('ficha-tipo').textContent=tipo;document.getElementById('ficha-t').textContent=tit;
+  const zi=dlg.querySelector('.fi-img');zi.textContent='';
+  im.forEach(([src,cap])=>{const fg=document.createElement('figure'),i=document.createElement('img'),fc=document.createElement('figcaption');
+    i.setAttribute('src',src);i.alt=cap;i.loading='lazy';fc.textContent=cap;fg.append(i,fc);zi.appendChild(fg);});
+  dlg.querySelector('.fi-txt').innerHTML='<p>'+txt+'</p><p class="fi-ia">Imagen ilustrativa generada con IA.</p>';
+  if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');}
+dlg.querySelector('.fi-cerrar').addEventListener('click',()=>dlg.close?dlg.close():dlg.removeAttribute('open'));
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+inicio();
+
+// ---------------------------------------------------------------- selección de circuito
+let circ='todos',verEt=true,mover=true;
+function aplicaCirc(){
+  for(const c in capas){const on=circ==='todos'||c===circ||(circ==='di'&&c==='ac');
+    capas[c].forEach(o=>{o.material.opacity=on?1:0.1;o.material.depthWrite=on;});}
+  if(circ==='todos'){inicio();etqs.forEach(e=>e.el.classList.remove('sel'));return;}
+  const [tit,uso,txt]=CIRC[circ];
+  panel.innerHTML='<div class="tipo">'+tit+'</div><h3>'+uso+'</h3><p>'+txt+'</p>'+(PIA[circ]?'<table class="fs-comp"><tr><td>Magnetotérmico (PIA)</td><td><strong>'+PIA[circ]+'</strong></td></tr><tr><td>Sección del cable</td><td><strong>'+SEC[circ]+'</strong></td></tr></table>':'');}
+document.querySelectorAll('[data-circ]').forEach(b=>b.addEventListener('click',()=>{circ=b.dataset.circ;document.querySelectorAll('[data-circ]').forEach(x=>x.classList.toggle('on',x===b));aplicaCirc();}));
+document.getElementById('chk-et').addEventListener('change',e=>{verEt=e.target.checked;});
+document.getElementById('chk-mov').addEventListener('change',e=>{mover=e.target.checked;});
+document.getElementById('chk-luz').addEventListener('change',e=>{const on=e.target.checked;lamparas.forEach(l=>{l.b.material.emissive.set(on?0xffd25a:0x000000);l.h.material.opacity=on?0.28:0;});});
+
+// ---------------------------------------------------------------- cámara orbital
+const VISTAS={general:{t:[3.6,0.6,2.0],az:-2.0,el:0.5,d:13.5},baja:{t:[3.6,1.2,0.9],az:-1.85,el:0.75,d:10.5},
+  alta:{t:[3.6,1.6,Z1+0.9],az:-1.85,el:0.85,d:11},cuadro:{t:[4.08,1.95,1.65],az:0.12,el:0.12,d:2.6},calle:{t:[3.8,-2.0,-0.3],az:-1.1,el:0.42,d:9.5}};
+let O={t:new T.Vector3(),az:0,el:0,d:10},modo='general',meta=null;
+function ponVista(n){const v=VISTAS[n];meta={t:V(...v.t),az:v.az,el:v.el,d:v.d};modo=n;gA.visible=n!=='baja'&&n!=='cuadro';
+  document.querySelectorAll('[data-vista]').forEach(b=>b.classList.toggle('on',b.dataset.vista===n));}
+document.querySelectorAll('[data-vista]').forEach(b=>b.addEventListener('click',()=>ponVista(b.dataset.vista)));
+ponVista('general');O.t.copy(meta.t);O.az=meta.az;O.el=meta.el;O.d=meta.d;
+const ptrs=new Map();let pinch0=0,d0=0,down=null;const ray=new T.Raycaster();
+cont.addEventListener('pointerdown',e=>{if(e.target.closest('.fs-et'))return;cont.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});down={x:e.clientX,y:e.clientY};meta=null;
+  if(ptrs.size===2){const a=[...ptrs.values()];pinch0=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);d0=O.d;}});
+cont.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;const p=ptrs.get(e.pointerId);
+  if(ptrs.size===1){O.az-=(e.clientX-p.x)*0.006;O.el=Math.min(1.45,Math.max(0.05,O.el+(e.clientY-p.y)*0.005));}
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===2&&pinch0){const a=[...ptrs.values()];O.d=Math.min(35,Math.max(1.5,d0*pinch0/Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)));}});
+const fin=e=>{if(down&&ptrs.size===1&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<6){const r=cont.getBoundingClientRect();
+    ray.setFromCamera({x:(e.clientX-r.left)/r.width*2-1,y:-(e.clientY-r.top)/r.height*2+1},cam);
+    const h=ray.intersectObjects(clic,false).find(h=>{let o=h.object;while(o){if(!o.visible)return false;o=o.parent;}return true;});if(h)mostrar(h.object.userData.ficha);}
+  ptrs.delete(e.pointerId);if(ptrs.size<2)pinch0=0;down=null;};
+cont.addEventListener('pointerup',fin);cont.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);down=null;});
+cont.addEventListener('wheel',e=>{e.preventDefault();meta=null;O.d=Math.min(35,Math.max(1.5,O.d*(e.deltaY>0?1.1:0.9)));},{passive:false});
+
+// ---------------------------------------------------------------- bucle
+function tam(){const w=cont.clientWidth,h=cont.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+window.addEventListener('resize',tam);tam();
+let t0=performance.now();
+function frame(t){const dt=Math.min(0.05,(t-t0)/1000);t0=t;
+  if(meta){const a=0.1;O.t.lerp(meta.t,a);O.az+=(meta.az-O.az)*a;O.el+=(meta.el-O.el)*a;O.d+=(meta.d-O.d)*a;}
+  if(mover)flujos.forEach(f=>{if(circ==='todos'||f.cap===circ||(circ==='di'&&f.cap==='ac'))f.t.offset.x-=dt*0.9*f.t.repeat.x/f.L;});
+  cam.position.set(O.t.x+O.d*Math.cos(O.el)*Math.cos(O.az),O.t.y+O.d*Math.sin(O.el),O.t.z+O.d*Math.cos(O.el)*Math.sin(O.az));cam.lookAt(O.t);
+  R.render(sc,cam);
+  const w=cont.clientWidth,h=cont.clientHeight;
+  etqs.forEach(e=>{const planta=(modo==='baja'||modo==='cuadro')?e.p.y<Z1-0.2:(modo==='alta'?(e.p.y>Z1-0.4):true);
+    const delCirc=circ==='todos'||e.cap==='gen'||e.cap===circ||(circ==='di'&&e.cap==='ac');
+    if(modo==='cuadro'&&!['cgmp','di','pica'].includes(e.id)){e.el.style.display='none';return;}
+    const vis=verEt&&planta&&delCirc&&(e.pr===1||O.d<10||circ!=='todos'||e.el.classList.contains('sel'));const p=e.p.clone().project(cam);
+    if(!vis||p.z>1||p.x<-1.05||p.x>1.05||p.y<-1.05||p.y>1.05){e.el.style.display='none';return;}
+    e.el.style.display='';e.el.style.left=((p.x+1)/2*w)+'px';e.el.style.top=((1-p.y)/2*h)+'px';});
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+window.__elListo=true;
+})();
+</script>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
