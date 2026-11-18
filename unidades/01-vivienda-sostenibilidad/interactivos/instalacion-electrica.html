@@ -192,7 +192,7 @@ function luz(x,y,z0){const z=z0+HM-0.02;
 
 // ---------------------------------------------------------------- recorridos
 const CI=['c1','c2','c3','c4','c5'];
-const CUA={x:4.0,y0:1.7,y1:2.2,z0:1.4,z1:2.0};      // cuadro en la cara este del tabique T1, en el pasillo
+const CUA={x:4.0,y0:1.6,y1:2.3,z0:1.45,z1:1.95};      // cuadro en la cara este del tabique T1, en el pasillo
 const xs=k=>4.07+0.0*k, ys=k=>1.78+0.085*k;          // salida de cada circuito por arriba del cuadro
 const zc=(z0,k)=>z0+HM-0.07-0.045*k;                 // altura de cada circuito bajo el techo
 // lleva el circuito k desde el cuadro hasta (tx,ty) por el techo de la planta z0 y baja hasta tz
@@ -236,9 +236,21 @@ G=gC;
 CI.forEach((c,k)=>cable(c,[[xs(k)+0.02,ys(k),zc(0,k)],[xs(k)+0.02,ys(k),Z1+zc(0,k)]],0.02));
 
 // ---------------------------------------------------------------- cuadro, contador, red y tierra
-const texCua=texto(200,240,(x,w,h)=>{x.fillStyle='#f2f3f5';x.fillRect(0,0,w,h);x.strokeStyle='#8a96a6';x.lineWidth=6;x.strokeRect(3,3,w-6,h-6);
-  for(let r=0;r<2;r++)for(let i=0;i<5;i++){const X=22+i*33,Y=46+r*96;x.fillStyle=(r===0&&i===0)?'#c0392b':'#fff';x.fillRect(X,Y,28,64);x.strokeStyle='#7d8a99';x.lineWidth=2;x.strokeRect(X,Y,28,64);x.fillStyle='#333';x.fillRect(X+10,Y+24,8,18);}
-  x.fillStyle='#55606e';x.font='bold 20px Barlow Condensed, sans-serif';x.fillText('CGMP',12,30);});
+const texCua=texto(700,500,(x,w,h)=>{x.fillStyle='#f2f3f5';x.fillRect(0,0,w,h);x.strokeStyle='#8a96a6';x.lineWidth=10;x.strokeRect(5,5,w-10,h-10);
+  x.fillStyle='#55606e';x.font='bold 30px Barlow Condensed, sans-serif';x.textAlign='center';x.fillText('CUADRO GENERAL DE MANDO Y PROTECCIÓN',w/2,52);
+  const y0=120,hh=250,U=50,X0=(w-12*U)/2;x.fillStyle='#b9c1ca';x.fillRect(X0-10,y0+hh/2-14,12*U+20,28);   // carril DIN
+  // [módulos, rótulo, color del rótulo, texto inferior, tipo]
+  const A=[[2,'IGA','#1d232b','40 A','iga'],[2,'⚡','#1d232b','','spd'],[2,'ID','#1d232b','30 mA','id'],
+    [1,'C1','#b38600','10 A'],[1,'C2','#1d5aa3','16 A'],[1,'C3','#a82a20','25 A'],[1,'C4','#4f3591','20 A'],[1,'C5','#0c6f73','16 A']];
+  let X=X0;A.forEach(([m,t,c,b,tipo],k)=>{const W=m*U-4;
+    x.fillStyle='#ffffff';x.fillRect(X,y0,W,hh);x.strokeStyle='#7d8a99';x.lineWidth=2;x.strokeRect(X,y0,W,hh);
+    x.fillStyle=c;x.fillRect(X+4,y0+10,W-8,40);x.fillStyle=tipo==='spd'?'#f2b705':'#fff';x.font='bold 28px Barlow Condensed, sans-serif';x.fillText(t,X+W/2,y0+40);
+    if(tipo==='spd'){x.fillStyle='#2ecc71';x.fillRect(X+W/2-22,y0+100,44,24);}
+    else{x.fillStyle='#d8dde3';x.fillRect(X+W/2-13,y0+80,26,90);x.fillStyle='#2a3038';x.fillRect(X+W/2-12,y0+82,24,40);}
+    if(tipo==='id'){x.fillStyle='#c0392b';x.fillRect(X+8,y0+86,22,22);x.fillStyle='#fff';x.font='bold 18px Barlow, sans-serif';x.fillText('T',X+19,y0+103);}
+    if(b){x.fillStyle='#33404d';x.font='bold 24px Barlow Condensed, sans-serif';x.fillText(b,X+W/2,y0+hh-22);}
+    X+=m*U+(k===2?U:0);});
+  x.fillStyle='#55606e';x.font='22px Barlow, sans-serif';x.fillText('general · sobretensiones · diferencial · un magnetotérmico (PIA) por circuito',w/2,h-50);});
 {const l=new T.MeshLambertMaterial({color:0xe4e8ee});G=gB;caja(CUA.x,CUA.y0,CUA.z0,CUA.x+0.12,CUA.y1,CUA.z1,0,1,'cgmp',[new T.MeshLambertMaterial({map:texCua}),l,l,l,l,l]);G=gC;}
 // pilar de la valla con la caja de protección y medida (contador)
 caja(3.0,-1.65,0,3.6,-1.35,1.75,0xb7aa96);
@@ -337,7 +349,7 @@ document.getElementById('chk-luz').addEventListener('change',e=>{const on=e.targ
 
 // ---------------------------------------------------------------- cámara orbital
 const VISTAS={general:{t:[3.6,0.6,2.0],az:-2.0,el:0.5,d:13.5},baja:{t:[3.6,1.2,0.9],az:-1.85,el:0.75,d:10.5},
-  alta:{t:[3.6,1.6,Z1+0.9],az:-1.85,el:0.85,d:11},cuadro:{t:[4.08,1.95,1.65],az:0.12,el:0.12,d:2.6},calle:{t:[3.8,-2.0,-0.3],az:-1.1,el:0.42,d:9.5}};
+  alta:{t:[3.6,1.6,Z1+0.9],az:-1.85,el:0.85,d:11},cuadro:{t:[4.1,1.95,1.7],az:0.0,el:0.06,d:1.35},calle:{t:[3.8,-2.0,-0.3],az:-1.1,el:0.42,d:9.5}};
 let O={t:new T.Vector3(),az:0,el:0,d:10},modo='general',meta=null;
 function ponVista(n){const v=VISTAS[n];meta={t:V(...v.t),az:v.az,el:v.el,d:v.d};modo=n;gA.visible=n!=='baja'&&n!=='cuadro';
   document.querySelectorAll('[data-vista]').forEach(b=>b.classList.toggle('on',b.dataset.vista===n));}
