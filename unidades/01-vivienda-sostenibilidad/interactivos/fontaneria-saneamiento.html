@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Fontanería y saneamiento · U01 · Tecnología 4º ESO</title>
+<meta name="description" content="Animación 3D de la instalación de agua fría y caliente y de la red de saneamiento de la vivienda tipo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.fs-wrap{max-width:1240px;margin:20px auto;padding:0 20px 60px}
+.fs-hero{text-align:center;margin-bottom:14px}
+.fs-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 6px}
+.fs-hero p{font-size:.95rem;color:var(--texto2);margin:0 auto;line-height:1.55;max-width:820px}
+.fs-barra{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.fs-capas{display:flex;gap:8px;flex-wrap:wrap}
+.fs-capa{display:inline-flex;align-items:center;gap:7px;font-family:var(--cond);font-size:1rem;padding:6px 12px;border-radius:18px;border:1.5px solid var(--borde);background:#fff;cursor:pointer;color:var(--texto2);user-select:none}
+.fs-capa input{accent-color:var(--principal);width:16px;height:16px;margin:0}
+.fs-capa i{display:inline-block;width:22px;height:6px;border-radius:3px}
+.fs-vistas{display:flex;gap:6px;flex-wrap:wrap}
+.fs-btn{font-family:var(--cond);font-size:.95rem;background:#fff;color:var(--principal);border:1.5px solid var(--principal);border-radius:6px;padding:6px 12px;cursor:pointer}
+.fs-btn.on,.fs-btn:hover{background:var(--principal);color:#fff}
+.fs-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}
+@media(max-width:960px){.fs-grid{grid-template-columns:1fr}}
+.fs-escena{position:relative;width:100%;aspect-ratio:16/10;background:linear-gradient(#eef3f8,#f8fafc);border:1px solid var(--borde);border-radius:10px;overflow:hidden;touch-action:none;cursor:grab}
+.fs-escena:active{cursor:grabbing}
+.fs-escena canvas{display:block;width:100%;height:100%}
+.fs-et{position:absolute;transform:translate(-50%,-100%);font-family:var(--cond);font-weight:600;font-size:13px;line-height:1;padding:3px 7px;border-radius:10px;background:rgba(255,255,255,.93);border:1.5px solid #7d8a99;color:#1a2430;white-space:nowrap;cursor:pointer;pointer-events:auto;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.fs-et.fria{border-color:#2f7fd8;color:#1d5aa3}.fs-et.cal{border-color:#e0483c;color:#a82a20}.fs-et.san{border-color:#8a7560;color:#5c4a37}
+.fs-et.sel{background:#1a2430;color:#fff}
+.fs-ayuda{position:absolute;left:10px;bottom:8px;font-size:.78rem;color:var(--texto2);background:rgba(255,255,255,.85);padding:3px 8px;border-radius:6px;pointer-events:none}
+.fs-panel{background:var(--principal-bg);border:1px solid var(--principal-cl);border-radius:10px;padding:14px 16px;font-size:.95rem;line-height:1.55}
+.fs-panel h3{font-family:var(--cond);color:var(--principal);font-size:1.2rem;margin:0 0 6px}
+.fs-panel p{margin:0 0 8px}
+.fs-panel .tipo{font-family:var(--cond);font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;color:var(--texto2);margin-bottom:2px}
+.fs-comp{margin-top:14px;border-collapse:collapse;width:100%;font-size:.88rem;background:#fff;border-radius:8px;overflow:hidden}
+.fs-comp th{font-family:var(--cond);font-size:.95rem;padding:6px 8px;color:#fff;text-align:left}
+.fs-comp th.a{background:#2f7fd8}.fs-comp th.s{background:#8a7560}
+.fs-comp td{padding:5px 8px;border-bottom:1px solid var(--principal-cl);vertical-align:top}
+.fs-leyenda{display:flex;gap:16px;flex-wrap:wrap;font-size:.86rem;color:var(--texto2);margin-top:8px}
+.fs-leyenda span{display:inline-flex;align-items:center;gap:6px}
+.fs-leyenda i{display:inline-block;width:24px;height:6px;border-radius:3px}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda · Fontanería y saneamiento</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html#s4"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚰</span><span class="nc-lbl">Fontanería y saneamiento</span></span><span class="nc-sep">·</span>
+  <a href="instalacion-casa.html"><span>💡</span><span class="nc-lbl">La instalación de la casa</span></a>
+</nav>
+
+<main id="main-content" class="fs-wrap">
+  <section class="fs-hero">
+    <h1>🚰 Fontanería y saneamiento</h1>
+    <p>El agua de la vivienda tipo, vista a través de las paredes: el agua fría y la caliente llegan <strong>a presión</strong> hasta cada aparato, y el agua usada se va <strong>por gravedad</strong> hasta el alcantarillado. Pulsa cualquier etiqueta para saber qué es.</p>
+  </section>
+
+  <div class="fs-barra">
+    <div class="fs-capas" role="group" aria-label="Capas">
+      <label class="fs-capa"><input type="checkbox" data-capa="fria" checked><i style="background:#2f7fd8"></i>Agua fría</label>
+      <label class="fs-capa"><input type="checkbox" data-capa="cal" checked><i style="background:#e0483c"></i>Agua caliente</label>
+      <label class="fs-capa"><input type="checkbox" data-capa="san" checked><i style="background:#8a7560"></i>Saneamiento</label>
+      <label class="fs-capa"><input type="checkbox" id="chk-et" checked>Etiquetas</label>
+      <label class="fs-capa"><input type="checkbox" id="chk-mov" checked>Movimiento</label>
+    </div>
+    <div class="fs-vistas" role="group" aria-label="Vistas">
+      <button class="fs-btn on" data-vista="general">Vista general</button>
+      <button class="fs-btn" data-vista="cocina">Cocina</button>
+      <button class="fs-btn" data-vista="bano">Baño</button>
+      <button class="fs-btn" data-vista="calle">Calle</button>
+    </div>
+  </div>
+
+  <div class="fs-grid">
+    <div>
+      <div class="fs-escena" id="escena" aria-label="Vista 3D de la vivienda con sus tuberías"><div class="fs-ayuda">Arrastra para girar · rueda o pellizco para acercar</div></div>
+      <div class="fs-leyenda">
+        <span><i style="background:#2f7fd8"></i>Agua fría (a presión)</span>
+        <span><i style="background:#e0483c"></i>Agua caliente (a presión)</span>
+        <span><i style="background:#8a7560"></i>Desagües (por gravedad)</span>
+        <span>Las tuberías están dibujadas más gruesas de lo real para que se vean.</span>
+      </div>
+    </div>
+    <aside class="fs-panel" id="panel" aria-live="polite">
+      <div class="tipo">Instalaciones de agua</div>
+      <h3>Dos redes distintas</h3>
+      <p>La vivienda tiene dos redes de agua que nunca se mezclan: la de <strong>abastecimiento</strong>, que trae agua potable, y la de <strong>saneamiento</strong>, que se lleva el agua usada.</p>
+      <table class="fs-comp">
+        <tr><th class="a">Abastecimiento</th><th class="s">Saneamiento</th></tr>
+        <tr><td>Agua a presión</td><td>Sin presión: por gravedad</td></tr>
+        <tr><td>Tuberías finas (16-25 mm)</td><td>Tuberías gruesas (32-110 mm)</td></tr>
+        <tr><td>Pueden subir y bajar</td><td>Siempre con pendiente hacia abajo</td></tr>
+        <tr><td>Llaves para cortar el agua</td><td>Sifones contra los malos olores</td></tr>
+      </table>
+    </aside>
+  </div>
+</main>
+<script src="../../../assets/js/vendor/three.min.js"></script>
+<script>
+const DATA={"HM": 2.5, "muros": [{"eje": "x", "x0": 0.0, "x1": 7.0, "y0": 0.0, "y1": 0.2, "u0": 0.0, "u1": 7.0, "puertas": [[4.2, 5.0, 2.0]], "ventanas": [[1.0, 2.0, 1.1, 2.1], [5.8, 6.4, 1.5, 2.1]]}, {"eje": "x", "x0": 0.0, "x1": 7.0, "y0": 4.6, "y1": 4.8, "u0": 0.0, "u1": 7.0, "puertas": [], "ventanas": [[1.0, 3.0, 0.9, 2.1], [5.0, 6.2, 0.9, 2.1]]}, {"eje": "y", "x0": 0.0, "x1": 0.2, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [], "ventanas": []}, {"eje": "y", "x0": 6.8, "x1": 7.0, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [], "ventanas": []}, {"eje": "y", "x0": 3.9, "x1": 4.0, "y0": 0.2, "y1": 4.6, "u0": 0.2, "u1": 4.6, "puertas": [[0.6, 1.4, 2.0]], "ventanas": []}, {"eje": "y", "x0": 5.2, "x1": 5.3, "y0": 0.2, "y1": 2.2, "u0": 0.2, "u1": 2.2, "puertas": [[1.0, 1.7, 2.0]], "ventanas": []}, {"eje": "x", "x0": 4.0, "x1": 6.8, "y0": 2.2, "y1": 2.3, "u0": 4.0, "u1": 6.8, "puertas": [[4.4, 5.2, 2.0]], "ventanas": []}], "estancias": [{"x0": 0.2, "y0": 0.2, "x1": 3.9, "y1": 4.6}, {"x0": 4.0, "y0": 0.2, "x1": 5.2, "y1": 2.2}, {"x0": 5.3, "y0": 0.2, "x1": 6.8, "y1": 2.2}, {"x0": 4.0, "y0": 2.3, "x1": 6.8, "y1": 4.6}]};
+(function(){
+const T=THREE, HM=DATA.HM;
+const COL={fria:0x2f7fd8,cal:0xe0483c,san:0x8a7560};
+// ---------------------------------------------------------------- escena
+const cont=document.getElementById('escena');
+const R=new T.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});R.setClearColor(0x000000,0);
+R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+cont.prepend(R.domElement);
+const sc=new T.Scene();
+const cam=new T.PerspectiveCamera(38,1.6,0.1,200);
+sc.add(new T.HemisphereLight(0xffffff,0xb8c2cc,0.85));
+const dl=new T.DirectionalLight(0xffffff,0.55);dl.position.set(-4,9,-6);sc.add(dl);
+// coordenadas: X = x (este), Y = z (altura), Z = y (sur)
+const V=(x,y,z)=>new T.Vector3(x,z,y);
+
+// suelos: estancias, acera y calzada (semitransparentes para ver lo enterrado)
+function plano(x0,y0,x1,y1,color,op,z){const m=new T.Mesh(new T.PlaneGeometry(x1-x0,y1-y0),new T.MeshLambertMaterial({color,transparent:true,opacity:op,depthWrite:false,side:T.DoubleSide}));
+  m.rotation.x=-Math.PI/2;m.position.set((x0+x1)/2,z||0,(y0+y1)/2);sc.add(m);return m;}
+DATA.estancias.forEach(e=>plano(e.x0,e.y0,e.x1,e.y1,0xf1e9da,0.55,0.002));
+plano(-1.2,-1.7,8.2,0,0xd9dde2,0.55);           // acera
+plano(-1.2,-3.6,8.2,-1.7,0x9aa3ad,0.55);        // calzada
+plano(-1.2,0,0,4.8,0xdfe6d8,0.45);plano(7.0,0,8.2,4.8,0xdfe6d8,0.45);plano(-1.2,4.8,8.2,5.8,0xdfe6d8,0.45);
+
+// muros semitransparentes con sus huecos
+function muro(m){
+  const s=new T.Shape();s.moveTo(m.u0,0);
+  m.puertas.slice().sort((a,b)=>a[0]-b[0]).forEach(p=>{s.lineTo(p[0],0);s.lineTo(p[0],p[2]);s.lineTo(p[1],p[2]);s.lineTo(p[1],0);});
+  s.lineTo(m.u1,0);s.lineTo(m.u1,HM);s.lineTo(m.u0,HM);s.lineTo(m.u0,0);
+  m.ventanas.forEach(v=>{const h=new T.Path();h.moveTo(v[0],v[2]);h.lineTo(v[0],v[3]);h.lineTo(v[1],v[3]);h.lineTo(v[1],v[2]);h.lineTo(v[0],v[2]);s.holes.push(h);});
+  const t=m.eje==='x'?m.y1-m.y0:m.x1-m.x0;
+  const g=new T.ExtrudeGeometry(s,{depth:t,bevelEnabled:false});
+  const me=new T.Mesh(g,new T.MeshLambertMaterial({color:0xe8edf3,transparent:true,opacity:0.22,depthWrite:false}));
+  const ed=new T.LineSegments(new T.EdgesGeometry(g,20),new T.LineBasicMaterial({color:0x6d7b8c,transparent:true,opacity:0.7}));
+  [me,ed].forEach(o=>{if(m.eje==='x'){o.position.set(0,0,m.y0);}else{o.rotation.y=-Math.PI/2;o.position.set(m.x1,0,0);}sc.add(o);});
+}
+DATA.muros.forEach(muro);
+
+// ---------------------------------------------------------------- aparatos
+const BL=0xffffff;
+function caja(x0,y0,z0,x1,y1,z1,color,op){const m=new T.Mesh(new T.BoxGeometry(x1-x0,z1-z0,y1-y0),new T.MeshLambertMaterial({color:color||BL,transparent:!!op,opacity:op||1}));
+  m.position.set((x0+x1)/2,(z0+z1)/2,(y0+y1)/2);sc.add(m);
+  const e=new T.LineSegments(new T.EdgesGeometry(m.geometry),new T.LineBasicMaterial({color:0x8794a3}));e.position.copy(m.position);sc.add(e);return m;}
+// cocina: encimera con fregadero, lavavajillas y lavadora
+caja(1.1,0.2,0,1.9,0.8,0.86,0xf4f1ea);caja(1.25,0.3,0.86,1.75,0.7,0.9,0xb9c3cc);
+caja(1.9,0.2,0,2.5,0.8,0.85,0xf7f7f7);caja(2.5,0.2,0,3.1,0.8,0.85,0xf7f7f7);
+{const d=new T.Mesh(new T.CircleGeometry(0.17,24),new T.MeshLambertMaterial({color:0x8fa4b8}));d.position.set(2.8,0.45,0.802);sc.add(d);}
+// termo eléctrico
+{const g=new T.CylinderGeometry(0.22,0.22,0.8,28);const m=new T.Mesh(g,new T.MeshLambertMaterial({color:0xfafafa}));m.position.set(0.55,1.75,0.45);sc.add(m);
+ const e=new T.LineSegments(new T.EdgesGeometry(g,30),new T.LineBasicMaterial({color:0x8794a3}));e.position.copy(m.position);sc.add(e);}
+// baño: lavabo, inodoro y plato de ducha
+caja(5.45,0.2,0.78,5.95,0.62,0.9,0xfbfbfb);caja(5.62,0.2,0,5.78,0.4,0.78,0xf0f0f0);
+caja(6.15,0.2,0.4,6.55,0.4,0.85,0xfbfbfb);caja(6.2,0.4,0,6.5,0.85,0.42,0xfbfbfb);
+caja(6.05,1.45,0,6.8,2.2,0.06,0xeef3f7);
+{const m=new T.Mesh(new T.CylinderGeometry(0.09,0.06,0.04,20),new T.MeshLambertMaterial({color:0xb9c3cc}));m.position.set(6.62,1.95,1.82);sc.add(m);}
+// contador en hornacina de fachada
+caja(3.1,-0.12,0.35,3.5,-0.02,0.85,0xe3e8ee);
+// arquetas
+function arqueta(x,y){caja(x-0.22,y-0.22,-0.55,x+0.22,y+0.22,0,0xcfc6b8,0.55);caja(x-0.25,y-0.25,0,x+0.25,y+0.25,0.025,0x8f8a80);}
+arqueta(3.0,-0.7);arqueta(6.0,-0.7);arqueta(4.6,-0.7);
+
+// ---------------------------------------------------------------- tuberías animadas
+const tex={};
+function rayas(color,claro){const c=document.createElement('canvas');c.width=64;c.height=8;const x=c.getContext('2d');
+  x.fillStyle=color;x.fillRect(0,0,64,8);x.fillStyle=claro;x.fillRect(0,0,22,8);
+  const t=new T.CanvasTexture(c);t.wrapS=T.RepeatWrapping;t.wrapT=T.RepeatWrapping;return t;}
+const capas={fria:[],cal:[],san:[]};const flujos=[];
+function tubo(capa,pts,r){
+  const P=pts.map(p=>V(p[0],p[1],p[2]));const path=new T.CurvePath();
+  let L=0;for(let i=0;i<P.length-1;i++){path.add(new T.LineCurve3(P[i],P[i+1]));L+=P[i].distanceTo(P[i+1]);}
+  const base={fria:['#2f7fd8','#9cc8f5'],cal:['#e0483c','#f8b2a8'],san:['#8a7560','#c9b9a4']}[capa];
+  const t=rayas(base[0],base[1]);t.repeat.set(Math.max(1,L/0.28),1);
+  const g=new T.TubeGeometry(path,Math.max(8,Math.round(L*40)),r||0.028,10,false);
+  const m=new T.Mesh(g,new T.MeshLambertMaterial({map:t}));sc.add(m);capas[capa].push(m);
+  flujos.push({t,v:capa==='san'?0.55:1.1,L});
+  // codos: esferas en cada vértice
+  P.slice(1,-1).forEach(p=>{const s=new T.Mesh(new T.SphereGeometry((r||0.028)*1.05,12,8),new T.MeshLambertMaterial({color:new T.Color(base[0])}));s.position.copy(p);sc.add(s);capas[capa].push(s);});
+  return m;
+}
+function llave(capa,x,y,z){const g=new T.Group();
+  const b=new T.Mesh(new T.SphereGeometry(0.05,16,10),new T.MeshLambertMaterial({color:0x6b7380}));
+  const h=new T.Mesh(new T.BoxGeometry(0.16,0.025,0.035),new T.MeshLambertMaterial({color:capa==='cal'?0xc0392b:0x1f5fae}));h.position.y=0.06;
+  g.add(b,h);g.position.copy(V(x,y,z));sc.add(g);capas[capa].push(g);}
+function sifon(x,y,z){const g=new T.Mesh(new T.TorusGeometry(0.06,0.024,8,20,Math.PI),new T.MeshLambertMaterial({color:0x8a7560}));
+  g.rotation.z=Math.PI;g.position.copy(V(x,y,z));sc.add(g);capas.san.push(g);}
+
+// --- abastecimiento: red pública → acometida → contador → llave general
+const zf=0.08;
+tubo('fria',[[-1.2,-2.5,-0.6],[8.2,-2.5,-0.6]],0.07);                       // red de abastecimiento
+tubo('fria',[[3.3,-2.5,-0.6],[3.3,-0.3,-0.6],[3.3,-0.3,0.45],[3.3,-0.07,0.45]],0.035);  // acometida hasta el contador
+tubo('fria',[[3.3,-0.07,0.6],[3.3,0.32,0.6],[3.3,0.32,zf],[3.3,0.3,zf]],0.03);         // entra en la vivienda
+llave('fria',3.3,0.32,0.6);
+// agua fría hacia la cocina
+tubo('fria',[[3.3,0.3,zf],[0.55,0.3,zf]]);
+llave('fria',3.12,0.3,zf+0.02);
+tubo('fria',[[2.8,0.3,zf],[2.8,0.3,0.55]]);                 // lavadora
+tubo('fria',[[2.2,0.3,zf],[2.2,0.3,0.5]]);                  // lavavajillas
+tubo('fria',[[1.58,0.3,zf],[1.58,0.3,0.97],[1.58,0.42,0.97]]);   // fregadero
+tubo('fria',[[0.55,0.3,zf],[0.5,0.3,zf],[0.5,0.3,1.35]]);   // entrada al termo
+// agua fría hacia el baño
+tubo('fria',[[3.3,0.3,zf],[6.72,0.3,zf]]);
+llave('fria',5.42,0.3,zf+0.02);
+tubo('fria',[[5.66,0.3,zf],[5.66,0.3,0.95],[5.66,0.38,0.95]]);   // lavabo
+tubo('fria',[[6.28,0.3,zf],[6.28,0.3,0.6]]);                // cisterna del inodoro
+tubo('fria',[[6.72,0.3,zf],[6.72,1.82,zf],[6.72,1.82,1.05]]);// ducha
+// agua caliente: termo → fregadero, lavabo y ducha
+const zc=0.14;
+tubo('cal',[[0.6,0.42,1.35],[0.6,0.42,zc],[6.62,0.42,zc]]);
+llave('cal',5.42,0.42,zc+0.02);
+tubo('cal',[[1.68,0.42,zc],[1.68,0.42,0.97],[1.68,0.48,0.97]]);
+tubo('cal',[[5.76,0.42,zc],[5.76,0.42,0.95],[5.76,0.46,0.95]]);
+tubo('cal',[[6.62,0.42,zc],[6.62,1.82,zc],[6.62,1.82,1.05]]);
+tubo('cal',[[6.67,1.82,1.05],[6.74,1.82,1.05],[6.74,1.82,1.95],[6.62,1.82,1.95]],0.022); // columna de la ducha (agua mezclada)
+
+// --- saneamiento (por gravedad, con pendiente hacia la arqueta)
+const zs=-0.12;
+// cocina: fregadero, lavavajillas, lavadora → colector → arqueta 1
+sifon(1.5,0.55,0.55);tubo('san',[[1.5,0.55,0.86],[1.5,0.55,0.61]],0.035);tubo('san',[[1.56,0.55,0.55],[1.56,0.62,0.55],[1.56,0.62,zs]],0.035);
+tubo('san',[[2.2,0.25,0.4],[2.2,0.62,0.4],[2.2,0.62,zs-0.01]],0.03);
+tubo('san',[[2.8,0.25,0.45],[2.8,0.62,0.45],[2.8,0.62,zs-0.02]],0.03);
+tubo('san',[[1.56,0.62,zs],[3.0,0.62,zs-0.03],[3.0,-0.7,zs-0.3],[3.0,-0.7,-0.45]],0.05);
+// baño: lavabo, ducha, inodoro → colector → arqueta 2 (con ventilación)
+sifon(5.66,0.5,0.55);tubo('san',[[5.66,0.5,0.8],[5.66,0.5,0.61]],0.03);tubo('san',[[5.72,0.5,0.55],[5.72,0.62,0.55],[5.72,0.62,zs]],0.03);
+tubo('san',[[6.42,1.82,0.0],[6.42,1.82,zs+0.05],[6.42,0.62,zs+0.02]],0.035);   // sumidero de la ducha
+tubo('san',[[6.35,0.62,0.0],[6.35,0.62,zs+0.01]],0.055);                         // manguetón del inodoro
+tubo('san',[[5.72,0.62,zs],[6.0,0.62,zs-0.01]],0.055);
+tubo('san',[[6.72,0.62,zs+0.03],[6.0,0.62,zs-0.01]],0.055);
+tubo('san',[[6.0,0.62,zs-0.01],[6.0,-0.7,zs-0.3],[6.0,-0.7,-0.45]],0.055);
+tubo('san',[[6.72,0.32,2.95],[6.72,0.32,zs+0.03],[6.72,0.62,zs+0.03]],0.045);      // ventilación (el aire entra por arriba)
+{const c=new T.Mesh(new T.CylinderGeometry(0.07,0.07,0.06,16),new T.MeshLambertMaterial({color:0x8a7560}));c.position.copy(V(6.72,0.32,2.98));sc.add(c);capas.san.push(c);}
+// exterior: arquetas → arqueta general → alcantarillado
+tubo('san',[[3.0,-0.7,-0.45],[4.6,-0.7,-0.5]],0.06);tubo('san',[[6.0,-0.7,-0.45],[4.6,-0.7,-0.5]],0.06);
+tubo('san',[[4.6,-0.7,-0.5],[4.6,-3.0,-1.05]],0.075);
+tubo('san',[[-1.2,-3.0,-1.1],[8.2,-3.0,-1.1]],0.16);
+
+// ---------------------------------------------------------------- etiquetas e información
+const INFO={
+ red:['fria','Abastecimiento','Red de abastecimiento','Tubería de la compañía de aguas que va enterrada bajo la calle. Lleva agua potable <strong>a presión</strong> a todas las viviendas.'],
+ acom:['fria','Abastecimiento','Acometida','Tubería que une la red pública con la vivienda. Al principio lleva una llave de registro que solo maneja la compañía.'],
+ cont:['fria','Abastecimiento','Contador','Mide el agua que consume la vivienda, en metros cúbicos (1 m³ = 1000 litros). Va en una hornacina de la fachada para poder leerlo desde la calle.'],
+ llg:['fria','Abastecimiento','Llave de paso general','Corta el agua de <strong>toda la vivienda</strong>. Se cierra cuando hay una fuga o antes de una reparación, y conviene cerrarla al irse de vacaciones.'],
+ llc:['fria','Abastecimiento','Llave de corte de la cocina','Cada local húmedo (cocina, baño) tiene su llave de corte: permite cortar el agua de ese local sin dejar sin agua al resto de la vivienda.'],
+ llb:['fria','Abastecimiento','Llaves de corte del baño','Una para el agua fría y otra para la caliente. Así se puede cambiar un grifo del baño sin cortar el agua de la cocina.'],
+ termo:['cal','Agua caliente','Termo eléctrico','Calienta el agua con una resistencia eléctrica y la guarda caliente en un depósito aislado. Le entra agua fría y sale agua caliente. Otras opciones: caldera de gas, aerotermia o placas solares térmicas.'],
+ cal:['cal','Agua caliente','Tubería de agua caliente','Va del termo a los grifos que necesitan agua caliente: fregadero, lavabo y ducha. Conviene que esté aislada para que el agua no se enfríe por el camino.'],
+ freg:['fria','Aparato','Fregadero','Recibe agua fría y caliente. Su desagüe lleva un sifón debajo.'],
+ lavav:['fria','Aparato','Lavavajillas','Solo necesita agua fría: la calienta él mismo. Desagua por una manguera hasta el desagüe de la cocina.'],
+ lavad:['fria','Aparato','Lavadora','Como el lavavajillas, toma agua fría y la calienta por dentro.'],
+ lavabo:['fria','Aparato','Lavabo','Recibe agua fría y caliente, y desagua por su sifón.'],
+ inod:['san','Aparato','Inodoro','La cisterna se llena con agua fría. El inodoro lleva el sifón incorporado y su desagüe es el más grueso de la casa (unos 110 mm), porque recoge las aguas fecales.'],
+ ducha:['cal','Aparato','Ducha','El grifo mezcla el agua fría y la caliente. El plato desagua por un sumidero con sifón.'],
+ sif:['san','Saneamiento','Sifón','Curva del desagüe que siempre queda llena de agua. Ese tapón de agua impide que los malos olores del alcantarillado entren en la vivienda.'],
+ col:['san','Saneamiento','Colector','Tubería enterrada que recoge los desagües. El agua no va a presión: baja <strong>por gravedad</strong>, así que el colector necesita una <strong>pendiente</strong> de al menos el 2 % (2 cm por cada metro).'],
+ vent:['san','Saneamiento','Ventilación','Tubo que sale por encima de la cubierta. Deja entrar aire en la red de desagües: así, al vaciarse un aparato, no se vacían los sifones de los demás, y los gases salen por arriba.'],
+ arq:['san','Saneamiento','Arqueta','Registro enterrado con tapa donde se juntan los colectores. Permite revisar y desatascar la red sin levantar el suelo.'],
+ arqg:['san','Saneamiento','Arqueta general','Última arqueta de la vivienda, antes de la acometida al alcantarillado.'],
+ alc:['san','Saneamiento','Alcantarillado','Red pública de tuberías bajo la calle. Lleva las aguas residuales hasta la depuradora (EDAR), donde se limpian antes de devolverlas al río o al mar.'],
+};
+// [id, x, y, z, texto corto, prioridad: 1 = siempre; 2 = solo al acercarse]
+const ETQ=[
+ ['red',1.0,-2.5,-0.45,'Red de abastecimiento',1],['acom',3.3,-1.4,-0.5,'Acometida',1],['cont',3.3,-0.1,0.95,'Contador',1],['llg',3.3,0.32,0.75,'Llave de paso general',1],
+ ['llc',3.0,0.3,0.25,'Llave de corte',2],['llb',5.42,0.36,0.25,'Llaves de corte',2],
+ ['termo',0.55,0.45,2.25,'Termo eléctrico',1],['cal',4.2,0.42,0.3,'Agua caliente',2],['freg',1.5,0.5,1.12,'Fregadero',2],['lavav',2.2,0.5,1.0,'Lavavajillas',2],['lavad',2.8,0.5,1.0,'Lavadora',2],
+ ['lavabo',5.7,0.42,1.1,'Lavabo',2],['inod',6.35,0.6,0.98,'Inodoro',2],['ducha',6.42,1.82,2.15,'Ducha',1],['sif',1.5,0.55,0.42,'Sifón',2],['col',2.4,0.62,-0.25,'Colector',1],
+ ['vent',6.72,0.32,3.1,'Ventilación',1],['arq',6.0,-0.7,0.15,'Arqueta',2],['arqg',4.6,-0.7,0.15,'Arqueta general',1],['alc',6.6,-3.0,-0.85,'Alcantarillado',1]];
+const capaDe=id=>INFO[id][0];
+const etqs=ETQ.map(([id,x,y,z,txt,pr])=>{const d=document.createElement('button');d.type='button';d.className='fs-et '+capaDe(id);d.textContent=txt;d.title=INFO[id][2];
+  d.addEventListener('click',ev=>{ev.stopPropagation();mostrar(id);});cont.appendChild(d);return {id,el:d,p:V(x,y,z),pr};});
+const panel=document.getElementById('panel');
+function mostrar(id){const [c,tipo,tit,txt]=INFO[id];etqs.forEach(e=>e.el.classList.toggle('sel',e.id===id));
+  panel.innerHTML='<div class="tipo">'+tipo+'</div><h3>'+tit+'</h3><p>'+txt+'</p>';}
+
+// ---------------------------------------------------------------- capas
+const visible={fria:true,cal:true,san:true};let verEt=true,mover=true;
+document.querySelectorAll('[data-capa]').forEach(ch=>ch.addEventListener('change',()=>{visible[ch.dataset.capa]=ch.checked;capas[ch.dataset.capa].forEach(o=>o.visible=ch.checked);}));
+document.getElementById('chk-et').addEventListener('change',e=>{verEt=e.target.checked;});
+document.getElementById('chk-mov').addEventListener('change',e=>{mover=e.target.checked;});
+
+// ---------------------------------------------------------------- cámara orbital
+const VISTAS={general:{t:[3.6,0.2,0.4],az:-1.82,el:0.6,d:12.5},cocina:{t:[1.8,0.5,0.7],az:-1.85,el:0.42,d:5.5},
+  bano:{t:[6.0,1.0,0.3],az:-1.35,el:0.95,d:6.3},calle:{t:[4.3,-1.6,-0.5],az:-0.9,el:0.38,d:8.5}};
+let O={t:new T.Vector3(),az:0,el:0,d:10};
+function ponVista(n){const v=VISTAS[n];O.t.copy(V(...v.t));O.az=v.az;O.el=v.el;O.d=v.d;
+  document.querySelectorAll('[data-vista]').forEach(b=>b.classList.toggle('on',b.dataset.vista===n));}
+document.querySelectorAll('[data-vista]').forEach(b=>b.addEventListener('click',()=>ponVista(b.dataset.vista)));
+ponVista('general');
+const ptrs=new Map();let pinch0=0,d0=0;
+cont.addEventListener('pointerdown',e=>{if(e.target.closest('.fs-et'))return;cont.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===2){const a=[...ptrs.values()];pinch0=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);d0=O.d;}});
+cont.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;const p=ptrs.get(e.pointerId);
+  if(ptrs.size===1){O.az-=(e.clientX-p.x)*0.006;O.el=Math.min(1.45,Math.max(0.08,O.el+(e.clientY-p.y)*0.005));}
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===2&&pinch0){const a=[...ptrs.values()];const d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);O.d=Math.min(30,Math.max(2.5,d0*pinch0/d));}});
+const fin=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pinch0=0;};
+cont.addEventListener('pointerup',fin);cont.addEventListener('pointercancel',fin);
+cont.addEventListener('wheel',e=>{e.preventDefault();O.d=Math.min(30,Math.max(2.5,O.d*(e.deltaY>0?1.1:0.9)));},{passive:false});
+
+// ---------------------------------------------------------------- bucle
+function tam(){const w=cont.clientWidth,h=cont.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+window.addEventListener('resize',tam);tam();
+let t0=performance.now();
+function frame(t){const dt=Math.min(0.05,(t-t0)/1000);t0=t;
+  if(mover)flujos.forEach(f=>{f.t.offset.x-=dt*f.v*f.t.repeat.x/f.L;});
+  cam.position.set(O.t.x+O.d*Math.cos(O.el)*Math.cos(O.az),O.t.y+O.d*Math.sin(O.el),O.t.z+O.d*Math.cos(O.el)*Math.sin(O.az));cam.lookAt(O.t);
+  R.render(sc,cam);
+  const w=cont.clientWidth,h=cont.clientHeight;
+  etqs.forEach(e=>{const vis=verEt&&visible[capaDe(e.id)]&&(e.pr===1||O.d<9||e.el.classList.contains('sel'));const p=e.p.clone().project(cam);
+    if(!vis||p.z>1||p.x<-1.05||p.x>1.05||p.y<-1.05||p.y>1.05){e.el.style.display='none';return;}
+    e.el.style.display='';e.el.style.left=((p.x+1)/2*w)+'px';e.el.style.top=((1-p.y)/2*h)+'px';});
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+window.__fsListo=true;
+})();
+</script>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
