@@ -480,7 +480,7 @@ let play=false;const bp=document.getElementById('play');
 bp.addEventListener('click',()=>{play=!play;bp.textContent=play?'⏸ Pausa':'▶ Reproducir';bp.classList.toggle('on',play);});
 let t0=performance.now();
 function frame(t){const dt=Math.min(0.05,(t-t0)/1000);t0=t;
-  if(play){hora+=dt*1.2;if(hora>24)hora=0;document.getElementById('hora').value=hora;actualiza();}
+  if(play){hora+=dt*0.6;if(hora>24)hora=0;document.getElementById('hora').value=hora;actualiza();}
   requestAnimationFrame(frame);}
 recalcula();requestAnimationFrame(frame);
 window.__asListo=true;
