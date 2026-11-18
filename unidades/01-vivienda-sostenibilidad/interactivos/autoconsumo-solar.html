@@ -344,7 +344,7 @@ function act(s){
   const noche=!s.dia_, k=s.kw;
   cont.style.background=noche?'linear-gradient(#141c33,#2a3550)':(s.nublado?'linear-gradient(#b9c4cf,#dfe5ea)':'linear-gradient(#8fc6f2,#e6f3ff)');
   hemi.intensity=noche?0.38:(s.nublado?0.7:0.85);
-  sol.visible=!noche;luna.visible=noche;
+  sol.visible=false;luna.visible=noche;   // el sol queda a la espalda de la cámara: su posición se ve en el indicador del arco
   {const a=document.getElementById('arco-sol');if(noche){a.style.display='none';}else{a.style.display='';const t=Math.PI*(1-s.f);a.setAttribute('cx',75+65*Math.cos(t));a.setAttribute('cy',74-62*Math.sin(t));a.setAttribute('fill',s.nublado?'#d8d2b8':'#ffcf3a');}}
   if(!noche){sol.position.copy(V(3.5+14*Math.cos(Math.PI*s.f),2.4+11,2+11*Math.sin(Math.PI*s.f)));sol.material.color.set(s.nublado?0xe9e2c8:0xffcf3a);
     solLuz.position.copy(sol.position);solLuz.intensity=s.nublado?0.2:0.6;}else{solLuz.intensity=0.05;}
