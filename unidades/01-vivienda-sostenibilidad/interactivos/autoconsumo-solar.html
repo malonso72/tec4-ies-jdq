@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autoconsumo solar con batería · U01 · Tecnología 4º ESO</title>
+<meta name="description" content="Simulador de una instalación de autoconsumo fotovoltaico con batería en una vivienda: producción, consumo, batería y red hora a hora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.as-wrap{max-width:1240px;margin:20px auto;padding:0 20px 60px}
+.as-hero{text-align:center;margin-bottom:14px}
+.as-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 6px}
+.as-hero p{font-size:.95rem;color:var(--texto2);margin:0 auto;line-height:1.55;max-width:840px}
+.as-ctrl{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;background:#fff;border:1px solid var(--borde);border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.as-hora{display:flex;align-items:center;gap:10px;flex:1;min-width:280px}
+.as-hora input{flex:1;accent-color:#e69500}
+.as-reloj{font-family:'JetBrains Mono',monospace;font-size:1.35rem;font-weight:600;color:var(--texto);min-width:64px;text-align:center}
+.as-btn{font-family:var(--cond);font-size:.98rem;background:#fff;color:var(--principal);border:1.5px solid var(--principal);border-radius:6px;padding:6px 12px;cursor:pointer}
+.as-btn.on,.as-btn:hover{background:var(--principal);color:#fff}
+.as-grupo{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.as-grupo b{font-family:var(--cond);font-size:.9rem;color:var(--texto2);margin-right:4px;font-weight:600}
+.as-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}
+@media(max-width:960px){.as-grid{grid-template-columns:1fr}}
+.as-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:10px}
+.as-svg{width:100%;height:auto;display:block}
+.as-panel{background:var(--principal-bg);border:1px solid var(--principal-cl);border-radius:10px;padding:14px 16px;font-size:.95rem;line-height:1.5}
+.as-panel h3{font-family:var(--cond);color:var(--principal);font-size:1.2rem;margin:0 0 8px}
+.as-msg{background:#fff;border-left:4px solid #e69500;border-radius:0 6px 6px 0;padding:8px 10px;margin:0 0 10px;min-height:66px}
+.as-tab{width:100%;border-collapse:collapse;font-size:.93rem}
+.as-tab td{padding:5px 2px;border-bottom:1px solid var(--principal-cl)}
+.as-tab td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.as-tab i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.as-bat{height:14px;background:#e6ece8;border-radius:7px;overflow:hidden;margin-top:4px}
+.as-bat div{height:100%;background:linear-gradient(90deg,#1f9d55,#35c16f);width:0}
+.as-dia{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+.as-dato{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:8px 10px}
+.as-dato span{display:block;font-size:.8rem;color:var(--texto2)}
+.as-dato b{font-family:'JetBrains Mono',monospace;font-size:1.15rem}
+.as-ley{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--texto2);margin:6px 4px 0}
+.as-ley span{display:inline-flex;align-items:center;gap:6px}
+.as-ley i{display:inline-block;width:18px;height:10px;border-radius:2px}
+.as-elem{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
+.as-elem div{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:10px 12px;font-size:.92rem;line-height:1.5}
+.as-elem h4{font-family:var(--cond);color:var(--principal);margin:0 0 4px;font-size:1.05rem}
+.t-svg{font-family:Barlow,sans-serif}
+.t-et{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;fill:#1a2430;text-anchor:middle}
+.t-kw{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:15px;text-anchor:middle}
+.t-eje{font-family:Barlow,sans-serif;font-size:12px;fill:#55606e}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U01 · Vivienda · Autoconsumo solar</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a><span class="nc-sep">·</span>
+  <a href="../libro-digital.html#autoconsumo"><span>📖</span><span class="nc-lbl">Libro digital</span></a><span class="nc-sep">·</span>
+  <span class="nc-current"><span>☀️</span><span class="nc-lbl">Autoconsumo solar</span></span><span class="nc-sep">·</span>
+  <a href="factura-luz.html"><span>💡</span><span class="nc-lbl">Consumo eléctrico</span></a>
+</nav>
+
+<main id="main-content" class="as-wrap">
+  <section class="as-hero">
+    <h1>☀️ Autoconsumo solar con batería</h1>
+    <p>Una vivienda en Granada con <strong>7 placas de 430 W</strong> (3 kW) en la cubierta, orientadas al sur, y una <strong>batería de 5 kWh</strong>. Mueve la hora y observa de dónde sale la energía que gasta la casa y adónde va la que producen las placas.</p>
+  </section>
+
+  <div class="as-ctrl">
+    <div class="as-hora"><button class="as-btn" id="play" aria-label="Reproducir el día">▶ Reproducir</button>
+      <input type="range" id="hora" min="0" max="24" step="0.05" value="12" aria-label="Hora del día"><span class="as-reloj" id="reloj">12:00</span></div>
+    <div class="as-grupo" role="group" aria-label="Día"><b>Día</b>
+      <button class="as-btn on" data-dia="verano">☀️ Verano</button><button class="as-btn" data-dia="invierno">❄️ Invierno</button><button class="as-btn" data-dia="nublado">☁️ Nublado</button></div>
+    <div class="as-grupo" role="group" aria-label="Batería"><b>Batería</b>
+      <button class="as-btn on" data-bat="1">Con batería</button><button class="as-btn" data-bat="0">Sin batería</button></div>
+  </div>
+
+  <div class="as-grid">
+    <div class="as-card"><svg class="as-svg t-svg" id="esq" viewBox="0 0 900 500" role="img" aria-label="Esquema de la instalación con los flujos de energía"></svg></div>
+    <aside class="as-panel" aria-live="polite">
+      <h3>Ahora mismo</h3>
+      <p class="as-msg" id="msg"></p>
+      <table class="as-tab">
+        <tr><td><i style="background:#f2a900"></i>Producen las placas</td><td id="v-p"></td></tr>
+        <tr><td><i style="background:#1f5fae"></i>Gasta la casa</td><td id="v-c"></td></tr>
+        <tr><td><i style="background:#1f9d55"></i><span id="l-b">Batería</span></td><td id="v-b"></td></tr>
+        <tr><td><i style="background:#7a5bc7"></i><span id="l-r">Red</span></td><td id="v-r"></td></tr>
+      </table>
+      <div style="margin-top:8px;font-size:.9rem" id="soc-txt">Carga de la batería</div>
+      <div class="as-bat"><div id="soc-bar"></div></div>
+    </aside>
+  </div>
+
+  <div class="as-card" style="margin-top:14px">
+    <svg class="as-svg t-svg" id="graf" viewBox="0 0 900 270" role="img" aria-label="Gráfica de producción y consumo a lo largo del día"></svg>
+    <div class="as-ley">
+      <span><i style="background:#f2a900;opacity:.75"></i>Consumo cubierto por las placas</span>
+      <span><i style="background:#1f9d55;opacity:.75"></i>Consumo cubierto por la batería</span>
+      <span><i style="background:#7a5bc7;opacity:.6"></i>Consumo comprado a la red</span>
+      <span><i style="background:#1f9d55;opacity:.3"></i>Sobrante que carga la batería</span>
+      <span><i style="background:#e08a00;opacity:.35"></i>Sobrante vertido a la red</span>
+      <span><i style="background:none;border-top:3px dashed #e08a00;height:0"></i>Producción de las placas</span>
+      <span><i style="background:none;border-top:3px solid #1f9d55;height:0"></i>Carga de la batería (%)</span>
+    </div>
+    <div class="as-dia" id="dia"></div>
+  </div>
+
+  <div class="as-elem">
+    <div><h4>☀️ Placas solares</h4>Las células fotovoltaicas convierten la luz del sol en electricidad de <strong>corriente continua</strong>. Producen más al mediodía y nada por la noche.</div>
+    <div><h4>🔁 Inversor</h4>Convierte la corriente continua de las placas y de la batería en <strong>corriente alterna de 230 V</strong>, la que usan los aparatos. Si se va la luz de la red, desconecta la instalación por seguridad.</div>
+    <div><h4>🔋 Batería</h4>Guarda la energía que sobra a mediodía para usarla por la tarde y por la noche. Aumenta el autoconsumo, pero encarece la instalación.</div>
+    <div><h4>🔌 Contador bidireccional</h4>Mide en los dos sentidos: la energía que se <strong>compra</strong> a la red y la que se <strong>vierte</strong>. Con la compensación de excedentes, la energía vertida se descuenta de la factura.</div>
+  </div>
+</main>
+<script>
+(function(){
+// ------------------------------------------------------------ modelo
+const DT=0.05, N=Math.round(24/DT);
+const CAP=5, PMAX_BAT=2.5, EF=0.95;          // batería: 5 kWh útiles, 2,5 kW, 95 % en carga y en descarga
+const DIAS={
+  verano:{sal:7.2,pue:21.5,pmax:2.45,clima:1},
+  invierno:{sal:8.4,pue:18.2,pmax:1.95,clima:1},
+  nublado:{sal:8.4,pue:18.2,pmax:1.95,clima:0.3}};
+// consumo medio por horas (kW) de una familia; en verano, aire acondicionado por la tarde
+const CONS_INV=[.22,.18,.16,.16,.16,.2,.35,.7,.55,.32,.3,.32,.45,.9,.85,.4,.32,.4,.55,.8,1.05,.95,.6,.32];
+const CONS_VER=CONS_INV.map((c,h)=>c*0.9+((h>=14&&h<19)?0.75:0)+((h>=19&&h<20)?0.3:0));
+let dia='verano', conBat=true, hora=12, S=null;
+function prod(h,d){const D=DIAS[d];if(h<=D.sal||h>=D.pue)return 0;const s=Math.sin(Math.PI*(h-D.sal)/(D.pue-D.sal));return D.pmax*D.clima*s*s;}
+function cons(h,d){const A=d==='verano'?CONS_VER:CONS_INV;const i=Math.floor(h)%24,j=(i+1)%24,f=h-Math.floor(h);
+  // transición suave entre horas
+  const w=f<0.75?0:(f-0.75)/0.25;return A[i]*(1-w)+A[j]*w;}
+function simular(){
+  let soc=CAP*0.3;const R={h:[],p:[],c:[],dir:[],bat:[],red:[],exp:[],car:[],soc:[]};
+  for(let k=0;k<3;k++){                       // tres días seguidos para que la batería empiece el día con su carga real
+    for(let i=0;i<N;i++){const h=i*DT,p=prod(h,dia),c=cons(h,dia);
+      const dir=Math.min(p,c);let sob=p-dir,fal=c-dir,car=0,des=0,exp=0,imp=0;
+      if(conBat){car=Math.min(sob,PMAX_BAT,(CAP-soc)/(DT*EF));soc+=car*DT*EF;sob-=car;
+                 des=Math.min(fal,PMAX_BAT,soc*EF/DT);soc-=des*DT/EF;fal-=des;}
+      exp=sob;imp=fal;
+      if(k===2){R.h.push(h);R.p.push(p);R.c.push(c);R.dir.push(dir);R.bat.push(des);R.car.push(car);R.red.push(imp);R.exp.push(exp);R.soc.push(soc/CAP);}
+    }}
+  const sum=a=>a.reduce((x,y)=>x+y,0)*DT;
+  R.tot={p:sum(R.p),c:sum(R.c),dir:sum(R.dir),bat:sum(R.bat),red:sum(R.red),exp:sum(R.exp)};
+  return R;}
+
+// ------------------------------------------------------------ esquema
+const NS='http://www.w3.org/2000/svg', esq=document.getElementById('esq');
+function el(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||esq).appendChild(e);return e;}
+function txt(x,y,t,cls,par,extra){const e=el('text',Object.assign({x,y,class:cls},extra||{}),par);e.textContent=t;return e;}
+const cielo=el('rect',{x:0,y:0,width:900,height:500,fill:'#dff0ff',rx:8});
+el('rect',{x:0,y:440,width:900,height:60,fill:'#cfe3c4'});
+const sol=el('g',{});el('circle',{r:26,fill:'#ffcc33',stroke:'#f2a900','stroke-width':3},sol);
+for(let a=0;a<12;a++){const r1=34,r2=46,t=a*Math.PI/6;el('line',{x1:r1*Math.cos(t),y1:r1*Math.sin(t),x2:r2*Math.cos(t),y2:r2*Math.sin(t),stroke:'#f2a900','stroke-width':3,'stroke-linecap':'round'},sol);}
+const luna=el('g',{});el('circle',{r:20,fill:'#f4f1d0'},luna);el('circle',{cx:9,cy:-6,r:18,fill:'#2a3550'},luna);
+// casa
+el('polygon',{points:'170,250 360,140 550,250',fill:'#b5654a',stroke:'#7b3f2c','stroke-width':2});
+for(let i=0;i<7;i++){const x=232+i*33,y=203-(i<4?0:0);el('polygon',{points:`${x},${200+ (i%2?0:0)} ${x+28},${200} ${x+28-0},${226} ${x},${226}`,fill:'#1d3d73',stroke:'#9fb7da','stroke-width':1.2});
+  el('line',{x1:x+14,y1:200,x2:x+14,y2:226,stroke:'#5f7fb3','stroke-width':.8});}
+txt(360,190,'7 placas · 3 kW','t-et',esq,{style:'font-size:14px;fill:#fff'});
+el('rect',{x:185,y:250,width:350,height:190,fill:'#f6efe2',stroke:'#7d6a52','stroke-width':2});
+// inversor, batería, aparatos
+el('rect',{x:205,y:285,width:86,height:52,rx:6,fill:'#fff',stroke:'#55606e','stroke-width':2});txt(248,308,'Inversor','t-et');txt(248,327,'CC → CA','t-eje',esq,{'text-anchor':'middle'});
+el('rect',{x:205,y:362,width:86,height:62,rx:6,fill:'#fff',stroke:'#1f9d55','stroke-width':2});
+const batFill=el('rect',{x:211,y:368,width:74,height:50,fill:'#35c16f'});txt(248,392,'Batería','t-et');const batPct=txt(248,411,'','t-eje',esq,{'text-anchor':'middle'});
+el('rect',{x:368,y:285,width:146,height:139,rx:8,fill:'#fff',stroke:'#1f5fae','stroke-width':2});
+txt(441,310,'Consumo','t-et');txt(441,330,'de la casa','t-et');
+txt(441,378,'💡 🧊 📺 🍳','t-et',esq,{style:'font-size:24px'});
+const casaKW=txt(441,412,'','t-kw',esq,{fill:'#1f5fae'});
+// contador y red
+el('rect',{x:578,y:322,width:70,height:58,rx:6,fill:'#fff',stroke:'#7a5bc7','stroke-width':2});txt(613,345,'Contador','t-et',esq,{style:'font-size:15px'});txt(613,365,'⇄','t-et',esq,{style:'font-size:18px'});
+const torre=el('g',{transform:'translate(780,210)'});
+el('path',{d:'M-30 230 L0 0 L30 230 M-22 170 L22 170 M-15 115 L15 115 M-8 60 L8 60 M-40 40 L40 40 M-30 90 L30 90 M-22 170 L15 115 M22 170 L-15 115',stroke:'#8a96a8','stroke-width':3,fill:'none'},torre);
+txt(780,470,'Red eléctrica','t-et');
+// flujos
+function flujo(d,col){const g=el('path',{d,stroke:col,'stroke-width':4,fill:'none','stroke-linecap':'round',opacity:.25});
+  const f=el('path',{d,stroke:col,'stroke-width':4,fill:'none','stroke-linecap':'round','stroke-dasharray':'10 12'});return {g,f,off:0};}
+const F={
+  pl:flujo('M 300 228 L 300 262 L 260 262 L 260 285','#f2a900'),
+  ca:flujo('M 291 300 L 368 300','#f2a900'),
+  bt:flujo('M 248 337 L 248 362','#1f9d55'),
+  rc:flujo('M 680 300 L 600 300 L 600 322','#7a5bc7'),
+  rc2:flujo('M 578 352 L 514 352','#7a5bc7'),
+  rx:flujo('M 291 318 L 330 318 L 330 440 L 613 440 L 613 380','#e08a00')};
+const lbl={pl:txt(350,272,'','t-kw',esq,{fill:'#b77800'}),ca:txt(330,292,'','t-kw',esq,{fill:'#b77800'}),bt:txt(315,354,'','t-kw',esq,{fill:'#16804a'}),
+  rc:txt(640,292,'','t-kw',esq,{fill:'#5b3fa6'}),rx:txt(470,462,'','t-kw',esq,{fill:'#b06a00'})};
+el('path',{d:'M 680 300 L 750 252',stroke:'#7a5bc7','stroke-width':2,opacity:.6});
+
+// ------------------------------------------------------------ gráfica
+const graf=document.getElementById('graf');const GX0=48,GX1=846,GY0=230,GY1=20,KMAX=3;
+const gx=h=>GX0+(GX1-GX0)*h/24, gy=k=>GY0-(GY0-GY1)*k/KMAX, gs=s=>GY0-(GY0-GY1)*s;
+function gel(tag,at){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);graf.appendChild(e);return e;}
+function dibujaGraf(){graf.innerHTML='';
+  for(let k=0;k<=KMAX;k++){gel('line',{x1:GX0,y1:gy(k),x2:GX1,y2:gy(k),stroke:'#e3e8ee'});const t=gel('text',{x:GX0-8,y:gy(k)+4,class:'t-eje','text-anchor':'end'});t.textContent=k+' kW';}
+  for(let h=0;h<=24;h+=3){const t=gel('text',{x:gx(h),y:GY0+18,class:'t-eje','text-anchor':'middle'});t.textContent=h+' h';gel('line',{x1:gx(h),y1:GY0,x2:gx(h),y2:GY0+4,stroke:'#55606e'});}
+  [0,50,100].forEach(p=>{const t=gel('text',{x:GX1+6,y:gs(p/100)+4,class:'t-eje'});t.textContent=p+'%';});
+  const area=(lo,hi,col,op)=>{let d='M'+gx(S.h[0])+' '+gy(lo(0));for(let i=1;i<S.h.length;i++)d+=' L'+gx(S.h[i])+' '+gy(lo(i));
+    for(let i=S.h.length-1;i>=0;i--)d+=' L'+gx(S.h[i])+' '+gy(hi(i));gel('path',{d:d+'Z',fill:col,opacity:op});};
+  area(i=>0,i=>S.dir[i],'#f2a900',.75);
+  area(i=>S.dir[i],i=>S.dir[i]+S.bat[i],'#1f9d55',.75);
+  area(i=>S.dir[i]+S.bat[i],i=>S.c[i],'#7a5bc7',.6);
+  area(i=>S.c[i],i=>S.c[i]+S.car[i],'#1f9d55',.25);
+  area(i=>S.c[i]+S.car[i],i=>S.c[i]+S.car[i]+S.exp[i],'#e08a00',.28);
+  let d='';S.h.forEach((h,i)=>d+=(i?' L':'M')+gx(h)+' '+gy(S.p[i]));gel('path',{d,fill:'none',stroke:'#e08a00','stroke-width':2.5,'stroke-dasharray':'7 5'});
+  if(conBat){d='';S.h.forEach((h,i)=>d+=(i?' L':'M')+gx(h)+' '+gs(S.soc[i]));gel('path',{d,fill:'none',stroke:'#1f9d55','stroke-width':2.5});}
+  gel('line',{x1:GX0,y1:GY0,x2:GX1,y2:GY0,stroke:'#55606e'});
+  cursor=gel('line',{x1:0,y1:GY1-6,x2:0,y2:GY0,stroke:'#1a2430','stroke-width':1.5,'stroke-dasharray':'4 3'});
+  graf.onclick=e=>{const r=graf.getBoundingClientRect();const x=(e.clientX-r.left)*900/r.width;ponHora(Math.max(0,Math.min(24,(x-GX0)/(GX1-GX0)*24)));};
+}
+let cursor;
+const kwh=v=>v.toFixed(1).replace('.',',')+' kWh', kw=v=>v.toFixed(2).replace('.',',')+' kW';
+function dibujaDia(){const t=S.tot,aut=t.c>0?(t.dir+t.bat)/t.c*100:0;
+  const datos=[['Producen las placas',kwh(t.p)],['Gasta la casa',kwh(t.c)],['De las placas, directo',kwh(t.dir)],['De la batería',conBat?kwh(t.bat):'—'],
+    ['Comprado a la red',kwh(t.red)],['Vertido a la red',kwh(t.exp)],['Autosuficiencia',Math.round(aut)+' %']];
+  document.getElementById('dia').innerHTML='<div class="as-dato" style="grid-column:1/-1;background:var(--principal-bg)"><span>Resumen del día completo</span></div>'+
+    datos.map(([a,b])=>'<div class="as-dato"><span>'+a+'</span><b>'+b+'</b></div>').join('');}
+
+// ------------------------------------------------------------ hora actual
+function ponHora(h){hora=h;document.getElementById('hora').value=h;actualiza();}
+function actualiza(){
+  const i=Math.min(S.h.length-1,Math.round(hora/DT)),p=S.p[i],c=S.c[i],dir=S.dir[i],des=S.bat[i],car=S.car[i],imp=S.red[i],exp=S.exp[i],soc=S.soc[i];
+  const hh=Math.floor(hora)%24,mm=Math.floor((hora-Math.floor(hora))*60);document.getElementById('reloj').textContent=String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');
+  const D=DIAS[dia],dia_=hora>D.sal&&hora<D.pue;
+  // sol / luna y cielo
+  if(dia_){const f=(hora-D.sal)/(D.pue-D.sal);sol.setAttribute('transform',`translate(${70+760*f},${150-110*Math.sin(Math.PI*f)})`);sol.style.display='';luna.style.display='none';
+    cielo.setAttribute('fill',dia==='nublado'?'#cfd8e2':'#dff0ff');}
+  else{sol.style.display='none';luna.style.display='';luna.setAttribute('transform','translate(110,70)');cielo.setAttribute('fill','#2a3550');}
+  // flujos
+  const set=(f,val,sentido,l,texto)=>{const on=val>0.005;f.f.style.display=on?'':'none';f.g.style.display=on?'':'none';f.v=on?val*sentido:0;
+    const w=3+val*3.2;f.f.setAttribute('stroke-width',w);f.g.setAttribute('stroke-width',w);if(l){l.textContent=on?texto:'';}};
+  set(F.pl,p,1,lbl.pl,kw(p));
+  set(F.ca,dir+des,1,lbl.ca,kw(dir+des));
+  set(F.bt,des+car,des>car?-1:1,lbl.bt,des>car?'↑ '+kw(des):'↓ '+kw(car));
+  set(F.rc,imp>0.005?imp:exp,imp>0.005?1:-1,lbl.rc,imp>0.005?'compra '+kw(imp):'vertido '+kw(exp));set(F.rc2,imp,1,null);
+  set(F.rx,exp,1,lbl.rx,kw(exp));
+  batFill.setAttribute('height',50*soc);batFill.setAttribute('y',368+50*(1-soc));batFill.style.display=conBat?'':'none';batPct.textContent=conBat?Math.round(soc*100)+' %':'sin batería';
+  casaKW.textContent=kw(c);
+  document.getElementById('v-p').textContent=kw(p);document.getElementById('v-c').textContent=kw(c);
+  document.getElementById('l-b').textContent=!conBat?'Batería (no hay)':(des>0.005?'La batería entrega':(car>0.005?'Se carga la batería':'Batería en reposo'));
+  document.getElementById('v-b').textContent=conBat?kw(des>0.005?des:car):'—';
+  document.getElementById('l-r').textContent=exp>0.005?'Se vierte a la red':(imp>0.005?'Se compra a la red':'Red sin intercambio');
+  document.getElementById('v-r').textContent=kw(exp>0.005?exp:imp);
+  document.getElementById('soc-txt').textContent=conBat?'Carga de la batería: '+Math.round(soc*100)+' %':'Sin batería';
+  document.getElementById('soc-bar').style.width=(conBat?soc*100:0)+'%';
+  cursor.setAttribute('x1',gx(hora));cursor.setAttribute('x2',gx(hora));
+  // explicación
+  let m;
+  if(p<0.01){m=conBat&&des>0.005?(imp>0.005?'🌙 Las placas no producen. La batería da lo que puede y el resto se compra a la red.':'🌙 Las placas no producen. La casa funciona con la energía que se guardó en la batería durante el día.')
+        :(conBat?'🌙 Las placas no producen y la batería está vacía: toda la energía se compra a la red.':'🌙 Las placas no producen: sin batería, toda la energía se compra a la red.');}
+  else if(p<c){m=des>0.005?'⛅ Las placas producen menos de lo que gasta la casa. Lo que falta sale de la batería'+(imp>0.005?' y de la red.':'.'):'⛅ Las placas producen menos de lo que gasta la casa. Lo que falta se compra a la red.';}
+  else{if(car>0.005&&exp<0.005)m='☀️ Sobra energía: todo lo que no gasta la casa se guarda en la batería.';
+       else if(car>0.005)m='☀️ Sobra mucha energía: una parte carga la batería y el resto se vierte a la red.';
+       else m=conBat?'☀️ Sobra energía y la batería está llena: el sobrante se vierte a la red y se descuenta de la factura.':'☀️ Sobra energía: sin batería, todo el sobrante se vierte a la red y se descuenta de la factura.';}
+  document.getElementById('msg').textContent=m;
+}
+function recalcula(){S=simular();dibujaGraf();dibujaDia();actualiza();}
+
+// ------------------------------------------------------------ controles y animación
+document.getElementById('hora').addEventListener('input',e=>{hora=parseFloat(e.target.value);actualiza();});
+document.querySelectorAll('[data-dia]').forEach(b=>b.addEventListener('click',()=>{dia=b.dataset.dia;document.querySelectorAll('[data-dia]').forEach(x=>x.classList.toggle('on',x===b));recalcula();}));
+document.querySelectorAll('[data-bat]').forEach(b=>b.addEventListener('click',()=>{conBat=b.dataset.bat==='1';document.querySelectorAll('[data-bat]').forEach(x=>x.classList.toggle('on',x===b));recalcula();}));
+let play=false;const bp=document.getElementById('play');
+bp.addEventListener('click',()=>{play=!play;bp.textContent=play?'⏸ Pausa':'▶ Reproducir';bp.classList.toggle('on',play);});
+let t0=performance.now();
+function frame(t){const dt=Math.min(0.05,(t-t0)/1000);t0=t;
+  if(play){hora+=dt*1.2;if(hora>24)hora=0;document.getElementById('hora').value=hora;actualiza();}
+  for(const k in F){const f=F[k];if(f.v){f.off-=f.v*dt*40;f.f.setAttribute('stroke-dashoffset',f.off);}}
+  requestAnimationFrame(frame);}
+recalcula();requestAnimationFrame(frame);
+window.__asListo=true;
+})();
+</script>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
